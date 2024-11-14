@@ -2,9 +2,9 @@ export const Header = () => {
     return (
 
         <>
-            <header className="fixed w-screen bg-gray-800 shadow-lg -mt-2 top-0 left-0 z-50">
+            <header className="fixed w-screen bg-sky-950 shadow-lg -mt-2 top-0 left-0 z-50">
                 <div className="flex items-center justify-between px-8 py-4">
-                    <div className="flex items-center space-x-8">
+                    <div className="flex items-center space-x-4">
                         <a  href="#">
                             <img className="w-12 h-12 rounded-full"
                                  src="https://www.shutterstock.com/image-vector/mp-pm-abstract-outstanding-professional-260nw-1942914580.jpg"
@@ -15,7 +15,7 @@ export const Header = () => {
                             {/*    width="127" height="21" alt="NerdWallet Home Page" title="NerdWallet Home Page"*/}
                             {/*    loading="lazy" className="xPVYe05"/>*/}
                         </a>
-                            <h1 className="text-white text-3xl font-bold tracking-wide">Trade Analyzer</h1>
+                            <h1 className="text-white text-2xl font-bold tracking-wide">Trade Analyzer</h1>
 
                     </div>
                     <nav>
