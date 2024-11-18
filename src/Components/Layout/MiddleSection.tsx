@@ -4,36 +4,49 @@ export const MiddleSection = () => {
             {/*First section*/}
             <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl">
                 <div>
-                    <div>
+                    <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl relative">
+                        <div
+                            className="absolute top-0 left-1.5 right-3/4 -mt-6 text-[300px] font-bold text-white opacity-20 pointer-events-none">
+                            1
+                        </div>
                         <div>
-                            <h1 className="text-3xl md:text-5xl font-bold text-white">The Only <span className="text-blue-600">Tool You Need</span> to
+                            <h1 className="text-3xl md:text-5xl font-bold text-white">The Only <span
+                                className="text-blue-600">Tool You Need</span> to
                                 Become <span className="text-blue-600">Profitable</span></h1>
                         </div>
                         <div>
                             <div>
                                 <p className="mt-4 text-blue-600 text-lg">
-                                    TradeZella helps you discover your strengths and weaknesses to become a profitable
+                                    MPTradeAnalyzer helps you discover your strengths and weaknesses to become a profitable
                                     trader with the power of journaling and analytics.
                                 </p>
                             </div>
                         </div>
-                        <a href="#" target="_blank" className="inline-block mt-6 bg-white  px-6 py-3 rounded-lg font-medium shadow-md hover:bg-blue-700 transition"
-                           >
-                            <div ></div>
-                            <div >Get Started Now<span
-                                ></span></div>
+                        <a href="#" target="_blank"
+                           className="inline-block mt-6 bg-white  px-6 py-3 rounded-lg font-medium shadow-md hover:bg-blue-700 transition"
+                        >
+                            <div></div>
+                            <div>Get Started Now<span
+                            ></span></div>
                         </a>
+
                     </div>
                 </div>
             </div>
             {/*second section*/}
-                <div className="text-center p-8  shadow-lg rounded-lg max-w-3xl">
+            <div className="text-center p-8  shadow-lg rounded-lg max-w-3xl">
                     <div>
-                        <div>
+                        <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl relative">
+                            <div
+                                className="absolute top-0 left-1.5 right-3/4 -mt-6 text-[300px] font-bold text-white opacity-20 pointer-events-none">
+                                2
+                            </div>
                             <div>
-                                <div><h1 className="text-3xl md:text-5xl font-bold text-white">Powerful and Automated </h1></div>
+                                <div><h1 className="text-3xl md:text-5xl font-bold text-white">Powerful and
+                                    Automated </h1></div>
                                 <div>
-                                    <div><p className="mt-4 text-blue-600 text-lg">You focus on trading while we focus on helping you get better. With
+                                    <div><p className="mt-4 text-blue-600 text-lg">You focus on trading while we focus
+                                        on helping you get better. With
                                         automated journaling, we do the heavy lifting for you.</p></div>
                                 </div>
                                 <a href="#" target="_blank"
@@ -47,7 +60,7 @@ export const MiddleSection = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
 
 
         </div>
