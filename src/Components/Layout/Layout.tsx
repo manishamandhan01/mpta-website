@@ -1,20 +1,24 @@
-import {Header} from "./Header.tsx";
-import {Footer} from "./Footer.tsx";
+import { Header } from "./Header.tsx";
+import { Footer } from "./Footer.tsx";
+import { MiddleSection } from "./MiddleSection.tsx";
 
-export const Layout = ()=> {
-    return(
+export const Layout = () => {
+    return (
         <>
-            <div className="relative h-screen w-screen bg-cover bg-center"
-                 style={{
-                     backgroundImage: 'url("/public/sl_022321_41020_35.jpg")',
-                 }}
+            <div
+                className="relative min-h-screen bg-cover bg-center"
+                style={{
+                    backgroundImage: 'url("/public/sl_022321_41020_35.jpg")',
+                }}
             >
-                <Header/>
-
+                <Header />
+                <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-60">
+                    <div className="text-center p-12  bg-opacity-90 rounded-lg shadow-lg max-w-3xl">
+                        <MiddleSection />
+                    </div>
+                </div>
             </div>
-            <div>
-                <Footer/>
-            </div>
+            <Footer />
         </>
     );
-}
+};

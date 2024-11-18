@@ -1,0 +1,55 @@
+export const MiddleSection = () => {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen space-y-96 mt-64">
+            {/*First section*/}
+            <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl">
+                <div>
+                    <div>
+                        <div>
+                            <h1 className="text-3xl md:text-5xl font-bold text-white">The Only <span className="text-blue-600">Tool You Need</span> to
+                                Become <span className="text-blue-600">Profitable</span></h1>
+                        </div>
+                        <div>
+                            <div>
+                                <p className="mt-4 text-blue-600 text-lg">
+                                    TradeZella helps you discover your strengths and weaknesses to become a profitable
+                                    trader with the power of journaling and analytics.
+                                </p>
+                            </div>
+                        </div>
+                        <a href="#" target="_blank" className="inline-block mt-6 bg-white  px-6 py-3 rounded-lg font-medium shadow-md hover:bg-blue-700 transition"
+                           >
+                            <div ></div>
+                            <div >Get Started Now<span
+                                ></span></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {/*second section*/}
+                <div className="text-center p-8  shadow-lg rounded-lg max-w-3xl">
+                    <div>
+                        <div>
+                            <div>
+                                <div><h1 className="text-3xl md:text-5xl font-bold text-white">Powerful and Automated </h1></div>
+                                <div>
+                                    <div><p className="mt-4 text-blue-600 text-lg">You focus on trading while we focus on helping you get better. With
+                                        automated journaling, we do the heavy lifting for you.</p></div>
+                                </div>
+                                <a href="#" target="_blank"
+                                   className="inline-block mt-6 bg-white  px-6 py-3 rounded-lg font-medium shadow-md hover:bg-blue-700 transition"
+                                >
+                                    <div></div>
+                                    <div>View All Brokers and Integerations<span
+                                    ></span></div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+    )
+}

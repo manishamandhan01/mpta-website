@@ -16,7 +16,7 @@ export const Header = () => {
                     </div>
                     <nav>
                     <ul className="flex space-x-8 text-lg text-gray-200 font-medium">
-                            {["Home", "Community", "Markets", "News", "Brokers", "More"].map((item) => (
+                            {["Home", "Calculators", "Markets", "News", "Brokers", "More"].map((item) => (
                                 <li key={item}>
                                     <button className="hover:text-white transition duration-300">{item}</button>
                                 </li>
