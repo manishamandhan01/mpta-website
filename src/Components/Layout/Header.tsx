@@ -1,24 +1,38 @@
 export const Header = () => {
+    const navigationItems = [
+        {name: "Home", icon:" 🏠"},
+        {name: "PositionCalculator", icon: "📊"},
+        {name: "Markets", icon: "📈"},
+        {name: "News", icon: "📰"},
+        {name: "Brokers", icon: "💼"},
+        {name: "More", icon: "➕"},
+    ]
     return (
 
         <>
             <header className="fixed w-screen bg-sky-950 shadow-lg -mt-2 top-0 left-0 z-50">
                 <div className="flex items-center justify-between px-8 py-4">
                     <div className="flex items-center space-x-4">
-                        <a  href="#">
+                        <a href="#">
                             <img className="w-12 h-12 rounded-full"
                                  src="https://www.shutterstock.com/image-vector/mp-pm-abstract-outstanding-professional-260nw-1942914580.jpg"
                                  width="30" height="40" alt="NerdWallet Home Page" title="NerdWallet Home Page"
                                  loading="eager"/>
-                                                   </a>
-                            <h1 className="text-white text-2xl font-bold tracking-wide">Trade Analyzer</h1>
+                        </a>
+                        <h1 className="text-white text-2xl font-bold tracking-wide">Trade Analyzer</h1>
 
                     </div>
                     <nav>
-                    <ul className="flex space-x-8 text-lg text-gray-200 font-medium">
-                            {["Home", "Calculators", "Markets", "News", "Brokers", "More"].map((item) => (
-                                <li key={item}>
-                                    <button className="hover:text-white transition duration-300">{item}</button>
+                        <ul className="flex space-x-8 text-lg text-gray-200 font-medium">
+                            {navigationItems.map((item, index) => (
+                                <li key={index} className="flex items-center space-x-2">
+                                    <button
+                                        className="flex items-center hover:text-white transition duration-300"
+                                        onClick={() => (window.location.href = `/${item.name}`)}
+                                    >
+                                        <span>{item.name}</span>
+                                        <span className="ml-2">{item.icon}</span>
+                                    </button>
                                 </li>
                             ))}
 
@@ -40,6 +54,6 @@ export const Header = () => {
             </header>
 
         </>
-)
+    )
 
 }
