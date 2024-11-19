@@ -2,7 +2,7 @@ export const PositionCalculator = () => {
     return (
         <>
 
-            <div className="min-h-screen bg-gray-100 flex items-center justify-center p-8">
+            <div className="min-h-screen bg-gray-600 flex items-center justify-center p-8">
                 <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
                     <h1 className="text-2xl font-bold text-gray-800 text-center mb-4">Position Size Calculator</h1>
                     <p className="text-gray-600 text-sm mb-6 text-center">This calculator can be used to find out how
@@ -52,14 +52,21 @@ export const PositionCalculator = () => {
                         >
                             Calculate
                         </button>
+                        <div className="bg-gray-200 flex items-center  rounded-2xl justify-center p-8 " >
+                            <form className="space-y-10">
+                                <h4 className="text-2xl font-semibold text-gray-700  mb-12">
+                                    Quantity of Stocks to Buy
+                                </h4>
+                                <h2 className="text-2xl font-bold text-blue-500 text-center ">50</h2>
+
+                            </form>
+
+
+                        </div>
+
                     </form>
                 </div>
-                <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
-                    <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                        Quantity of Stocks to Buy
-                    </h4>
-                    <h2 className="text-2xl font-bold text-blue-500">50</h2>
-                </div>
+
             </div>
         </>
     )
