@@ -1,20 +1,21 @@
+
 export const MiddleSection = () => {
 
 
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-96 mt-64">
+        <div className="flex flex-col items-center justify-center min-h-screen space-y-96 mt-1">
             {/*First section*/}
             <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl">
                 <div>
                     <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl relative">
                         <div
-                            className="absolute top-0 left-1.5 right-3/4 -mt-6 text-[300px] font-bold text-white opacity-20 pointer-events-none">
+                            className="absolute top-0 left-1.5 right-3/4 -mt-6 text-[300px] font-bold text-black opacity-20 pointer-events-none">
                             1
                         </div>
                         <div>
-                            <h1 className="text-3xl md:text-5xl font-bold text-white">The Only <span
+                            <h1 className="text-3xl md:text-5xl font-bold text-sky-950">The Only <span
                                 className="text-blue-600">Tool You Need</span> to
                                 Become <span className="text-blue-600">Profitable</span></h1>
                         </div>

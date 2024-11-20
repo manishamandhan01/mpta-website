@@ -9,11 +9,11 @@ export const Layout = () => {
             <div
                 className="relative min-h-screen bg-cover bg-center"
                 style={{
-                    backgroundImage: 'url("/public/sl_022321_41020_35.jpg")',
+                    backgroundImage: 'url("/public/sl_022321_41020_35 (2).jpg")',
                 }}
             >
                 <Header />
-                <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-60">
+                <div className="flex items-center justify-center min-h-screen bg-white bg-opacity-40">
                     <div className="text-center p-12  bg-opacity-90 rounded-lg shadow-lg max-w-3xl">
                         <MiddleSection />
                     </div>

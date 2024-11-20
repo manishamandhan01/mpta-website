@@ -2,9 +2,14 @@ export const PositionCalculator = () => {
     return (
         <>
 
-            <div className="min-h-screen bg-gray-600 flex items-center justify-center p-8">
-                <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
-                    <h1 className="text-2xl font-bold text-gray-800 text-center mb-4">Position Size Calculator</h1>
+            <div className="min-h-screen tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position) flex items-center justify-center p-8">
+                <div className="bg-white shadow-lg rounded-lg w-full max-w-screen-2xl p-12 ">
+                    <div className="flex space-x-6">
+                        <h1 className="text-5xl font-bold text-green-500 text-center mb-4">Position Size </h1>
+                        <h1 className="text-3xl font-medium text-gray-800 text-center mt-3">Calculator </h1>
+
+                    </div>
+
                     <p className="text-gray-600 text-sm mb-6 text-center">This calculator can be used to find out how
                         many stocks to buy when trading intraday as per Risk Management and Money Management Rules. Just
                         enter Total capital and Stop loss for trade and calculator will calculate how many stocks to
@@ -12,7 +17,7 @@ export const PositionCalculator = () => {
                     <form className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
-                                Total Capital (excluding leverage) <span className="text-red-500">*</span>
+                                Risk Tier (% Capital at Risk)<span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="number"
@@ -21,7 +26,7 @@ export const PositionCalculator = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
-                                Daily Risk in Percentage (%) ideally 1% <span className="text-red-500">*</span>
+                                Entry Price<span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="number"
@@ -30,7 +35,7 @@ export const PositionCalculator = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
-                                Total number of trades per day (ideally 2) <span className="text-red-500">*</span>
+                                 Stop Price<span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="number"
@@ -39,7 +44,7 @@ export const PositionCalculator = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
-                                Stop Loss for Trade <span className="text-red-500">*</span>
+                                Target Price (estimate)<span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="number"

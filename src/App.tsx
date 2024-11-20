@@ -2,7 +2,7 @@
 import './App.css'
 import { RouteObject, useRoutes } from 'react-router-dom';
 import {Layout} from "./Components/Layout/Layout.tsx";
-import {PositionCalculator} from "./Components/Calculators/PositionCalculator.tsx";
+import {Calculators} from "./Components/Calculators/Calculator.tsx";
 function App() {
     const route : RouteObject[]=[
         {
@@ -10,9 +10,9 @@ function App() {
             element:<Layout/>,
             children:[
                 {
-                    path:"PositionCalculator/*",
+                    path:"Calculators/*",
                     element: (
-                        <PositionCalculator/>
+                        <Calculators/>
                     ),
                 },
             ],
