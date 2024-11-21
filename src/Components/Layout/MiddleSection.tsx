@@ -5,13 +5,13 @@ export const MiddleSection = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-96 mt-1">
+        <div className="flex flex-col items-center justify-center min-h-screen space-y-96 mt-64">
             {/*First section*/}
             <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl">
                 <div>
                     <div className="text-center p-8 shadow-lg rounded-lg max-w-3xl relative">
                         <div
-                            className="absolute top-0 left-1.5 right-3/4 -mt-6 text-[300px] font-bold text-black opacity-20 pointer-events-none">
+                            className="absolute top-0 left-1.5 right-3/4 -mt-6 text-[300px] font-bold text-black opacity-10 pointer-events-none">
                             1
                         </div>
                         <div>
