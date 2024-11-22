@@ -19,7 +19,7 @@ export const Header = () => {
     };
 
     return (
-        <header className="fixed w-full h-20 bg-gradient-to-l from-blue-50 to-blue-90 shadow-lg top-0 z-50">
+        <header className="fixed w-full h-20 bg-gradient-to-r from-blue-50 to-blue-200 shadow-lg top-0 z-50">
             <div className="flex items-center justify-between px-6 md:px-12 py-4">
                 {/* Logo Section */}
                 <div className="flex items-center space-x-4">
