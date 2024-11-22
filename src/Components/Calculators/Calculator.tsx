@@ -13,14 +13,47 @@ export const Calculators = () => {
 
     return (
         <Box
-            className="bg-white mt-40 rounded-lg bg-gradient-to-br from-gray-50 to-gray-200"
-            sx={{ width: "80%", height:"100%"}} // Fixed height for the outer box
+            className="bg-white mt-24 rounded-xl bg-gradient-to-br from-gray-50 to-gray-200"
+
         >
             <TabContext value={value}>
-                <Box sx={{ borderbottom: 1, borderColor: "divider" }}>
+                <Box sx={{ borderbottom: 2, borderColor: "black" }}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab label="Position Calculator" sx={{ border:1, borderColor: "divider" }}value="positionCalculator" />
-                        <Tab label="RB Calculator" value="rbCalculator" />
+                        <Tab label="Position Calculator" sx={{
+                            color: value === "positionCalculator" ? "blue" : "inherit",
+                            borderRadius: "4px",
+                            fontWeight: value === "positionCalculator" ? "bold" : "normal",
+                            px: 2,
+                            mx: 1,
+                            textTransform: "none",
+                            transition: "all 0.3s ease",
+                            "&:hover": {
+                                color: "blue",
+                                border: value === "positionCalculator" ? 1 : 0,
+                                borderColor: value === "positionCalculator" ? "blue" : "transparent",
+
+                                backgroundColor: "rgba(0, 0, 255, 0.1)",
+                            },
+                        }}
+                        value="positionCalculator" />
+                        <Tab label="RB Calculator"
+                             sx={{
+                                 color: value === "rbCalculator" ? "blue" : "inherit",
+                                 borderRadius: "4px",
+                                 fontWeight: value === "rbCalculator" ? "bold" : "normal",
+                                 px: 2,
+                                 mx: 1,
+                                 textTransform: "none",
+                                 transition: "all 0.3s ease",
+                                 "&:hover": {
+                                     color: "blue",
+                                     border: value === "rbCalculator" ? 1 : 0,
+                                     borderColor: value === "rbCalculator" ? "blue" : "transparent",
+
+                                     backgroundColor: "rgba(0, 0, 255, 0.1)",
+                                 },
+                             }}
+                             value="rbCalculator" />
                     </TabList>
                 </Box>
                 <Box sx={{ height: "calc(100% - 48px)", m:0, overflowY: "auto" }}>

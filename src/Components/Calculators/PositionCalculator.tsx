@@ -40,7 +40,7 @@ export const PositionCalculator = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center p-6">
+        <div className=" bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center p-6">
             <div className="bg-white shadow-xl rounded-lg w-full max-w-5xl p-8">
                 {/* Header */}
                 <div className="text-center mb-8">
