@@ -56,6 +56,12 @@ const rows = [
 
 interface IRBCalculatorResult {
     reset: () => void;
+    formData:{
+        risktier: number;
+        entryPrice: number;
+        stopPrice: number;
+        targetPrice: number;
+    }
 }
 export const PositionCalculatorResult :React.FC<IRBCalculatorResult>  = ({reset})=>{
     return (

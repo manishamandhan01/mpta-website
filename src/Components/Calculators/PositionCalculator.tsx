@@ -1,14 +1,38 @@
-import React from "react";
-import {PositionCalculatorResult} from "./RBCalculatorResult.tsx";
+import React, {} from "react";
+import {PositionCalculatorResult} from "./PositionCalculatorResult.tsx";
+import {PositionCalculatorModel} from "../Models/PositionCalculatorModel.tsx";
 
 export const PositionCalculator = () => {
+    const[formData, setFormData] = React.useState<PositionCalculatorModel>({
+        riskTier:0,
+        entryPrice:0,
+        stopPrice:0,
+        targetPrice:0,
+        ticker:'',
+
+    });
     const [showResult, setShowResult] = React.useState(false);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "" ? Number(value) : value,
+        }));
+    };
 
     const handleCalculate = () => {
         setShowResult(true);
     };
     const handleReset =( )=>{
         setShowResult(false);
+        setFormData({
+            riskTier:0,
+            entryPrice:0,
+            stopPrice:0,
+            targetPrice:0,
+            ticker:"",
+        })
     }
 
     return (
@@ -35,6 +59,9 @@ export const PositionCalculator = () => {
                                     </label>
                                     <input
                                         type="number"
+                                        name="riskTier"
+                                        value={formData.riskTier}
+                                        onChange={handleInputChange}
                                         className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
@@ -44,6 +71,20 @@ export const PositionCalculator = () => {
                                     </label>
                                     <input
                                         type="number"
+                                        name="entryPrice"
+                                        value={formData.entryPrice}
+                                        onChange={handleInputChange}
+                                        className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">
+                                        Ticker<span className="text-red-500">*</span>
+                                    </label>
+                                    <textarea
+                                        name="ticker"
+                                        value={formData.ticker}
+                                        onChange={handleInputChange}
                                         className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
@@ -57,6 +98,9 @@ export const PositionCalculator = () => {
                                     </label>
                                     <input
                                         type="number"
+                                        name="stopPrice"
+                                        value={formData.stopPrice}
+                                        onChange={handleInputChange}
                                         className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
@@ -66,9 +110,13 @@ export const PositionCalculator = () => {
                                     </label>
                                     <input
                                         type="number"
+                                        name="targetPrice"
+                                        value={formData.targetPrice}
+                                        onChange={handleInputChange}
                                         className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
+
                             </div>
                         </div>
 
@@ -82,7 +130,7 @@ export const PositionCalculator = () => {
                     </form>
                 {showResult && (
                     <div className="mt-10">
-                    <PositionCalculatorResult reset={handleReset} />
+                        <PositionCalculatorResult reset={handleReset} formData={formData}/>
                     </div>
 
 
