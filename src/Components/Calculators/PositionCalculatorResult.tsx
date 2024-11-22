@@ -1,13 +1,12 @@
 import React from "react";
-import { PositionCalculatorModel } from "../Models/PositionCalculatorModel";
+import {PositionCalculatorModel} from "../Models/PositionCalculatorModel";
 
 interface IPositionCalculatorResult {
-    reset: () => void;
     formData: PositionCalculatorModel;
 }
 
 export const PositionCalculatorResult: React.FC<IPositionCalculatorResult> = ({
-                                                                                  reset,
+
                                                                                   formData,
                                                                               }) => {
     const calculateRiskPerShare = (
@@ -62,8 +61,8 @@ export const PositionCalculatorResult: React.FC<IPositionCalculatorResult> = ({
         entryPrice: number | null,
         numberOfShares: number | null
     ): number | null => {
-        if(targetPrice === null || entryPrice === null || numberOfShares === null) return null;
-        return (targetPrice-entryPrice)* numberOfShares;
+        if (targetPrice === null || entryPrice === null || numberOfShares === null) return null;
+        return (targetPrice - entryPrice) * numberOfShares;
     };
     const calculatePotentialUpsidePercentValue = (
         accountBalance: number | null,
@@ -72,7 +71,6 @@ export const PositionCalculatorResult: React.FC<IPositionCalculatorResult> = ({
         if (accountBalance === null || potentialUpsideDollarValue === null) return null;
         return (potentialUpsideDollarValue / accountBalance) * 100; // Convert to percentage
     };
-
 
 
     // Calculations
@@ -109,22 +107,66 @@ export const PositionCalculatorResult: React.FC<IPositionCalculatorResult> = ({
         formData.accountBalance,
         potentialUpsideDollarValue
     );
+    const riskToRewardRatio =
+        dollarRiskDollarValue && potentialUpsideDollarValue
+            ? (potentialUpsideDollarValue / dollarRiskDollarValue).toFixed(2)
+            : null;
+
 
     const rows = [
-        { name: "Trade Idea", dollarValue: null, percentValue: null, ticker: formData.ticker },
-        { name: "Risk Tier (% Capital at Risk)", dollarValue: null, percentValue: formData.riskTier, ticker: null },
-        { name: "Entry Price", dollarValue: formData.entryPrice, percentValue: null, ticker: null },
-        { name: "Stop Price", dollarValue: formData.stopPrice, percentValue: stopPercentValue !== null ? stopPercentValue.toFixed(2) : null },
-        { name: "Target Price", dollarValue: formData.targetPrice, percentValue: formData.targetPrice && formData.entryPrice ? (((formData.targetPrice / formData.entryPrice) - 1) * 100).toFixed(2) : null, ticker: null },
-        { name: "Dollar Risk", dollarValue: dollarRiskDollarValue !== null ? dollarRiskDollarValue.toFixed(2) : null, percentValue: null, ticker: null },
-        { name: "Risk Per Share", dollarValue: riskPerShare !== null ? riskPerShare.toFixed(2) : null, percentValue: null, ticker: null },
-        { name: "Number Of Shares", dollarValue: numberOfShares !== null ? Math.floor(numberOfShares) : null, percentValue: null, ticker: null },
-        { name: "Capital Allocation", dollarValue: capitalAllocationDollarValue !== null ? capitalAllocationDollarValue.toFixed(2) : null, percentValue: capitalAllocationPercentValue !== null ? capitalAllocationPercentValue.toFixed(2) : null, ticker: null },
-        { name: "Potential Upside", dollarValue: potentialUpsideDollarValue !== null ? potentialUpsideDollarValue.toFixed(2) : null, percentValue: potentialUpsidePercentValue !== null ? potentialUpsidePercentValue.toFixed(2) : null, ticker: null },
+        {name: "Trade Idea", dollarValue: null, percentValue: null, ticker: formData.ticker},
+        {name: "Risk Tier (% Capital at Risk)", dollarValue: null, percentValue: formData.riskTier, ticker: null},
+        {name: "Entry Price", dollarValue: formData.entryPrice, percentValue: null, ticker: null},
+        {
+            name: "Stop Price",
+            dollarValue: formData.stopPrice,
+            percentValue: stopPercentValue !== null ? stopPercentValue.toFixed(2) : null
+        },
+        {
+            name: "Target Price",
+            dollarValue: formData.targetPrice,
+            percentValue: formData.targetPrice && formData.entryPrice ? (((formData.targetPrice / formData.entryPrice) - 1) * 100).toFixed(2) : null,
+            ticker: null
+        },
+        {
+            name: "Dollar Risk",
+            dollarValue: dollarRiskDollarValue !== null ? dollarRiskDollarValue.toFixed(2) : null,
+            percentValue: null,
+            ticker: null
+        },
+        {
+            name: "Risk Per Share",
+            dollarValue: riskPerShare !== null ? riskPerShare.toFixed(2) : null,
+            percentValue: null,
+            ticker: null
+        },
+        {
+            name: "Number Of Shares",
+            dollarValue: numberOfShares !== null ? Math.floor(numberOfShares) : null,
+            percentValue: null,
+            ticker: null
+        },
+        {
+            name: "Capital Allocation",
+            dollarValue: capitalAllocationDollarValue !== null ? capitalAllocationDollarValue.toFixed(2) : null,
+            percentValue: capitalAllocationPercentValue !== null ? capitalAllocationPercentValue.toFixed(2) : null,
+            ticker: null
+        },
+        {
+            name: "Potential Upside",
+            dollarValue: potentialUpsideDollarValue !== null ? potentialUpsideDollarValue.toFixed(2) : null,
+            percentValue: potentialUpsidePercentValue !== null ? potentialUpsidePercentValue.toFixed(2) : null,
+            ticker: null
+        },
     ];
+    const rows2 = [
+        {name: "Risk To Reward Ratio", dollarValue: `1: ${riskToRewardRatio || "-"}`, percentValue: null, ticker: null},
+
+    ]
 
     return (
-        <div className="bg-gray-100 flex flex-col space-y-8 items-center rounded-2xl shadow-lg p-8 mx-auto w-full max-w-4xl">
+        <div
+            className="bg-gray-100 flex flex-col space-y-8 items-center rounded-2xl shadow-lg p-8 mx-auto w-full max-w-4xl">
             <div className="w-full overflow-x-auto">
                 <table className="min-w-full table-auto border-collapse border border-gray-200 rounded-lg">
                     <thead className="bg-blue-500 text-white">
@@ -141,10 +183,11 @@ export const PositionCalculatorResult: React.FC<IPositionCalculatorResult> = ({
                             key={row.name}
                             className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
                         >
-                            <td className="px-4 py-2 border border-gray-200">{row.name}</td>
                             <td className="px-4 py-2 text-right border border-gray-200">
-                                {row.dollarValue !== null ? `$${row.dollarValue}` : "-"}
+                                {row.name}
                             </td>
+                            <td className="px-4 text-right py-2 border border-gray-200">{row.name === "Number Of Shares" ? row.dollarValue ?? "-" : row.dollarValue !== null ? `$${row.dollarValue}` : "-"}</td>
+
                             <td className="px-4 py-2 text-right border border-gray-200">
                                 {row.percentValue !== null ? `${row.percentValue}%` : "-"}
                             </td>
@@ -156,14 +199,30 @@ export const PositionCalculatorResult: React.FC<IPositionCalculatorResult> = ({
                     </tbody>
                 </table>
             </div>
+            <div className="w-full overflow-x-auto">
+                <table className="min-w-full table-auto border-collapse border border-gray-200 rounded-lg">
+                    <thead className="bg-blue-500 text-white">
 
-            <button
-                type="button"
-                className="w-64 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
-                onClick={reset}
-            >
-                Reset
-            </button>
+                    </thead>
+                    <tbody>
+                    {rows2.map((row, index) => (
+                        <tr
+                            key={row.name}
+                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                        >
+                            <td className="px-4 py-2 border border-gray-200">{row.name}</td>
+                            <td className="px-4 py-2 text-right border border-gray-200">
+                                {row.dollarValue !== null ? `${row.dollarValue}` : "-"}
+                            </td>
+
+
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
     );
 };

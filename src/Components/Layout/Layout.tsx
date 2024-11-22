@@ -10,9 +10,9 @@ export const Layout = () => {
     return (
         <div
             className="relative min-h-screen bg-cover bg-center bg-white"
-            // style={{
-            //     backgroundImage: `url("/sl_022321_41020_35 (2).jpg")`,
-            // }}
+            style={{
+                backgroundImage: `url("trade3.jpg")`,
+            }}
         >
             <Header />
 
