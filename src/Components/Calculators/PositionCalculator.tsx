@@ -9,6 +9,7 @@ export const PositionCalculator = () => {
         stopPrice:0,
         targetPrice:0,
         ticker:'',
+        accountBalance:0,
 
     });
     const [showResult, setShowResult] = React.useState(false);
@@ -32,6 +33,7 @@ export const PositionCalculator = () => {
             stopPrice:0,
             targetPrice:0,
             ticker:"",
+            accountBalance:0,
         })
     }
 
@@ -112,6 +114,18 @@ export const PositionCalculator = () => {
                                         type="number"
                                         name="targetPrice"
                                         value={formData.targetPrice}
+                                        onChange={handleInputChange}
+                                        className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">
+                                        Account Balance <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="accountBalance"
+                                        value={formData.accountBalance}
                                         onChange={handleInputChange}
                                         className="w-96 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />

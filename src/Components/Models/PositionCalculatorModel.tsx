@@ -4,5 +4,6 @@ export interface PositionCalculatorModel {
     stopPrice: number;
     targetPrice: number;
     ticker:string;
+    accountBalance:number;
 
 }
