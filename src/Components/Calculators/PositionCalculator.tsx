@@ -1,17 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { PositionCalculatorResult } from "./PositionCalculatorResult.tsx";
 import { PositionCalculatorModel } from "../Models/PositionCalculatorModel.tsx";
+import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";
+import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
 
 export const PositionCalculator = () => {
-    const [formData, setFormData] = React.useState<PositionCalculatorModel>({
-        riskTier: 0,
-        entryPrice: 0,
-        stopPrice: 0,
-        targetPrice: 0,
-        ticker: '',
-        accountBalance: 0,
-    });
+    const [formData, setFormData] = React.useState<PositionCalculatorModel>(CPSModel);
     const [showResult, setShowResult] = React.useState(false);
+    const [pSResult , setPSResult] = React.useState<PositionCalculatorResultModel[]>(CPSResultModel);
+    const [rtrResult , setRtrResult] = React.useState<number>(0.0);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -25,18 +22,27 @@ export const PositionCalculator = () => {
 
     const handleCalculate = () => {
         setShowResult(true);
+        fetch('http://localhost:8000/calculators/position_size_calculator/get_results?format=json',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json())
+            .then(json => {
+                setPSResult(json["calculations"]);
+                setRtrResult(json["risk_to_reward_ratio"]);
+                // console.log(pSResult);
+
+            })
+            .catch(err => console.log(err));
     };
+
 
     const handleReset = () => {
         setShowResult(false);
-        setFormData({
-            riskTier: 0,
-            entryPrice: 0,
-            stopPrice: 0,
-            targetPrice: 0,
-            ticker: "",
-            accountBalance: 0,
-        });
+        setFormData(CPSModel);
     };
 
     return (
@@ -159,7 +165,7 @@ export const PositionCalculator = () => {
                 {/* Results */}
                 {showResult && (
                     <div className="mt-10">
-                        <PositionCalculatorResult  formData={formData} />
+                        <PositionCalculatorResult  formData={pSResult} rtrResult={rtrResult} />
                     </div>
                 )}
             </div>

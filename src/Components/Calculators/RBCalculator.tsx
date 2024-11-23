@@ -1,17 +1,10 @@
 import React from "react";
 import {RBCalculatorModel} from "../Models/RBCalculatorModel.tsx";
+import {CRBModel} from "@Components/Utils/Constants.tsx";
 
 export const RBCalculator = () => {
     const [showResult, setShowResult] = React.useState(false);
-    const [formData, setFormData] = React.useState<RBCalculatorModel>({
-        portfolioSize: 0,
-        positionSize: 0,
-        desiredReturn: 0,
-        averageGain: 0,
-        averageLoss: 0,
-        winningTrades: 0,
-        numberOfTrades: 0,
-    });
+    const [formData, setFormData] = React.useState<RBCalculatorModel>(CRBModel);
 
  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
      const {name , value} = e.target;
@@ -39,6 +32,7 @@ export const RBCalculator = () => {
     };
     const handleReset = () => {
         setShowResult(false);
+        setFormData(CRBModel);
 
     }
 
