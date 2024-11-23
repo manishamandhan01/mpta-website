@@ -1,9 +1,9 @@
 export interface RBCalculatorModel {
-    portfolioSize: 0;
-    positionSize: 0;
-    desiredReturn: 0;
-    averageGain: 0;
-    averageLoss: 0;
-    winningTrades: 0;
-    NumberOfTrades: 0;
+    portfolioSize: number;
+    positionSize: number;
+    desiredReturn: number;
+    averageGain: number;
+    averageLoss: number;
+    winningTrades: number;
+    numberOfTrades: number;
 }

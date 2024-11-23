@@ -1,12 +1,41 @@
 import React from "react";
+import {RBCalculatorModel} from "../Models/RBCalculatorModel.tsx";
 
 export const RBCalculator = () => {
     const [showResult, setShowResult] = React.useState(false);
+    const [formData, setFormData] = React.useState<RBCalculatorModel>({
+        portfolioSize: 0,
+        positionSize: 0,
+        desiredReturn: 0,
+        averageGain: 0,
+        averageLoss: 0,
+        winningTrades: 0,
+        numberOfTrades: 0,
+    });
 
-
+ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+     const {name , value} = e.target;
+     setFormData((prev) => ({
+         ...prev,
+         [name] : Number(value),
+     }))
+     console.log(formData);
+ }
 
     const handleCalculate = () => {
         setShowResult(true);
+        fetch('',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json())
+            .then(json => {
+                return json;
+            })
+            .catch(err => console.log(err));
     };
     const handleReset = () => {
         setShowResult(false);
@@ -34,6 +63,9 @@ export const RBCalculator = () => {
                             </label>
                             <input
                                 type="number"
+                                name="portfolioSize"
+                                value={formData.portfolioSize}
+                                onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
@@ -43,6 +75,9 @@ export const RBCalculator = () => {
                             </label>
                             <input
                                 type="number"
+                                name="positionSize"
+                                value={formData.positionSize}
+                                onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
@@ -52,6 +87,9 @@ export const RBCalculator = () => {
                             </label>
                             <input
                                 type="number"
+                                name="desiredReturn"
+                                value={formData.desiredReturn}
+                                onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
@@ -65,6 +103,9 @@ export const RBCalculator = () => {
                             </label>
                             <input
                                 type="number"
+                                name="averageGain"
+                                value={formData.averageGain}
+                                onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
@@ -74,6 +115,9 @@ export const RBCalculator = () => {
                             </label>
                             <input
                                 type="number"
+                                name="averageLoss"
+                                value={formData.averageLoss}
+                                onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
@@ -83,6 +127,9 @@ export const RBCalculator = () => {
                             </label>
                             <input
                                 type="number"
+                                name="winningTrades"
+                                value={formData.winningTrades}
+                                onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
@@ -93,6 +140,9 @@ export const RBCalculator = () => {
                         </label>
                         <input
                             type="number"
+                            name="numberOfTrades"
+                            value={formData.numberOfTrades}
+                            onChange={handleInputChange}
                             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                     </div>

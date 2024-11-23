@@ -87,7 +87,7 @@ export const Header = () => {
                     ))}
                 </nav>
 
-                 Buttons Section
+
                 <div className="flex items-center space-x-4">
                     <button className="px-4 py-2 bg-blue-500 text-white rounded-lg font-semibold shadow-md hover:bg-blue-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition">
                         Sign In
