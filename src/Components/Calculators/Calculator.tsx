@@ -22,7 +22,7 @@ export const Calculators = () => {
                         <Tab label="Position Calculator" sx={{
                             color: value === "positionCalculator" ? "blue" : "inherit",
                             borderRadius: "4px",
-                            fontWeight: value === "positionCalculator" ? "bold" : "normal",
+                            fontWeight: value === "positionCalculator" ? "serif" : "normal",
                             px: 2,
                             mx: 1,
                             textTransform: "none",
@@ -40,7 +40,7 @@ export const Calculators = () => {
                              sx={{
                                  color: value === "rbCalculator" ? "blue" : "inherit",
                                  borderRadius: "4px",
-                                 fontWeight: value === "rbCalculator" ? "bold" : "normal",
+                                 fontWeight: value === "rbCalculator" ? "serif" : "normal",
                                  px: 2,
                                  mx: 1,
                                  textTransform: "none",

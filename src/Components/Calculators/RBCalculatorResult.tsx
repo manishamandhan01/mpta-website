@@ -1,110 +1,75 @@
-import React from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { styled } from '@mui/material/styles';
+import React, {useState} from "react";
+import {RBCalculatorModel} from "../Models/RBCalculatorModel.tsx";
 
-import Paper from '@mui/material/Paper';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
-}));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
 
-function createData(
-    name?: string,
-    $?: number,
-    percentage?: number,
-    Ticker?: string,
-) {
-    return { name, $, percentage, Ticker };
-}
-
-const rows = [
-    createData('Risk Tier (% Capital at Risk)', 159, 6.0, 'MSFT'),
-    createData('Stop Price', 159, 6.0),
-    createData('Entry Price', 159),
-    createData('Target Price', 159, 6.0),
-    createData('Dollar Risk', 159),
-    createData('Risk Per Share', 159),
-    createData('Number Of Shares', 159),
-    createData('Rounded Number Of Shares', 159),
-    createData('Capital Allocation', 159, 6.0),
-    createData('Potential Upside', 159, 6.0),
-
-];
 
 
 
 interface IRBCalculatorResult {
-    reset: () => void;
-    formData:{
-        risktier: number;
-        entryPrice: number;
-        stopPrice: number;
-        targetPrice: number;
-    }
+    formData:RBCalculatorModel;
 }
-export const PositionCalculatorResult :React.FC<IRBCalculatorResult>  = ({reset})=>{
+export const RBCalculatorResult :React.FC<IRBCalculatorResult>  = ({formData})=>{
     return (
-        <>
-            <div className="bg-gray-200 flex flex-col space-y-10 items-center rounded-2xl justify-center p-8 mr-24">
+        <div
+            className="bg-gray-100 flex flex-col space-y-8 items-center rounded-2xl shadow-lg p-8 mx-auto w-full max-w-4xl">
+            <div className="w-full overflow-x-auto">
+                <table className="min-w-full table-auto border-collapse border border-gray-200 rounded-lg">
+                    <thead className="bg-blue-500 text-white">
+                    <tr>
+                        <th className="px-4 py-2 text-left">Equity Calculator</th>
+                        <th className="px-4 py-2 text-right">$</th>
+                        <th className="px-4 py-2 text-right">Percentage</th>
+                        <th className="px-4 py-2 text-right">Ticker</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {rows.map((row, index) => (
+                        <tr
+                            key={row.name}
+                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                        >
+                            <td className="px-4 py-2 text-right border border-gray-200">
+                                {row.name}
+                            </td>
+                            <td className="px-4 text-right py-2 border border-gray-200">{row.name === "Number Of Shares" ? row.dollarValue ?? "-" : row.dollarValue !== null ? `$${row.dollarValue}` : "-"}</td>
 
-
-                <TableContainer component={Paper}>
-                    <Table className="w-full" aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Equity Calculator</StyledTableCell>
-                                <StyledTableCell align="right">$</StyledTableCell>
-                                <StyledTableCell align="right">Percentage</StyledTableCell>
-                                <StyledTableCell align="right">Ticker</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row) => (
-                                <StyledTableRow key={row.name}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.name}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">{row.$}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.percentage}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.Ticker}</StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
-
-                    </Table>
-
-                </TableContainer>
-                <button
-                    type="button"
-                    className="w-64 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 "
-                    onClick={reset}
-                >
-                    Reset
-                </button>
-
-
+                            <td className="px-4 py-2 text-right border border-gray-200">
+                                {row.percentValue !== null ? `${row.percentValue}%` : "-"}
+                            </td>
+                            <td className="px-4 py-2 text-right border border-gray-200">
+                                {row.ticker || "-"}
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
-        </>
+            <div className="w-full overflow-x-auto">
+                <table className="min-w-full table-auto border-collapse border border-gray-200 rounded-lg">
+                    <thead className="bg-blue-500 text-white">
+
+                    </thead>
+                    <tbody>
+                    {rows2.map((row, index) => (
+                        <tr
+                            key={row.name}
+                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                        >
+                            <td className="px-4 py-2 border border-gray-200">{row.name}</td>
+                            <td className="px-4 py-2 text-right border border-gray-200">
+                                {row.dollarValue !== null ? `${row.dollarValue}` : "-"}
+                            </td>
+
+
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
     )
 }
