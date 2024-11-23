@@ -23,13 +23,15 @@ export const Header = () => {
             <div className="flex items-center justify-between px-6 md:px-12 py-4">
                 {/* Logo Section */}
                 <div className="flex items-center space-x-4">
-                    <a href="#" className="group">
+                    <a href="#" className="group relative block w-20 h-14">
                         <img
-                            className="w-12 h-12 rounded-full shadow-md transform transition-transform group-hover:scale-105"
-                            src="https://www.shutterstock.com/image-vector/mp-pm-abstract-outstanding-professional-260nw-1942914580.jpg"
+                            className="w-full h-full object-cover shadow-md transform transition-transform group-hover:scale-105"
+                            src="06.png"
                             alt="Logo"
                         />
                     </a>
+
+
                     <h1 className="text-blue-700 text-2xl font-bold tracking-wide group-hover:text-blue-800 transition-colors">
                         Trade Analyzer
                     </h1>
