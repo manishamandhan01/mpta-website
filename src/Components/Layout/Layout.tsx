@@ -1,11 +1,12 @@
 import React from "react";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { MiddleSection } from "./MiddleSection";
-import { Outlet } from "react-router-dom";
+import {Header} from "./Header";
+import {Footer} from "./Footer";
+import {MiddleSection} from "./MiddleSection";
+import {Outlet} from "react-router-dom";
 
 export const Layout = () => {
     const [open, setOpen] = React.useState(false);
+    setOpen(false);
 
     return (
         <div

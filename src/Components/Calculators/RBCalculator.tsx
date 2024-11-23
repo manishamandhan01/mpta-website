@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import {RBCalculatorResult} from "./RBCalculatorResult.tsx";
+import React from "react";
 
 export const RBCalculator = () => {
     const [showResult, setShowResult] = React.useState(false);
@@ -118,7 +117,7 @@ export const RBCalculator = () => {
                 </div>
                 {showResult && (
                     <div className="mt-10">
-                        <RBCalculatorResult formData={formData}/>
+                        {/*<RBCalculatorResult formData={formData}/>*/}
                     </div>
                 )}
             </div>

@@ -1,16 +1,28 @@
-import React, {useState} from "react";
+import React from "react";
 import {RBCalculatorModel} from "../Models/RBCalculatorModel.tsx";
-
-
-
-
-
 
 
 interface IRBCalculatorResult {
     formData:RBCalculatorModel;
 }
 export const RBCalculatorResult :React.FC<IRBCalculatorResult>  = ({formData})=>{
+    console.log(formData);
+    const rows = [
+        {
+            "name": "test",
+            "dollarValue": 0,
+            "percentValue": 0,
+            "ticker": "msft",
+        }
+    ];
+    const rows2 = [
+        {
+            "name": "test",
+            "dollarValue": 0,
+            "percentValue": 0,
+            "ticker": "msft",
+        }
+    ];
     return (
         <div
             className="bg-gray-100 flex flex-col space-y-8 items-center rounded-2xl shadow-lg p-8 mx-auto w-full max-w-4xl">
