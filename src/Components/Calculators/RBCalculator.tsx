@@ -1,10 +1,17 @@
 import React from "react";
 import {RBCalculatorModel} from "../Models/RBCalculatorModel.tsx";
-import {CRBModel} from "@Components/Utils/Constants.tsx";
+import {CPSResultModel, CRBModel, CRBResultModel} from "@Components/Utils/Constants.tsx";
+import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
+import {RBCalculatorResultModel} from "@Components/Models/RBCalculatorResultModel.tsx";
+import {RBCalculatorResult} from "@Components/Calculators/RBCalculatorResult.tsx";
 
 export const RBCalculator = () => {
     const [showResult, setShowResult] = React.useState(false);
     const [formData, setFormData] = React.useState<RBCalculatorModel>(CRBModel);
+    const [rB1Result , setRB1Result] = React.useState<RBCalculatorResultModel[]>(CRBResultModel);
+    const [rB2Result , setRB2Result] = React.useState<RBCalculatorResultModel[]>(CRBResultModel);
+    const [rB3Result , setRB3Result] = React.useState<RBCalculatorResultModel[]>(CRBResultModel);
+
 
  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
      const {name , value} = e.target;
@@ -17,7 +24,7 @@ export const RBCalculator = () => {
 
     const handleCalculate = () => {
         setShowResult(true);
-        fetch('',{
+        fetch('http://localhost:8000/calculators/result_based_calculator/get_results?format=json',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +33,9 @@ export const RBCalculator = () => {
         })
             .then(res => res.json())
             .then(json => {
-                return json;
+                setRB1Result(json["table_1"]);
+                setRB2Result(json["table_2"]);
+                setRB3Result(json["table_3"]);
             })
             .catch(err => console.log(err));
     };
@@ -140,6 +149,18 @@ export const RBCalculator = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                     </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                            Biggest Losing <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="biggestLosing"
+                            value={formData.biggestLosing}
+                            onChange={handleInputChange}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                    </div>
                 </form>
 
 
@@ -161,7 +182,7 @@ export const RBCalculator = () => {
                 </div>
                 {showResult && (
                     <div className="mt-10">
-                        {/*<RBCalculatorResult formData={formData}/>*/}
+                        <RBCalculatorResult formData={rB1Result} rB2Result={rB2Result} rB3Result={rB3Result} />
                     </div>
                 )}
             </div>

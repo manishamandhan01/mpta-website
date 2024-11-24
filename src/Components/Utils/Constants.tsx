@@ -1,4 +1,5 @@
 import {PositionCalculatorResultModel} from "../Models/PositionCalculatorResultModel.tsx";
+import {RBCalculatorResultModel} from "@Components/Models/RBCalculatorResultModel.tsx";
 
 export const CPSModel =
     {
@@ -18,12 +19,19 @@ export const CRBModel =
         averageLoss: 0,
         winningTrades: 0,
         numberOfTrades: 0,
+        biggestLosing: 0,
     }
 export const CPSResultModel: PositionCalculatorResultModel[] = [{
     name: '',
     dollarValue: 0,
     percentValue: 0,
     ticker: ''
+}
+]
+export const CRBResultModel: RBCalculatorResultModel[] = [{
+    name: '',
+    dollarValue: 0,
+    percentValue: 0,
 }
 ]
 

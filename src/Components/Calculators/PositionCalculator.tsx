@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { PositionCalculatorResult } from "./PositionCalculatorResult.tsx";
 import { PositionCalculatorModel } from "../Models/PositionCalculatorModel.tsx";
-import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";
+import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";5
 import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
 
 export const PositionCalculator = () => {

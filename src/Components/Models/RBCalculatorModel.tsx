@@ -6,4 +6,5 @@ export interface RBCalculatorModel {
     averageLoss: number;
     winningTrades: number;
     numberOfTrades: number;
+    biggestLosing :number;
 }
