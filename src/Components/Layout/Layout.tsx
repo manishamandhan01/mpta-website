@@ -1,8 +1,8 @@
 // import React from "react";
-import {Header} from "./Header";
-import {Footer} from "./Footer";
-import {MiddleSection} from "./MiddleSection";
 import {Outlet} from "react-router-dom";
+import {HeaderB} from "@Components/Layout/Header(Bootstrap).tsx";
+import {MiddleSectionB} from "@Components/Layout/MiddleSection(Bootstrap).tsx";
+import {FooterB} from "@Components/Layout/Footer(Bootstrap).tsx";
 
 export const Layout = () => {
     const open = false;
@@ -10,25 +10,23 @@ export const Layout = () => {
 
     return (
         <div
-            className="relative min-h-screen bg-cover bg-center bg-white"
-            style={{
-                backgroundImage: `url("trade3.jpg")`,
-            }}
-        >
-            <Header />
+            className=""
 
-            <main className="flex items-center justify-center min-h-screen bg-opacity-50 bg-white" >
+        >
+            <HeaderB />
+
+
                 {open ? (
-                    <div className="text-center p-12 bg-white bg-opacity-90 rounded-lg shadow-lg max-w-3xl">
-                        <MiddleSection />
-                    </div>
+
+                        <MiddleSectionB />
+
                 ) : (
                     <Outlet />
                 )}
-            </main>
+
 
             {/* Footer at the bottom */}
-            <Footer />
+            <FooterB />
         </div>
     );
 };

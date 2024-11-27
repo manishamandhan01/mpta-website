@@ -1,9 +1,10 @@
 
-import './App.css'
+
 import { RouteObject, useRoutes } from 'react-router-dom';
 import {Layout} from "./Components/Layout/Layout.tsx";
-import {Calculators} from "./Components/Calculators/Calculator.tsx";
-import {MiddleSection} from "./Components/Layout/MiddleSection.tsx";
+import './App.css'
+import {MiddleSectionB} from "@Components/Layout/MiddleSection(Bootstrap).tsx";
+import {CalculatorsB} from "@Components/Calculators/Calculator(bootstrap).tsx";
 function App() {
     const route : RouteObject[]=[
         {
@@ -11,15 +12,15 @@ function App() {
             element:<Layout/>,
             children:[
                 {
-                    path:"home/*",
+                    path:"home",
                     element: (
-                        <MiddleSection/>
+                        <MiddleSectionB/>
                     ),
                 },
                 {
-                    path:"calculators/*",
+                    path:"calculators",
                     element: (
-                        <Calculators/>
+                        <CalculatorsB/>
                     ),
                 },
             ],
