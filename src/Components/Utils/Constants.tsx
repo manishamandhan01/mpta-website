@@ -3,23 +3,23 @@ import {RBCalculatorResultModel} from "@Components/Models/RBCalculatorResultMode
 
 export const CPSModel =
     {
-        riskTier: 0,
-        entryPrice: 0,
-        stopPrice: 0,
-        targetPrice: 0,
-        ticker: '',
-        accountBalance: 0,
+        riskTier: 0.50,
+        entryPrice: 200,
+        stopPrice: 95,
+        targetPrice: 120,
+        ticker: 'MCFT',
+        accountBalance: 100000,
     }
 export const CRBModel =
     {
-        portfolioSize: 0,
-        positionSize: 0,
-        desiredReturn: 0,
-        averageGain: 0,
-        averageLoss: 0,
-        winningTrades: 0,
-        numberOfTrades: 0,
-        biggestLosing: 0,
+        portfolioSize: 100000,
+        positionSize: 25,
+        desiredReturn: 30,
+        averageGain: 13,
+        averageLoss: 8,
+        winningTrades: 50,
+        numberOfTrades: 100,
+        biggestLosing: 15 ,
     }
 export const CPSResultModel: PositionCalculatorResultModel[] = [{
     name: '',

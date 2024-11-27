@@ -71,7 +71,6 @@ export const PositionCalculatorB = () => {
                                 onChange={handleInputChange}
                                 className=" p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                                 aria-label="Risk Tier"
-                                placeholder="0.50"
                             />
                         </div>
                     <div className="col-6">
