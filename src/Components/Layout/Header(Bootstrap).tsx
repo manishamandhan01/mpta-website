@@ -14,7 +14,7 @@ export const HeaderB = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto header_links font_poppins heading-16 text_gray">
                         <li className="nav-item">
-                            <a className="nav-link text_gray font_weight_400 " aria-current="page" href="home">Home</a>
+                            <a className="nav-link text_gray font_weight_400 " aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text_gray font_weight_400" href="#">About Us</a>

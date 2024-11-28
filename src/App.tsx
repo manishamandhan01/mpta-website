@@ -12,7 +12,7 @@ function App() {
             element:<Layout/>,
             children:[
                 {
-                    path:"home",
+                    index: true,
                     element: (
                         <MiddleSectionB/>
                     ),
