@@ -3,6 +3,7 @@ import {PositionCalculatorModel} from "../Models/PositionCalculatorModel.tsx";
 import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";
 import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
 import {PositionCalculatorResultB} from "@Components/Calculators/PositionCalculatorResult(B).tsx";
+import Swal from 'sweetalert2'
 
 export const PositionCalculatorB = () => {
     const [formData, setFormData] = React.useState<PositionCalculatorModel>(CPSModel);
@@ -28,12 +29,18 @@ export const PositionCalculatorB = () => {
     }
 
     const handleCalculate = () => {
-        if(tradetype === "Long" && formData.targetPrice < formData.entryPrice){
-            alert("Target price can not be smaller then Entry price");
-
-        }else if(tradetype === "Short" && formData.targetPrice > formData.entryPrice){
-            alert("Target price can not be bigger then Entry price");
-
+        if (tradetype === "Long" && formData.targetPrice < formData.entryPrice) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Target price cannot be smaller than Entry price.",
+            });
+        } else if (tradetype === "Short" && formData.targetPrice > formData.entryPrice) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Target price cannot be greater than Entry price.",
+            });
         }
         setShowResult(true);
         fetch('http://localhost:8000/calculators/position_size_calculator/get_results?format=json', {

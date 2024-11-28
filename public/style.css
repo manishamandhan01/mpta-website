@@ -377,4 +377,6 @@ a{
     padding: 12px;
 }
 
-
+.swal2-confirm{
+    background-color: #2196F3;
+}
