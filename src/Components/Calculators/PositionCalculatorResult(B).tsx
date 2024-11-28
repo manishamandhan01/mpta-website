@@ -17,8 +17,8 @@ export const PositionCalculatorResultB: React.FC<IPositionCalculatorResult> = ({
 
     return (
         <div
-            className="position_result_table">
-            <div className="">
+            className="position_result_table Hero-section ">
+            <div className="hero-section">
                 <table className="w-100">
                     <thead className="text-center font_Epilogue line_height_32 heading-14 ">
                     <tr>
@@ -32,7 +32,7 @@ export const PositionCalculatorResultB: React.FC<IPositionCalculatorResult> = ({
                     {resultData.map((row, index) => (
                         <tr
                             key={row.name}
-                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                            className="bg-white"
                         >
                             <td className="px-4 py-2 text-right border border-gray-200">
                                 {row.name}
@@ -59,6 +59,7 @@ export const PositionCalculatorResultB: React.FC<IPositionCalculatorResult> = ({
 
                         <tr
                             key="Risk To Reward Ratio"
+                            className="bg-white"
                             // className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
                         >
                             <td className="px-4 py-2 border border-gray-200">Risk To Reward Ratio</td>

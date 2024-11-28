@@ -180,7 +180,7 @@ export const RBCalculatorB = () => {
                     {/*</button>*/}
                 </div>
                 {showResult && (
-                    <div className="calculator_psition_result_main">
+                    <div className="calculator_psition_result_main  ">
                         <RBCalculatorResultB formData={rB1Result} rB2Result={rB2Result} rB3Result={rB3Result} />
                     </div>
                 )}

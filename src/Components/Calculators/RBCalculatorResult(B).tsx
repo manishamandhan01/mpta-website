@@ -12,8 +12,8 @@ export const RBCalculatorResultB: React.FC<IRBCalculatorResult> = ({formData, rB
     const table1 = formData;
 
     return (
-        <div  className="position_result_table row col-12">
-            <div className="col-6" >
+        <div  className="position_result_table Hero-section row col-12">
+            <div className=" col-6 " >
 
 
 
@@ -22,22 +22,27 @@ export const RBCalculatorResultB: React.FC<IRBCalculatorResult> = ({formData, rB
                     <thead className="text-center font_Epilogue line_height_32 heading-14 ">
                     <tr>
                         <th >Name</th>
-                        <th>$</th>
-                        <th>Percentage</th>
+                        <th>Value</th>
+
                     </tr>
                     </thead>
                     <tbody className="text-center">
-                    {table1.map((row, index) => (
+                    {table1.map((row, ) => (
                         <tr
                             key={row.name}
-                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                            className="bg-white"
                         >
                             <td className="px-4 py-2 text-right border border-gray-200">{row.name}</td>
-                            <td className="px-4 text-right py-2 border border-gray-200">
-                                {row.name === "Number Of Trades" ? row.dollarValue ?? "-" : row.dollarValue !== null ? `$${row.dollarValue}` : "-"}
-                            </td>
+                            {/*<td className="px-4 text-right py-2 border border-gray-200">*/}
+                            {/*    {row.name === "Number Of Trades" ? row.dollarValue ?? "-" : row.dollarValue !== null && row.dollarValue !== undefined ? `$${row.dollarValue}` : "-"}*/}
+                            {/*</td>*/}
                             <td className="px-4 py-2 text-right border border-gray-200">
-                                {row.percentValue !== null ? `${row.percentValue}%` : "-"}
+                                { row.name === "Portfolio Size"
+                                    ? `$${row.percentValue}`: row.percentValue !== null && row.percentValue !== undefined
+                                    ? `${row.percentValue}%`
+
+                                        : "-"
+                                }
                             </td>
                         </tr>
                     ))}
@@ -53,11 +58,11 @@ export const RBCalculatorResultB: React.FC<IRBCalculatorResult> = ({formData, rB
                     {rB2Result.map((row, index) => (
                         <tr
                             key={row.name}
-                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                            className="bg-white"
                         >
                             <td className="px-4 py-2 border border-gray-200">{row.name}</td>
                             <td className="px-4 py-2 text-right border border-gray-200">
-                                {row.dollarValue !== null ? `${row.dollarValue}` : "-"}
+                                {row.dollarValue !== null && row.dollarValue !== undefined ? `${row.dollarValue}` : "-"}
                             </td>
                         </tr>
                     ))}
@@ -71,18 +76,29 @@ export const RBCalculatorResultB: React.FC<IRBCalculatorResult> = ({formData, rB
                         <thead className="text-center font_Epilogue line_height_32 heading-14 ">
                         <tr>
                             <th className="">Name</th>
-                            <th className="">$</th>
+                            <th className="">Value</th>
                         </tr>
                         </thead>
                         <tbody className="text-center">
                         {rB3Result.map((row, index) => (
                             <tr
                                 key={row.name}
-                                className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}
+                                className="bg-white"
                             >
                                 <td className="px-4 py-2 border border-gray-200">{row.name}</td>
                                 <td className="px-4 text-right py-2 border border-gray-200">
-                                    {row.name === "Winning Trades" ? row.dollarValue ?? "-" : row.dollarValue !== null ? `$${row.dollarValue}` : "-"}
+                                    {row.name === "Winning Trades" ||
+                                    row.name === "Losing Trades" ||
+                                    row.name === "Gain / Loss Ratio (Non Adjusted)" ||
+                                    row.name === "Number Of Trades Needed To Reach Gaol" ||
+                                    row.name === "Gain / Loss Ratio (Adjusted)"
+                                        ? row.dollarValue ?? "-"
+                                        : row.name === "Expected Net Return Per Trade" || row.name ==="Optimal Position Size"
+                                            ? `${row.dollarValue}%`
+                                            : row.dollarValue !== null && row.dollarValue !== undefined
+                                                ? `$${row.dollarValue}`
+                                                : "-"}
+
                                 </td>
                             </tr>
                         ))}

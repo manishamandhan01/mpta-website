@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import { PositionCalculatorResult } from "./PositionCalculatorResult.tsx";
+import React from "react";
 import { PositionCalculatorModel } from "../Models/PositionCalculatorModel.tsx";
-import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";5
+import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";
 import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
+import {PositionCalculatorResultB} from "@Components/Calculators/PositionCalculatorResult(B).tsx";
 
 export const PositionCalculator = () => {
     const [formData, setFormData] = React.useState<PositionCalculatorModel>(CPSModel);
@@ -165,7 +165,7 @@ export const PositionCalculator = () => {
                 {/* Results */}
                 {showResult && (
                     <div className="mt-10">
-                        <PositionCalculatorResult  formData={pSResult} rtrResult={rtrResult} />
+                        <PositionCalculatorResultB  formData={pSResult} rtrResult={rtrResult} />
                     </div>
                 )}
             </div>

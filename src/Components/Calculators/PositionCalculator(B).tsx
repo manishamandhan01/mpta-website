@@ -161,7 +161,7 @@ export const PositionCalculatorB = () => {
 
                 {/* Results */}
                 {showResult && (
-                    <div className="calculator_psition_result_main">
+                    <div className="calculator_psition_result_main ">
                         <PositionCalculatorResultB  formData={pSResult} rtrResult={rtrResult} />
                     </div>
                 )}
