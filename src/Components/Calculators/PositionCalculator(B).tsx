@@ -1,5 +1,5 @@
 import React from "react";
-import { PositionCalculatorModel } from "../Models/PositionCalculatorModel.tsx";
+import {PositionCalculatorModel} from "../Models/PositionCalculatorModel.tsx";
 import {CPSModel, CPSResultModel} from "@Components/Utils/Constants.tsx";
 import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
 import {PositionCalculatorResultB} from "@Components/Calculators/PositionCalculatorResult(B).tsx";
@@ -7,11 +7,12 @@ import {PositionCalculatorResultB} from "@Components/Calculators/PositionCalcula
 export const PositionCalculatorB = () => {
     const [formData, setFormData] = React.useState<PositionCalculatorModel>(CPSModel);
     const [showResult, setShowResult] = React.useState(false);
-    const [pSResult , setPSResult] = React.useState<PositionCalculatorResultModel[]>(CPSResultModel);
-    const [rtrResult , setRtrResult] = React.useState<number>(0.0);
+    const [pSResult, setPSResult] = React.useState<PositionCalculatorResultModel[]>(CPSResultModel);
+    const [rtrResult, setRtrResult] = React.useState<number>(0.0);
+    const [tradetype, setTradeType] = React.useState("Long");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prev) => ({
             ...prev,
             [name]: name === "riskTier" || name === "entryPrice" || name === "stopPrice" || name === "targetPrice" || name === "accountBalance"
@@ -19,15 +20,29 @@ export const PositionCalculatorB = () => {
                 : value,
         }));
     };
+    const handleTrade =(e: React.ChangeEvent<HTMLSelectElement>) =>{
+        const{value} = e.target;
+        setTradeType(value);
+
+
+    }
 
     const handleCalculate = () => {
+        if(tradetype === "Long" && formData.targetPrice < formData.entryPrice){
+            alert("Target price can not be smaller then Entry price");
+
+        }else if(tradetype === "Short" && formData.targetPrice > formData.entryPrice){
+            alert("Target price can not be bigger then Entry price");
+
+        }
         setShowResult(true);
-        fetch('http://localhost:8000/calculators/position_size_calculator/get_results?format=json',{
+        fetch('http://localhost:8000/calculators/position_size_calculator/get_results?format=json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData)
+
         })
             .then(res => res.json())
             .then(json => {
@@ -50,7 +65,8 @@ export const PositionCalculatorB = () => {
             <div className="">
                 {/* Header */}
                 <div className=" calculator_main_heading mb-4">
-                    <h1 className="font_poppins heading-40 line_height_32 text_primary_300 font_weight_700 mt-3 mb-3">Position Size Calculator</h1>
+                    <h1 className="font_poppins heading-40 line_height_32 text_primary_300 font_weight_700 mt-3 mb-3">Position
+                        Size Calculator</h1>
                     <p className="font_poppins heading-16 text_light_gray">
                         Calculate how many stocks to buy based on your risk and account balance.
                     </p>
@@ -60,19 +76,35 @@ export const PositionCalculatorB = () => {
                 <form className="font_Epilogue row col-12 m-auto mb-5">
                     {/* Left Column */}
 
-                        <div className="col-6" >
-                            <label className="block text-sm font-medium text-gray-700">
-                                Risk Tier (% Capital at Risk) <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                                type="number"
-                                name="riskTier"
-                                value={formData.riskTier}
-                                onChange={handleInputChange}
-                                className=" p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                aria-label="Risk Tier"
-                            />
-                        </div>
+                    <div className="col-6">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Risk Tier (% Capital at Risk) <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="riskTier"
+                            value={formData.riskTier}
+                            onChange={handleInputChange}
+                            className=" p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                            aria-label="Risk Tier"
+                        />
+                    </div>
+                    <div className="col-6">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Trade <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                            className=" p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        onChange={handleTrade }>
+                            <option value="Long"
+                            > Long
+                            </option>
+                            <option value="Short"
+                            >Short
+                            </option>
+                        </select>
+
+                    </div>
                     <div className="col-6">
                         <label className="block text-sm font-medium text-gray-700">
                             Entry Price <span className="text-red-500">*</span>
@@ -85,6 +117,8 @@ export const PositionCalculatorB = () => {
                             className=" p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                             aria-label="Entry Price"
                         />
+
+
                     </div>
                     <div className="col-6">
                         <label className="block text-sm font-medium text-gray-700">
@@ -162,7 +196,7 @@ export const PositionCalculatorB = () => {
                 {/* Results */}
                 {showResult && (
                     <div className="calculator_psition_result_main ">
-                        <PositionCalculatorResultB  formData={pSResult} rtrResult={rtrResult} />
+                        <PositionCalculatorResultB formData={pSResult} rtrResult={rtrResult}/>
                     </div>
                 )}
             </div>
