@@ -29,18 +29,45 @@ export const PositionCalculatorB = () => {
     }
 
     const handleCalculate = () => {
-        if (tradetype === "Long" && formData.targetPrice < formData.entryPrice) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Target price cannot be smaller than Entry price.",
-            });
-        } else if (tradetype === "Short" && formData.targetPrice > formData.entryPrice) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Target price cannot be greater than Entry price.",
-            });
+        let validationFailed = false; 
+
+
+        if (tradetype === "Long") {
+            if (formData.targetPrice < formData.entryPrice) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Target price cannot be smaller than Entry price.",
+                });
+                validationFailed = true;
+            } else if (formData.stopPrice > formData.entryPrice) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Stop price must be less than entry price",
+                });
+                validationFailed = true;
+            }
+        } else if (tradetype === "Short") {
+            if (formData.targetPrice > formData.entryPrice) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Target price cannot be greater than Entry price.",
+                });
+                validationFailed = true;
+            } else if (formData.stopPrice < formData.entryPrice) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Stop price must be higher than entry price",
+                });
+                validationFailed = true;
+            }
+        }
+
+        if (validationFailed) {
+            return;
         }
         setShowResult(true);
         fetch('http://localhost:8000/calculators/position_size_calculator/get_results?format=json', {

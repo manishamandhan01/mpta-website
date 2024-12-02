@@ -1,5 +1,7 @@
 import React from "react";
 import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
+import { Tooltip } from 'react-tooltip'
+
 
 interface IPositionCalculatorResult {
     formData: PositionCalculatorResultModel[];
@@ -29,7 +31,7 @@ export const PositionCalculatorResultB: React.FC<IPositionCalculatorResult> = ({
                     </tr>
                     </thead>
                     <tbody className="text-center">
-                    {resultData.map((row, index) => (
+                    {resultData.map((row) => (
                         <tr
                             key={row.name}
                             className="bg-white"
@@ -40,7 +42,18 @@ export const PositionCalculatorResultB: React.FC<IPositionCalculatorResult> = ({
                             <td className="px-4 text-right py-2 border border-gray-200">{row.name === "Number Of Shares" ? row.dollarValue ?? "-" : row.dollarValue !== null && row.dollarValue !== undefined ? `$${row.dollarValue}` : "-"}</td>
 
                             <td className="px-4 py-2 text-right border border-gray-200">
-                                {row.percentValue !== null && row.percentValue !== undefined ? `${row.percentValue}%` : "-"}
+                                {row.name ==="Stop Price"  && row.percentValue !== undefined && row.percentValue > 12 ?(
+                                        <div data-tooltip-id="stoploss-tooltip"
+                                             data-tooltip-content={`Stop Loss is ${row.percentValue !== null && row.percentValue !== undefined ? `${row.percentValue}%` : "-"}  which is higher`}
+                                             data-tooltip-place="top"
+                                             className="tooltiptext" style={{color:"red"}}>
+
+                                            {row.percentValue !== null && row.percentValue !== undefined ? `${row.percentValue}%` : "-"}
+                                        </div>
+                                    ):
+                                    row.percentValue !== null && row.percentValue !== undefined ? `${row.percentValue}%` : "-"
+                                }
+                                <Tooltip id="stoploss-tooltip"/>
                             </td>
                             <td className="px-4 py-2 text-right border border-gray-200">
                                 {row.ticker || "-"}

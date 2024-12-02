@@ -5,6 +5,8 @@ import {Layout} from "./Components/Layout/Layout.tsx";
 import './App.css'
 import {MiddleSectionB} from "@Components/Layout/MiddleSection(Bootstrap).tsx";
 import {CalculatorsB} from "@Components/Calculators/Calculator(bootstrap).tsx";
+import 'react-tooltip/dist/react-tooltip.css'
+
 function App() {
     const route : RouteObject[]=[
         {
