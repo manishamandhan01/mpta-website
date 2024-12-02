@@ -3,6 +3,7 @@ import {RBCalculatorModel} from "../Models/RBCalculatorModel.tsx";
 import { CRBModel, CRBResultModel} from "@Components/Utils/Constants.tsx";
 import {RBCalculatorResultModel} from "@Components/Models/RBCalculatorResultModel.tsx";
 import {RBCalculatorResultB} from "@Components/Calculators/RBCalculatorResult(B).tsx";
+import Swal from "sweetalert2";
 
 export const RBCalculatorB = () => {
     const [showResult, setShowResult] = React.useState(false);
@@ -22,6 +23,13 @@ export const RBCalculatorB = () => {
  }
 
     const handleCalculate = () => {
+        if (formData.averageGain < formData.averageLoss) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Average % Gain must be higher than Average % Loss",
+            });
+        }
         setShowResult(true);
         fetch('http://localhost:8000/calculators/result_based_calculator/get_results?format=json',{
             method: 'POST',
@@ -148,18 +156,18 @@ export const RBCalculatorB = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                     </div>
-                    <div className="col-6">
-                        <label className="block text-sm font-medium text-gray-700">
-                            Biggest Losing <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="number"
-                            name="biggestLosing"
-                            value={formData.biggestLosing}
-                            onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        />
-                    </div>
+                    {/*<div className="col-6">*/}
+                    {/*    <label className="block text-sm font-medium text-gray-700">*/}
+                    {/*        Biggest Losing <span className="text-red-500">*</span>*/}
+                    {/*    </label>*/}
+                    {/*    <input*/}
+                    {/*        type="number"*/}
+                    {/*        name="biggestLosing"*/}
+                    {/*        value={formData.biggestLosing}*/}
+                    {/*        onChange={handleInputChange}*/}
+                    {/*        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"*/}
+                    {/*    />*/}
+                    {/*</div>*/}
                 </form>
 
 
