@@ -381,3 +381,12 @@ a{
 .swal2-confirm{
     background-color: #2196F3;
 }
+
+/*#videoSection*/
+.Hero-video-section{
+   padding-bottom: 60px;
+    padding-top: 60px;
+}
+.Vedio-section-button{
+    margin-top: 24px;
+}

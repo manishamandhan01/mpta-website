@@ -88,32 +88,35 @@ export const MiddleSectionB = () => {
             </section>
             <section className="  ">
                 <div className="container pe-0 ">
-                    <div className="row col-11 m-auto align-items-center" >
+                    <div className="row col-11 m-auto align-items-center Hero-video-section" >
 
 
 
-                    <div className="col-lg-6 col-md-12 p-0  Hero-section-left">
+                    <div className="col-lg-5 col-md-12   ">
                         <div className="Hero-section-left_top">
                             <p className="heading-20 font_poppins text_primary_300 font_weight_500 mb-12">Our Feature
-                                </p>
-                            <h1 className="font_weight_700  heading-48 text-bold line_height_72 ">Easy Way to Invest
+                            </p>
+                            <h1 className="font_weight_700  font_Epilogue heading-48 text-bold line_height_72 ">Easy Way to Invest
                                 and Get Profit </h1>
-                            <p className=" font_poppins heading-16 text_light_gray Hero-section-left-para mt-12">Using the Tradiant Application is an easy way to invest
-                                and benefit, equipped with comprehensive analysis tools and Artificial Intelligent (AI) that helps automation in monitoring and transactions.
-                                </p>
-                        </div>
-                        <div className=" font_poppins  ">
-                            <button
-                                className=" button_get_started btn text-white bg-primary-300 font_weight_500 heading-16  ">Get
-                                Started
-                            </button>
+                            <p className=" font_poppins heading-16 text_light_gray Hero-section-left-para mt-12 ">Using
+                                the MpTradeAnalyzer Application is an easy way to invest
+                                and benefit, equipped with comprehensive analysis tools and Artificial Intelligent (AI)
+                                that helps automation in monitoring and transactions.
+                            </p>
+                            <div className=" font_poppins Vedio-section-button ">
+                                <button
+                                    className=" button_get_started btn text-white bg-primary-300 font_weight_500 heading-16  ">Get
+                                    Started
+                                </button>
+                            </div>
                         </div>
 
+
                     </div>
-                    <div className="col-lg-5 col-md-12 p-0 Hero-section-right-1">
-                        <img src="Group 39813.png" alt="Illustration showing COVID-19 prevention measures"
-                             className="img-fluid"/>
-                    </div>
+                        <div className="col-lg-7 col-md-12 text-center Hero-section-right-1">
+                            <img src="Group 39813.png" alt=""
+                                 className="img-fluid"/>
+                        </div>
                     </div>
                 </div>
 
