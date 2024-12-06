@@ -19,7 +19,7 @@ export const PositionCalculatorResultB: React.FC<IPositionCalculatorResult> = ({
 
     return (
         <div
-            className="position_result_table Hero-section ">
+            className="position_result_table hero-section-white ">
             <div className="hero-section">
                 <table className="w-100">
                     <thead className="text-center font_Epilogue line_height_32 heading-14 ">

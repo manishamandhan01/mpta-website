@@ -180,6 +180,9 @@ a{
 .bg-primary-300 {
     background-color: #2196F3;
 }
+.bg-primary-30{
+    background-color: #cfe8fc;
+}
 
 .button_get_started {
     width: 100%;
@@ -195,6 +198,9 @@ a{
 .Hero-section {
     background-color: #F5F5F5;
 
+}
+.hero-section-white{
+    background-color: white;
 }
 
 .Hero-section-left {
@@ -356,8 +362,10 @@ a{
 
 /*calculator*/
 .calculator_main_table{
-    background-color: white;
-    padding-top: 30px;
+    background-color:  #cfe8fc;
+    padding-top: 20px;
+    margin-bottom: 40px;
+    border-radius: 20px;
 }
 .textarea_ticker{
     height: 100%;
@@ -377,6 +385,7 @@ a{
 .position_result_table{
     border: 1px solid #dee2e6;
     padding: 12px;
+    border-radius: 8px;
 }
 
 .swal2-confirm{

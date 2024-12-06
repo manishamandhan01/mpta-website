@@ -13,17 +13,17 @@ export const CalculatorsB = () => {
 
     return (
 <>
-    <div className="Hero-section p-4">
+    <div className="hero-section-white p-4">
 
     </div>
 
 
         <Box
-            className="  Hero-section    "
+            className="  hero-section-white    "
 
         >
             <div className=" container">
-                <div className="calculator_main_table" >
+                <div className="calculator_main_table " >
 
 
                 <div className=" row col-10 m-auto">
@@ -82,10 +82,10 @@ export const CalculatorsB = () => {
             </div>
 
         </Box>
-        <div className="Hero-section p-4">
+        {/*<div className="Hero-section p-4">*/}
 
 
-        </div>
+        {/*</div>*/}
 </>
     );
 };

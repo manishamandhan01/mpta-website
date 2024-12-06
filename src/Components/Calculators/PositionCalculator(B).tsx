@@ -98,10 +98,10 @@ export const PositionCalculatorB = () => {
         <div className=" ">
             <div className="">
                 {/* Header */}
-                <div className=" calculator_main_heading mb-4">
-                    <h1 className="font_poppins heading-40 line_height_32 text_primary_300 font_weight_700 mt-3 mb-3">Position
+                <div className=" calculator_main_heading  mb-4">
+                    <h1 className="font_poppins heading-24 line_height_24 text-primary font_weight_500 mt-3 mb-3">Position
                         Size Calculator</h1>
-                    <p className="font_poppins heading-16 text_light_gray">
+                    <p className="font_poppins heading-16 line_height_24  text_light_gray">
                         Calculate how many stocks to buy based on your risk and account balance.
                     </p>
                 </div>

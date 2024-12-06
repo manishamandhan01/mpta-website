@@ -13,7 +13,7 @@ export const RBCalculatorResultB: React.FC<IRBCalculatorResult> = ({formData, rB
     const table1 = formData;
 
     return (
-        <div className="position_result_table Hero-section row col-12">
+        <div className="position_result_table hero-section-white row col-12">
             <div className="mt-2 mb-3">
                 <table className="w-100">
                     <thead className="bg-blue-500 text-white">
