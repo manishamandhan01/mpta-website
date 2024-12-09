@@ -6,7 +6,7 @@ export const CandleChart = ()=>{
     (async () => {
 
         const data = await fetch(
-            'http://api.marketstack.com/v1/eod?access_key=ca2f9186b5ec222d719cbc24016ecacd&symbols=AAPL'
+            'https://api.marketstack.com/v1/eod?access_key=ca2f9186b5ec222d719cbc24016ecacd&symbols=AAPL'
         ).then(response => response.json());
         const stockData : StockDataModel[] = data.data;
 
