@@ -1,30 +1,27 @@
 import Highcharts from "highcharts/highstock";
 import {StockDataModel} from "@Components/Models/StockDataModel.tsx";
 import React from "react";
-import {PositionCalculatorResultModel} from "@Components/Models/PositionCalculatorResultModel.tsx";
-import {CPSResultModel} from "@Components/Utils/Constants.tsx";
 
 
 export const CandleChart = ()=>{
-    const [stockData, setStockData] = React.useState<StockDataModel[]>();
+    const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     fetch(
-            'http://localhost:8000/charts/charts/get_results?format=json' , {
+            'http://localhost:8000/stockapis/candle_stick_chart/get_results?format=json' , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify("")
 
             })
             .then(res => res.json())
             .then(json => {
-                setStockData(json["data"]);
-
+                setStockData(json["data"].data);
+                bindHighChart();
             })
             .catch(err => console.log(err));
 
-
-
+    function bindHighChart() {
         // split the data set into ohlc and volume
         const ohlc = [],
             volume = [],
@@ -115,12 +112,15 @@ export const CandleChart = ()=>{
             }]
         })
 
-    })();
+
+
+    }
+
 
 
     return (
 <div className="card" >
         <div  id="candleStickContainer"></div></div>
     )
-}// src/components/HighchartsComponent.tsx
-
+// src/components/HighchartsComponent.tsx
+};
