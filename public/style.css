@@ -400,3 +400,21 @@ a{
 .Vedio-section-button{
     margin-top: 24px;
 }
+
+/*CandlestickCharts*/
+.candleStickContainer{
+    background-color: #074C83;
+}
+.candlestickMain{
+    width: 100% !important;
+    max-width: 1500px!important;
+    margin: auto;
+}
+.highcharts-container  {
+
+
+    /* height: 100% !important; */
+    height: 900px !important;
+    background-color: beige !important;
+}
+/*CandlestickCharts*/
