@@ -1,3 +1,6 @@
+
+
+
 export const HeaderB = () => {
 
 
@@ -23,7 +26,7 @@ export const HeaderB = () => {
                             <a className="nav-link text_gray font_weight_400" href="#">Why Us?</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text_gray font_weight_400" href="#">Products</a>
+                            <a className="nav-link text_gray font_weight_400" href="/charts" target="_blank">Products</a>
                         </li>
 
                         <li className="nav-item dropdown">

@@ -5,6 +5,9 @@ import React from "react";
 
 export const CandleChart = ()=>{
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
+    // const currDate = new Date().toLocaleDateString();
+    const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+
     fetch(
             'http://localhost:8000/stockapis/candle_stick_chart/get_results?format=json' , {
                 method: 'POST',
@@ -119,8 +122,27 @@ export const CandleChart = ()=>{
 
 
     return (
-<div className="card" >
-        <div  id="candleStickContainer"></div></div>
+        <>
+            <div className="card">Top section</div>
+            <div className="row">
+                <div className="col-lg-1 col-md-12 text-center ">
+                    <div className="card drawingTool">Drawing tool</div>
+                </div>
+
+                <div className="col-lg-9 col-md-12 candleStickMain">
+                    <div  id="candleStickContainer"></div>
+                    <div className="card dateTimeContainer">{currTime} (UTC +5:30)</div>
+                    {/* DateTime below candleStickContainer */}
+                </div>
+
+                <div className="col-lg-2 col-md-12 text-center ">
+                    <div className="card">Stocks</div>
+                    <div className="card mt-1">Information</div>
+                </div>
+            </div>
+
+
+        </>
     )
-// src/components/HighchartsComponent.tsx
+
 };
