@@ -23,7 +23,7 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
 
 
     const handleInputChange =(ticker: TickersListModel) => {
-        setSearchticker(ticker.ticker || "");
+        setSearchticker(ticker.name || "");
     };
 
 
@@ -60,11 +60,11 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
                 open={open}
                     maxWidth="md"
                 // onClose={handleClose}
-                //     PaperProps={{ sx: { marginBottom: '25rem' } }}
+
 
             >
                 <DialogTitle className="dialogTitle" >Symbol Search</DialogTitle>
-                <DialogContent>
+                <DialogContent   style={{height:'600px'}}>
                     <DialogContentText>
 
                     </DialogContentText>
