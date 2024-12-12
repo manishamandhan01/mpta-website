@@ -11,7 +11,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import {SearchDialogTickerList} from "@Components/Lists/SearchDialogTickerList.tsx";
 import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
-import Autocomplete from '@mui/material/Autocomplete';
 
 interface IProps {
     open: boolean;
@@ -21,6 +20,12 @@ interface IProps {
 export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
     const [tickersData , setTickersData] = React.useState<TickersListModel[] | undefined>(undefined);
     const [searchticker , setSearchticker] = useState("");
+
+
+    const handleInputChange =(ticker: TickersListModel) => {
+        setSearchticker(ticker.ticker || "");
+    };
+
 
     const fetchTickers = () => {
         fetch('http://localhost:8000/stockapis/v1/tickers?format=json', {
@@ -77,7 +82,7 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
 
                         <TextField
                             id="standard-basic"
-                            label="Search Ticker"
+                            // label="Search Ticker"
                             variant="standard"
                             value={searchticker}
                             onChange={(e) => setSearchticker(e.target.value)}
@@ -90,7 +95,7 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
                             }}
                         />
                         <FormControl sx={{ mt: 2,  }}>
-                            <SearchDialogTickerList tickersList={filterTickers}  />
+                            <SearchDialogTickerList tickersList={filterTickers} onSelectTicker={handleInputChange}  />
 
                         </FormControl>
 

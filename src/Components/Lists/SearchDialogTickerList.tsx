@@ -9,8 +9,9 @@ import ListItemContent from '@mui/joy/ListItemContent';
 
 interface IProps{
     tickersList: TickersListModel[] | undefined;
+    onSelectTicker: (ticker: TickersListModel) => void;
 }
-export const SearchDialogTickerList: React.FC<IProps> = ({tickersList}) => {
+export const SearchDialogTickerList: React.FC<IProps> = ({tickersList, onSelectTicker}) => {
     if (!tickersList || tickersList.length === 0) {
         return <div>No tickers available</div>; // Display a message if tickers are undefined or empty
     }
@@ -22,7 +23,7 @@ export const SearchDialogTickerList: React.FC<IProps> = ({tickersList}) => {
             <List>
                 {tickersList.map((ticker) => (
                 <ListItem>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => onSelectTicker(ticker)}>
                         <ListItemDecorator>{ticker.name ? ticker.name : 'Unknown Name'}</ListItemDecorator>
                         <ListItemContent>{ticker.ticker ? ticker.ticker : 'Unknown Ticker'}</ListItemContent>
                     </ListItemButton>
