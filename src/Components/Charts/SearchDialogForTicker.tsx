@@ -1,0 +1,106 @@
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import DialogActions from "@mui/material/DialogActions";
+import React, {useEffect, useState} from "react";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import {SearchDialogTickerList} from "@Components/Lists/SearchDialogTickerList.tsx";
+import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
+import Autocomplete from '@mui/material/Autocomplete';
+
+interface IProps {
+    open: boolean;
+}
+
+
+export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
+    const [tickersData , setTickersData] = React.useState<TickersListModel[] | undefined>(undefined);
+    const [searchticker , setSearchticker] = useState("");
+
+    const fetchTickers = () => {
+        fetch('http://localhost:8000/stockapis/v1/tickers?format=json', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+        })
+            .then(res => res.json())
+            .then(json => {
+                setTickersData(json.results);
+
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+     fetchTickers();
+    }, []);
+
+    const filterTickers = tickersData?.filter(ticker =>
+        // Ensure ticker properties are not undefined
+        (ticker.name && ticker.name.toLowerCase().includes(searchticker.toLowerCase())) ||
+        (ticker.ticker && ticker.ticker.toLowerCase().includes(searchticker.toLowerCase()))
+    );
+
+    return (
+        <>
+            <Dialog className="searchDialogForTicker"
+                    fullWidth
+                open={open}
+                    maxWidth="md"
+                // onClose={handleClose}
+                //     PaperProps={{ sx: { marginBottom: '25rem' } }}
+
+            >
+                <DialogTitle className="dialogTitle" >Symbol Search</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+
+                    </DialogContentText>
+                    <Box
+                        className="m-0 w-100"
+                        noValidate
+                        component="form"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            m: 'auto',
+                            width: 'fit-content',
+                        }}
+                    >
+
+                        <TextField
+                            id="standard-basic"
+                            label="Search Ticker"
+                            variant="standard"
+                            value={searchticker}
+                            onChange={(e) => setSearchticker(e.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <FormControl sx={{ mt: 2,  }}>
+                            <SearchDialogTickerList tickersList={filterTickers}  />
+
+                        </FormControl>
+
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    {/*<Button onClick={handleClose}>Close</Button>*/}
+                </DialogActions>
+            </Dialog>
+
+        </>
+    )
+}

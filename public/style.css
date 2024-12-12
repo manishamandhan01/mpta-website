@@ -444,3 +444,11 @@ a{
 
 
 /*CandlestickCharts*/
+
+/*SearchDialogBox*/
+.dialogTitle{
+    font-weight: 600 !important;
+    color: #2196F3 !important;
+}
+
+/*SearchDialogBox*/
