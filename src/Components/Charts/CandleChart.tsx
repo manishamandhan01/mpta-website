@@ -11,8 +11,9 @@ export const CandleChart = ()=>{
     // const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
     const [open ,setOpen] = React.useState(false);
+    const [selectedTicker, setSelectedTicker] = React.useState<string>("selectedTicker");
 
-   
+
     const handleClose = () => {
         setOpen(false);
     }
@@ -129,7 +130,7 @@ export const CandleChart = ()=>{
                    events: {
                        load: function () {
                            const chart = this;
-                           chart.renderer.button('Click Me', 0, 0, function () {
+                           chart.renderer.button(selectedTicker, 0, 0, function () {
 
                            })
                                .attr({
@@ -144,13 +145,21 @@ export const CandleChart = ()=>{
                }
 
            });
+           if (chart){
+               const button = chart.renderer.button;
+               if(button){
+                   button.attr({
+                       text:selectedTicker
+                   });
+               }
+           }
 
 
        }
-   }
+   };
     useEffect(() => {
         fetchChartData();
-    }, []);
+    }, [selectedTicker]);
 
     return (
         <>
@@ -162,11 +171,23 @@ export const CandleChart = ()=>{
 
                 <div className="col-lg-9 col-md-12 candleStickMain">
                     <div id="candleStickContainer"></div>
-                    <div className="card dateTimeContainer">{currTime} (UTC +5:30)</div>
+                    <div className="  card dateTimeintervalContainer">
+                        <div className="intervalContainer">
+                            <button className="intervalButtons">1D</button>
+                            <button className="intervalButtons ms-2">5D</button>
+                            <button className="intervalButtons ms-2">3M</button>
+                            <button className="intervalButtons ms-2">6M</button>
+                            <button className="intervalButtons ms-2">1Y</button>
+                            <button className="intervalButtons ms-2">5Y</button>
+                            <div className="timeContainer">{currTime} (UTC +5:30)</div>
+                        </div>
+
+
+                    </div>
 
                     {/* Conditionally render the search box */}
                     {open && (
-                       <SearchDialogForTicker dialogOpen={open} dialogClose={handleClose} />
+                       <SearchDialogForTicker dialogOpen={open} dialogClose={handleClose} onSelectTicker={setSelectedTicker} />
                     )}
                 </div>
 

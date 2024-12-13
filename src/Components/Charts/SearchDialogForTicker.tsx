@@ -18,16 +18,21 @@ import Stack from '@mui/material/Stack';
 interface IProps {
     dialogOpen: boolean;
     dialogClose : () => void;
+    onSelectTicker : (ticker: string) => void;
 }
 
 
-export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose}) => {
+export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose,onSelectTicker}) => {
     const [tickersData, setTickersData] = React.useState<TickersListModel[] | undefined>(undefined);
     const [searchticker, setSearchticker] = useState("");
 
 
     const handleInputChange = (ticker: TickersListModel) => {
-        setSearchticker(ticker.name || "");
+        const selectedTicker = ticker.name || "";
+        setSearchticker(selectedTicker);
+        onSelectTicker(selectedTicker);
+        dialogClose();
+
     };
 
 
