@@ -10,8 +10,12 @@ export const CandleChart = ()=>{
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     // const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
-    const [showSearchBox, setShowSearchBox] = React.useState(true);
-    const [open ,setOpen] = React.useState(true);
+    const [open ,setOpen] = React.useState(false);
+
+   
+    const handleClose = () => {
+        setOpen(false);
+    }
 
 
 
@@ -133,7 +137,6 @@ export const CandleChart = ()=>{
                                })
                                .add()
                                .on('click', function () {
-                                   setShowSearchBox(prevState => !prevState);
                                    setOpen(prevState => !prevState);
                                });
                        }
@@ -162,8 +165,8 @@ export const CandleChart = ()=>{
                     <div className="card dateTimeContainer">{currTime} (UTC +5:30)</div>
 
                     {/* Conditionally render the search box */}
-                    {showSearchBox && (
-                       <SearchDialogForTicker open={showSearchBox}/>
+                    {open && (
+                       <SearchDialogForTicker dialogOpen={open} dialogClose={handleClose} />
                     )}
                 </div>
 

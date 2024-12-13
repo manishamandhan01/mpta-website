@@ -13,19 +13,20 @@ import {SearchDialogTickerList} from "@Components/Lists/SearchDialogTickerList.t
 import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+
+
 interface IProps {
-    open: boolean;
+    dialogOpen: boolean;
+    dialogClose : () => void;
 }
 
 
-export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
-    const [tickersData , setTickersData] = React.useState<TickersListModel[] | undefined>(undefined);
-    const [searchticker , setSearchticker] = useState("");
+export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose}) => {
+    const [tickersData, setTickersData] = React.useState<TickersListModel[] | undefined>(undefined);
+    const [searchticker, setSearchticker] = useState("");
 
 
-    const handleInputChange =(ticker: TickersListModel) => {
+    const handleInputChange = (ticker: TickersListModel) => {
         setSearchticker(ticker.name || "");
     };
 
@@ -47,7 +48,7 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
     };
 
     useEffect(() => {
-     fetchTickers();
+        fetchTickers();
     }, []);
 
     const filterTickers = tickersData?.filter(ticker =>
@@ -60,14 +61,18 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
         <>
             <Dialog className="searchDialogForTicker"
                     fullWidth
-                open={open}
+                    open={dialogOpen}
                     maxWidth="md"
-                // onClose={handleClose}
+                    onClose={dialogClose}
 
 
             >
-                <DialogTitle className="font_weight_700  font_Epilogue heading-48 text-bold line_height_72" >Symbol Search</DialogTitle>
-                <DialogContent  className="p-0"  style={{height:'600px'}}>
+                <DialogTitle className="font_weight_700  font_Epilogue heading-48 text-bold line_height_72 ">Symbol
+                    Search
+
+
+                </DialogTitle>
+                <DialogContent className="p-0" style={{height: '600px'}}>
                     <DialogContentText>
 
                     </DialogContentText>
@@ -93,34 +98,33 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
                             onChange={(e) => setSearchticker(e.target.value)}
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment  position="start">
-                                        <SearchIcon />
+                                    <InputAdornment position="start">
+                                        <SearchIcon/>
                                         {/*<AddIcon/>*/}
                                         {/*<RemoveIcon/>*/}
                                     </InputAdornment>
                                 ),
                             }}
                         />
-                        <Stack  direction="row" spacing={2}>
+                        <Stack direction="row" spacing={2}>
 
-                                <Button variant="outlined">All</Button>
+                            <Button variant="outlined">All</Button>
 
-                                <Button className="ms-1" variant="outlined" href="#outlined-buttons">
-                                    Stocks
-                                </Button>
-
+                            <Button className="ms-1" variant="outlined" href="#outlined-buttons">
+                                Stocks
+                            </Button>
 
 
                         </Stack>
-                        <FormControl sx={{ mt: 2,  }}>
-                            <SearchDialogTickerList tickersList={filterTickers} onSelectTicker={handleInputChange}  />
+                        <FormControl sx={{mt: 2,}}>
+                            <SearchDialogTickerList tickersList={filterTickers} onSelectTicker={handleInputChange}/>
 
                         </FormControl>
 
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    {/*<Button onClick={handleClose}>Close</Button>*/}
+                    <Button onClick={dialogClose}>Close</Button>
                 </DialogActions>
             </Dialog>
 
