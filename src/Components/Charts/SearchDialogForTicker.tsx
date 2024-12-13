@@ -11,7 +11,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import {SearchDialogTickerList} from "@Components/Lists/SearchDialogTickerList.tsx";
 import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 interface IProps {
     open: boolean;
 }
@@ -63,8 +66,8 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
 
 
             >
-                <DialogTitle className="dialogTitle" >Symbol Search</DialogTitle>
-                <DialogContent   style={{height:'600px'}}>
+                <DialogTitle className="font_weight_700  font_Epilogue heading-48 text-bold line_height_72" >Symbol Search</DialogTitle>
+                <DialogContent  className="p-0"  style={{height:'600px'}}>
                     <DialogContentText>
 
                     </DialogContentText>
@@ -80,7 +83,9 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
                         }}
                     >
 
+
                         <TextField
+                            className="searchInputTicker "
                             id="standard-basic"
                             // label="Search Ticker"
                             variant="standard"
@@ -88,12 +93,25 @@ export const SearchDialogForTicker : React.FC<IProps> = ({open}) => {
                             onChange={(e) => setSearchticker(e.target.value)}
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment position="start">
+                                    <InputAdornment  position="start">
                                         <SearchIcon />
+                                        {/*<AddIcon/>*/}
+                                        {/*<RemoveIcon/>*/}
                                     </InputAdornment>
                                 ),
                             }}
                         />
+                        <Stack  direction="row" spacing={2}>
+
+                                <Button variant="outlined">All</Button>
+
+                                <Button className="ms-1" variant="outlined" href="#outlined-buttons">
+                                    Stocks
+                                </Button>
+
+
+
+                        </Stack>
                         <FormControl sx={{ mt: 2,  }}>
                             <SearchDialogTickerList tickersList={filterTickers} onSelectTicker={handleInputChange}  />
 

@@ -450,5 +450,67 @@ a{
     font-weight: 600 !important;
     color: #2196F3 !important;
 }
+/*.listItemContent{*/
+/*    float: right !important;*/
+/*}*/
+
+.css-1adno9d-JoyListItemContent-root {
+    /* -webkit-flex: 1 1 auto; */
+    -ms-flex: 0 !important;
+     flex: 0 !important;
+     min-width: auto !important;
+    position: relative;
+}
+.css-dzijul-JoyListItemButton-root:not(.Mui-selected, [aria-selected="true"]):hover {
+    background-color: #F0F4F8;
+    color: #0B0D0E;
+
+}
+
+
+
+/*.markedFlagWrap-oRSs8UQo {*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    top: 10px;*/
+/*    padding: 0px;*/
+/*}*/
+/* Initially hide the markedFlagWrap */
+.markedFlagWrap-oRSs8UQo {
+    display: none;
+}
+
+/* Show the markedFlagWrap when hovering over ListItemButton */
+.css-dzijul-JoyListItemButton-root:hover .markedFlagWrap-oRSs8UQo {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    padding: 0px;
+    color: #dee2e6;
+}
+
+.searchInputTicker {
+    border-top: 1px solid #949494 !important;
+    /* padding: 10px; */
+}
+.searchInputTicker>.MuiInputBase-root{
+    padding:7px ;
+}
+.MuiStack-root {
+    /* border-radius: 20px; */
+    margin-top: 10px;
+    margin-left: 14px;
+}
+.DialogBoxButtons{
+    border-radius: 10px;
+}
+.MuiButtonBase-root{
+    border-radius: 20px !important;
+}
+.MuiButtonBase-root:hover{
+    background-color: #2196f3 !important;
+    color: white !important;
+}
 
 /*SearchDialogBox*/
