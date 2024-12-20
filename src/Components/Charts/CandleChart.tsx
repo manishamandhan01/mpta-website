@@ -8,32 +8,45 @@ import {SearchDialogForTicker} from "@Components/Charts/SearchDialogForTicker.ts
 
 export const CandleChart = ()=>{
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
-    const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
     const [open ,setOpen] = React.useState(false);
     const [selectedTicker, setSelectedTicker] = React.useState<string>("selectedTicker");
+    const [interval, setInterval] = React.useState<string>("");
 
 
     const handleClose = () => {
         setOpen(false);
     }
+    const handleInterval = (interval: string)=>{
+        setInterval(interval);
+
+    }
+    const getFormattedDate = () => {
+        const date = new Date();
+        const year = date.getFullYear();
+        const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if single digit
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed, so add 1 and pad with leading zero
+
+        return `${year}-${day}-${month}`;
+    };
+
+    const currDate = getFormattedDate();
 
 
 
 
    const fetchChartData= ()=> {
        fetch(
-           'http://localhost:8000/stockapis/candle_stick_chart/get_results?format=json', {
-               method: 'POST',
+           `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F1%2Fminute%2F${currDate}%2F${currDate}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`, {
+               method: 'GET',
                headers: {
                    'Content-Type': 'application/json',
                },
-               body: JSON.stringify("")
 
            })
            .then(res => res.json())
            .then(json => {
-               setStockData(json["data"].data);
+               setStockData(json.results);
                bindHighChart();
            })
            .catch(err => console.log(err));
@@ -174,7 +187,7 @@ export const CandleChart = ()=>{
                     <div id="candleStickContainer"></div>
                     <div className="  card dateTimeintervalContainer">
                         <div className="intervalContainer">
-                            <button className="intervalButtons" onClick={()=>{}} >1D</button>
+                            <button className="intervalButtons" onClick={()=>handleInterval("1")} >1D</button>
                             <button className="intervalButtons ms-2">5D</button>
                             <button className="intervalButtons ms-2">3M</button>
                             <button className="intervalButtons ms-2">6M</button>
