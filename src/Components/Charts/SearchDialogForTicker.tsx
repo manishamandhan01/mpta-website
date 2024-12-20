@@ -37,7 +37,7 @@ export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose
 
 
     const fetchTickers = () => {
-        fetch('http://localhost:8000/stockapis/v1/tickers?format=json', {
+        fetch('http://localhost:8000/stockapis/v1?format=json&url=v3%2Freference%2Ftickers%3Factive%3Dtrue%26limit%3D100%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

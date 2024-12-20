@@ -8,7 +8,7 @@ import {SearchDialogForTicker} from "@Components/Charts/SearchDialogForTicker.ts
 
 export const CandleChart = ()=>{
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
-    // const currDate = new Date().toLocaleDateString();
+    const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
     const [open ,setOpen] = React.useState(false);
     const [selectedTicker, setSelectedTicker] = React.useState<string>("selectedTicker");
@@ -17,6 +17,7 @@ export const CandleChart = ()=>{
     const handleClose = () => {
         setOpen(false);
     }
+
 
 
 
@@ -173,7 +174,7 @@ export const CandleChart = ()=>{
                     <div id="candleStickContainer"></div>
                     <div className="  card dateTimeintervalContainer">
                         <div className="intervalContainer">
-                            <button className="intervalButtons">1D</button>
+                            <button className="intervalButtons" onClick={()=>{}} >1D</button>
                             <button className="intervalButtons ms-2">5D</button>
                             <button className="intervalButtons ms-2">3M</button>
                             <button className="intervalButtons ms-2">6M</button>
