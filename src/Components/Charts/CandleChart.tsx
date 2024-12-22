@@ -28,9 +28,15 @@ export const CandleChart = () => {
     const currentDateMinusOneDate = getNDaysPreviousDate(1);
     const currentDateMinusTwoDate = getNDaysPreviousDate(2);
 
-    const fetchChartData = () => {
+    const fetchChartData = (numberOfDays?: number) => {
+        let fromDate = currentDateMinusTwoDate;
+        console.log("num", numberOfDays);
+        if(numberOfDays !== undefined){
+            fromDate = getNDaysPreviousDate(numberOfDays + 1);
+        }
+        console.log(fromDate);
         fetch(
-            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F1%2Fminute%2F${currentDateMinusTwoDate}%2F${currentDateMinusOneDate}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
+            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F1%2Fminute%2F${fromDate}%2F${currentDateMinusOneDate}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
             {
                 method: "GET",
                 headers: {
@@ -141,14 +147,15 @@ export const CandleChart = () => {
     };
 
     useEffect(() => {
-        fetchChartData();
-    }, [selectedTicker]);
-
-    useEffect(() => {
+        // If `stockData` changes, bind the chart
         if (stockData.length > 0) {
             bindHighChart(stockData);
         }
-    }, [stockData]);
+        // If `selectedTicker` changes, fetch new data
+        else {
+            fetchChartData();
+        }
+    }, [selectedTicker, stockData]);
 
     return (
         <>
@@ -162,8 +169,8 @@ export const CandleChart = () => {
                     <div id="candleStickContainer"></div>
                     <div className="card dateTimeintervalContainer">
                         <div className="intervalContainer">
-                            <button className="intervalButtons">1D</button>
-                            <button className="intervalButtons ms-2">5D</button>
+                            <button className="intervalButtons" onClick={() => fetchChartData(1)}>1D</button>
+                            <button className="intervalButtons ms-2" onClick={() => fetchChartData(5)}>5D</button>
                             <button className="intervalButtons ms-2">3M</button>
                             <button className="intervalButtons ms-2">6M</button>
                             <button className="intervalButtons ms-2">1Y</button>
