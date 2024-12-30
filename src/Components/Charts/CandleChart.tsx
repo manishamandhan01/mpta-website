@@ -3,12 +3,16 @@ import { StockDataModel } from "@Components/Models/StockDataModel.tsx";
 import React, { useEffect, useRef } from "react";
 
 import { SearchDialogForTicker } from "@Components/Charts/SearchDialogForTicker.tsx";
+import {DropdownInterval} from "@Components/Utils/DropdownInterval.tsx";
+import {MenuItem} from "@mui/material";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export const CandleChart = () => {
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedTicker, setSelectedTicker] = React.useState<string>("AAPL");
     const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+
     const chartRef = useRef<Highcharts.Chart | null>(null);
 
     const handleClose = () => setOpen(false);
@@ -27,16 +31,19 @@ export const CandleChart = () => {
 
     const currentDateMinusOneDate = getNDaysPreviousDate(1);
     const currentDateMinusTwoDate = getNDaysPreviousDate(2);
+    const [fromDate , setFromDate] = React.useState(currentDateMinusTwoDate);
+    const [toDate, setToDate] = React.useState(currentDateMinusOneDate);
 
     const fetchChartData = (numberOfDays?: number) => {
-        let fromDate = currentDateMinusTwoDate;
         console.log("num", numberOfDays);
         if(numberOfDays !== undefined){
-            fromDate = getNDaysPreviousDate(numberOfDays + 1);
+           const fromDate = getNDaysPreviousDate(numberOfDays + 1);
+            setFromDate(fromDate);
         }
+
         console.log(fromDate);
         fetch(
-            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F1%2Fminute%2F${fromDate}%2F${currentDateMinusOneDate}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
+            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F${multiplier}%2Fminute%2F${fromDate}%2F${toDate}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
             {
                 method: "GET",
                 headers: {
@@ -157,9 +164,52 @@ export const CandleChart = () => {
         }
     }, [selectedTicker, stockData]);
 
+
+    const [multiplier, setMultiplier] = React.useState<string>("1");
+
+
+    const handleChangeMultiplier = (event: SelectChangeEvent) => {
+        setMultiplier(event.target.value);
+
+    };
+    useEffect(() => {
+        fetchChartData();
+    }, [multiplier,fromDate,toDate]);
+
+
+
     return (
         <>
-            <div className="card">Top section</div>
+            <div className="cardTopSection d-flex align-items-center">
+                <img src="navBar.jpg" className="logo" alt="Logo"/>
+                <button onClick={() => setOpen(true)}>{selectedTicker}</button>
+                <button className="ms-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28">
+                        <path fill="currentColor"
+                              d="M13.5 6a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM4 14.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"></path>
+                        <path fill="currentColor" d="M9 14h4v-4h1v4h4v1h-4v4h-1v-4H9v-1z"></path>
+                    </svg>
+                </button>
+
+                <div className="vertical-line ms-3"></div>
+
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={multiplier}
+                    label="Age"
+                    onChange={handleChangeMultiplier}
+
+                >
+                    <MenuItem value="1">1</MenuItem>
+                    <MenuItem value="5">5</MenuItem>
+                    <MenuItem value="30">30</MenuItem>
+                </Select>
+
+                <div className="vertical-line ms-3"></div>
+            </div>
+
+
             <div className="row">
                 <div className="col-lg-1 col-md-12 text-center">
                     <div className="card drawingTool">Drawing tool</div>
@@ -169,13 +219,13 @@ export const CandleChart = () => {
                     <div id="candleStickContainer"></div>
                     <div className="card dateTimeintervalContainer">
                         <div className="intervalContainer">
-                            <button className="intervalButtons" onClick={() => fetchChartData(1)}>1D</button>
-                            <button className="intervalButtons ms-2" onClick={() => fetchChartData(5)}>5D</button>
+                            <button className="intervalButtons" >1D</button>
+                            <button className="intervalButtons ms-2" >5D</button>
                             <button className="intervalButtons ms-2">3M</button>
                             <button className="intervalButtons ms-2">6M</button>
                             <button className="intervalButtons ms-2">1Y</button>
                             <button className="intervalButtons ms-2">5Y</button>
-                            <div className="timeContainer">{currTime} (UTC +5:30)</div>
+                            <div className="timeContainer ">{currTime} (UTC +5:30)</div>
                         </div>
                     </div>
 
@@ -189,7 +239,8 @@ export const CandleChart = () => {
                 </div>
 
                 <div className="col-lg-2 col-md-12 text-center">
-                    <div className="card">Stocks</div>s
+                    <div className="card">Stocks</div>
+                    s
                     <div className="card mt-1">Information</div>
                 </div>
             </div>

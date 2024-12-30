@@ -11,7 +11,12 @@
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, p {
     margin-bottom: 0px;
 }
-
+.vertical-line {
+    width: 1px;               /* Define the thickness of the vertical line */
+    background-color: gainsboro;  /* Color of the vertical line */
+    height: 50px;            /* Adjust height based on the layout */
+    margin: 10px 10px;           /* Spacing above and below the line */
+}
 .container {
     width: 100%;
     max-width: 1440px;
@@ -587,3 +592,66 @@ a {
 }
 
 /*SearchDialogBox*/
+.cardTopSection {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/*dropdownInterval*/
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Button style */
+.dropdown-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dropdown menu style */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    display: block;
+}
+
+/* Individual menu items */
+.dropdown-item {
+    padding: 8px 16px;
+    background-color: white;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Hover effect for items */
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Close dropdown when clicked outside */
+.dropdown-menu {
+    display: none;
+}
+
+/* Show dropdown when it's open */
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+/*dropdownInterval*/
