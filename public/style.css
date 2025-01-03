@@ -454,10 +454,29 @@ a {
 .drawingTool {
 
     width: 100%;
-    max-width: 46px;
+    max-width: 54px;
     margin-left: 5px;
     height: 869px;
-    margin-top: 5px;
+    background-color: white;
+
+}
+.drawingToolLayout{
+
+    overflow: hidden;
+    margin-left: 5px;
+    margin-right: 1px;
+    margin-top: 6px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    max-width: 80px;
+    padding-right: 2px;
+}
+.drawingToolIcon{
+    width: 50px;
+    height: 50px;
+    border:None;
+    background-color: white;
+
 }
 
 .dateTimeintervalContainer {
@@ -471,11 +490,12 @@ a {
 
 .candleStickMain {
     overflow: hidden;
-    margin-left: -100px;
+    margin-left: 0px;
     margin-top: 6px;
     border-radius: 6px;
     margin-bottom: 6px;
     max-width: 1600px;
+    padding-left: 1px;
 }
 
 #candleStickContainer {
@@ -595,10 +615,9 @@ a {
 .cardTopSection {
     display: flex;
     align-items: center;
-    background-color: #f8f9fa;
-    padding: 10px;
+    background-color: #ffffff;
+    padding: 1px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 /*dropdownInterval*/
 /* Dropdown container */
@@ -655,3 +674,155 @@ a {
 }
 
 /*dropdownInterval*/
+
+/*TopSection*/
+.button-merBkM5y {
+    all: unset;
+    align-items: center;
+    cursor: default;
+    display: flex;
+    flex: 1 0 auto;
+    height: 100%;
+    --tv-toolbar-explicit-hover-border-radius: 4px;
+    position: relative;
+    transition: background-color .35s ease,color 60ms ease;
+    z-index: 0;
+}
+.menu-S_1OCXUK:only-child {
+    padding: 0 10px;
+}
+.button-merBkM5y:before {
+    border-radius: var(--tv-toolbar-explicit-hover-border-radius,2px);
+    display: block;
+    outline: 2px none #2962ff;
+    position: absolute;
+    z-index: -1;
+}
+.menuContent-S_1OCXUK {
+    justify-content: center;
+}
+.wrap-n5bmFxyX {
+    align-items: center;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    height: 100%;
+}
+.value-gwXludjS {
+    font-size: 14px;
+    text-align: left;
+}
+.group-MBOVGQRI {
+    align-items: center;
+    border-radius: 0;
+    cursor: default;
+    display: flex;
+    flex: 0 0 auto;
+    height: 100%;
+    justify-content: center;
+    margin-left: 0;
+    min-width: 37px;
+    overflow: hidden;
+}
+.wrap-n5bmFxyX {
+    align-items: center;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    height: 100%;
+}
+.separatorWrap-MBOVGQRI {
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+}
+.separator-xVhBjD5m {
+    background-color:#e0e3eb;
+    height: 22px;
+    margin: auto 4px;
+    width: 1px;
+}
+.group-MBOVGQRI {
+    align-items: center;
+    background-color:#fff;
+    border-radius: 0;
+    cursor: default;
+    display: flex;
+    flex: 0 0 auto;
+    height: 100%;
+    justify-content: center;
+    margin-left: 0;
+    min-width: 37px;
+    overflow: hidden;
+}
+.button-GwQQdU8S.isInteractive-GwQQdU8S {
+    position: relative;
+    z-index: 0;
+}
+.uppercase-cq__ntSC {
+    text-transform: uppercase;
+}
+.button-cq__ntSC {
+    padding: 5px 10px;
+    width: 100px;
+}
+.button-GwQQdU8S {
+    all: unset;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: default;
+    display: flex;
+    height: 100%;
+    transition: background-color 60ms ease,opacity 60ms ease,color 60ms ease;
+    --tv-toolbar-explicit-hover-border-radius: 4px;
+    color: #131722;
+}
+.icon-GwQQdU8S+.text-GwQQdU8S, .text-GwQQdU8S+.icon-GwQQdU8S {
+    margin-left: 2px;
+}
+.text-cq__ntSC {
+    font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
+    font-feature-settings: "tnum" on,"lnum" on;
+    font-style: normal;
+    --ui-lib-typography-font-size: 14px;
+    font-size: var(--ui-lib-typography-font-size);
+    font-weight: 600;
+    --ui-lib-typography-line-height: 18px;
+    line-height: var(--ui-lib-typography-line-height);
+    overflow: hidden;
+}
+.button-ptpAHg8E.withoutText-ptpAHg8E {
+    padding: 0 5px;
+}
+.button-GwQQdU8S.isInteractive-GwQQdU8S {
+    position: relative;
+    z-index: 0;
+}
+.button-GwQQdU8S {
+    all: unset;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: default;
+    display: flex;
+    height: 100%;
+    transition: background-color 60ms ease,opacity 60ms ease,color 60ms ease;
+    --tv-toolbar-explicit-hover-border-radius: 4px;
+    color: #131722;
+}
+.topLeftButton-hCWTCWBf {
+    height: 38px;
+    width: 52px;
+}
+.menu-U2jIw4km {
+    position: relative;
+}
+.buttonWrap-U2jIw4km {
+    position: relative;
+}
+.userPic-U2jIw4km {
+    border-radius: 50%;
+    display: block;
+    height: 28px;
+    width: 28px;
+}
+/*TopSection*/
