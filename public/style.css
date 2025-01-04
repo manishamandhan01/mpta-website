@@ -473,31 +473,47 @@ a {
 
 
 .drawingTool {
-
-    width: 100%;
-    max-width: 54px;
-    margin-left: 5px;
-    height: 869px;
+    height: 100%;
     background-color: white;
-
+    position: absolute;
+    top: 0;
+    width: 54px;
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+    justify-content: flex-start;
 }
 .drawingToolLayout{
-
-    overflow: hidden;
-    margin-left: 5px;
-    margin-right: 1px;
-    margin-top: 6px;
+    margin: 1px;
+    padding: 0;
     border-radius: 6px;
-    margin-bottom: 6px;
-    max-width: 80px;
-    padding-right: 2px;
+    position: absolute;
+    top: 42px;
+    width: 54px;
 }
-.drawingToolIcon{
-    width: 50px;
-    height: 50px;
-    border:None;
-    background-color: white;
 
+.drawingToolIconWrapper {
+    box-sizing: border-box;
+    position: relative;
+    touch-action: manipulation;
+    width: 52px;
+}
+
+.drawingToolIcon{
+    width: 52px;
+    height: 36px;
+    background-color: white; /* Make buttons visible */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*margin-bottom: 8px; !* Add spacing between buttons *!*/
+    cursor: pointer;
+    border: none;
+}
+
+.drawingToolIcon:hover {
+    background-color: #f0f0f0; /* Highlight button on hover */
+    border-radius: 6px; /* Optional: Rounded corners on hover */
 }
 
 .dateTimeintervalContainer {
@@ -509,14 +525,36 @@ a {
     width: 100%;
 }
 
-.candleStickMain {
+.layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.layout__area--top {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 1px;
+    margin-left: 2px;
+    border-radius: 8px;
+    height: 38px;
+    left: 52px;
+    width: 1460px;
+    position: absolute;
+}
+
+.layout__area--center {
     overflow: hidden;
     margin-left: 0px;
-    margin-top: 6px;
+    margin-top: 1px;
     border-radius: 6px;
     margin-bottom: 6px;
-    max-width: 1600px;
     padding-left: 1px;
+    position: absolute;
+    top: 42px;
+    left: 56px;
+    width: 1456px;
     /*height: 100vh;*/
 }
 
@@ -639,13 +677,6 @@ a {
 }
 
 /*SearchDialogBox*/
-.cardTopSection {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 1px;
-    border-radius: 8px;
-}
 /*dropdownInterval*/
 /* Dropdown container */
 .dropdown {
@@ -831,7 +862,7 @@ a {
 .buttonWrap-U2jIw4km {
     position: relative;
 }
-.userPic-U2jIw4km {
+.org-logo {
     border-radius: 50%;
     display: block;
     height: 28px;
