@@ -525,12 +525,6 @@ a {
     width: 100%;
 }
 
-.layout {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
 .layout__area--top {
     display: flex;
     align-items: center;
@@ -869,3 +863,17 @@ a {
     width: 28px;
 }
 /*TopSection*/
+
+#candleStickContainer {
+    width: 100%;
+    height: 80vh; /* Adjust as needed */
+}
+
+.layout {
+    /*overflow: hidden;*/
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    padding: 0;
+    margin: 0;
+}

@@ -3,9 +3,6 @@ import {StockDataModel} from "@Components/Models/StockDataModel.tsx";
 import React, {useEffect, useRef} from "react";
 
 import {SearchDialogForTicker} from "@Components/Charts/SearchDialogForTicker.tsx";
-import {DropdownInterval} from "@Components/Utils/DropdownInterval.tsx";
-import {MenuItem} from "@mui/material";
-import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {currentTime, formatDate, subtractDaysFromDate} from "@Components/Utils/DateUtil.tsx";
 import {
     daysButtonData,
@@ -13,11 +10,15 @@ import {
     multiplierButtonData,
     MultiplierTimespanModel
 } from "@Components/Charts/CandleChartData.tsx";
+import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
 
 export const CandleChart = () => {
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     const [open, setOpen] = React.useState(false);
-    const [selectedTicker, setSelectedTicker] = React.useState<string>("AAPL");
+    const [selectedTicker, setSelectedTicker] = React.useState<TickersListModel>({
+        "ticker": "X:00USD",
+        "name": "00 Token - United States dollar"
+    });
     const chartRef = useRef<Highcharts.Chart | null>(null);
     const [fromDate, setFromDate] = React.useState(subtractDaysFromDate(2));
     const [toDate, setToDate] = React.useState(subtractDaysFromDate(1));
@@ -35,7 +36,7 @@ export const CandleChart = () => {
             setFromDate(fromDate);
         }
         fetch(
-            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F${multiplierTimespan.multiplier}%2F${multiplierTimespan.timespan}%2F${formatDate(fromDate)}%2F${formatDate(toDate)}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
+            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker.ticker}%2Frange%2F${multiplierTimespan.multiplier}%2F${multiplierTimespan.timespan}%2F${formatDate(fromDate)}%2F${formatDate(toDate)}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
             {
                 method: "GET",
                 headers: {
@@ -70,7 +71,7 @@ export const CandleChart = () => {
                 selected: 4,
             },
             title: {
-                text: `${selectedTicker} Historical`,
+                // text: `${selectedTicker} Historical`,
             },
             yAxis: [
                 {
@@ -90,7 +91,7 @@ export const CandleChart = () => {
                 {
                     labels: {
                         align: "right",
-                        x: -3,
+                        x: 0,
                     },
                     title: {
                         text: "Volume",
@@ -99,6 +100,8 @@ export const CandleChart = () => {
                     height: "35%",
                     offset: 0,
                     lineWidth: 2,
+                    startOnTick: false,
+                    endOnTick: false
                 },
             ],
             tooltip: {
@@ -107,7 +110,7 @@ export const CandleChart = () => {
             series: [
                 {
                     type: "candlestick",
-                    name: selectedTicker,
+                    name: selectedTicker.ticker,
                     data: ohlc,
                 },
                 {
@@ -117,23 +120,19 @@ export const CandleChart = () => {
                     yAxis: 1,
                 }
             ],
-            chart: {
-                events: {
-                    load: function () {
-                        const chart = this;
-                        chart.renderer.button(selectedTicker, 0, 0, function () {
-
-                        })
-                            .attr({
-                                zIndex: 5
-                            })
-                            .add()
-                            .on('click', function () {
-                                setOpen(prevState => !prevState);
-                            });
-                    }
-                }
-            }
+            // chart: {
+            //     events: {
+            //         load: function () {
+            //             const chart = this;
+            //             chart.renderer.button(selectedTicker.name, 0, 0, function () {})
+            //             .attr({
+            //                 zIndex: 5
+            //             })
+            //             .add()
+            //             .on('click', function () {setOpen(prevState => !prevState);});
+            //         }
+            //     }
+            // }
         });
         /*if (chart){
             const button = chart.renderer.button;
@@ -158,7 +157,7 @@ export const CandleChart = () => {
 
     useEffect(() => {
         fetchChartData();
-    }, [multiplierTimespan, fromDate, toDate]);
+    }, [multiplierTimespan, fromDate, toDate, selectedTicker]);
 
     const handleClose = () => setOpen(false);
 
@@ -187,8 +186,8 @@ export const CandleChart = () => {
                     {/*</div>*/}
 
                     <div className="topLayoutGroup">
-                        <button aria-label="Symbol Search" id="header-toolbar-symbol-search" type="button"
-                                className="uppercase-cq__ntSC button-GwQQdU8S button-cq__ntSC apply-common-tooltip isInteractive-GwQQdU8S accessible-GwQQdU8S"
+                        <button type="button"
+                                className="uppercase-cq__ntSC button-GwQQdU8S button-cq__ntSC isInteractive-GwQQdU8S"
                                 data-tooltip="Symbol Search"
                                 onClick={() => setOpen(true)}>
                         <span role="img" className="icon-GwQQdU8S" aria-hidden="true">
@@ -196,7 +195,7 @@ export const CandleChart = () => {
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18"><path
                             fill="currentColor"
                             d="M3.5 8a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM8 2a6 6 0 1 0 3.65 10.76l3.58 3.58 1.06-1.06-3.57-3.57A6 6 0 0 0 8 2Z"></path></svg></span>
-                            <div className="js-button-text text-GwQQdU8S text-cq__ntSC">{selectedTicker}</div>
+                            <div className="js-button-text text-GwQQdU8S text-cq__ntSC">{selectedTicker.name}</div>
                         </button>
                         <button aria-label="Compare or Add Symbol" id="header-toolbar-compare" aria-haspopup="dialog"
                                 type="button"

@@ -5,7 +5,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import DialogActions from "@mui/material/DialogActions";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -17,18 +17,18 @@ import Stack from '@mui/material/Stack';
 
 interface IProps {
     dialogOpen: boolean;
-    dialogClose : () => void;
-    onSelectTicker : (ticker: string) => void;
+    dialogClose: () => void;
+    onSelectTicker: (ticker: TickersListModel) => void;
 }
 
 
-export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose,onSelectTicker}) => {
+export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose, onSelectTicker}) => {
     const [tickersData, setTickersData] = React.useState<TickersListModel[] | undefined>(undefined);
-    const [searchticker, setSearchticker] = useState("");
+    const [searchticker, setSearchticker] = React.useState<TickersListModel>();
 
 
     const handleInputChange = (ticker: TickersListModel) => {
-        const selectedTicker = ticker.name || "";
+        const selectedTicker = ticker || "";
         setSearchticker(selectedTicker);
         onSelectTicker(selectedTicker);
         dialogClose();
@@ -56,31 +56,20 @@ export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose
         fetchTickers();
     }, []);
 
-    const filterTickers = tickersData?.filter(ticker =>
-        // Ensure ticker properties are not undefined
-        (ticker.name && ticker.name.toLowerCase().includes(searchticker.toLowerCase())) ||
-        (ticker.ticker && ticker.ticker.toLowerCase().includes(searchticker.toLowerCase()))
-    );
-
     return (
         <>
-            <Dialog className="searchDialogForTicker"
-                    fullWidth
-                    open={dialogOpen}
-                    maxWidth="md"
-                    onClose={dialogClose}
-
-
+            <Dialog
+                className="searchDialogForTicker"
+                fullWidth
+                open={dialogOpen}
+                maxWidth="md"
+                onClose={dialogClose}
             >
-                <DialogTitle className="font_weight_700  font_Epilogue heading-48 text-bold line_height_72 ">Symbol
-                    Search
-
-
-                </DialogTitle>
+                <DialogTitle className="font_weight_700  font_Epilogue heading-48 text-bold line_height_72 ">Symbol Search</DialogTitle>
                 <DialogContent className="p-0" style={{height: '600px'}}>
-                    <DialogContentText>
-
-                    </DialogContentText>
+                    {/*<DialogContentText>*/}
+                    {/**/}
+                    {/*</DialogContentText>*/}
                     <Box
                         className="m-0 w-100"
                         noValidate
@@ -92,15 +81,13 @@ export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose
                             width: 'fit-content',
                         }}
                     >
-
-
                         <TextField
                             className="searchInputTicker "
                             id="standard-basic"
                             // label="Search Ticker"
                             variant="standard"
-                            value={searchticker}
-                            onChange={(e) => setSearchticker(e.target.value)}
+                            value={searchticker?.ticker}
+                            onChange={(e) => setSearchticker(e.currentTarget)}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -122,7 +109,7 @@ export const SearchDialogForTicker: React.FC<IProps> = ({dialogOpen, dialogClose
 
                         </Stack>
                         <FormControl sx={{mt: 2,}}>
-                            <SearchDialogTickerList tickersList={filterTickers} onSelectTicker={handleInputChange}/>
+                            <SearchDialogTickerList tickersList={tickersData} onSelectTicker={handleInputChange}/>
 
                         </FormControl>
 
