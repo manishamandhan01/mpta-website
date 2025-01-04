@@ -12,7 +12,11 @@ import {
 } from "@Components/Charts/CandleChartData.tsx";
 import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
 
+
 export const CandleChart = () => {
+    // Load the modules
+    // StockToolsModule(Highcharts);
+    // AnnotationsModule(Highcharts);
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedTicker, setSelectedTicker] = React.useState<TickersListModel>({
@@ -120,6 +124,17 @@ export const CandleChart = () => {
                     yAxis: 1,
                 }
             ],
+            stockTools: {
+                gui: {
+                    enabled: true // Show the stock tools GUI toolbar
+                }
+            },
+            navigator: {
+                enabled: true
+            },
+            navigation: {
+                bindingsClassName: 'highcharts-bindings-container'
+            }
             // chart: {
             //     events: {
             //         load: function () {
