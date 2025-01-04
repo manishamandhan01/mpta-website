@@ -6,44 +6,25 @@ import { SearchDialogForTicker } from "@Components/Charts/SearchDialogForTicker.
 import {DropdownInterval} from "@Components/Utils/DropdownInterval.tsx";
 import {MenuItem} from "@mui/material";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import {currentTime, formatDate, subtractDaysFromDate} from "@Components/Utils/DateUtil.tsx";
+import {daysButtonData, multiplierButtonData} from "@Components/Charts/CandleChartData.tsx";
 
 export const CandleChart = () => {
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedTicker, setSelectedTicker] = React.useState<string>("AAPL");
-    const currTime = new Date().toLocaleTimeString('en-US', { hour12: false });
-
     const chartRef = useRef<Highcharts.Chart | null>(null);
-
-    const handleClose = () => setOpen(false);
-
-    const getCurrentDate = () => {
-        const today = new Date();
-        today.setDate(today.getDate() - 1);
-        return today.toISOString().split("T")[0];
-    };
-
-    const getNDaysPreviousDate = (n: number) => {
-        const today = new Date();
-        today.setDate(today.getDate() - n);
-        return today.toISOString().split("T")[0];
-    };
-
-    const currentDateMinusOneDate = getNDaysPreviousDate(1);
-    const currentDateMinusTwoDate = getNDaysPreviousDate(2);
-    const [fromDate , setFromDate] = React.useState(currentDateMinusTwoDate);
-    const [toDate, setToDate] = React.useState(currentDateMinusOneDate);
+    const [fromDate , setFromDate] = React.useState(subtractDaysFromDate(2));
+    const [toDate, setToDate] = React.useState(subtractDaysFromDate(1));
+    const [multiplier, setMultiplier] = React.useState<string>("1");
 
     const fetchChartData = (numberOfDays?: number) => {
-        console.log("num", numberOfDays);
         if(numberOfDays !== undefined){
-           const fromDate = getNDaysPreviousDate(numberOfDays + 1);
+           const fromDate = subtractDaysFromDate(numberOfDays + 1);
             setFromDate(fromDate);
         }
-
-        console.log(fromDate);
         fetch(
-            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F${multiplier}%2Fminute%2F${fromDate}%2F${toDate}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
+            `http://localhost:8000/stockapis/v1?format=json&url=v2%2Faggs%2Fticker%2F${selectedTicker}%2Frange%2F${multiplier}%2Fminute%2F${formatDate(fromDate)}%2F${formatDate(toDate)}%3Fadjusted%3Dtrue%26sort%3Dasc%26apiKey%3DvM4IvSPxWHLtSRa5vSYhXhQ70_A1Zr6B`,
             {
                 method: "GET",
                 headers: {
@@ -164,27 +145,28 @@ export const CandleChart = () => {
         }
     }, [selectedTicker, stockData]);
 
-
-    const [multiplier, setMultiplier] = React.useState<string>("1");
-
-
-    const handleChangeMultiplier = (event: React.MouseEvent<HTMLButtonElement>) => {
-        // If you need to access the value from button element
-        const newValue = event.currentTarget.value;
-        setMultiplier(newValue); // Update the multiplier state
-    };
     useEffect(() => {
         fetchChartData();
     }, [multiplier,fromDate,toDate]);
 
+    const handleClose = () => setOpen(false);
 
+    const updateMultiplier = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        // If you need to access the value from button element
+        const newValue = event.currentTarget.value;
+        console.log(newValue);
+        setMultiplier(newValue); // Update the multiplier state
+    };
+
+    const updateFromDate = (numberOfDays: number) => {
+        setFromDate(subtractDaysFromDate(numberOfDays + 1));
+    }
 
     return (
         <>
             <div className="cardTopSection d-flex align-items-center">
 
-                <div className="layout__area--topleft"
-                     style={{ position: 'absolute', top: '0px', left: '0px', height: '38px', width: '52px' }}>
+                <div className="layout__area--topleft" style={{ position: 'absolute', top: '0px', left: '0px', height: '38px', width: '52px' }}>
                     <div className="topLeftButton-hCWTCWBf">
                         <div className="menu-U2jIw4km">
                             <div className="buttonWrap-U2jIw4km">
@@ -198,7 +180,7 @@ export const CandleChart = () => {
                     </div>
                 </div>
 
-                <div className="group-MBOVGQRI">
+                <div className="topLayoutGroup">
                     <button aria-label="Symbol Search" id="header-toolbar-symbol-search" type="button"
                             className="uppercase-cq__ntSC button-GwQQdU8S button-cq__ntSC apply-common-tooltip isInteractive-GwQQdU8S accessible-GwQQdU8S"
                             data-tooltip="Symbol Search"
@@ -221,33 +203,38 @@ export const CandleChart = () => {
                         fill="currentColor" d="M9 14h4v-4h1v4h4v1h-4v4h-1v-4H9v-1z"></path></svg></span></button>
                 </div>
 
-                <div className="separatorWrap-MBOVGQRI">
-                    <div className="separator-xVhBjD5m separator-MBOVGQRI"></div>
+                <div className="topLayoutGroupSeparator">
+                    <div className="separatorBar"></div>
                 </div>
 
-                <div className="group-MBOVGQRI">
-                    <div className="wrap-n5bmFxyX" id="header-toolbar-intervals">
-                        <button
-                            type="button"
-                            className="menu-S_1OCXUK button-merBkM5y apply-common-tooltip accessible-merBkM5y"
-                            data-tooltip="1 day"
-                            aria-label="1 day"
-                            aria-haspopup="menu"
-                            value={multiplier}
-                            onClick={handleChangeMultiplier} // Change from onChange to onClick
-                        >
-                            <div className="menuContent-S_1OCXUK wrap-n5bmFxyX">
-                                <div className="value-gwXludjS">D</div>
-                            </div>
-                        </button>
-                    </div>
+                <div className="topLayoutGroup">
+                    <select
+                        className="menu-S_1OCXUK button-merBkM5y"
+                        value={multiplier}
+                        onChange={updateMultiplier}
+                    >
+                        {multiplierButtonData.map((item) => (
+                            <option key={item.label} value={item.value}>
+                                {item.label}
+                            </option>
+                        ))}
+                    </select>
+                    {/*<div className="wrap-n5bmFxyX" id="header-toolbar-intervals">*/}
+                    {/*    <button*/}
+                    {/*        className="menu-S_1OCXUK button-merBkM5y"*/}
+                    {/*        value={multiplier}*/}
+                    {/*        onClick={updateMultiplier} // Change from onChange to onClick*/}
+                    {/*    >*/}
+                    {/*        {multiplier}*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                 </div>
 
-                <div className="separatorWrap-MBOVGQRI">
-                    <div className="separator-xVhBjD5m separator-MBOVGQRI"></div>
+                <div className="topLayoutGroupSeparator">
+                    <div className="separatorBar separator-MBOVGQRI"></div>
                 </div>
 
-                <div className="group-MBOVGQRI">
+                <div className="topLayoutGroup">
                     <div className="wrap-n5bmFxyX" id="header-toolbar-chart-styles">
                         <button type="button"
                                 className="menu-b3Cgff6l button-merBkM5y apply-common-tooltip accessible-merBkM5y"
@@ -261,10 +248,10 @@ export const CandleChart = () => {
                         </button>
                     </div>
                 </div>
-                <div className="separatorWrap-MBOVGQRI">
-                    <div className="separator-xVhBjD5m separator-MBOVGQRI"></div>
+                <div className="topLayoutGroupSeparator">
+                    <div className="separatorBar separator-MBOVGQRI"></div>
                 </div>
-                <div className="group-MBOVGQRI">
+                <div className="topLayoutGroup">
                     <div className="wrap-n5bmFxyX" id="header-toolbar-indicators">
                         <button aria-label="Indicators, metrics, and strategies" data-role="button"
                                 data-tooltip-hotkey="{&amp;#34;keys&amp;#34;:[&amp;#34;/&amp;#34;],&amp;#34;text&amp;#34;:&amp;#34;{0}&amp;#34;}"
@@ -294,10 +281,10 @@ export const CandleChart = () => {
                         </button>
                     </div>
                 </div>
-                <div className="separatorWrap-MBOVGQRI">
-                    <div className="separator-xVhBjD5m separator-MBOVGQRI"></div>
+                <div className="topLayoutGroupSeparator">
+                    <div className="separatorBar separator-MBOVGQRI"></div>
                 </div>
-                <div className="group-MBOVGQRI">
+                <div className="topLayoutGroup">
                     <button aria-label="Create Alert" id="header-toolbar-alerts"
                             data-tooltip-hotkey="{&amp;#34;keys&amp;#34;:[&amp;#34;Alt&amp;#34;,&amp;#34;A&amp;#34;],&amp;#34;text&amp;#34;:&amp;#34;{0} + {1}&amp;#34;}"
 
@@ -319,10 +306,10 @@ export const CandleChart = () => {
                         <div className="js-button-text text-GwQQdU8S">Replay</div>
                     </button>
                 </div>
-                <div className="separatorWrap-MBOVGQRI">
-                    <div className="separator-xVhBjD5m separator-MBOVGQRI"></div>
+                <div className="topLayoutGroupSeparator">
+                    <div className="separatorBar separator-MBOVGQRI"></div>
                 </div>
-                <div className="group-MBOVGQRI">
+                <div className="topLayoutGroup">
                     <div className="wrap-n5bmFxyX" id="header-toolbar-undo-redo">
                         <button
                                 className="button-GwQQdU8S apply-common-tooltip isInteractive-GwQQdU8S accessible-GwQQdU8S"
@@ -349,8 +336,7 @@ export const CandleChart = () => {
 
 
             <div className="row">
-                <div className="col-lg-1 col-md-12 drawingToolLayout"
-                  >
+                <div className="col-lg-1 col-md-12 drawingToolLayout">
                     <div className="drawingTool">
                         <button className="drawingToolIcon">
                         <span role="img" aria-hidden="true">
@@ -395,13 +381,14 @@ export const CandleChart = () => {
                     <div id="candleStickContainer"></div>
                     <div className="card dateTimeintervalContainer">
                         <div className="intervalContainer">
-                            <button className="intervalButtons">1D</button>
-                            <button className="intervalButtons ms-2">5D</button>
-                            <button className="intervalButtons ms-2">3M</button>
-                            <button className="intervalButtons ms-2">6M</button>
-                            <button className="intervalButtons ms-2">1Y</button>
-                            <button className="intervalButtons ms-2">5Y</button>
-                            <div className="timeContainer ">{currTime} (UTC +5:30)</div>
+                            {daysButtonData.map((item) => (
+                                <button className="intervalButtons"
+                                    key={item.value}
+                                    onClick={() => updateFromDate(item.value)}>
+                                    {item.label}
+                                </button>
+                            ))}
+                            <div className="timeContainer ">{currentTime()} (UTC +5:30)</div>
                         </div>
                     </div>
 
@@ -414,10 +401,45 @@ export const CandleChart = () => {
                     )}
                 </div>
 
-                <div className="col-lg-2 col-md-12 text-center">
-                    <div className="card">Stocks</div>
-                    s
-                    <div className="card mt-1">Information</div>
+                <div className="col-lg-1 col-md-12 rightNavigatorLayout">
+                    <div className="rightNavigator">
+                        <button className="drawingToolIcon">
+                        <span role="img" aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><g
+                                fill="currentColor"><path d="M18 15h8v-1h-8z"></path><path
+                                d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z"></path></g></svg></span>
+                        </button>
+                        <button className="drawingToolIcon">
+                        <span role="img" aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><g
+                                fill="currentColor"><path d="M18 15h8v-1h-8z"></path><path
+                                d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z"></path></g></svg></span>
+                        </button>
+                        <button className="drawingToolIcon">
+                        <span role="img" aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><g
+                                fill="currentColor"><path d="M18 15h8v-1h-8z"></path><path
+                                d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z"></path></g></svg></span>
+                        </button>
+                        <button className="drawingToolIcon">
+                        <span role="img" aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><g
+                                fill="currentColor"><path d="M18 15h8v-1h-8z"></path><path
+                                d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z"></path></g></svg></span>
+                        </button>
+                        <button className="drawingToolIcon">
+                        <span role="img" aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><g
+                                fill="currentColor"><path d="M18 15h8v-1h-8z"></path><path
+                                d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z"></path></g></svg></span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </>
