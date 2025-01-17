@@ -537,6 +537,7 @@ a {
     left: 52px;
     width: 1460px;
     position: absolute;
+    margin-top: 3px;
 }
 
 .layout__area--center {
@@ -556,6 +557,7 @@ a {
 #candleStickContainer {
     border-radius: 5px;
     height: 815px;
+    margin-top: 4px;
 }
 .highcharts-button-box{
     stroke: none;
@@ -729,7 +731,7 @@ a {
 /*dropdownInterval*/
 
 /*TopSection*/
-.button-merBkM5y {
+.top_buttons {
     all: unset;
     align-items: center;
     cursor: default;
@@ -741,7 +743,7 @@ a {
     transition: background-color .35s ease,color 60ms ease;
     z-index: 0;
 }
-.button-merBkM5y:before {
+.top_buttonsbutton:before {
     border-radius: var(--tv-toolbar-explicit-hover-border-radius,2px);
     display: block;
     outline: 2px none #2962ff;
@@ -749,14 +751,14 @@ a {
     z-index: -1;
 }
 
-.menu-S_1OCXUK:only-child {
+.top_interval_button:only-child {
     padding: 0 10px;
 }
 
 .menuContent-S_1OCXUK {
     justify-content: center;
 }
-.wrap-n5bmFxyX {
+.top_arrows {
     align-items: center;
     display: flex;
     flex: 1 0 auto;
@@ -793,18 +795,18 @@ a {
     display: flex;
 }
 
-.button-GwQQdU8S.isInteractive-GwQQdU8S {
+.search_button_top.isInteractive-search_button_top {
     position: relative;
     z-index: 0;
 }
-.uppercase-cq__ntSC {
+.text_uppercase {
     text-transform: uppercase;
 }
 .button-cq__ntSC {
     padding: 5px 10px;
     width: 100px;
 }
-.button-GwQQdU8S {
+.search_button_top {
     all: unset;
     align-items: center;
     box-sizing: border-box;
@@ -815,7 +817,7 @@ a {
     --tv-toolbar-explicit-hover-border-radius: 4px;
     color: #131722;
 }
-.icon-GwQQdU8S+.text-GwQQdU8S, .text-GwQQdU8S+.icon-GwQQdU8S {
+.icon-GwQQdU8S+.text_margin_2, .text_margin_2+.icon-GwQQdU8S {
     margin-left: 2px;
 }
 .text-cq__ntSC {
@@ -829,14 +831,14 @@ a {
     line-height: var(--ui-lib-typography-line-height);
     overflow: hidden;
 }
-.button-ptpAHg8E.withoutText-ptpAHg8E {
+.button_four_square{
     padding: 0 5px;
 }
-.button-GwQQdU8S.isInteractive-GwQQdU8S {
+.button.isInteractive-GwQQdU8S {
     position: relative;
     z-index: 0;
 }
-.button-GwQQdU8S {
+.button {
     all: unset;
     align-items: center;
     box-sizing: border-box;
