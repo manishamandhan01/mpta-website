@@ -1,0 +1,151 @@
+/*topItems*/
+.dashboard-container {
+
+}
+
+.ua_top_item ul {
+    display: flex;
+    justify-content: flex-start;  /* Distribute items evenly */
+    list-style-type: none;
+    padding-left: 290px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    flex-wrap: wrap;  /* Allow wrapping for small screens */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Bottom shadow */
+background-color: #ffffff;
+}
+
+.ua_top_item li {
+    display: flex;
+    align-items: center;
+    gap: 8px;  /* Spacing between icon and label */
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 2px;
+    padding-left: 34px;
+}
+
+.ua_top_item li i {
+    font-size: 12px; /* Size of the icon */
+}
+
+.ua_top_item li span {
+    font-size: 16px;
+    color: #333; /* Text color */
+}
+
+/* Optional: Add hover effect */
+.ua_top_item li:hover {
+    cursor: pointer;
+}
+
+
+/*topItems*/
+
+/*dashboard-container*/
+.dashboard-container{
+margin-left: 65px;
+    font-size: 24px;
+    font-weight: 600;
+}
+/*dashboard-container*/
+
+/*card-container*/
+.card-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 400px;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+    margin-top:30px;
+    margin-left:30px;
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;  /* Space between balance and the percentage */
+}
+
+.dashboard-card h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #a5a2b2;
+}
+.dashboard-card_main{
+    display: flex;
+    flex-direction: row;
+    margin-left: 38px;
+}
+.amounts {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.amounts p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #007BFF;
+}
+
+.percentage {
+    position: absolute;
+    bottom: 10px;  /* Bottom left positioning */
+    left: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #28a745;
+}
+
+/*card-container*/
+
+/*dashboard-pnl-graph*/
+.dashboard-pnl-graph{
+     display: flex;
+     flex-direction: column;
+     padding: 20px;
+     width: 1695px;
+     background-color: #fff;
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+     border-radius: 8px;
+     position: relative;
+     margin-top:30px;
+     margin-left:65px;
+
+ }
+.dashboard-pnl-graph h1 {
+    font-size: 16px;
+    color: #475076;
+    margin-bottom: 15px; /* Add some spacing between heading and image */
+}
+
+.pnl_image {
+    width: 600px;
+    display: block; /* Ensure the image takes its own line */
+}
+/*dashboard-pnl-graph*/
+
+/*dashboard-account-summary*/
+.dashboard-account-summary{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 1695px;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+    margin-top:30px;
+    margin-left:65px;
+    margin-bottom: 80px;
+
+}
+.dashboard-account-summary h1{
+    font-size: 16px;
+    color:#475076;
+}
+/*dashboard-account-summary*/

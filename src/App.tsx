@@ -7,6 +7,7 @@ import {MiddleSectionB} from "@Components/Layout/MiddleSection(Bootstrap).tsx";
 import {CalculatorsB} from "@Components/Calculators/Calculator(bootstrap).tsx";
 import 'react-tooltip/dist/react-tooltip.css'
 import {CandleChart} from "@Components/Charts/CandleChart.tsx";
+import {Dashboard} from "@Components/Dashboard/Dashboard.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -32,6 +33,13 @@ function App() {
                         <CandleChart/>
                     ),
                 },
+                {
+                    path:"dashboard",
+                    element: (
+                        <Dashboard/>
+                    ),
+                },
+
             ],
 
         }
