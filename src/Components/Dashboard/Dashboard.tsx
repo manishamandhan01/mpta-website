@@ -11,10 +11,10 @@ type Props = {};
 export const Dashboard = (props: Props) => {
     return (
         <div>
-        <div className="">
+        <div>
             <div className="ua_top_item">
                 <ul>
-                    {DashboardData.map((item: DashboardData, index: number) => {
+                    {DashboardData.map((item, index: number) => {
                         return (
                             <li key={index}>
                                 <i className={item.icon}></i>
@@ -30,9 +30,6 @@ export const Dashboard = (props: Props) => {
 
             </div>
             <div className="dashboard-card_main">
-                <DashboardCard/>
-                <DashboardCard/>
-                <DashboardCard/>
                 <DashboardCard/>
 
             </div>

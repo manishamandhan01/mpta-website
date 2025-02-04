@@ -6,11 +6,11 @@ import {SearchDialogForTicker} from "@Components/Charts/SearchDialogForTicker.ts
 import {currentTime, formatDate, subtractDaysFromDate} from "@Components/Utils/DateUtil.tsx";
 import {
     daysButtonData,
-    drawingToolIconsData,
     multiplierButtonData,
     MultiplierTimespanModel
 } from "@Components/Charts/CandleChartData.tsx";
 import {TickersListModel} from "@Components/Models/TickersListModel.tsx";
+import {DrawingTool} from "@Components/Charts/DrawingTool.tsx";
 
 
 export const CandleChart = () => {
@@ -19,6 +19,7 @@ export const CandleChart = () => {
     // AnnotationsModule(Highcharts);
     const [stockData, setStockData] = React.useState<StockDataModel[]>([]);
     const [open, setOpen] = React.useState(false);
+
     const [selectedTicker, setSelectedTicker] = React.useState<TickersListModel>({
         "ticker": "X:00USD",
         "name": "00 Token - United States dollar"
@@ -179,6 +180,8 @@ export const CandleChart = () => {
     const updateFromDate = (numberOfDays: number) => {
         setFromDate(subtractDaysFromDate(numberOfDays + 1));
     }
+
+
 
     return (
         <>
@@ -342,29 +345,8 @@ export const CandleChart = () => {
                 </div>
 
                 <div className="layout__area--left">
-                    <div className="drawingToolLayout">
-                        <div className="drawingTool">
-                            {drawingToolIconsData.map((icon) => (
-                                <div className="drawingToolIconWrapper" key={icon.id}>
-                                    <button className="drawingToolIcon">
-                                        <span role="img" aria-hidden="true">
-                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28"
-                                               height="28">
-                                            <g fill="currentColor">
-                                              {icon.paths.map((d, index) => (
-                                                  <path d={d} key={index}></path>
-                                              ))}
-                                            </g>
-                                          </svg>
-                                        </span>
-                                    </button>
-                                </div>
-                            ))}
+                    <DrawingTool/>
 
-
-                        </div>
-
-                    </div>
                 </div>
 
 
