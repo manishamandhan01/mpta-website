@@ -6,6 +6,7 @@ import {OverAllPerformanceCard} from "@Components/Dashboard/OverAllPerformanceCa
 import {DasboardPnlGraph} from "@Components/Dashboard/DasboardPNLGraph.tsx";
 import {DasboardAccountSummary} from "@Components/Dashboard/DasboardAccountSummary.tsx";
 import {GainLossBar} from "@Components/Dashboard/GainLossBar.tsx";
+import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 
 type Props = {};
 
@@ -32,7 +33,9 @@ export const Dashboard = (props: Props) => {
             </div>
             <div className="dashboard-card_main">
                 <OverAllPerformanceCard/>
-                <GainLossBar/>
+                    <GainLossBar/>
+
+                <OverAllTradeStatisticsCard/>
 
             </div>
 

@@ -118,7 +118,7 @@ export const GainLossBar = (props: Props) => {
 
     return (
         <div>
-            <div className="card-container">
+            <div className="card-container-gain-loss-highchart">
                 <div className="dashboard-gain-loss-highchart">
                     <HighchartsReact
                         highcharts={Highcharts}
