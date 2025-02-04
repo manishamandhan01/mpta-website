@@ -7,7 +7,7 @@ import {useEffect} from "react";
 
 type Props = {};
 
-export const DashboardCard = (props: Props) => {
+export const OverAllPerformanceCard = (props: Props) => {
     const [cardData, setCardData] = React.useState<OverAllPerformanceModel | null>(null); // Allowing null for initial state
     const [totalProfit, setTotalProfit] = React.useState(0);
     const [totalLoss, setTotalLoss] = React.useState(0);
@@ -46,7 +46,7 @@ export const DashboardCard = (props: Props) => {
     return (
         <div>
             <div className="card-container">
-                <div className="dashboard-card">
+                <div className="dashboard-overall-performance-card" >
                     <h1 style={{
                         fontSize: "30px",
                         fontWeight: "normal"

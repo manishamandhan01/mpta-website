@@ -2,9 +2,10 @@
 import * as React from 'react';
 import {DashboardData} from "@Components/Dashboard/DashboardData.tsx";
 import 'font-awesome/css/font-awesome.min.css';
-import {DashboardCard} from "@Components/Dashboard/DashboardCard.tsx";
+import {OverAllPerformanceCard} from "@Components/Dashboard/OverAllPerformanceCard.tsx";
 import {DasboardPnlGraph} from "@Components/Dashboard/DasboardPNLGraph.tsx";
 import {DasboardAccountSummary} from "@Components/Dashboard/DasboardAccountSummary.tsx";
+import {GainLossBar} from "@Components/Dashboard/GainLossBar.tsx";
 
 type Props = {};
 
@@ -30,7 +31,8 @@ export const Dashboard = (props: Props) => {
 
             </div>
             <div className="dashboard-card_main">
-                <DashboardCard/>
+                <OverAllPerformanceCard/>
+                <GainLossBar/>
 
             </div>
 

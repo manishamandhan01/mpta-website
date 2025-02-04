@@ -1,5 +1,8 @@
 /*topItems*/
-.dashboard-container {
+.dashboard-card_main {
+    display: flex;
+
+    flex-direction: row;
 
 }
 
@@ -54,19 +57,28 @@ margin-left: 65px;
 .card-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding: 20px;
+    width: 500px;
+    padding: 2px;
     margin-left: 45px;
+    margin-top: 40px;
 }
 
-.dashboard-card {
+.dashboard-overall-performance-card {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     width: 100%;
-    max-width: 500px;
+    height: 440px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.dashboard-gain-loss-highchart{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 800px;
     height: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .amounts {
