@@ -82,7 +82,7 @@ margin-left: 65px;
 .card-container-gain-loss-highchart{
     width: 500px;
     margin-top: 40px;
-        margin-left: -15px;
+        margin-left: -295px;
 }
 .dashboard-overall-trade-statistics-card{
     margin-left: -40px;
@@ -165,3 +165,29 @@ margin-left: 65px;
     color:#475076;
 }
 /*dashboard-account-summary*/
+
+/*dashboard-overall-trade-statistics*/
+.pie-chart {
+    width: 100%;
+    max-width: 300px;
+    box-sizing: content-box;
+    height: 100%;
+    min-height: 300px;
+    max-height: 250px;
+    margin-top: -5px;
+}
+.pie-chart>.highcharts-container>svg>.highcharts-data-labels>.highcharts-data-label-connector,.pie-chart>.highcharts-container>svg>.highcharts-credits{
+display: none;
+}
+.custom-width{
+    width: 100%;
+    max-width: 100px;
+    margin: auto;
+    text-align: center;
+
+}
+.pie-chart .highcharts-root {
+    background-color: #0000ff;  /* Change this to your desired background color */
+}
+
+/*dashboard-overall-trade-statistics*/

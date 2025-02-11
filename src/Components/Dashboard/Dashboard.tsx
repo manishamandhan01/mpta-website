@@ -32,6 +32,7 @@ export const Dashboard = (props: Props) => {
 
             </div>
             <div className="dashboard-card_main">
+                
                 <OverAllPerformanceCard/>
                     <GainLossBar/>
 
@@ -39,12 +40,12 @@ export const Dashboard = (props: Props) => {
 
             </div>
 
-            <div>
-                <DasboardPnlGraph/>
-            </div>
-            <div>
-                <DasboardAccountSummary/>
-            </div>
+            {/*<div>*/}
+            {/*    <DasboardPnlGraph/>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <DasboardAccountSummary/>*/}
+            {/*</div>*/}
 
         </div>
 
