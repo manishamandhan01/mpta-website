@@ -151,14 +151,14 @@ export const OverAllPerformanceCard = (props: Props) => {
                     </div>
 
                     {/* Highcharts Component Integration */}
-                    <div id="topCumulativeContainer">
-                        {/* Render Highcharts only when the data is available */}
-                        {top3Profits.length > 0 && top3Losses.length > 0 ? (
-                            <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-                        ) : (
-                            <p>Loading chart...</p>
-                        )}
-                    </div>
+                    {/*<div id="topCumulativeContainer">*/}
+                    {/*    /!* Render Highcharts only when the data is available *!/*/}
+                    {/*    {top3Profits.length > 0 && top3Losses.length > 0 ? (*/}
+                    {/*        <HighchartsReact highcharts={Highcharts} options={chartOptions} />*/}
+                    {/*    ) : (*/}
+                    {/*        <p>Loading chart...</p>*/}
+                    {/*    )}*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </div>
