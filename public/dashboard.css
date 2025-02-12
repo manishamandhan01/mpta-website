@@ -60,24 +60,24 @@ margin-left: 65px;
 .card-container {
     display: flex;
     flex-direction: column;
-    width: 500px;
+    /*width: 500px;*/
     padding: 2px;
-    margin-left: 45px;
-    margin-top: 40px;
+    /*margin-left: 45px;*/
+    /*margin-top: 40px;*/
 }
 
 .dashboard-overall-performance-card,
 .dashboard-gain-loss-highchart,
 .dashboard-overall-trade-statistics-card {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /*background-color: #ffffff;*/
+    /*padding: 20px;*/
+    /*border-radius: 8px;*/
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
 }
 
 .dashboard-overall-performance-card {
-    width: 100%;  /* Ensure it takes up 30% of the available width */
-    height: 440px;
+    /*width: 100%;  !* Ensure it takes up 30% of the available width *!*/
+    /*height: 440px;*/
 }
 .card-container-gain-loss-highchart{
     width: 500px;
@@ -85,7 +85,7 @@ margin-left: 65px;
         margin-left: -295px;
 }
 .dashboard-overall-trade-statistics-card{
-    margin-left: -40px;
+    /*margin-left: -40px;*/
 }
 
 .dashboard-gain-loss-highchart{
@@ -95,7 +95,7 @@ margin-left: 65px;
 
 
 .amounts {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     display: flex;
     flex-direction: column; /* Stack the rows vertically */
 }
@@ -172,12 +172,19 @@ margin-left: 65px;
     max-width: 300px;
     box-sizing: content-box;
     height: 100%;
-    min-height: 300px;
+    min-height: 250px;
     max-height: 250px;
     margin-top: -5px;
 }
-.pie-chart>.highcharts-container>svg>.highcharts-data-labels>.highcharts-data-label-connector,.pie-chart>.highcharts-container>svg>.highcharts-credits{
-display: none;
+.pie-chart>.highcharts-container>svg>.highcharts-data-labels>.highcharts-data-label-connector{
+/*display: none;*/
+}
+.pie-chart>.highcharts-container>svg>.highcharts-credits{
+    display: none;
+}
+.dashboard-card>div>.highcharts-container>.highcharts-root>.highcharts-credits{
+
+    display: none;
 }
 .custom-width{
     width: 100%;
@@ -189,5 +196,14 @@ display: none;
 .pie-chart .highcharts-root {
     background-color: #0000ff;  /* Change this to your desired background color */
 }
-
+.box-12 {
+    /*background-color: #F8F9FA;*/
+     padding: 20px;
+    /* border: 1px solid #ddd; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 100%;
+}
 /*dashboard-overall-trade-statistics*/

@@ -32,7 +32,7 @@ export const Dashboard = (props: Props) => {
                 Dashboard
 
             </div>
-            <div className="dashboard-card_main">
+            <div className="row col-12 m-auto">
 
                 <OverAllPerformanceCard/>
                     <GainLossBar/>
@@ -41,11 +41,10 @@ export const Dashboard = (props: Props) => {
 
             </div>
 
-            <div className="dashboard-card_main">
+            <div className="row col-12 m-auto mt-5">
                 <PerformancePerRecord/>
                 <GainLossBar/>
 
-                <OverAllTradeStatisticsCard/>
             </div>
             {/*<div>*/}
             {/*    <DasboardAccountSummary/>*/}

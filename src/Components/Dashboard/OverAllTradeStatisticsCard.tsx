@@ -83,7 +83,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                             enabled: true,
                             format: '{point.name}: {point.y}%',
                             style: {
-                                fontSize: '16px',transform: 'translate(65px, 100px)',
+                                fontSize: '16px',
                             },
                         },
                     },
@@ -123,7 +123,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                             format: '{point.name}: {point.y}%',
                             style: {
                                 fontSize: '16px',
-                                transform: 'translate(60px, 100px)',
+
                             },
                         },
                     },
@@ -133,61 +133,64 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
     }, [profitRatePercent]); // Re-render chart when profitRatePercent updates
 
     return (
-        <div className="card-container">
-            <div className="dashboard-overall-trade-statistics-card">
-                <h1 style={{
-                    fontSize: "30px",
-                    fontWeight: "normal"
-                }}>Overall Trade Statistics</h1>
-                <div className="chart-container d-flex justify-content-center">
-                    <div id="pie_container1" className="pie-chart"></div>
-                    <div id="pie_container2" className="pie-chart"></div>
-                </div>
-                <div className="d-flex justify-content-between text-center">
-
-
-                    <div className="lh-lg">
-                        <div><p className="text-success font-bold">{winTrades}</p></div>
-                        <div><p>Win Trades</p></div>
-                        <div><p className="text-success font-bold   ">{averageWinPercent}%</p>
-                        </div>
-                        <div><p>Ave.Win%</p></div>
-                        <div><p>Profit Factor</p></div>
-
+        <div className="col-xl-3 col-sm-12 " >
+            <div className="card-container box-12 ">
+                <div className="dashboard-overall-trade-statistics-card">
+                    <h1 style={{
+                        fontSize: "30px",
+                        fontWeight: "normal"
+                    }}>Overall Trade Statistics</h1>
+                    <div className="chart-container d-flex justify-content-center">
+                        <div id="pie_container1" className="pie-chart"></div>
+                        <div id="pie_container2" className="pie-chart"></div>
                     </div>
+                    <div className="d-flex justify-content-between text-center">
 
-                    <div className="lh-lg">
-                        <div><p className="text-danger font-bold">{lossTrades}</p></div>
-                        <div><p>Loss Trades</p></div>
-                        <div><p className="text-danger  font-bold   ">{averageLossPercent}%</p>
-                        </div>
-                        <div><p>Ave.Loss%</p></div>
-                        <div><p>{profitFactor}</p></div>
 
-                    </div>
-                    <div className="lh-lg">
-                        <div><p className="text-success font-bold">{averageProfit}</p></div>
-                        <div><p>Avg Profit</p></div>
-                        <div><p className="text-success font-bold   ">{winLossRatio}</p>
-                        </div>
-                        <div><p>W/L Ratio</p></div>
-                        <div><p>Expectancy</p></div>
+                        <div className="lh-lg">
+                            <div><p className="text-success font-bold">{winTrades}</p></div>
+                            <div><p>Win Trades</p></div>
+                            <div><p className="text-success font-bold   ">{averageWinPercent}%</p>
+                            </div>
+                            <div><p>Ave.Win%</p></div>
+                            <div><p>Profit Factor</p></div>
 
-                    </div>
-                    <div className="lh-lg">
-                        <div><p className="text-danger  font-bold">{averageLoss}</p></div>
-                        <div><p>Avg Loss</p></div>
-                        <div><p className="text-success font-bold   ">{profitLossRatio}</p>
-                        </div>
-                        <div><p>P/L Ratio</p></div>
-                        <div className={expectancyPerTrade > 0 ? "text-success" : "text-danger"}>
-                            <p>{expectancyPerTrade}</p>
                         </div>
 
+                        <div className="lh-lg">
+                            <div><p className="text-danger font-bold">{lossTrades}</p></div>
+                            <div><p>Loss Trades</p></div>
+                            <div><p className="text-danger  font-bold   ">{averageLossPercent}%</p>
+                            </div>
+                            <div><p>Ave.Loss%</p></div>
+                            <div><p>{profitFactor}</p></div>
 
+                        </div>
+                        <div className="lh-lg">
+                            <div><p className="text-success font-bold">{averageProfit}</p></div>
+                            <div><p>Avg Profit</p></div>
+                            <div><p className="text-success font-bold   ">{winLossRatio}</p>
+                            </div>
+                            <div><p>W/L Ratio</p></div>
+                            <div><p>Expectancy</p></div>
+
+                        </div>
+                        <div className="lh-lg">
+                            <div><p className="text-danger  font-bold">{averageLoss}</p></div>
+                            <div><p>Avg Loss</p></div>
+                            <div><p className="text-success font-bold   ">{profitLossRatio}</p>
+                            </div>
+                            <div><p>P/L Ratio</p></div>
+                            <div className={expectancyPerTrade > 0 ? "text-success" : "text-danger"}>
+                                <p>{expectancyPerTrade}</p>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     );
 };

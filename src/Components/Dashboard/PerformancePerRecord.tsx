@@ -36,16 +36,17 @@ export const PerformancePerRecord = (props: Props) => {
     }, []);
 
     return (
-        <div>
-            <div className="card-container">
-                <div className="dashboard-overall-performance-card">
-                    <h1 style={{fontSize: '30px', fontWeight: 'normal'}}>Performance Per Period</h1>
+
+            <div className="col-xl-3 col-md-6  col-sm-12 ">
+                <div className="card-container box-12">
+
                     <div className="amounts">
-                        <div className="d-flex justify-content-between text-center">
+                        <h1 className="mb-3" style={{fontSize: '30px', fontWeight: 'normal'}}>Performance Per Period</h1>
+                        <div className="d-flex justify-content-between text-center mt-4 ">
                             <div className="lh-lg">
                                 <div><p className="text-success font-bold">This Month</p></div>
                                 <div><p>1st Quater</p></div>
-                                <div><p >2nd Quater</p></div>
+                                <div><p>2nd Quater</p></div>
                                 <div><p>3rd Quater</p></div>
                                 <div><p>4th Quater</p></div>
                                 <div><p>Year to Date</p></div>
@@ -77,12 +78,12 @@ export const PerformancePerRecord = (props: Props) => {
                             </div>
                             <div className="lh-lg">
                                 <div><p className=" font-bold"></p></div>
-                                <div><p className=" font-bold"><i className= 'fa-solid fa-caret-up'></i></p></div>
-                                <div><p className=" font-bold"><i className= 'fa-solid fa-caret-up'></i></p></div>
-                                <div><p className=" font-bold"><i className= 'fa-solid fa-caret-up'></i></p></div>
-                                <div><p className=" font-bold"><i className= 'fa-solid fa-caret-up'></i></p></div>
-                                <div><p className=" font-bold"><i className= 'fa-solid fa-caret-up'></i></p></div>
-                                <div><p className=" font-bold"><i className= 'fa-solid fa-caret-up'></i></p></div>
+                                <div><p className=" font-bold"><i className='fa-solid fa-caret-up'></i></p></div>
+                                <div><p className=" font-bold"><i className='fa-solid fa-caret-up'></i></p></div>
+                                <div><p className=" font-bold"><i className='fa-solid fa-caret-up'></i></p></div>
+                                <div><p className=" font-bold"><i className='fa-solid fa-caret-up'></i></p></div>
+                                <div><p className=" font-bold"><i className='fa-solid fa-caret-up'></i></p></div>
+                                <div><p className=" font-bold"><i className='fa-solid fa-caret-up'></i></p></div>
 
                             </div>
                             <div className="lh-lg">
@@ -101,6 +102,6 @@ export const PerformancePerRecord = (props: Props) => {
 
                 </div>
             </div>
-        </div>
+
     );
 };

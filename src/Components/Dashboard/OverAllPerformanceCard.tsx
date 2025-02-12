@@ -98,11 +98,11 @@ export const OverAllPerformanceCard = (props: Props) => {
     };
 
     return (
-        <div>
-            <div className="card-container">
+        <div className="col-xl-3 col-md-6  col-sm-12 " >
+            <div className="card-container box-12">
                 <div className="dashboard-overall-performance-card">
                     <h1 style={{ fontSize: '30px', fontWeight: 'normal' }}>Overall Performance</h1>
-                    <div className="amounts">
+                    <div className="amounts mt-4">
                         <div className="amounts-row">
                             <p>Total Gain</p>
                             <p className="total_gain_row">$</p>
