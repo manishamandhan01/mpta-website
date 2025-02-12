@@ -112,7 +112,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                             {
                                 name: 'Profit Rate',
                                 y: profitRatePercent,
-                                color : red[500],
+                                color : green[500],
                             },
 
 
@@ -144,7 +144,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                         <div id="pie_container1" className="pie-chart"></div>
                         <div id="pie_container2" className="pie-chart"></div>
                     </div>
-                    <div className="d-flex justify-content-between text-center">
+                    <div className="d-flex justify-content-between text-center mt-0">
 
 
                         <div className="lh-lg">

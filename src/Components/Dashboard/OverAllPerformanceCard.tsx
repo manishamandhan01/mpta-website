@@ -101,42 +101,55 @@ export const OverAllPerformanceCard = (props: Props) => {
         <div className="col-xl-3 col-md-6  col-sm-12 " >
             <div className="card-container box-12">
                 <div className="dashboard-overall-performance-card">
-                    <h1 style={{ fontSize: '30px', fontWeight: 'normal' }}>Overall Performance</h1>
+                    <h1 style={{fontSize: '30px', fontWeight: 'normal'}}>Overall Performance</h1>
                     <div className="amounts mt-4">
-                        <div className="amounts-row">
-                            <p>Total Gain</p>
-                            <p className="total_gain_row">$</p>
-                            <p className="total_gain_row">{totalProfit}</p>
-                            <span className="total_gain_row">
-                <i className="fa-solid fa-caret-up"></i>
-              </span>
-                            <p className="total_gain_row">{totalGainPer}%</p>
-                        </div>
-                        <div className="amounts-row">
-                            <p>Total Loss</p>
-                            <p className="total_loss_row">$</p>
-                            <p className="total_loss_row">{totalLoss}</p>
-                            <span className="total_loss_row">
-                <i className="fa-solid fa-caret-down"></i>
-              </span>
-                            <p className="total_loss_row">{totalLossPer}%</p>
-                        </div>
-                        <div className="amounts-row">
-                            <p>Profit/Loss</p>
-                            <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</p>
-                            <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
-                                {totalProfitLoss}
-                            </p>
-                            <span className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
-                <i
-                    className={
-                        totalProfitLoss >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'
-                    }
-                ></i>
-              </span>
-                            <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
-                                {totalProfitLossPer}%
-                            </p>
+
+                        <div className="d-flex justify-content-between text-center mt-4 ">
+                            <div className="lh-lg">
+                                <div><p>Total Gain</p></div>
+                                <div><p>Total Loss</p></div>
+                                <div><p>Profit/Loss</p></div>
+
+                            </div>
+
+                            <div className="lh-lg">
+                                <div><p className="total_gain_row">$</p></div>
+                                <div><p className="total_loss_row">$</p></div>
+                                <div><p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</p>
+                                </div>
+
+
+                            </div>
+
+                            <div className="lh-lg">
+                                <div><p className="total_gain_row">{totalProfit}</p></div>
+                                <div><p className="total_loss_row">{totalLoss}</p></div>
+                                <div><p
+                                    className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>{totalProfitLoss}</p>
+                                </div>
+
+                            </div>
+                            <div className="lh-lg">
+                                <div><p className="total_gain_row"><i className="fa-solid fa-caret-up"></i></p></div>
+                                <div><p className="total_loss_row"><i className="fa-solid fa-caret-down"></i></p></div>
+                                <div><p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={
+                                        totalProfitLoss >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'
+                                    }
+                                ></i></p>
+                                </div>
+
+                            </div>
+                            <div className="lh-lg">
+                                <div><p className="total_gain_row">{totalGainPer}%</p></div>
+                                <div><p className="total_loss_row">{totalLossPer}%</p></div>
+                                <div><p
+                                    className={totalProfitLoss >= 0 ? 'total_gain_row ' : 'total_loss_row'}>{totalProfitLossPer}%</p>
+                                </div>
+
+
+                            </div>
+
                         </div>
                         <div
                             className="profit-loss-bar"
@@ -149,6 +162,7 @@ export const OverAllPerformanceCard = (props: Props) => {
                             }}
                         ></div>
                     </div>
+
 
                     {/* Highcharts Component Integration */}
                     {/*<div id="topCumulativeContainer">*/}

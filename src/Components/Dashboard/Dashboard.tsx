@@ -32,7 +32,7 @@ export const Dashboard = (props: Props) => {
                 Dashboard
 
             </div>
-            <div className="row col-12 m-auto">
+            <div className="row col-12 m-auto mt-4">
 
                 <OverAllPerformanceCard/>
                     <GainLossBar/>
