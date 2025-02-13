@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { useEffect } from "react";
+import {useEffect} from 'react';
 import {PerformancePeriod, QuarterlyPnl} from "@Components/Utils/Constants.tsx";
-
-
 
 
 type ApiResponse = {

@@ -70,7 +70,7 @@ export const TradeStatistics = (props: Props) => {
                 </h1>
                 <div className="amounts">
 
-                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
+                    <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
                         <thead>
                         <tr>
                             <th className="font_Epilogue" style={{fontSize: '15px'}}>Metrics</th>
@@ -85,7 +85,7 @@ export const TradeStatistics = (props: Props) => {
                         </thead>
                         <tbody>
                         <tr className="background_grey_color">
-                            <td>Win rate %:</td>
+                            <td >Win rate %:</td>
                             <td></td>
                             <td className={winRatePercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{winRatePercentage}</td>
                             <td></td>

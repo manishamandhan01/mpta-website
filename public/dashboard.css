@@ -218,10 +218,17 @@ margin-left: 65px;
 }
 /*dashboard-overall-trade-statistics*/
 /*trade-statistics*/
-table,th,td{
+table,th,td,tr{
     border:none;
-}
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    font-family: "Epilogue", sans-serif;
+    font-size: 15px;
 
+}
+.tr{
+    margin-top: 2px !important;
+}
 
 .linear-gradient-headings {
     font-size: 20px;
