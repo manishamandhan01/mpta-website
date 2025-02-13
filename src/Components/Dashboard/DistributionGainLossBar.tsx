@@ -39,7 +39,7 @@ export const DistributionGainLossBar = (props: Props) => {
             text: 'Distribution Of Gains And Losses',
             style: {
                 fontSize: '30px',
-                fontWeight: "normal",
+                fontWeight: "font_weight_200",
                 textAlign:'center',
             }
         },

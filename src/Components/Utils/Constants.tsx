@@ -35,4 +35,17 @@ export const CRBResultModel: RBCalculatorResultModel[] = [{
 }
 ]
 
+export type QuarterlyPnl ={
+    [key:string] :number;
+}
+
+export type PerformancePeriod = {
+    quarterly_pnl: QuarterlyPnl;
+    year_to_date_pnl: number;
+    previous_year_to_date_pnl: number;
+    this_month_pnl: number;
+};
+
+
+
 

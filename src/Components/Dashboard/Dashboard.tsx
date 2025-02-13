@@ -8,6 +8,7 @@ import {DasboardAccountSummary} from "@Components/Dashboard/DasboardAccountSumma
 import {DistributionGainLossBar} from "@Components/Dashboard/DistributionGainLossBar.tsx";
 import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 import {PerformancePerRecord} from "@Components/Dashboard/PerformancePerRecord.tsx";
+import {TradeStatistics} from "@Components/Dashboard/TradeStatistics.tsx";
 
 type Props = {};
 
@@ -32,7 +33,7 @@ export const Dashboard = (props: Props) => {
                 Dashboard
 
             </div>
-            <div className="row col-12 m-auto mt-4">
+            <div className="row col-12 m-auto mt-2">
 
                 <OverAllPerformanceCard/>
                     <DistributionGainLossBar/>
@@ -41,9 +42,9 @@ export const Dashboard = (props: Props) => {
 
             </div>
 
-            <div className="row col-12 m-auto mt-5">
+            <div className="row col-12 m-auto mt-3">
                 <PerformancePerRecord/>
-                <DistributionGainLossBar/>
+                <TradeStatistics/>
 
             </div>
             {/*<div>*/}

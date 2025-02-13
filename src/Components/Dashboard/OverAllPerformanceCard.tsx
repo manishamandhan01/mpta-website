@@ -17,6 +17,7 @@ export const OverAllPerformanceCard = (props: Props) => {
     const [top3Profits, setTop3Profits] = React.useState<any[]>([]);
     const [top3Losses, setTop3Losses] = React.useState<any[]>([]);
 
+
     // Define the function to fetch the overall performance data
     const overAllPerformanceData = () => {
         // Make the API call on mount
@@ -35,17 +36,9 @@ export const OverAllPerformanceCard = (props: Props) => {
                 setTotalLossPer(overallPerformance['total_loss_percent']);
                 setTotalProfitLoss(overallPerformance['overall_total_gain_loss']);
                 setTotalProfitLossPer(overallPerformance['overall_total_gain_loss_percent']);
-                const top3ProfitsData = overallPerformance['top_3_profits'].map((item: any) => ({
-                    name: item[0], // Ticker or symbol
-                    y: item[1],    // Profit value
-                }));
-                const top3LossesData = overallPerformance['top_3_losses'].map((item: any) => ({
-                    name: item[0], // Ticker or symbol
-                    y: item[1],    // Loss value
-                }));
+                setTop3Profits(overallPerformance['top_3_profits']);
+                setTop3Losses(overallPerformance['top_3_losses']);
 
-                setTop3Profits(top3ProfitsData);
-                setTop3Losses(top3LossesData);
             })
             .catch((err) => console.log(err));
     };
@@ -55,53 +48,75 @@ export const OverAllPerformanceCard = (props: Props) => {
         overAllPerformanceData();
     }, []); // Dependency array makes sure the effect runs once on mount
 
+    const profitNames = top3Profits.map((item) => item[0]);
+    const profitValues = top3Profits.map((item) => item[1].pnl);
+    const lossNames = top3Losses.map((item) => item[0]);
+    const lossValues = top3Losses.map((item) => item[1].pnl);
+
     // Highcharts options for the chart
     const chartOptions = {
         chart: {
-            type: 'column',
+            type: 'bar',
+            height:300,
         },
         title: {
-            text: 'Top 3 Cumulative Profit & Loss Per Symbol',
+            text: 'Top 3 Cumulative Profits and Losses',
+            style: {
+                fontSize: '15px',  fontWeight:'normal'
+            }
         },
         xAxis: {
-            categories: [
-                ...top3Profits.map((item) => item.name),
-                ...top3Losses.map((item) => item.name),
-            ],
+
+            categories:  [...profitNames, ...lossNames],
+            gridLineWidth: 0,
         },
         yAxis: {
-            min: 0,
             title: {
-                text: 'Amount ($)',
+                text: '',
+
             },
+            min: -20000,  // Set the minimum value for the Y-axis
+            max: 70000,
+            reversed: false,
+            labels:{
+                enabled:false,
+            }// Set the maximum value for the Y-axis
         },
-        series: [
-            {
-                name: 'Top 3 Profits',
-                data: top3Profits.map((item) => item.y),
-                color: '#4caf50', // Green for profits
-            },
-            {
-                name: 'Top 3 Losses',
-                data: top3Losses.map((item) => item.y),
-                color: '#f44336', // Red for losses
-            },
-        ],
-        credits: {
-            enabled: false,
-        },
-        plotOptions: {
-            column: {
-                borderRadius: 5,
-            },
-        },
+        series: [{
+            name: 'Profits',
+            data: profitValues,  // Positive values for profits
+            color: 'green',
+            dataLabels: {
+                enabled: true,
+                color: 'black',
+                align: 'center',
+                format: '{point.y}',
+                style:{fontWeight:'bold'}// Display value on the bar
+            }
+        }, {
+            name: 'Losses',
+            data: lossValues,  // Negative values for losses
+            color: 'red',
+            dataLabels: {
+                enabled: true,
+                color: 'black',
+                align: 'right',
+                format: '{point.y}',
+                style: {
+                    fontWeight: 'bold',
+                },
+                allowOverlap: false, // Ensures negative labels aren't hidden
+                verticalAlign: 'middle', // Display value on the bar
+            }
+        }]
     };
+
 
     return (
         <div className="col-xl-3 col-md-6  col-sm-12 " >
             <div className="card-container box-12">
                 <div className="dashboard-overall-performance-card">
-                    <h1 style={{fontSize: '30px', fontWeight: 'normal'}}>Overall Performance</h1>
+                    <h1 className="font_weight_200" style={{fontSize: '30px', fontWeight: 'normal'}}>Overall Performance</h1>
                     <div className="amounts mt-4">
 
                         <div className="d-flex justify-content-between text-center mt-4 ">
@@ -164,15 +179,13 @@ export const OverAllPerformanceCard = (props: Props) => {
                     </div>
 
 
-                    {/* Highcharts Component Integration */}
-                    {/*<div id="topCumulativeContainer">*/}
-                    {/*    /!* Render Highcharts only when the data is available *!/*/}
-                    {/*    {top3Profits.length > 0 && top3Losses.length > 0 ? (*/}
-                    {/*        <HighchartsReact highcharts={Highcharts} options={chartOptions} />*/}
-                    {/*    ) : (*/}
-                    {/*        <p>Loading chart...</p>*/}
-                    {/*    )}*/}
-                    {/*</div>*/}
+
+                    <div id="overAllPerformanceChart">
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={chartOptions}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
