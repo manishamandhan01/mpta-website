@@ -62,30 +62,34 @@ export const TradeStatistics = (props: Props) => {
     return (
         <div className="col-xl-6 col-md-6 col-sm-12">
             <div className="card-container box-12">
+                <div className="dashboard-overall-performance-card">
+
+
+                <h1 className="linear-gradient-headings">
+                    Trade Statistics
+                </h1>
                 <div className="amounts">
-                    <h1 className="mb-3 font_weight_200 " style={{fontSize: '30px', fontWeight: 'normal'}}>
-                        Trade Statistics
-                    </h1>
-                    <table className="table table-bordered mt-4">
+
+                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
                         <thead>
                         <tr>
-                            <th>Metrics</th>
-                            <th></th>
-                            <th>All Trades Stats</th>
-                            <th></th>
-                            <th>Last 50 Trades</th>
-                            <th>Remarks</th>
-                            <th>Change %</th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Metrics</th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}>All Trades Stats</th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Last 50 Trades</th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Remarks</th>
+                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Change %</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr className="background_grey_color">
                             <td>Win rate %:</td>
                             <td></td>
-                            <td>{winRatePercentage}</td>
+                            <td className={winRatePercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{winRatePercentage}</td>
                             <td></td>
-                            <td>{lastFiftyTrades}</td>
+                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades}</td>
                             <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > winRatePercentage ? "Improved" : "Declined"}<i
                                 className={lastFiftyTrades > winRatePercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
                             </td>
@@ -93,23 +97,23 @@ export const TradeStatistics = (props: Props) => {
                         </tr>
                         <tr>
                             <td>Largest Profit</td>
-                            <td>$</td>
-                            <td>{largestProfit}</td>
-                            <td>$</td>
+                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestProfit}</td>
+                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
                             <td>{lastFiftyTrades}</td>
                             <td>
                                 <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestProfit ? "Improved" : "Declined"}<i
                                     className={lastFiftyTrades > largestProfit ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
                                 </td>
-                            </td >
+                            </td>
                             <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
 
                         </tr>
-                        <tr>
+                        <tr className="background_grey_color">
                             <td>Largest Loss</td>
-                            <td>$</td>
-                            <td>{largestLoss}</td>
-                            <td>$</td>
+                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLoss}</td>
+                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
                             <td>{lastFiftyTrades}</td>
                             <td>
                                 <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLoss ? "Improved" : "Declined"}<i
@@ -121,7 +125,7 @@ export const TradeStatistics = (props: Props) => {
                         <tr>
                             <td>Largest Win %</td>
                             <td></td>
-                            <td>{largestWinPercentage}</td>
+                            <td className={largestWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestWinPercentage}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -131,10 +135,10 @@ export const TradeStatistics = (props: Props) => {
                             </td>
                             <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
                         </tr>
-                        <tr>
+                        <tr className="background_grey_color">
                             <td>Largest Loss %</td>
                             <td></td>
-                            <td>{largestLossPercentage}</td>
+                            <td className={largestLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLossPercentage}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -147,7 +151,7 @@ export const TradeStatistics = (props: Props) => {
                         <tr>
                             <td>Ave. Win %</td>
                             <td></td>
-                            <td>{averageWinPercentage}</td>
+                            <td className={averageWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageWinPercentage}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -158,10 +162,10 @@ export const TradeStatistics = (props: Props) => {
                             <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
 
                         </tr>
-                        <tr>
+                        <tr className="background_grey_color">
                             <td>Ave. Loss %</td>
                             <td></td>
-                            <td>{averageLossPercentage}</td>
+                            <td className={averageLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageLossPercentage}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -174,7 +178,7 @@ export const TradeStatistics = (props: Props) => {
                         <tr>
                             <td>Reward To Risk Ratio</td>
                             <td></td>
-                            <td>{rewardToRiskRatio}</td>
+                            <td className={rewardToRiskRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{rewardToRiskRatio}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -184,10 +188,10 @@ export const TradeStatistics = (props: Props) => {
                             </td>
                             <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
                         </tr>
-                        <tr>
+                        <tr className="background_grey_color">
                             <td>Profit Loss (Edge) Ratio</td>
                             <td></td>
-                            <td>{profitLossRatio}</td>
+                            <td className={profitLossRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitLossRatio}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -200,7 +204,7 @@ export const TradeStatistics = (props: Props) => {
                         <tr>
                             <td>Profit factor</td>
                             <td></td>
-                            <td>{profitFactor}</td>
+                            <td className={profitFactor > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitFactor}</td>
                             <td></td>
                             <td>{lastFiftyTrades}</td>
                             <td>
@@ -210,11 +214,11 @@ export const TradeStatistics = (props: Props) => {
                             </td>
                             <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
                         </tr>
-                        <tr>
+                        <tr className="background_grey_color">
                             <td>Expectancy Per Trade</td>
-                            <td>$</td>
-                            <td>{expectancyPerTrade}</td>
-                            <td>$</td>
+                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{expectancyPerTrade}</td>
+                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
                             <td>{lastFiftyTrades}</td>
                             <td>
                                 <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > expectancyPerTrade ? "Improved" : "Declined"}<i
@@ -225,7 +229,7 @@ export const TradeStatistics = (props: Props) => {
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                </div>   </div>
             </div>
         </div>
     );

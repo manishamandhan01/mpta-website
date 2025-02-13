@@ -160,13 +160,10 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
     // });
 
     return (
-        <div className="col-xl-3 col-sm-12">
+        <div className="col-xl-3 col-md-6 col-sm-12">
             <div className="card-container box-12">
                 <div className="dashboard-overall-trade-statistics-card">
-                    <h1 style={{
-                        fontSize: "30px",
-                        fontWeight: "normal"
-                    }}>Overall Trade Statistics</h1>
+                    <h1 className="linear-gradient-headings">Overall Trade Statistics</h1>
                     {/*<div className="chart-container d-flex justify-content-center">*/}
                     {/*    <HighchartsReact*/}
                     {/*        highcharts={Highcharts}*/}

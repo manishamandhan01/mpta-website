@@ -6,7 +6,7 @@ import { OverAllPerformanceModel } from "@Components/Models/OverAllPerformanceMo
 
 type Props = {};
 
-export const DistributionGainLossBar = (props: Props) => {
+export const PerformanceCurve = (props: Props) => {
     const [cardData, setCardData] = React.useState<OverAllPerformanceModel | null>(null);
     const [gainAndLoss, setGainAndLoss] = React.useState<any>(null); // Store gain/loss distribution data
 
@@ -103,20 +103,13 @@ export const DistributionGainLossBar = (props: Props) => {
     return (
         <div className="col-xl-6 col-md-6 col-sm-12">
             <div className="card-container box-12">
-                <div><h1 className="linear-gradient-headings">Distribution Of Gains
-                    And Losses</h1></div>
+                <div><h1 className="linear-gradient-headings">Performance Curve</h1></div>
 
 
                 <div className="dashboard-overall-performance-card">
 
 
-                <div className="dashboard-card">
 
-                        <HighchartsReact
-                            highcharts={Highcharts}
-                            options={chartOptions}
-                        />
-                    </div>
                 </div>
             </div>
         </div>

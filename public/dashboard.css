@@ -53,6 +53,12 @@ background-color: #ffffff;
 margin-left: 65px;
     font-size: 24px;
     font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'monospace';
+    background: -webkit-linear-gradient(#0d82fe, #ecf1f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 /*dashboard-container*/
 
@@ -64,6 +70,7 @@ margin-left: 65px;
     padding: 2px;
     /*margin-left: 45px;*/
     /*margin-top: 40px;*/
+    border-radius: 20px;
 }
 
 .dashboard-overall-performance-card,
@@ -182,6 +189,9 @@ margin-left: 65px;
 .pie-chart>.highcharts-container>svg>.highcharts-credits{
     display: none;
 }
+.highcharts-container>.highcharts-root>.highcharts-credits{
+    display: none;
+}
 .dashboard-card>div>.highcharts-container>.highcharts-root>.highcharts-credits{
 
     display: none;
@@ -198,7 +208,7 @@ margin-left: 65px;
 }
 .box-12 {
     /*background-color: #F8F9FA;*/
-     padding: 20px;
+     padding: 10px;
     /* border: 1px solid #ddd; */
     display: flex;
     flex-direction: column;
@@ -207,3 +217,22 @@ margin-left: 65px;
     height: 100%;
 }
 /*dashboard-overall-trade-statistics*/
+/*trade-statistics*/
+table,th,td{
+    border:none;
+}
+
+
+.linear-gradient-headings {
+    font-size: 20px;
+    font-weight: 500;
+    background: -webkit-linear-gradient(to right,#28a745, #dc3545);
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
+    background: linear-gradient(to right, #f9939d, #28a745);
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+/*trade-statistics*/

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -116,10 +116,10 @@ export const OverAllPerformanceCard = (props: Props) => {
         <div className="col-xl-3 col-md-6  col-sm-12 " >
             <div className="card-container box-12">
                 <div className="dashboard-overall-performance-card">
-                    <h1 className="font_weight_200" style={{fontSize: '30px', fontWeight: 'normal'}}>Overall Performance</h1>
+                    <h1 className="linear-gradient-headings" >Overall Performance</h1>
                     <div className="amounts mt-4">
 
-                        <div className="d-flex justify-content-between text-center mt-4 ">
+                        <div className="d-flex justify-content-between text-center mt-1 ">
                             <div className="lh-lg">
                                 <div><p>Total Gain</p></div>
                                 <div><p>Total Loss</p></div>
@@ -173,14 +173,14 @@ export const OverAllPerformanceCard = (props: Props) => {
                                 width: '100%',
                                 height: '20px',
                                 borderRadius: '1px',
-                                marginTop: '20px',
+                                marginTop: '3px',
                             }}
                         ></div>
                     </div>
 
 
 
-                    <div id="overAllPerformanceChart">
+                    <div id="overAllPerformanceChart" className="mt-1">
                         <HighchartsReact
                             highcharts={Highcharts}
                             options={chartOptions}

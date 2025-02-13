@@ -9,42 +9,60 @@ import {DistributionGainLossBar} from "@Components/Dashboard/DistributionGainLos
 import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 import {PerformancePerRecord} from "@Components/Dashboard/PerformancePerRecord.tsx";
 import {TradeStatistics} from "@Components/Dashboard/TradeStatistics.tsx";
+import {PerformanceCurve} from "@Components/Dashboard/PerformanceCurve.tsx";
+import {WeeklyPerformanceCurve} from "@Components/Dashboard/WeeklyPerformanceCurve.tsx";
 
 type Props = {};
 
 export const Dashboard = (props: Props) => {
     return (
         <div>
-        <div>
-            <div className="ua_top_item">
-                <ul>
-                    {DashboardData.map((item, index: number) => {
-                        return (
-                            <li key={index}>
-                                <i className={item.icon}></i>
-                                <span>{item.label}</span>
-                            </li>
-                        );
-                    })}
-                </ul>
+            <div>
+                <div className="ua_top_item">
+                    <ul>
+                        {DashboardData.map((item, index: number) => {
+                            return (
+                                <li key={index}>
+                                    <i className={item.icon}></i>
+                                    <span>{item.label}</span>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </div>
-        </div>
             <div className="dashboard-container">
-                Dashboard
+                Overall summary
 
             </div>
             <div className="row col-12 m-auto mt-2">
 
                 <OverAllPerformanceCard/>
-                    <DistributionGainLossBar/>
+                <DistributionGainLossBar/>
 
                 <OverAllTradeStatisticsCard/>
 
             </div>
+            <div className="dashboard-container mt-3">
+                Performance summary
 
+            </div>
             <div className="row col-12 m-auto mt-3">
                 <PerformancePerRecord/>
+                <PerformanceCurve/>
+                <WeeklyPerformanceCurve/>
+
+            </div>
+            <div className="dashboard-container mt-3">
+               Analytics
+
+            </div>
+            <div className="row col-12 m-auto mt-2">
+
+                <OverAllPerformanceCard/>
                 <TradeStatistics/>
+
+                <OverAllTradeStatisticsCard/>
 
             </div>
             {/*<div>*/}
