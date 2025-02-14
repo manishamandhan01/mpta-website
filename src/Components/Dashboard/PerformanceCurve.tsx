@@ -134,10 +134,7 @@ export const PerformanceCurve = (props: Props) => {
                 <div><h1 className="linear-gradient-headings">Performance Curve</h1></div>
 
                 <div className="dashboard-overall-performance-card">
-                    <HighchartsReact
-                        highcharts={Highcharts}
-                        options={chartOptions}
-                    />
+                   
                 </div>
             </div>
         </div>
