@@ -46,17 +46,7 @@ export const Dashboard = (props: Props) => {
 
             </div>
             <div className="dashboard-container mt-3">
-                Performance summary
-
-            </div>
-            <div className="row col-12 m-auto mt-3">
-                <PerformancePerRecord/>
-                <PerformanceCurve/>
-                <WeeklyPerformanceCurve/>
-
-            </div>
-            <div className="dashboard-container mt-3">
-               Analytics
+                Analytics
 
             </div>
             <div className="row col-12 m-auto mt-2">
@@ -67,6 +57,17 @@ export const Dashboard = (props: Props) => {
                 <RequiredWinRate/>
 
             </div>
+            <div className="dashboard-container mt-3">
+                Performance summary
+
+            </div>
+            <div className="row col-12 m-auto mt-3">
+                <PerformancePerRecord/>
+                <PerformanceCurve/>
+                <WeeklyPerformanceCurve/>
+
+            </div>
+
             {/*<div>*/}
             {/*    <DasboardAccountSummary/>*/}
             {/*</div>*/}

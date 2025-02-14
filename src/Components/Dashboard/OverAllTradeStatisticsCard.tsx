@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import HighchartsMore from 'highcharts/highcharts-more'; // Importing highcharts-more
 
 type Props = {};
 
@@ -51,132 +52,143 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
         overAllPerformanceData();
     }, []);
 
-    // const gaugeOptions = {
-    //     chart: {
-    //         type: 'solidgauge'
-    //     },
-    //
-    //     title: null,
-    //
-    //     pane: {
-    //         center: ['50%', '85%'],
-    //         size: '140%',
-    //         startAngle: -90,
-    //         endAngle: 90,
-    //         background: {
-    //             backgroundColor:
-    //                 Highcharts.defaultOptions.legend || '#fafafa',
-    //             borderRadius: 5,
-    //             innerRadius: '60%',
-    //             outerRadius: '100%',
-    //             shape: 'circle'
-    //         }
-    //     },
-    //
-    //     exporting: {
-    //         enabled: false
-    //     },
-    //
-    //     tooltip: {
-    //         enabled: false
-    //     },
-    //
-    //     yAxis: {
-    //         stops: [
-    //             [0.1, '#55BF3B'], // green
-    //             [0.5, '#DDDF0D'], // yellow
-    //             [0.9, '#DF5353'] // red
-    //         ],
-    //         lineWidth: 0,
-    //         tickWidth: 0,
-    //         minorTickInterval: null,
-    //         tickAmount: 2,
-    //         title: {
-    //             y: -70
-    //         },
-    //         labels: {
-    //             y: 16
-    //         }
-    //     },
-    //
-    //     plotOptions: {
-    //         solidgauge: {
-    //             borderRadius: 3,
-    //             dataLabels: {
-    //                 y: 5,
-    //                 borderWidth: 0,
-    //                 useHTML: true
-    //             }
-    //         }
-    //     }
-    // };
-    //
-    // const chartSpeedOptions = Highcharts.merge(gaugeOptions, {
-    //     yAxis: {
-    //         min: 0,
-    //         max: 100, // Win rate percentage range
-    //         title: {
-    //             text: 'Win Rate %'
-    //         }
-    //     },
-    //     series: [{
-    //         name: 'Win Rate %',
-    //         data: [winRatePercent],
-    //         dataLabels: {
-    //             format:
-    //                 '<div style="text-align:center">' +
-    //                 '<span style="font-size:25px">{y}</span><br/>' +
-    //                 '<span style="font-size:12px;opacity:0.4">%</span>' +
-    //                 '</div>'
-    //         },
-    //         tooltip: {
-    //             valueSuffix: ' %'
-    //         }
-    //     }]
-    // });
-    //
-    // const chartRpmOptions = Highcharts.merge(gaugeOptions, {
-    //     yAxis: {
-    //         min: 0,
-    //         max: 100, // Profit rate percentage range
-    //         title: {
-    //             text: 'Profit Rate %'
-    //         }
-    //     },
-    //     series: [{
-    //         name: 'Profit Rate %',
-    //         data: [profitRatePercent],
-    //         dataLabels: {
-    //             format:
-    //                 '<div style="text-align:center">' +
-    //                 '<span style="font-size:25px">{y}</span><br/>' +
-    //                 '<span style="font-size:12px;opacity:0.4">%</span>' +
-    //                 '</div>'
-    //         },
-    //         tooltip: {
-    //             valueSuffix: ' %'
-    //         }
-    //     }]
-    // });
+    // Dynamically create the Highcharts options based on winRatePercent and profitRatePercent
+    // Pie chart for win rate percentage
+    const winRateChartOptions = {
+        chart: {
+            type: 'pie',
+            height: 180, // Set height for smaller pie chart size
+            width: 180, // Set width for smaller pie chart size
+            backgroundColor: 'transparent', // Make background transparent
+        },
+        title: {
+            text: '',
+        },
+        tooltip: {},
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y}%', // Show name and percentage value
+                    style: {
+                        color: 'black', // Text color for data labels
+                        fontWeight: 'bold', // Make text bold
+                        fontSize: '14px', // Font size of data labels
+
+                    },
+                    distance: -105, // Place the data label closer to the center
+                },
+                shadow: {
+                    color: 'rgba(0.5, 0.8, 0.7, 0.5)', // Shadow color (semi-transparent black)
+                    offsetX: 10, // Horizontal offset of the shadow
+                    offsetY: 4, // Vertical offset of the shadow
+                    opacity: 0.1, // Transparency of the shadow
+                    blur: 1, // Blur radius for the shadow
+                },
+            },
+        },
+        series: [
+            {
+                name: 'Trade Statistics',
+                colorByPoint: true,
+                innerSize: '80%',
+                data: [
+                    {
+                        name: 'Win Rate',
+                        y: winRatePercent,
+                        color: '#28a745', // Green for win rate
+                    },
+                    {
+                        name: 'Loss Rate',
+                        y: 100 - winRatePercent,
+                        color: '#B4B4B4', // Red for loss rate
+                        dataLabels: {
+                            enabled: false, // Hide text for Non profit Rate
+                        },
+                    },
+                ],
+            },
+        ],
+    };
+
+// Pie chart for profit rate percentage
+    const profitRateChartOptions = {
+        chart: {
+            type: 'pie',
+            height: 180, // Set height for smaller pie chart size
+            width: 180, // Set width for smaller pie chart size
+            backgroundColor: 'transparent', // Make background transparent
+        },
+        title: {
+            text: '',
+        },
+        tooltip: {},
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}:{point.y}%', // Show name and percentage value
+                    style: {
+                        color: 'black', // Text color for data labels
+                        fontWeight: 'bold', // Make text bold
+                        fontSize: '14px', // Font size of data labels
+
+                    },
+                    distance: -105, // Place the data label closer to the center
+                },
+                shadow: {
+                    color: 'rgba(0.5, 0.8, 0.7, 0.5)', // Shadow color (semi-transparent black)
+                    offsetX: 10, // Horizontal offset of the shadow
+                    offsetY: 4, // Vertical offset of the shadow
+                    opacity: 0.1, // Transparency of the shadow
+                    blur: 1, // Blur radius for the shadow
+                },
+            },
+        },
+        series: [
+            {
+                name: 'Trade Statistics',
+                colorByPoint: true,
+                innerSize: '80%',
+                data: [
+                    {
+                        name: 'Profit Rate',
+                        y: profitRatePercent,
+                        color: '#28a745', // Blue for profit rate
+                    },
+                    {
+                        name: 'Non profit Rate',
+                        y: 100 - profitRatePercent,
+                        color: '#B4B4B4', // Red for non-profit rate
+                        dataLabels: {
+                            enabled: false, // Hide text for Non profit Rate
+                        },
+                    },
+                ],
+            },
+        ],
+    };
 
     return (
         <div className="col-xl-3 col-md-6 col-sm-12">
             <div className="card-container box-12">
+
                 <div className="dashboard-overall-trade-statistics-card">
                     <h1 className="linear-gradient-headings">Overall Trade Statistics</h1>
-                    {/*<div className="chart-container d-flex justify-content-center">*/}
-                    {/*    <HighchartsReact*/}
-                    {/*        highcharts={Highcharts}*/}
-                    {/*        options={chartSpeedOptions}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-                    {/*<div className="chart-container d-flex justify-content-center">*/}
-                    {/*    <HighchartsReact*/}
-                    {/*        highcharts={Highcharts}*/}
-                    {/*        options={chartRpmOptions}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-                    <div className="d-flex justify-content-between text-center mt-0">
+
+                    <div className="row mt-4">
+                        {/* First pie chart (Win Rate) */}
+                        <div className="col-6">
+                            <HighchartsReact highcharts={Highcharts} options={winRateChartOptions}/>
+                        </div>
+
+                        {/* Second pie chart (Profit Rate) */}
+                        <div className="col-6">
+                            <HighchartsReact highcharts={Highcharts} options={profitRateChartOptions}/>
+                        </div>
+                    </div>
+
+                    <div className="d-flex justify-content-between text-center mt-5">
                         <div className="lh-lg">
                             <div><p className="text-success font-bold">{winTrades}</p></div>
                             <div><p>Win Trades</p></div>
@@ -213,6 +225,9 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                     </div>
                 </div>
             </div>
+
+            {/* Highcharts component for the pie chart */}
+
         </div>
     );
 };
