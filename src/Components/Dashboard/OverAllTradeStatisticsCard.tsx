@@ -59,7 +59,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
             type: 'pie',
             height: 180, // Set height for smaller pie chart size
             width: 180, // Set width for smaller pie chart size
-            backgroundColor: 'transparent', // Make background transparent
+
         },
         title: {
             text: '',
@@ -117,7 +117,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
             type: 'pie',
             height: 180, // Set height for smaller pie chart size
             width: 180, // Set width for smaller pie chart size
-            backgroundColor: 'transparent', // Make background transparent
+
         },
         title: {
             text: '',

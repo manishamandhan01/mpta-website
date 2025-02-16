@@ -8,6 +8,7 @@ import {CalculatorsB} from "@Components/Calculators/Calculator(bootstrap).tsx";
 import 'react-tooltip/dist/react-tooltip.css'
 import {CandleChart} from "@Components/Charts/CandleChart.tsx";
 import {Dashboard} from "@Components/Dashboard/Dashboard.tsx";
+import {Calendar} from "@Components/Calender/Calender.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -37,6 +38,12 @@ function App() {
                     path:"dashboard",
                     element: (
                         <Dashboard/>
+                    ),
+                },
+                {
+                    path:"calender",
+                    element: (
+                        <Calendar/>
                     ),
                 },
 

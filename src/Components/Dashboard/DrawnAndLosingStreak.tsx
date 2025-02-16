@@ -116,7 +116,7 @@ export const DrawnAndLosingStreak = (props: Props) => {
         <div className="col-xl-3 col-md-6  col-sm-12 " >
             <div className="card-container box-12">
                 <div className="dashboard-overall-performance-card">
-                    <h1 className="linear-gradient-headings" >Drawn And Losing Streak</h1>
+                    <h1 className="linear-gradient-headings" >DrawnDown And Losing Streak</h1>
                     <div className="amounts mt-4">
 
 

@@ -1,0 +1,84 @@
+/* General Calendar Styling */
+.calender-heading{
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'monospace';
+    background: -webkit-linear-gradient(#0d82fe, #ecf1f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Year Header */
+.year-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: 'monospace';
+}
+
+/* Year Navigation Buttons */
+button {
+    padding: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    background-color: #2196f3;
+    border-radius: 10px;
+    margin:15px;
+    color: white;
+    font-family: Epilogue;
+}
+
+/* Scrollable Calendar Wrapper */
+.scrollable-calendar {
+    display: flex;
+    overflow-x: auto; /* Allow horizontal scroll */
+    padding-bottom: 50px; /* Optional for extra spacing at the bottom */
+}
+
+/* Month Container */
+.month-container {
+    margin-right: 2px;
+    max-width: 500px; /* Minimum width for each month */
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+/* Month Name Styling */
+.month-name {
+    text-align: center;
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 25px;
+}
+
+/* Calendar Grid Styling */
+.calendar-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 5px;
+    padding: 5px;
+}
+
+/* Calendar Day Styling */
+.calendar-day {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    background-color: #fff;
+}
+
+/* Empty Day Styling */
+.empty-day {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+}

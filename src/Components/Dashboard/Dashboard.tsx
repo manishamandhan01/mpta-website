@@ -13,10 +13,12 @@ import {PerformanceCurve} from "@Components/Dashboard/PerformanceCurve.tsx";
 import {WeeklyPerformanceCurve} from "@Components/Dashboard/WeeklyPerformanceCurve.tsx";
 import {DrawnAndLosingStreak} from "@Components/Dashboard/DrawnAndLosingStreak.tsx";
 import {RequiredWinRate} from "@Components/Dashboard/RequiredWinRate.tsx";
+import {useLocation} from "react-router-dom";
 
 type Props = {};
 
 export const Dashboard = (props: Props) => {
+
     return (
         <div>
             <div>
@@ -26,7 +28,7 @@ export const Dashboard = (props: Props) => {
                             return (
                                 <li key={index}>
                                     <i className={item.icon}></i>
-                                    <span>{item.label}</span>
+                                    <span> <a className="nav-link text_gray font_weight_400 " aria-current="page" href={item.label}>{item.label}</a></span>
                                 </li>
                             );
                         })}

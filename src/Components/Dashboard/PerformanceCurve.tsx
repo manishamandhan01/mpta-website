@@ -1,142 +1,72 @@
 import * as React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useEffect } from "react";
 
 type Props = {};
 
 export const PerformanceCurve = (props: Props) => {
-    const chartOptions = {
+    const [equitygraph, setEquitygraph] = React.useState<number[]>([]);
+
+    const PerformanceCurve = () => {
+        fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                const overallPerformance = json['overall_performance'];
+                setEquitygraph(overallPerformance['equity']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        PerformanceCurve();
+    }, []);
+
+    const performanceCurveGraph = {
         chart: {
-            type: 'spline',
+            type: 'line',
+            height:'200'
         },
         title: {
-            text: '',
+            text: ''  // Title of the chart
         },
         subtitle: {
-            text: 'Total-Time-Weighted-Return:',
+            text: 'Total time-weighted return'
         },
-        // Hardcoded CSV data (for demo purposes)
-        data: {
-            csv: `
-                Year,Inflation,Claims on central government, Net foreign assets, Net domestic credit
-                2000,2.2,4500,10000,12000
-                2001,1.5,4700,10500,12500
-                2002,1.8,4900,11000,13000
-                2003,2.0,5100,11500,13500
-                2004,2.5,5300,12000,14000
-                2005,3.0,5500,12500,14500
-                2006,2.8,5700,13000,15000
-                2007,3.2,5900,13500,15500
-                2008,4.5,6100,14000,16000
-            `
+        xAxis: {
+            categories: ['', '', '', '', '', '', '']  // Categories on the X-axis
         },
-        yAxis: [{
+        yAxis: {
             title: {
-                text: 'Inflation',
-            },
-            plotLines: [{
-                color: 'black',
-                width: 2,
-                value: 13.5492019749684,
-                animation: {
-                    duration: 1000,
-                    defer: 4000,
-                },
-                label: {
-                    text: 'Max Inflation',
-                    align: 'right',
-                    x: -20,
-                },
-            }],
-        }, {
-            title: {
-                text: 'Claims on central government, etc.',
-            },
-        }, {
-            opposite: true,
-            title: {
-                text: '',
-            },
-        }, {
-            opposite: true,
-            title: {
-                text: '',
-            },
-        }],
-        plotOptions: {
-            series: {
-                animation: {
-                    duration: 1000,
-                },
-                marker: {
-                    enabled: false,
-                },
-                lineWidth: 2,
-            },
+                text: ''
+            }
         },
         series: [{
-            yAxis: 0,
-        }, {
-            yAxis: 1,
-            animation: {
-                defer: 1000,
-            },
-        }, {
-            yAxis: 2,
-            animation: {
-                defer: 2000,
-            },
-        }, {
-            yAxis: 3,
-            animation: {
-                defer: 3000,
-            },
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500,
-                },
-                chartOptions: {
-                    yAxis: [{
-                        tickAmount: 2,
-                        title: {
-                            x: 15,
-                            reserveSpace: false,
-                        },
-                    }, {
-                        tickAmount: 2,
-                        title: {
-                            x: 20,
-                            reserveSpace: false,
-                        },
-                    }, {
-                        tickAmount: 2,
-                        title: {
-                            x: -20,
-                            reserveSpace: false,
-                        },
-                    }, {
-                        tickAmount: 2,
-                        title: {
-                            x: -20,
-                            reserveSpace: false,
-                        },
-                    }],
-                },
-            }],
+            name: 'Performance',  // First series name
+            data: [1, 2, 3, 4, 5, 6, 7]  // First line data points
         },
-    };
+            {
+                name: '',  // Second series name
+                data: [3, 6, 1, 7, 2, 4, 9],  // Second line data points
+                color: 'red' , // Set the line color to red
+            }]
+    }
 
     return (
         <div className="col-xl-6 col-md-6 col-sm-12">
             <div className="card-container box-12">
                 <div><h1 className="linear-gradient-headings">Performance Curve</h1></div>
-
                 <div className="dashboard-overall-performance-card">
-                   
+                    <div className="dashboard-card">
+                        <HighchartsReact highcharts={Highcharts} options={performanceCurveGraph}/>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-};
+            </div>
+            );
+            };

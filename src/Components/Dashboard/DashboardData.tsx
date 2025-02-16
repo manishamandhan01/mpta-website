@@ -1,22 +1,51 @@
 export const DashboardData = [
     {
         icon:"fa-solid fa-gauge-high",
+
         label:"Dashboard",
     },
     {
         icon:"fa-solid fa-newspaper",
-        label:"Journal",
+        label:"Trade Log",
     },
     {
         icon:"fa-solid fa-table-cells-large",
-        label:"Reports",
+        label:"Bank Transfers",
     },
     {
         icon:"fa-solid fa-trophy",
-        label:"Challenges",
+        label:"Trade Review",
     },
     {
         icon:"fa-solid fa-upload",
-        label:"Import",
-    }
+        label:"Monthly Report",
+    },
+    {
+        icon:"fa-solid fa-newspaper",
+        label:"Trade Log",
+    },
+    {
+        icon:"fa-solid fa-table-cells-large",
+        label:"Bank Transfers",
+    },
+    {
+        icon:"fa-solid fa-trophy",
+        label:"Calender",
+    },
+    // {
+    //     icon:"fa-solid fa-upload",
+    //     label:"Portfolio",
+    // },
+    // {
+    //     icon:"fa-solid fa-table-cells-large",
+    //     label:" Stock Position",
+    // },
+    // {
+    //     icon:"fa-solid fa-trophy",
+    //     label:"Dividends",
+    // },
+    // {
+    //     icon:"fa-solid fa-upload",
+    //     label:"Settings",
+    // }
 ]

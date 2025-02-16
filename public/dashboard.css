@@ -13,7 +13,7 @@
     display: flex;
     justify-content: flex-start;  /* Distribute items evenly */
     list-style-type: none;
-    padding-left: 290px;
+    padding-left: 195px;
     padding-bottom: 20px;
     padding-top: 20px;
     flex-wrap: wrap;  /* Allow wrapping for small screens */
