@@ -41,7 +41,7 @@ button {
 
 /* Month Container */
 .month-container {
-    margin-right: 2px;
+    margin-left: 20px;
     max-width: 500px; /* Minimum width for each month */
     width: 100%;
     border: 1px solid #ccc;
@@ -49,6 +49,11 @@ button {
     box-sizing: border-box;
     background-color: #f9f9f9;
 }
+.highlight-today {
+    border-radius: 50%;
+    color: #007BFF;
+}
+
 
 /* Month Name Styling */
 .month-name {
@@ -64,7 +69,6 @@ button {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 5px;
-    padding: 5px;
 }
 
 /* Calendar Day Styling */

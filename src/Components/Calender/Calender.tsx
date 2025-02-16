@@ -7,6 +7,11 @@ type Props = {};
 
 export const Calendar = (props: Props) => {
     const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
+    const currentDate = new Date(); // Get the current date
+    const currentDay = currentDate.getDate(); // Current day of the month
+    const currentMonth = currentDate.getMonth(); // Current month (0-indexed)
+    const currentYearGlobal = currentDate.getFullYear(); // Current year
+
 
     const monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -25,8 +30,12 @@ export const Calendar = (props: Props) => {
 
         // Fill the month with days
         for (let i = 1; i <= daysInMonth; i++) {
+            const isToday = currentYear === currentYearGlobal && monthIndex === currentMonth && i === currentDay;
             days.push(
-                <div key={i} className="calendar-day">
+                <div
+                    key={i}
+                    className={`calendar-day ${isToday ? 'highlight-today' : ''}`}
+                >
                     {i}
                 </div>
             );
