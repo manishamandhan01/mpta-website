@@ -21,7 +21,7 @@ export const DashboardData = [
         label:"Monthly Report",
     },
     {
-        icon:"fa-solid fa-newspaper",
+        icon:"fa-brands fa-searchengin",
         label:"Trade Review",
     },
 

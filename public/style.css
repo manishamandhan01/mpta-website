@@ -931,3 +931,41 @@ a {
 .mw-50{
     max-width: 50%;
 }
+.stock_id_table select{
+    width: 100%;
+    max-width: 200px; /* Set max-width for both elements */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+.stock_id_table label{
+    width: 100%;
+    max-width:80px; /* Set max-width for both elements */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+.stock_id_table button{
+    width: 100%;
+    max-width: 60px; /* Set max-width for both elements */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+.stock_id_table label {
+    flex: 1;
+    padding-right: 10px; /* Adjust spacing as needed */
+}
+
+.circle-btn {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    max-width: 50px;
+    max-height: 50px;
+    min-height: 50px;
+}
+.icon-large-30 {
+    font-size: 30px; /* Adjust this value to make it bigger or smaller */
+}
+.icon-large-20 {
+    font-size: 20px; /* Adjust this value to make it bigger or smaller */
+}
+.icon-black {
+    color: black; /* Sets the color to black */
+}
+
