@@ -305,3 +305,15 @@ table,th,td,tr{
 }
 
 /*trade-statistics*/
+
+/*.portfolio-card-container*/
+.portfolio-card-container{
+    border-radius: 20px;
+    /*padding: 20px;*/
+}
+.portfolio-table{
+}
+.top-10{
+    top: 10px;
+}
+/*.portfolio-card-container*/

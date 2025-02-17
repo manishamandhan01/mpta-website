@@ -9,6 +9,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 import {CandleChart} from "@Components/Charts/CandleChart.tsx";
 import {Dashboard} from "@Components/Dashboard/Dashboard.tsx";
 import {Calendar} from "@Components/Calender/Calender.tsx";
+import {Portfolio} from "@Components/Portfolio/Portfolio.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -44,6 +45,12 @@ function App() {
                     path:"calender",
                     element: (
                         <Calendar/>
+                    ),
+                },
+                {
+                    path:"portfolio",
+                    element: (
+                        <Portfolio/>
                     ),
                 },
 

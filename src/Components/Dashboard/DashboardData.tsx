@@ -13,8 +13,8 @@ export const DashboardData = [
         label:"Bank Transfers",
     },
     {
-        icon:"fa-solid fa-trophy",
-        label:"Trade Review",
+        icon:"fa-solid fa-address-card",
+        label:"Portfolio",
     },
     {
         icon:"fa-solid fa-upload",
