@@ -1,18 +1,14 @@
 /*dashboard-top_item*/
 .dashboard-top_item {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    height: auto;
-    padding: 1rem;
-
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dashboard-header {
     display: flex;
     align-items: center;
-    margin-right: 5px;
-    margin-left: 50px;
+
 }
 
 .dashboard-image {
@@ -28,32 +24,31 @@
 .dashboard-details-main{
     display: flex;
     flex-direction: row;
+    column-gap: 40px;
 }
 
-.dashboard-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding-left: 80px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    color: gray;
+/*.dashboard-details {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*    padding-left: 80px;*/
+/*    padding-bottom: 10px;*/
+/*    padding-top: 10px;*/
+/*    color: gray;*/
 
-}
+/*}*/
 
 .dashboard-heading {
     font-size: 18px;
     font-weight: normal;
     margin: 0;
 }
-.dashboard-side-icons{
+.dashboard-side-icons {
     display: flex;
-    flex-direction: row;
-    margin-left: 45px;
-    margin-right: -15px;
-    margin-top: 20px;
-    padding: 2px;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
 /*dashboard-top_item*/
 
@@ -315,5 +310,15 @@ table,th,td,tr{
 }
 .top-10{
     top: 10px;
+}
+.bank-icon>img{
+    width: 24px;
+
+    height: 24px;
+}
+
+.profit_Rate>div>div>.highcharts-root>.highcharts-data-labels   {
+    transform: translate(-13%, -26%);
+
 }
 /*.portfolio-card-container*/

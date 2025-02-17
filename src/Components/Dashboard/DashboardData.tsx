@@ -10,7 +10,7 @@ export const DashboardData = [
     },
     {
         icon:"fa-solid fa-table-cells-large",
-        label:"Bank Transfers",
+        label:"Bank Transfer",
     },
     {
         icon:"fa-solid fa-address-card",
@@ -22,12 +22,9 @@ export const DashboardData = [
     },
     {
         icon:"fa-solid fa-newspaper",
-        label:"Trade Log",
+        label:"Trade Review",
     },
-    {
-        icon:"fa-solid fa-table-cells-large",
-        label:"Bank Transfers",
-    },
+
     {
         icon:"fa-solid fa-trophy",
         label:"Calender",

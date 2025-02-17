@@ -10,6 +10,8 @@ import {CandleChart} from "@Components/Charts/CandleChart.tsx";
 import {Dashboard} from "@Components/Dashboard/Dashboard.tsx";
 import {Calendar} from "@Components/Calender/Calender.tsx";
 import {Portfolio} from "@Components/Portfolio/Portfolio.tsx";
+import {BankTransfer} from "@Components/BankTransfer/BankTransfer.tsx";
+import {TradeReview} from "@Components/TradeReview/TradeReview.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -51,6 +53,17 @@ function App() {
                     path:"portfolio",
                     element: (
                         <Portfolio/>
+                    ),
+                },
+                {
+                    path:"bank transfer",
+                    element: (
+                        <BankTransfer/>
+                    ),
+                },{
+                    path:"trade review",
+                    element: (
+                        <TradeReview/>
                     ),
                 },
 

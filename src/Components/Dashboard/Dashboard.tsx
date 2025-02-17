@@ -36,16 +36,18 @@ export const Dashboard = (props: Props) => {
                     </ul>
                 </div>
             </div>
-            <div className="dashboard-top_item ">
-                <div className="dashboard-header">
+            <div className="dashboard-top_item pe-5 ps-5 row ">
+                <div className="dashboard-header col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
                     <img src="/public/06-removebg-preview.png" alt="Logo" className="dashboard-image"/>
                     <h1 className="dashboard-title">Trading Journal</h1>
                 </div>
 
-                <div className="dashboard-details-main ">
+                <div className="dashboard-details-main col-xl-6 col-lg-12 col-md-12 col-sm-12 ">
                     <div className="dashboard-details ">
-                        <p className={"font_Epilogue heading-16 font_weight_500 total_gain_row"}>$ 4005890.50</p>
-                        <h1 className="font_poppins heading-16">BEG. BALANCE</h1>
+                        <div><p className={"font_Epilogue heading-16 font_weight_500 total_gain_row"}>$ 4005890.50</p>
+                        </div>
+                        <div><h1 className="font_poppins heading-16">BEG. BALANCE</h1></div>
+
                     </div>
                     <div className="dashboard-details ">
                         <p className={"font_Epilogue heading-16 font_weight_500 total_gain_row"}>$ 4005890.50</p>
@@ -63,22 +65,26 @@ export const Dashboard = (props: Props) => {
                         <p className={"font_Epilogue heading-16 font_weight_500 total_loss_row"}>$ 4005890.50</p>
                         <h1 className="font_poppins heading-16">CASH BALANCE</h1>
                     </div>
-                    <div className="dashboard-side-icons ">
-                        <i className="fa-solid fa-arrows-rotate "></i>
-                    </div>
-                    <div className="dashboard-side-icons ">
-                        <i className="fa-solid fa-house"></i>
-                    </div>
-                    <div className="dashboard-side-icons ">
-                        <i className="fa-solid fa-list-ul"></i>
-                    </div>
-                    <div className="dashboard-side-icons ">
-                        <i className="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
-                    <div className="dashboard-side-icons ">
-                        <i className="fa-solid fa-gear"></i>
-                    </div>
 
+                </div>
+                <div className="dashboard-side-icons  col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+
+
+                    <div className="">
+                        <i className="fa-solid fa-arrows-rotate heading-24"></i>
+                    </div>
+                    <div className="bank-icon ">
+                        {/*<i className="fa-solid fa-house heading-24"></i>*/}
+                        <img src="/public/bank.png" />                    </div>
+                    <div className=" ">
+                        <i className="fa-solid fa-list-ul heading-24"></i>
+                    </div>
+                    <div className=" ">
+                        <i className="fa-solid fa-hand-holding-dollar heading-24"></i>
+                    </div>
+                    <div className=" ">
+                        <i className="fa-solid fa-gear heading-24"></i>
+                    </div>
 
                 </div>
             </div>

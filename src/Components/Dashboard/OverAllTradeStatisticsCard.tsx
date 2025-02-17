@@ -117,22 +117,20 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
             type: 'pie',
             height: 180, // Set height for smaller pie chart size
             width: 180, // Set width for smaller pie chart size
-
         },
         title: {
-            text: '',
+            text: '', // Remove default title
         },
         tooltip: {},
         plotOptions: {
             pie: {
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}:{point.y}%', // Show name and percentage value
+                    format: '{point.name}: {point.y}%', // Show name and percentage value
                     style: {
                         color: 'black', // Text color for data labels
                         fontWeight: 'bold', // Make text bold
                         fontSize: '14px', // Font size of data labels
-
                     },
                     distance: -105, // Place the data label closer to the center
                 },
@@ -145,6 +143,22 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                 },
             },
         },
+        annotations: [{
+            labels: [{
+                point: {
+                    x: '100%', // X position (center of the pie)
+                    y: '100%', // Y position (center of the pie)
+                },
+                text: 'Profit Rate: ' + profitRatePercent + '%',
+                style: {
+                    fontSize: '14px', // Font size
+                    fontWeight: 'bold', // Bold text
+                    color: 'black', // Text color
+                    textAlign: 'center', // Center the text horizontally
+                    verticalAlign: 'middle', // Center the text vertically
+                }
+            }]
+        }],
         series: [
             {
                 name: 'Trade Statistics',
@@ -154,12 +168,12 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                     {
                         name: 'Profit Rate',
                         y: profitRatePercent,
-                        color: '#28a745', // Blue for profit rate
+                        color: '#28a745', // Green for profit rate
                     },
                     {
                         name: 'Non profit Rate',
                         y: 100 - profitRatePercent,
-                        color: '#B4B4B4', // Red for non-profit rate
+                        color: '#B4B4B4', // Gray for non-profit rate
                         dataLabels: {
                             enabled: false, // Hide text for Non profit Rate
                         },
@@ -168,6 +182,9 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
             },
         ],
     };
+
+
+
 
     return (
         <div className="col-xl-3 col-md-6 col-sm-12">
@@ -183,7 +200,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                         </div>
 
                         {/* Second pie chart (Profit Rate) */}
-                        <div className="col-6">
+                        <div className="col-6 profit_Rate ">
                             <HighchartsReact highcharts={Highcharts} options={profitRateChartOptions}/>
                         </div>
                     </div>
