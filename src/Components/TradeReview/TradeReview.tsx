@@ -3,6 +3,8 @@ import { DashboardData } from "@Components/Dashboard/DashboardData.tsx";
 import { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import {EntryExitTableWithChart} from "@Components/TradeReview/EntryExitTableWithChart.tsx";
+import {EmotionTableWithChart} from "@Components/TradeReview/EmotionTableWithChart.tsx";
 
 type Props = {};
 
@@ -106,7 +108,7 @@ export const TradeReview = (props: Props) => {
 
             <div>
                 <div className="d-flex align-items-center ms-4 p-3">
-                    <i className="fa-brands fa-searchengin"></i>
+                    <i className="fa-brands fa-searchengin heading-24"></i>
                     <p className="ps-2">Trade Review</p>
                 </div>
 
@@ -292,97 +294,22 @@ export const TradeReview = (props: Props) => {
                         <div className="portfolio-card-container position-relative box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-4">
-                                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10">
-                                        <tr>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Portfolio</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr className="background_grey_color">
-                                            <td>Total Bought value:</td>
-                                            <td>$</td>
-                                            <td>232,735</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Portfolio Trade Value:</td>
-                                            <td></td>
-                                            <td>242,400</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Total Equities Gain/Loss:</td>
-                                            <td>$</td>
-                                            <td>9,665</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Equities Gain/Loss%:</td>
-                                            <td></td>
-                                            <td>4.15%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Total Account Equity Value:</td>
-                                            <td>$</td>
-                                            <td>507,558</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+
+
+                                    <EntryExitTableWithChart/>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Card Five (Portfolio Forecast) */}
-                    <div className="col-xl-3 col-md-6 col-sm-12">
+                    <div className="col-xl-3 col-md-7 col-sm-12">
                         <div className="portfolio-card-container position-relative box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-4">
-                                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10">
-                                        <tr>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Portfolio
-                                                Forecast
-                                            </th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Worst Case
-                                                Scenario
-                                            </th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Best Case
-                                                Scenario
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr className="background_grey_color">
-                                            <td>Total Portfolio Trade Value:</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Equities Gain/Loss:</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Total Equities Gain/Loss%:</td>
-                                            <td></td>
-                                            <td>35%</td>
-                                            <td></td>
-                                            <td>35%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Account Equity Value:</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+
+
+                                    <EmotionTableWithChart/>
                                 </div>
                             </div>
                         </div>

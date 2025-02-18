@@ -321,4 +321,8 @@ table,th,td,tr{
     transform: translate(-13%, -26%);
 
 }
+
+.table-row-padding>td {
+    padding: 10px 0px !important;
+}
 /*.portfolio-card-container*/

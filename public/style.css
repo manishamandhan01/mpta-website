@@ -968,4 +968,11 @@ a {
 .icon-black {
     color: black; /* Sets the color to black */
 }
+.z-999{
 
+        z-index: 999;
+
+}
+.mw-75{
+    max-width: 75%;
+}

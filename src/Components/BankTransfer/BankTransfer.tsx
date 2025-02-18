@@ -6,6 +6,11 @@ type Props = {
     
 };
 export const BankTransfer = (props: Props) => {
+    const [realizedProfit, setTotalGainPer] = React.useState<number>(7892);
+    const [realizedLoss, setTotalLossPer] = React.useState<number>(794);
+    const total = realizedProfit + realizedLoss;
+    const profitPercentage = total ? (realizedProfit / total) * 100 : 0; // percentage of realized profit
+    const lossPercentage = total ? (realizedLoss / total) * 100 : 0; //
     return (
         <div className="pb-5" >
             {/*heading*/}
@@ -26,8 +31,9 @@ export const BankTransfer = (props: Props) => {
             </div>
             <div className="">
                 <div className="d-flex align-items-center ms-4 p-3">
-                    <i className="fa-solid fa-address-card "></i>
-                    <p className="ps-2">Portfolio</p>
+                    <div className="bank-icon ">
+                        <img className="heading-24" src="/public/bank.png"/></div>
+                    <p className="ps-2">Bank Transfers</p>
                 </div>
 
                 <div className="row col-12 m-auto mt-2">
@@ -36,43 +42,65 @@ export const BankTransfer = (props: Props) => {
                     <div className="col-xl-4 col-md-6 col-sm-12">
                         <div className="portfolio-card-container box-12 position-relative">
                             <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-4">
+                                <p>OVERALL PROFIT/LOSS</p>
+                                <div className="amounts mt-3    ">
+
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10" >
+                                        <thead className="">
                                         <tr>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Overall Profit/Loss</th>
-                                            {/*<th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>*/}
+
+                                            <th className="font_Epilogue "  style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue " colSpan={2}
+                                                style={{fontSize: '15px'}}>Profit
+                                            </th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Profit%</th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr className="background_grey_color">
-                                            <td>End Capital</td>
+                                            <td>Realized Profit</td>
                                             <td>$</td>
-                                            <td>5,214,700</td>
+                                            <td>90716</td>
+                                            <td>29.26%</td>
                                         </tr>
                                         <tr>
-                                            <td>Equity % to risk per trade (IR):</td>
-                                            <td></td>
-                                            <td>1.00%</td>
+                                            <td>Realized Loss</td>
+                                            <td>$</td>
+                                            <td>-45616</td>
+                                            <td>29.26%</td>
                                         </tr>
                                         <tr className="background_grey_color">
-                                            <td>Value at risk per trade (VAR):</td>
+                                            <td>Cash Dividend</td>
                                             <td>$</td>
-                                            <td>3,363</td>
+                                            <td>90716</td>
+                                            <td>-9.26%</td>
                                         </tr>
                                         <tr>
-                                            <td>Cash Balance</td>
-                                            <td></td>
-                                            <td>265,158</td>
+                                            <td>Realized P&L</td>
+                                            <td>$</td>
+                                            <td>90716</td>
+                                            <td>1.26%</td>
                                         </tr>
                                         <tr className="background_grey_color">
-                                            <td>Gain/Loss Preview Option:</td>
-                                            <td></td>
-                                            <td>Value</td>
+                                            <td>Realized Profit</td>
+                                            <td>$</td>
+                                            <td>90716</td>
+                                            <td>29.26%</td>
                                         </tr>
+
                                         </tbody>
                                     </table>
-
+                                    <div
+                                        className="profit-loss-bar mw-75 m-auto"
+                                        style={{
+                                            background: `linear-gradient(to right, green ${profitPercentage}%, red ${lossPercentage}%)`,
+                                            width: '100%',
+                                            height: '20px',
+                                            borderRadius: '1px',
+                                            marginTop: '3px',
+                                        }}
+                                    ></div>
 
                                 </div>
                             </div>
@@ -83,125 +111,76 @@ export const BankTransfer = (props: Props) => {
                     <div className="col-xl-8 col-md-7 col-sm-12">
                         <div className="portfolio-card-container   position-relative    box-12">
                             <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-4">
-                                    <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10" >
-                                        <tr>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Previous Cumulative</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Previous Cumulative</th>
+                                <div className="d-flex justify-content-between text-center mw-50 m-auto " >
+                                    <div><p>PREVIOUS CUMULATIVE</p><p>NOV-19</p></div>
+                                    <div><p>THIS PERIOD</p><p>NOV-19</p></div>
+                                    <div><p> CUMULATIVE</p><p>NOV-19</p></div>
 
+                                </div>
+
+                                <div className="amounts mt-4 d-flex flex-row">
+                                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
+                                        <thead>
+                                        <tr>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr className="background_grey_color">
-                                            <td>Total Bought value:</td>
+                                            <td>Total Deposits</td>
                                             <td>$</td>
-                                            <td>232,735</td>
+                                            <td>90716$</td>
+                                            <td>90716$</td>
+                                            <td>310,00</td>
                                         </tr>
-                                        <tr className="">
-                                            <td>Total Portfolio Trade Value:</td>
-                                            <td></td>
-                                            <td>242,400</td>
+                                        <tr>
+                                            <td>Total Withdrawals</td>
+                                            <td>$</td>
+                                            <td>90716$</td>
+                                            <td>90716$</td>
+                                            <td>310,00</td>
                                         </tr>
                                         <tr className="background_grey_color">
-                                            <td>Total Equities Gain/Loss:</td>
+                                            <td>Dividend</td>
                                             <td>$</td>
-                                            <td>9,665</td>
+                                            <td>90716$</td>
+                                            <td>90716$</td>
+                                            <td>310,00</td>
                                         </tr>
-                                        <tr className="">
-                                            <td>Total Equities Gain/Loss%:</td>
-                                            <td></td>
-                                            <td>4.15%</td>
+                                        <tr>
+                                            <td>Total Profit/Loss</td>
+                                            <td>$</td>
+                                            <td>90716$</td>
+                                            <td>90716$</td>
+                                            <td>310,00</td>
                                         </tr>
                                         <tr className="background_grey_color">
-                                            <td>Total Account Equity Value:</td>
+                                            <td>Total Equity</td>
                                             <td>$</td>
-                                            <td>507,558</td>
+                                            <td>90716$</td>
+                                            <td>90716$</td>
+                                            <td>310,00</td>
                                         </tr>
 
                                         </tbody>
                                     </table>
+                                    <div className=" ms-5 me-5">
+                                        <button className="circle-btn bg-light m-0"><i
+                                            className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
+                                        </button>
+                                        <button className="circle-btn bg-light m-0 mt-3"><i
+                                            className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/*card3*/}
 
-                    {/*<div className="col-xl-2 col-md-5 col-sm-12">*/}
-                    {/*    <div className="portfolio-card-container position-relative box-12">*/}
-                    {/*        <div className="dashboard-overall-performance-card">*/}
-                    {/*            <div className="amounts mt-2">*/}
-                    {/*                <p className="heading-20 font_Epilogue font_weight_400 mb-4">OPEN POSITION DATA</p>*/}
-                    {/*                <button className="btn  text-white bg-primary-300 font_weight_500 p-lg-2 m-auto"*/}
-                    {/*                        type="submit">Refresh*/}
-                    {/*                    <i className="fa-solid fa-arrows-rotate ms-4"></i>*/}
-                    {/*                </button>*/}
-                    {/*                <p className="heading-16 font_Epilogue font_weight_300 mt-5">Click Refresh To Update*/}
-                    {/*                    The Portfolio Data</p>*/}
-                    {/*            </div>*/}
-
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*Card4*/}
-                    {/*<div className="col-xl-4 col-md-6 col-sm-12">*/}
-                    {/*    <div className="portfolio-card-container position-relative box-12">*/}
-                    {/*        <div className="dashboard-overall-performance-card">*/}
-                    {/*            <div className="amounts  mt-4 ">*/}
-                    {/*                <table className="table mt-2  " style={{borderCollapse: 'collapse'}}>*/}
-                    {/*                    <thead className="position-absolute top-10" >*/}
-                    {/*                    <tr>*/}
-                    {/*                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Portfolio*/}
-                    {/*                            Forecast*/}
-                    {/*                        </th>*/}
-                    {/*                        <th className="font_Epilogue" style={{fontSize: '15px'}}></th>*/}
-                    {/*                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Worst Case*/}
-                    {/*                            Scenario*/}
-                    {/*                        </th>*/}
-                    {/*                        <th className="font_Epilogue" style={{fontSize: '15px'}}></th>*/}
-                    {/*                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Best Case*/}
-                    {/*                            Scenario*/}
-                    {/*                        </th>*/}
-
-                    {/*                    </tr>*/}
-                    {/*                    </thead>*/}
-                    {/*                    <tbody>*/}
-                    {/*                    <tr className="background_grey_color">*/}
-                    {/*                        <td>Total Portfolio Trade Value:</td>*/}
-                    {/*                        <td>$</td>*/}
-                    {/*                        <td>5214700</td>*/}
-                    {/*                        <td>$</td>*/}
-                    {/*                        <td>5214700</td>*/}
-                    {/*                    </tr>*/}
-                    {/*                    <tr className="">*/}
-                    {/*                        <td>Total Equities gain/Loss:</td>*/}
-                    {/*                        <td>$</td>*/}
-                    {/*                        <td>5214700</td>*/}
-                    {/*                        <td>$</td>*/}
-                    {/*                        <td>5214700</td>*/}
-                    {/*                    </tr>*/}
-                    {/*                    <tr className="background_grey_color">*/}
-                    {/*                        <td>Total Equities gain/Loss%:</td>*/}
-                    {/*                        <td></td>*/}
-                    {/*                        <td>35%</td>*/}
-                    {/*                        <td></td>*/}
-                    {/*                        <td>35%</td>*/}
-                    {/*                    </tr>*/}
-                    {/*                    <tr className="">*/}
-                    {/*                        <td>Total Account Equity Value:</td>*/}
-                    {/*                        <td>$</td>*/}
-                    {/*                        <td>5214700</td>*/}
-                    {/*                        <td>$</td>*/}
-                    {/*                        <td>5214700</td>*/}
-                    {/*                    </tr>*/}
-
-
-                    {/*                    </tbody>*/}
-                    {/*                </table>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
 
                 </div>
 

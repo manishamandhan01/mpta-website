@@ -31,7 +31,7 @@ export const Portfolio = (props: Props) => {
             </div>
             <div className="">
                 <div className="d-flex align-items-center ms-4 p-3">
-                    <i className="fa-solid fa-address-card "></i>
+                    <i className="fa-solid fa-address-card heading-24 "></i>
                     <p className="ps-2">Portfolio</p>
                 </div>
 
@@ -45,7 +45,7 @@ export const Portfolio = (props: Props) => {
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10" >
                                         <tr>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Account Name</th>
+                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}} >Account Name</th>
                                             <th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>
                                         </tr>
                                         </thead>
