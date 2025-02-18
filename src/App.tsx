@@ -12,6 +12,7 @@ import {Calendar} from "@Components/Calender/Calender.tsx";
 import {Portfolio} from "@Components/Portfolio/Portfolio.tsx";
 import {BankTransfer} from "@Components/BankTransfer/BankTransfer.tsx";
 import {TradeReview} from "@Components/TradeReview/TradeReview.tsx";
+import {StockPosition} from "@Components/StockPosition/StockPosition.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -64,6 +65,12 @@ function App() {
                     path:"trade review",
                     element: (
                         <TradeReview/>
+                    ),
+                },
+                {
+                    path:"stock position",
+                    element: (
+                        <StockPosition/>
                     ),
                 },
 

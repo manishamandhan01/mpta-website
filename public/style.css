@@ -976,3 +976,6 @@ a {
 .mw-75{
     max-width: 75%;
 }
+.overflow-x-auto{
+    overflow-x: auto;
+}

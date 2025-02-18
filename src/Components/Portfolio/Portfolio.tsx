@@ -38,7 +38,7 @@ export const Portfolio = (props: Props) => {
                 <div className="row col-12 m-auto mt-2">
                     {/*CardOne*/}
 
-                    <div className="col-xl-3 col-md-6 col-sm-12">
+                    <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div className="portfolio-card-container box-12 position-relative">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-4">
@@ -85,7 +85,7 @@ export const Portfolio = (props: Props) => {
                     </div>
 
                     {/*card2*/}
-                    <div className="col-xl-3 col-md-7 col-sm-12">
+                    <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
                         <div className="portfolio-card-container   position-relative    box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-4">
@@ -131,7 +131,7 @@ export const Portfolio = (props: Props) => {
                     </div>
                     {/*card3*/}
 
-                    <div className="col-xl-2 col-md-5 col-sm-12">
+                    <div className="col-xl-2 col-lg-6 col-md-5 col-sm-12">
                         <div className="portfolio-card-container position-relative box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-2">
@@ -148,8 +148,8 @@ export const Portfolio = (props: Props) => {
                         </div>
                     </div>
                     {/*Card4*/}
-                    <div className="col-xl-4 col-md-6 col-sm-12">
-                        <div className="portfolio-card-container position-relative box-12">
+                    <div className="col-xl-4  col-lg-6 col-md-6 col-sm-12">
+                        <div className="portfolio-card-container position-relative box-12 overflow-x-auto">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts  mt-4 ">
                                     <table className="table mt-2  " style={{borderCollapse: 'collapse'}}>

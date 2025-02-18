@@ -1,3 +1,5 @@
+import {StockPosition} from "@Components/StockPosition/StockPosition.tsx";
+
 export const DashboardData = [
     {
         icon:"fa-solid fa-gauge-high",
@@ -17,8 +19,8 @@ export const DashboardData = [
         label:"Portfolio",
     },
     {
-        icon:"fa-solid fa-upload",
-        label:"Monthly Report",
+        icon:"fa-solid fa-chart-column",
+        label:"Stock Position",
     },
     {
         icon:"fa-brands fa-searchengin",
