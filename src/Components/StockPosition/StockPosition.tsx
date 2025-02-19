@@ -239,18 +239,18 @@ export const StockPosition = (props: Props) => {
 
                                 </div>
 
-                                <div className="amounts mt-4 d-flex flex-row  ">
+                                <div className="amounts mt-4  mr-82 d-flex flex-row  ">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
                                         <thead >
                                         <tr>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Stock Code</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Profit</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Trade(Win%)</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Win Rate %</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Average Days</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Average Allocation</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Average Win%</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 ">Average Loss%</th>
+                                            <th className="  heading-20 font_Epilogue font_weight_400 mb-4 text-center  ">Stock Code</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Profit</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Trade(Win%)</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Win Rate %</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average Days</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average Allocation</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average Win%</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average Loss%</th>
                                         </tr>
                                         </thead>
                                         <tbody>
