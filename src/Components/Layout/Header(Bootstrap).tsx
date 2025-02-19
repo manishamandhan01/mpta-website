@@ -23,7 +23,7 @@ export const HeaderB = () => {
                             <a className="nav-link text_gray font_weight_400" href="#">About Us</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text_gray font_weight_400" href="#">Why Us?</a>
+                            <a className="nav-link text_gray font_weight_400" href="/dashboard">Demo</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text_gray font_weight_400" href="/charts" target="_blank">Products</a>
