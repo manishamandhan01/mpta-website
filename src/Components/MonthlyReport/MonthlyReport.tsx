@@ -182,7 +182,7 @@ export const MonthlyReport = (props: Props) => {
 
                     {/*card2*/}
                     <div className="col-xl-6 col-lg-12 col-md-6 col-sm-12">
-                        <div className="portfolio-card-container box-12 position-relative">
+                        <div className="portfolio-card-container box-12 position-relative overflow-x-auto">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-3 d-flex flex-row    ">
 

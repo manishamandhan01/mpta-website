@@ -35,6 +35,7 @@
     "react-tooltip": "^5.28.0",
     "sweetalert2": "^11.14.5",
     "vite-plugin-svgr": "^4.3.0",
+    "xlsx": "^0.18.5",
     "yarn": "^1.22.22"
   },
   "devDependencies": {

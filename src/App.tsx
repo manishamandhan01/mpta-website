@@ -14,6 +14,8 @@ import {BankTransfer} from "@Components/BankTransfer/BankTransfer.tsx";
 import {TradeReview} from "@Components/TradeReview/TradeReview.tsx";
 import {StockPosition} from "@Components/StockPosition/StockPosition.tsx";
 import {MonthlyReport} from "@Components/MonthlyReport/MonthlyReport.tsx";
+import ExcelToTable from "@Components/ExcelToTable.tsx";
+import {TradeLog} from "@Components/TradeLog/TradeLog.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -78,6 +80,18 @@ function App() {
                     path:"monthly report",
                     element: (
                         <MonthlyReport/>
+                    ),
+                },
+                {
+                    path:"excel",
+                    element: (
+                        <ExcelToTable/>
+                    ),
+                },
+                {
+                    path:"trade log",
+                    element: (
+                        <TradeLog/>
                     ),
                 },
 

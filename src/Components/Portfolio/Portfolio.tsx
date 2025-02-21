@@ -41,7 +41,7 @@ export const Portfolio = (props: Props) => {
                     <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div className="portfolio-card-container box-12 position-relative">
                             <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-4">
+                                <div className="amounts mt-5">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10" >
                                         <tr>
@@ -88,7 +88,7 @@ export const Portfolio = (props: Props) => {
                     <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
                         <div className="portfolio-card-container   position-relative    box-12">
                             <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-4">
+                                <div className="amounts mt-5">
                                     <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10" >
                                         <tr>
@@ -151,7 +151,7 @@ export const Portfolio = (props: Props) => {
                     <div className="col-xl-4  col-lg-6 col-md-6 col-sm-12">
                         <div className="portfolio-card-container position-relative box-12 overflow-x-auto">
                             <div className="dashboard-overall-performance-card">
-                                <div className="amounts  mt-4 ">
+                                <div className="amounts  mt-5 ">
                                     <table className="table mt-2  " style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10" >
                                         <tr>
