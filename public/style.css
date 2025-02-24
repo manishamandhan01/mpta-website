@@ -985,3 +985,7 @@ a {
 .bg-allicblue{
     background-color: aliceblue;
 }
+.tableBorderStyle {
+    border: 1px solid #ccc;
+    padding: 8px;
+}

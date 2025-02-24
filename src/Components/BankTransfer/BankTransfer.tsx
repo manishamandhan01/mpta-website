@@ -1,18 +1,38 @@
 // @flow 
 import * as React from 'react';
 import {DashboardData} from "@Components/Dashboard/DashboardData.tsx";
+import {BankTransferModel} from "@Components/Models/BankTransferModel.tsx";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+} from "@mui/material";
 
-type Props = {
-    
-};
+type Props = {};
+
+
+
+export const transactions: BankTransferModel[] = [
+    { date: "9/3/2017", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
+    { date: "1/1/2018", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
+    { date: "5/1/2019", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
+    { date: "12/1/2019", action: "Withdraw", grossAmount: "$50,000", fees: "", netAmount: "-$50,000" },
+    { date: "12/3/2019", action: "Deposit", grossAmount: "$10,000", fees: "", netAmount: "$10,000" },
+];
 export const BankTransfer = (props: Props) => {
     const [realizedProfit, setTotalGainPer] = React.useState<number>(7892);
     const [realizedLoss, setTotalLossPer] = React.useState<number>(794);
     const total = realizedProfit + realizedLoss;
     const profitPercentage = total ? (realizedProfit / total) * 100 : 0; // percentage of realized profit
     const lossPercentage = total ? (realizedLoss / total) * 100 : 0; //
+
+
     return (
-        <div className="pb-5" >
+        <div className="pb-5">
             {/*heading*/}
             <div>
                 <div className="ua_top_item">
@@ -49,7 +69,7 @@ export const BankTransfer = (props: Props) => {
                                         <thead className="">
                                         <tr>
 
-                                            <th className="font_Epilogue "  style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}></th>
                                             <th className="font_Epilogue " colSpan={2}
                                                 style={{fontSize: '15px'}}>Profit
                                             </th>
@@ -111,7 +131,7 @@ export const BankTransfer = (props: Props) => {
                     <div className="col-xl-8 col-md-7 col-sm-12">
                         <div className="portfolio-card-container   position-relative    box-12">
                             <div className="dashboard-overall-performance-card">
-                                <div className="d-flex justify-content-between text-center mw-50 m-auto " >
+                                <div className="d-flex justify-content-between text-center mw-50 m-auto ">
                                     <div><p>PREVIOUS CUMULATIVE</p><p>NOV-19</p></div>
                                     <div><p>THIS PERIOD</p><p>NOV-19</p></div>
                                     <div><p> CUMULATIVE</p><p>NOV-19</p></div>
@@ -182,6 +202,36 @@ export const BankTransfer = (props: Props) => {
                     </div>
 
 
+                </div>
+                <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead >
+                                <TableRow  style={{ backgroundColor: "#e0e0e0" }}>
+                                    <TableCell className={"text-center p-2"} ><b>S.No.</b></TableCell>
+                                    <TableCell className={"text-center p-2"} ><b>DATE</b></TableCell>
+                                    <TableCell className={"text-center"} ><b>ACTION</b></TableCell>
+                                    <TableCell className={"text-center"} ><b>GROSS AMOUNT</b></TableCell>
+                                    <TableCell className={"text-center"} ><b>FEES</b></TableCell>
+                                    <TableCell className={"text-center"} ><b>NET AMOUNT</b></TableCell>
+                                    <TableCell className={"text-center"} ><b>NOTES</b></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {transactions.map((row, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell className={" tableBorderStyle text-center p-2 "} style={{width:"0.1%"}}>{index + 1}</TableCell>
+                                        <TableCell  className={" tableBorderStyle text-center p-2 "} style={{width:"10%"}} >{row.date}</TableCell>
+                                        <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}}  >{row.action}</TableCell>
+                                        <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}} >{row.grossAmount}</TableCell>
+                                        <TableCell className={"text-center tableBorderStyle"} style={{width:"5%"}}  >{row.fees}</TableCell>
+                                        <TableCell className={"background_grey_color text-center tableBorderStyle"} style={{width:"10%"}} >{row.netAmount}</TableCell>
+                                        <TableCell className={"text-center tableBorderStyle"}style={{width:"25%"}} >{row.notes || ""}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </div>
 
             </div>
