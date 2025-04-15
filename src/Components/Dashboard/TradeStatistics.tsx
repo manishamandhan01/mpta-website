@@ -28,7 +28,7 @@ export const TradeStatistics = (props: Props) => {
     // Fetch data from the backend and update the state
     const fetchTradeStatistics = () => {
         fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

@@ -13,7 +13,7 @@ export const DistributionGainLossBar = (props: Props) => {
     const DistributionGainLossBar = () => {
         // Make the API call on mount
         fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

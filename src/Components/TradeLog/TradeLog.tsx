@@ -6,13 +6,44 @@ import {DistributionGainLossBar} from "@Components/Dashboard/DistributionGainLos
 import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import TradeDataGrid, {TradeRow} from "@Components/DataGrid/DataGrid.tsx";
+import {useEffect, useState} from "react";
 
 type Props = {
 
 };
 export const TradeLog = (props: Props) => {
+
+    const [tradeRows, setTradeRows] = useState<TradeRow[]>([]);
+
+    const [topStockPositionsByAllocation, setTopStockPositionsByAllocation] = useState([]);
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tradeRows)
+        })
+            .then(res => res.json())
+            .then(json => {
+                setTopStockPositionsByAllocation(json['top_5_stock_positions_by_allocation']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
+
+    const handleTradeRowsChange = (rows: TradeRow[]) => {
+        console.log("Updated trade rows from TradeDataGrid", rows);
+        setTradeRows(rows);
+    };
     // Data retrieved from https://netmarketshare.com/
-// Make monochrome colors
+    // Make monochrome colors
     const colors = Highcharts.getOptions().colors.map((c, i) =>
         // Start out with a darkened base color (negative brighten), and end
         // up with a much brighter color
@@ -98,9 +129,11 @@ export const TradeLog = (props: Props) => {
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10" >
+                                        <thead className="position-absolute top-10">
                                         <tr>
-                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}} >Account Name</th>
+                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}}>Account
+                                                Name
+                                            </th>
                                             <th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>
                                         </tr>
                                         </thead>
@@ -184,41 +217,30 @@ export const TradeLog = (props: Props) => {
 
 
                                         <tbody>
-                                        <tr className="background_grey_color">
-                                            <td>20.0%</td>
-                                            <td>BILL</td>
-                                            <td>232,735</td>
-                                            <td>232</td>
-                                            <td>14200</td>
-                                        </tr>
-                                        <tr className="">
-                                            <td>20.0%</td>
-                                            <td>BILL</td>
-                                            <td>232,735</td>
-                                            <td>232</td>
-                                            <td>14200</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>20.0%</td>
-                                            <td>BILL</td>
-                                            <td>232,735</td>
-                                            <td>232</td>
-                                            <td>14200</td>
-                                        </tr>
-                                        <tr className="">
-                                            <td>20.0%</td>
-                                            <td>BILL</td>
-                                            <td>232,735</td>
-                                            <td>232</td>
-                                            <td>14200</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>20.0%</td>
-                                            <td>BILL</td>
-                                            <td>232,735</td>
-                                            <td>232</td>
-                                            <td>14200</td>
-                                        </tr>
+                                        {topStockPositionsByAllocation?.length > 0 ? (
+                                            topStockPositionsByAllocation.map((stock, index) => (
+                                                <tr className="background_grey_color" key={index}>
+                                                    <td>{stock['weight_percentage'] ?? 'N/A'}</td>
+                                                    <td>{stock['symbol'] ?? 'N/A'}</td>
+                                                    <td>{stock['average_price'] ?? 'N/A'}</td>
+                                                    <td>{stock['total_shares'] ?? 'N/A'}</td>
+                                                    <td>{stock['amount'] ?? 'N/A'}</td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={5}>Loading or No Data</td>
+                                            </tr>
+                                        )}
+
+                                        {/*<tr className="background_grey_color">*/}
+                                        {/*    <td>{topStockPositionsByAllocation?.[0]?.['weight%'] ?? 'N/A'}</td>*/}
+                                        {/*    /!*<td>21</td>*!/*/}
+                                        {/*    <td>BILL</td>*/}
+                                        {/*    <td>232,735</td>*/}
+                                        {/*    <td>232</td>*/}
+                                        {/*    <td>14200</td>*/}
+                                        {/*</tr>*/}
 
                                         </tbody>
                                     </table>
@@ -235,7 +257,9 @@ export const TradeLog = (props: Props) => {
                                     <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10">
                                         <tr>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>SL & TP Calculator</th>
+                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>SL & TP
+                                                Calculator
+                                            </th>
                                             <th className="font_Epilogue " style={{fontSize: '15px'}}><i
                                                 className="fa-solid fa-gear heading-24 "></i></th>
 
@@ -243,8 +267,12 @@ export const TradeLog = (props: Props) => {
                                         </thead>
                                         <thead>
                                         <tr>
-                                            <th className="font_Epilogue text-center" style={{fontSize: '15px'}}>Stop Loss</th>
-                                            <th className="font_Epilogue text-center " style={{fontSize: '15px'}}>Target Price</th>
+                                            <th className="font_Epilogue text-center" style={{fontSize: '15px'}}>Stop
+                                                Loss
+                                            </th>
+                                            <th className="font_Epilogue text-center " style={{fontSize: '15px'}}>Target
+                                                Price
+                                            </th>
 
                                         </tr>
 
@@ -304,8 +332,12 @@ export const TradeLog = (props: Props) => {
 
                 </div>
 
+                <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
+                    <TradeDataGrid onRowsChange={handleTradeRowsChange}/>
+                </div>
+
+                </div>
             </div>
-        </div>
-    );
-};
+            );
+            };
 

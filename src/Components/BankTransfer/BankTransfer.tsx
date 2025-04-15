@@ -11,6 +11,7 @@ import {
     TableRow,
     Paper,
 } from "@mui/material";
+import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
 
 type Props = {};
 
@@ -204,6 +205,7 @@ export const BankTransfer = (props: Props) => {
 
                 </div>
                 <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
+
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead >

@@ -23,7 +23,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
     // Fetching data
     const overAllPerformanceData = () => {
         fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

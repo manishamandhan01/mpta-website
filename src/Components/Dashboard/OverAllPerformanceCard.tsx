@@ -17,10 +17,10 @@ export const OverAllPerformanceCard = (props: Props) => {
 
     useEffect(() => {
         fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            },
+            }
         })
             .then((res) => res.json())
             .then((json) => {
