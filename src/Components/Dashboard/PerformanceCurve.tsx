@@ -2,20 +2,16 @@ import * as React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useEffect } from "react";
+import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 export const PerformanceCurve = (props: Props) => {
+    const {tradeRows} = useGlobalStore()
     const [equitygraph, setEquitygraph] = React.useState<number[]>([]);
 
     const PerformanceCurve = () => {
-        fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => res.json())
+        fetchTradeResults(tradeRows)
             .then((json) => {
                 const overallPerformance = json['overall_performance'];
                 setEquitygraph(overallPerformance['equity']);

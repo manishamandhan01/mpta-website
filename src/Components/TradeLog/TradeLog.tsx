@@ -6,28 +6,22 @@ import {DistributionGainLossBar} from "@Components/Dashboard/DistributionGainLos
 import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import TradeDataGrid, {TradeRow} from "@Components/DataGrid/DataGrid.tsx";
+import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
 import {useEffect, useState} from "react";
+import {fetchTradeResults, TradeRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {
 
 };
 export const TradeLog = (props: Props) => {
 
-    const [tradeRows, setTradeRows] = useState<TradeRow[]>([]);
+    const {tradeRows, setTradeRows} = useGlobalStore();
 
     const [topStockPositionsByAllocation, setTopStockPositionsByAllocation] = useState([]);
 
     // Fetching data
     const overAllPerformanceData = () => {
-        fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(tradeRows)
-        })
-            .then(res => res.json())
+        fetchTradeResults(tradeRows)
             .then(json => {
                 setTopStockPositionsByAllocation(json['top_5_stock_positions_by_allocation']);
             })

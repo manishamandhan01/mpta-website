@@ -1,27 +1,9 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {TradeRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
-export type TradeRow = {
-    id: number;
-    date: string;
-    ticker: string;
-    action: string;
-    price: number;
-    volume: number;
-    over_write_fees: number;
-    fees: number;
-    netAmount: number;
-    avePrice: number;
-    profit: number;
-    percentProfit: string;
-    days: number;
-    rmul: string;
-    equity: number;
-    setup: string;
-    reason: string;
-    notes: string;
-};
+
 
 type TradeDataGridProps = {
     onRowsChange?: (rows: TradeRow[]) => void;
@@ -48,7 +30,7 @@ const columns: GridColDef<TradeRow>[] = [
 ];
 
 const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
-    const [rows, setRows] = useState<TradeRow[]>([]);
+    const {tradeRows, setTradeRows} = useGlobalStore();
     const [showPasteBox, setShowPasteBox] = useState(false);
     const [pasteText, setPasteText] = useState('');
 
@@ -77,16 +59,16 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
                 notes: values[16] || ''
             };
         });
-        const updatedRows = [...rows, ...newRows];
-        setRows(updatedRows);
+        const updatedRows = [...tradeRows, ...newRows];
+        setTradeRows(updatedRows);
         setPasteText('');
         setShowPasteBox(false);
         onRowsChange?.(updatedRows);
     };
 
     const handleRowUpdate = (newRow: TradeRow) => {
-        const updated = rows.map((r) => (r.id === newRow.id ? newRow : r));
-        setRows(updated);
+        const updated = tradeRows.map((r) => (r.id === newRow.id ? newRow : r));
+        setTradeRows(updated);
         onRowsChange?.(updated); // 👈 Update parent
         return newRow;
     };
@@ -118,7 +100,7 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
 
             <Box sx={{ height: 600, width: '100%' }}>
                 <DataGrid
-                    rows={rows}
+                    rows={tradeRows}
                     columns={columns}
                     processRowUpdate={handleRowUpdate}
                     pageSizeOptions={[5, 10, 20]}

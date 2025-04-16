@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect } from "react";
 import {PerformancePeriod, QuarterlyPnl} from "@Components/Utils/Constants.tsx";
+import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 
 
@@ -9,7 +10,7 @@ import {PerformancePeriod, QuarterlyPnl} from "@Components/Utils/Constants.tsx";
 type Props = {};
 
 export const TradeStatistics = (props: Props) => {
-
+    const {tradeRows} = useGlobalStore();
     const [winRatePercentage, setWinRatePercentage] = React.useState(0);
     const [largestProfit, setLargestProfit] = React.useState(0);
     const [largestLoss, setLargestLoss] = React.useState(0);
@@ -27,13 +28,7 @@ export const TradeStatistics = (props: Props) => {
 
     // Fetch data from the backend and update the state
     const fetchTradeStatistics = () => {
-        fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => res.json())
+        fetchTradeResults(tradeRows)
             .then((json) => {
                 const trade_statistics = json['trade_statistics'];
                 setWinRatePercentage(trade_statistics.win_rate_percentage);

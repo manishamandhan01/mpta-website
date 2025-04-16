@@ -2,11 +2,13 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import HighchartsMore from 'highcharts/highcharts-more'; // Importing highcharts-more
+import HighchartsMore from 'highcharts/highcharts-more';
+import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx"; // Importing highcharts-more
 
 type Props = {};
 
 export const OverAllTradeStatisticsCard = (props: Props) => {
+    const {tradeRows} = useGlobalStore();
     const [winRatePercent, setWinRatePercent] = React.useState(0);
     const [profitRatePercent, setProfitRatePercent] = React.useState(0);
     const [winTrades, setWinTrades] = React.useState(0);
@@ -22,13 +24,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
 
     // Fetching data
     const overAllPerformanceData = () => {
-        fetch('http://localhost:8000/dashboard/overall_performance/get_results?format=json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(res => res.json())
+        fetchTradeResults(tradeRows)
             .then(json => {
                 const overall_trade_statistics = json['overall_trade_statistics'];
                 const trade_statistics = json['trade_statistics'];

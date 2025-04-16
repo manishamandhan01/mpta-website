@@ -3,8 +3,6 @@ import * as React from 'react';
 import {DashboardData} from "@Components/Dashboard/DashboardData.tsx";
 import 'font-awesome/css/font-awesome.min.css';
 import {OverAllPerformanceCard} from "@Components/Dashboard/OverAllPerformanceCard.tsx";
-import {DasboardPnlGraph} from "@Components/Dashboard/DasboardPNLGraph.tsx";
-import {DasboardAccountSummary} from "@Components/Dashboard/DasboardAccountSummary.tsx";
 import {DistributionGainLossBar} from "@Components/Dashboard/DistributionGainLossBar.tsx";
 import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 import {PerformancePerRecord} from "@Components/Dashboard/PerformancePerRecord.tsx";
@@ -13,7 +11,6 @@ import {PerformanceCurve} from "@Components/Dashboard/PerformanceCurve.tsx";
 import {WeeklyPerformanceCurve} from "@Components/Dashboard/WeeklyPerformanceCurve.tsx";
 import {DrawnAndLosingStreak} from "@Components/Dashboard/DrawnAndLosingStreak.tsx";
 import {RequiredWinRate} from "@Components/Dashboard/RequiredWinRate.tsx";
-import {useLocation} from "react-router-dom";
 
 type Props = {};
 
