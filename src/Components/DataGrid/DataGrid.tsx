@@ -59,7 +59,7 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
                 notes: values[16] || ''
             };
         });
-        const updatedRows = [...tradeRows, ...newRows];
+        const updatedRows = [...newRows];
         setTradeRows(updatedRows);
         setPasteText('');
         setShowPasteBox(false);

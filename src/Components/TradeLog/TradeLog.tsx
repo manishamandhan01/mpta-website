@@ -34,7 +34,7 @@ export const TradeLog = (props: Props) => {
 
     const handleTradeRowsChange = (rows: TradeRow[]) => {
         console.log("Updated trade rows from TradeDataGrid", rows);
-        setTradeRows(rows);
+        // setTradeRows(rows);
     };
     // Data retrieved from https://netmarketshare.com/
     // Make monochrome colors

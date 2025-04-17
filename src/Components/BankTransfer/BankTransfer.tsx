@@ -12,6 +12,7 @@ import {
     Paper,
 } from "@mui/material";
 import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
+import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
 
 type Props = {};
 
@@ -205,35 +206,36 @@ export const BankTransfer = (props: Props) => {
 
                 </div>
                 <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
+                    <BankTransferDataGrid />
 
-                    <TableContainer component={Paper}>
-                        <Table>
-                            <TableHead >
-                                <TableRow  style={{ backgroundColor: "#e0e0e0" }}>
-                                    <TableCell className={"text-center p-2"} ><b>S.No.</b></TableCell>
-                                    <TableCell className={"text-center p-2"} ><b>DATE</b></TableCell>
-                                    <TableCell className={"text-center"} ><b>ACTION</b></TableCell>
-                                    <TableCell className={"text-center"} ><b>GROSS AMOUNT</b></TableCell>
-                                    <TableCell className={"text-center"} ><b>FEES</b></TableCell>
-                                    <TableCell className={"text-center"} ><b>NET AMOUNT</b></TableCell>
-                                    <TableCell className={"text-center"} ><b>NOTES</b></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {transactions.map((row, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell className={" tableBorderStyle text-center p-2 "} style={{width:"0.1%"}}>{index + 1}</TableCell>
-                                        <TableCell  className={" tableBorderStyle text-center p-2 "} style={{width:"10%"}} >{row.date}</TableCell>
-                                        <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}}  >{row.action}</TableCell>
-                                        <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}} >{row.grossAmount}</TableCell>
-                                        <TableCell className={"text-center tableBorderStyle"} style={{width:"5%"}}  >{row.fees}</TableCell>
-                                        <TableCell className={"background_grey_color text-center tableBorderStyle"} style={{width:"10%"}} >{row.netAmount}</TableCell>
-                                        <TableCell className={"text-center tableBorderStyle"}style={{width:"25%"}} >{row.notes || ""}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    {/*<TableContainer component={Paper}>*/}
+                    {/*    <Table>*/}
+                    {/*        <TableHead >*/}
+                    {/*            <TableRow  style={{ backgroundColor: "#e0e0e0" }}>*/}
+                    {/*                <TableCell className={"text-center p-2"} ><b>S.No.</b></TableCell>*/}
+                    {/*                <TableCell className={"text-center p-2"} ><b>DATE</b></TableCell>*/}
+                    {/*                <TableCell className={"text-center"} ><b>ACTION</b></TableCell>*/}
+                    {/*                <TableCell className={"text-center"} ><b>GROSS AMOUNT</b></TableCell>*/}
+                    {/*                <TableCell className={"text-center"} ><b>FEES</b></TableCell>*/}
+                    {/*                <TableCell className={"text-center"} ><b>NET AMOUNT</b></TableCell>*/}
+                    {/*                <TableCell className={"text-center"} ><b>NOTES</b></TableCell>*/}
+                    {/*            </TableRow>*/}
+                    {/*        </TableHead>*/}
+                    {/*        <TableBody>*/}
+                    {/*            {transactions.map((row, index) => (*/}
+                    {/*                <TableRow key={index}>*/}
+                    {/*                    <TableCell className={" tableBorderStyle text-center p-2 "} style={{width:"0.1%"}}>{index + 1}</TableCell>*/}
+                    {/*                    <TableCell  className={" tableBorderStyle text-center p-2 "} style={{width:"10%"}} >{row.date}</TableCell>*/}
+                    {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}}  >{row.action}</TableCell>*/}
+                    {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}} >{row.grossAmount}</TableCell>*/}
+                    {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"5%"}}  >{row.fees}</TableCell>*/}
+                    {/*                    <TableCell className={"background_grey_color text-center tableBorderStyle"} style={{width:"10%"}} >{row.netAmount}</TableCell>*/}
+                    {/*                    <TableCell className={"text-center tableBorderStyle"}style={{width:"25%"}} >{row.notes || ""}</TableCell>*/}
+                    {/*                </TableRow>*/}
+                    {/*            ))}*/}
+                    {/*        </TableBody>*/}
+                    {/*    </Table>*/}
+                    {/*</TableContainer>*/}
                 </div>
 
             </div>
