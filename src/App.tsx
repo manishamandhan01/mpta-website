@@ -17,6 +17,7 @@ import {MonthlyReport} from "@Components/MonthlyReport/MonthlyReport.tsx";
 import ExcelToTable from "@Components/ExcelToTable.tsx";
 import {TradeLog} from "@Components/TradeLog/TradeLog.tsx";
 import {Dividends} from "@Components/Dividends/Dividends.tsx";
+import TradeResultsUpdater from "@Components/DataGrid/TradeResultUpdater.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -110,7 +111,7 @@ function App() {
 
   return (
     <>
-
+        <TradeResultsUpdater />
             {context}
 
     </>

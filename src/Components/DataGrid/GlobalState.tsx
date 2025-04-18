@@ -67,7 +67,13 @@ export const useGlobalStore = create<GlobalState>()(
     )
 );
 
-export const fetchTradeResults = async (tradeRows: any[]) => {
+export type CombinedRows = {
+    tradeRows: TradeRow[];
+    bankTransferRows: BankTransferRow[];
+    dividendRows: DividendRow[];
+}
+
+export const fetchTradeResults = async (tradeRows: TradeRow[], combinedRows?: CombinedRows) => {
     const response = await fetch(
         'http://localhost:8000/dashboard/overall_performance/get_results?format=json',
         {
