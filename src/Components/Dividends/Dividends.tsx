@@ -6,6 +6,8 @@ import {DistributionGainLossBar} from "@Components/Dashboard/DistributionGainLos
 import {OverAllTradeStatisticsCard} from "@Components/Dashboard/OverAllTradeStatisticsCard.tsx";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
+import DividendDataGrid from "@Components/DataGrid/DividendDataGrid.tsx";
 
 type Props = {
     
@@ -43,9 +45,11 @@ export const Dividends = (props: Props) => {
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10" >
+                                        <thead className="position-absolute top-10">
                                         <tr>
-                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}} >Account Name</th>
+                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}}>Account
+                                                Name
+                                            </th>
                                             <th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>
                                         </tr>
                                         </thead>
@@ -107,7 +111,7 @@ export const Dividends = (props: Props) => {
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10" >
+                                        <thead className="position-absolute top-10">
                                         <tr>
                                             <th className="font_Epilogue " style={{fontSize: '15px'}}>Symbol</th>
                                             <th className="font_Epilogue " style={{fontSize: '15px'}}>Count</th>
@@ -117,8 +121,8 @@ export const Dividends = (props: Props) => {
                                         </thead>
                                         <tbody>
                                         <tr className="background_grey_color">
-                                            <td>Total </td>
-                                            <td>1 </td>
+                                            <td>Total</td>
+                                            <td>1</td>
                                             <td>$</td>
                                             <td>232,735</td>
                                         </tr>
@@ -168,9 +172,13 @@ export const Dividends = (props: Props) => {
 
                 </div>
 
+                <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
+                    <DividendDataGrid/>
+                </div>
+
+                </div>
             </div>
-        </div>
-    );
-};
+            );
+            };
 
 

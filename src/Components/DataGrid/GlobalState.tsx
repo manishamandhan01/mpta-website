@@ -33,11 +33,21 @@ export type BankTransferRow = {
     notes: string;
 }
 
+export type DividendRow = {
+    id: number;
+    symbol: string;
+    dividendType: string;
+    dateReceived: string;
+    amountReceived: number;
+}
+
 interface GlobalState {
     tradeRows: TradeRow[];
     setTradeRows: (tradeRows: TradeRow[]) => void;
     bankTransferRows: BankTransferRow[];
     setBankTransferRows: (bankTransferRows: BankTransferRow[]) => void;
+    dividendRows: DividendRow[];
+    setDividendRows: (dividendRows: DividendRow[]) => void;
 }
 
 export const useGlobalStore = create<GlobalState>()(
@@ -47,6 +57,8 @@ export const useGlobalStore = create<GlobalState>()(
             setTradeRows: (tradeRows) => set({ tradeRows }),
             bankTransferRows: [],
             setBankTransferRows: (bankTransferRows) => set({ bankTransferRows }),
+            dividendRows: [],
+            setDividendRows: (dividendRows) => set({ dividendRows }),
         }),
         {
             name: 'trade_rows_data', // 🔑 key used in localStorage
