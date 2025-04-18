@@ -23,6 +23,10 @@ export const DashboardData = [
         label:"Stock Position",
     },
     {
+        icon:"fa-solid fa-hand-holding-dollar",
+        label:"Dividends",
+    },
+    {
         icon:"fa-brands fa-searchengin",
         label:"Trade Review",
     },

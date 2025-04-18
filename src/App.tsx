@@ -16,6 +16,7 @@ import {StockPosition} from "@Components/StockPosition/StockPosition.tsx";
 import {MonthlyReport} from "@Components/MonthlyReport/MonthlyReport.tsx";
 import ExcelToTable from "@Components/ExcelToTable.tsx";
 import {TradeLog} from "@Components/TradeLog/TradeLog.tsx";
+import {Dividends} from "@Components/Dividends/Dividends.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -57,6 +58,12 @@ function App() {
                     path:"portfolio",
                     element: (
                         <Portfolio/>
+                    ),
+                },
+                {
+                    path:"dividends",
+                    element: (
+                        <Dividends/>
                     ),
                 },
                 {
