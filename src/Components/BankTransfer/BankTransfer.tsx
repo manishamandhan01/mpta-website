@@ -13,24 +13,41 @@ import {
 } from "@mui/material";
 import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
 import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
+import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useEffect, useState} from "react";
 
 type Props = {};
 
 
-
-export const transactions: BankTransferModel[] = [
-    { date: "9/3/2017", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
-    { date: "1/1/2018", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
-    { date: "5/1/2019", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
-    { date: "12/1/2019", action: "Withdraw", grossAmount: "$50,000", fees: "", netAmount: "-$50,000" },
-    { date: "12/3/2019", action: "Deposit", grossAmount: "$10,000", fees: "", netAmount: "$10,000" },
-];
+//
+// export const transactions: BankTransferModel[] = [
+//     { date: "9/3/2017", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
+//     { date: "1/1/2018", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
+//     { date: "5/1/2019", action: "Deposit", grossAmount: "$100,000", fees: "", netAmount: "$100,000" },
+//     { date: "12/1/2019", action: "Withdraw", grossAmount: "$50,000", fees: "", netAmount: "-$50,000" },
+//     { date: "12/3/2019", action: "Deposit", grossAmount: "$10,000", fees: "", netAmount: "$10,000" },
+// ];
 export const BankTransfer = (props: Props) => {
+    const {tradeRows, setTradeRows} = useGlobalStore();
+
+    const {bankTransferRows, setBankTransferRows} = useGlobalStore();
+    const [bankTransferCummulatives, setBankTransferCummulatives] = useState([]);
     const [realizedProfit, setTotalGainPer] = React.useState<number>(7892);
     const [realizedLoss, setTotalLossPer] = React.useState<number>(794);
     const total = realizedProfit + realizedLoss;
     const profitPercentage = total ? (realizedProfit / total) * 100 : 0; // percentage of realized profit
     const lossPercentage = total ? (realizedLoss / total) * 100 : 0; //
+    const overAllPerformanceData = () => {
+        fetchTradeResults(tradeRows)
+            .then(json => {
+                setBankTransferCummulatives(json['bank_transfer_cummulatives']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [bankTransferRows]);
 
 
     return (
@@ -151,41 +168,18 @@ export const BankTransfer = (props: Props) => {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr className="background_grey_color">
-                                            <td>Total Deposits</td>
-                                            <td>$</td>
-                                            <td>90716$</td>
-                                            <td>90716$</td>
-                                            <td>310,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Withdrawals</td>
-                                            <td>$</td>
-                                            <td>90716$</td>
-                                            <td>90716$</td>
-                                            <td>310,00</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Dividend</td>
-                                            <td>$</td>
-                                            <td>90716$</td>
-                                            <td>90716$</td>
-                                            <td>310,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Profit/Loss</td>
-                                            <td>$</td>
-                                            <td>90716$</td>
-                                            <td>90716$</td>
-                                            <td>310,00</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Total Equity</td>
-                                            <td>$</td>
-                                            <td>90716$</td>
-                                            <td>90716$</td>
-                                            <td>310,00</td>
-                                        </tr>
+                                        {bankTransferCummulatives?.length > 0 ? (
+                                            bankTransferCummulatives.map((stock, index) => (
+                                                <tr className="background_grey_color" key={index}>
+                                                    <td>{stock['deposit']?? 'N/A'}</td>
+
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={5}>Loading or No Data</td>
+                                            </tr>
+                                        )}
 
                                         </tbody>
                                     </table>

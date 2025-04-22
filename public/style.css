@@ -402,10 +402,10 @@ a {
 
 /*calculator*/
 .calculator_main_table {
-    background-color: #cfe8fc;
+    background-color:#f4faff;
     padding-top: 20px;
     margin-bottom: 40px;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .textarea_ticker {

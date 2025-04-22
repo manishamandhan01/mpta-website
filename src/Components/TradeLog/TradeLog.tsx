@@ -17,7 +17,9 @@ export const TradeLog = (props: Props) => {
 
     const {tradeRows, setTradeRows} = useGlobalStore();
 
+
     const [topStockPositionsByAllocation, setTopStockPositionsByAllocation] = useState([]);
+    const[activeLabel, setActiveLabel] = React.useState<string | null>("Trade Log");
 
     // Fetching data
     const overAllPerformanceData = () => {
@@ -56,7 +58,7 @@ export const TradeLog = (props: Props) => {
             height: 300  //
         },
         title: {
-            text: 'Portfolio'
+            text: ''
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -92,17 +94,148 @@ export const TradeLog = (props: Props) => {
         }]
     };
     return (
-        <div className="pb-5" >
-            {/*heading*/}
+        <div className="pb-5">
+            <div className="dashboard-top_item pe-5 ps-5 row ">
+                <div className="dashboard-top_item">
+                    <div className="dashboard-header col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                        <div className="vertical-line me-2"></div>
+
+
+                        <h1 className=" font_poppins font_weight_500 heading-20 line_height_24">Manisha Mandhan</h1>
+                    </div>
+                    <div className="dashboard-side-icons  col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+
+
+                        <div className="">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2.06672 9.83334L1.62671 10.2767C1.74376 10.3927 1.9019 10.4578 2.06672 10.4578C2.23153 10.4578 2.38967 10.3927 2.50672 10.2767L2.06672 9.83334ZM3.90672 8.88834C4.02452 8.77142 4.09105 8.6125 4.09167 8.44653C4.0923 8.28056 4.02696 8.12114 3.91005 8.00334C3.85216 7.94501 3.78334 7.89866 3.70754 7.86692C3.63173 7.83519 3.55042 7.81869 3.46824 7.81838C3.30227 7.81776 3.14285 7.88309 3.02505 8.00001L3.90672 8.88834ZM1.10672 8.00001C0.988375 7.88656 0.830199 7.82415 0.666276 7.82622C0.502353 7.8283 0.345809 7.8947 0.230381 8.01111C0.114954 8.12752 0.0498856 8.28462 0.0491998 8.44856C0.048514 8.61249 0.112266 8.77013 0.226715 8.88751L1.10672 8.00001ZM14.5134 5.16001C14.5553 5.23215 14.6112 5.29517 14.6778 5.34536C14.7445 5.39555 14.8205 5.4319 14.9014 5.45225C14.9823 5.4726 15.0664 5.47655 15.1489 5.46387C15.2313 5.45118 15.3104 5.42212 15.3815 5.37839C15.4525 5.33466 15.5141 5.27716 15.5625 5.20926C15.611 5.14136 15.6454 5.06444 15.6637 4.98305C15.6819 4.90165 15.6837 4.81742 15.6689 4.73532C15.6542 4.65322 15.6231 4.57491 15.5775 4.50501L14.5134 5.16001ZM9.06588 0.875007C4.86005 0.875007 1.44088 4.25917 1.44088 8.44417H2.69088C2.69088 4.95917 5.54088 2.12501 9.06588 2.12501V0.875007ZM1.44088 8.44417V9.83334H2.69088V8.44417H1.44088ZM2.50755 10.2775L3.90672 8.88834L3.02505 8.00001L1.62505 9.38917L2.50755 10.2775ZM2.50755 9.39001L1.10672 8.00001L0.225882 8.88751L1.62588 10.2758L2.50755 9.39001ZM15.5775 4.50667C14.8933 3.3952 13.9355 2.47773 12.7956 1.84193C11.6558 1.20612 10.3711 0.873214 9.06588 0.875007V2.12501C10.1577 2.1229 11.2327 2.40089 12.1864 2.9324C13.1402 3.46391 13.9416 4.23117 14.5142 5.16084L15.5775 4.50667ZM15.9284 8.16667L16.3675 7.72251C16.2506 7.60699 16.0928 7.54221 15.9284 7.54221C15.764 7.54221 15.6062 7.60699 15.4892 7.72251L15.9284 8.16667ZM14.0834 9.11084C14.025 9.16857 13.9786 9.23723 13.9467 9.3129C13.9149 9.38858 13.8982 9.46979 13.8978 9.55189C13.8968 9.7177 13.9618 9.8771 14.0784 9.99501C14.195 10.1129 14.3536 10.1797 14.5194 10.1806C14.6852 10.1816 14.8446 10.1166 14.9625 10L14.0834 9.11084ZM16.8942 10C16.9523 10.0592 17.0215 10.1063 17.0979 10.1385C17.1744 10.1707 17.2564 10.1874 17.3394 10.1876C17.4223 10.1877 17.5044 10.1714 17.581 10.1395C17.6575 10.1076 17.727 10.0608 17.7853 10.0018C17.8435 9.94279 17.8895 9.87278 17.9204 9.79584C17.9514 9.71891 17.9667 9.63658 17.9655 9.55365C17.9644 9.47073 17.9467 9.38887 17.9136 9.31285C17.8804 9.23682 17.8325 9.16815 17.7725 9.11084L16.8942 10ZM3.43171 12.8383C3.34464 12.6972 3.20506 12.5965 3.0437 12.5583C2.88235 12.5201 2.71242 12.5475 2.5713 12.6346C2.43018 12.7217 2.32944 12.8612 2.29123 13.0226C2.25301 13.184 2.28047 13.3539 2.36755 13.495L3.43171 12.8383ZM8.90255 17.125C13.1209 17.125 16.5525 13.7433 16.5525 9.55584H15.3025C15.3025 13.0392 12.4442 15.875 8.90255 15.875V17.125ZM16.5525 9.55584V8.16667H15.3025V9.55584H16.5525ZM15.4892 7.72251L14.0834 9.11084L14.9625 10L16.3675 8.61084L15.4892 7.72251ZM15.4892 8.61084L16.8942 10L17.7725 9.11084L16.3675 7.72251L15.4892 8.61084ZM2.36672 13.4942C3.05558 14.6068 4.01776 15.5246 5.16167 16.1601C6.30557 16.7957 7.59312 17.1278 8.90171 17.125V15.875C7.80646 15.8778 6.7287 15.6003 5.77107 15.0687C4.81344 14.5372 4.00864 13.7693 3.43171 12.8383L2.36672 13.4942Z"
+                                    fill="black"/>
+                            </svg>
+
+                        </div>
+                        <div className=" ">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_38_2544)">
+                                    <path
+                                        d="M17.9167 7.49996V15.8333M4.58333 7.49996V15.8333M2.08333 7.49996V15.8333M15.4167 7.49996V15.8333M1.66667 17.5H18.3333M0 19.5833H20M10 9.16663H9.16667C8.94565 9.16663 8.73369 9.25442 8.57741 9.4107C8.42113 9.56698 8.33333 9.77895 8.33333 9.99996V10.3125C8.33333 10.4928 8.39181 10.6682 8.5 10.8125C8.60818 10.9567 8.76024 11.062 8.93333 11.1125L11.0667 11.735C11.2398 11.7854 11.3918 11.8907 11.5 12.035C11.6082 12.1792 11.6667 12.3547 11.6667 12.535V13.3333C11.6667 13.5543 11.5789 13.7663 11.4226 13.9225C11.2663 14.0788 11.0543 14.1666 10.8333 14.1666H10M10 9.16663H10.8333C11.0543 9.16663 11.2663 9.25442 11.4226 9.4107C11.5789 9.56698 11.6667 9.77895 11.6667 9.99996V10.4166M10 9.16663V7.49996M10 14.1666H9.16667C8.94565 14.1666 8.73369 14.0788 8.57741 13.9225C8.42113 13.7663 8.33333 13.5543 8.33333 13.3333V12.9166M10 14.1666V15.8333M19.5833 5.20829V5.83329H0.416667V5.20829C4.58333 3.74996 7.08333 2.49996 9.79167 0.416626H10.2083C12.9167 2.49996 15.4167 3.74996 19.5833 5.20829Z"
+                                        stroke="black"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_38_2544">
+                                        <rect width="20" height="20" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </div>
+                        <div className=" ">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2.91663 3.12496C2.91663 3.06971 2.93858 3.01672 2.97765 2.97765C3.01672 2.93858 3.06971 2.91663 3.12496 2.91663H14.375C14.4302 2.91663 14.4832 2.93858 14.5223 2.97765C14.5613 3.01672 14.5833 3.06971 14.5833 3.12496V11.4583C14.5833 11.6241 14.6491 11.783 14.7664 11.9002C14.8836 12.0174 15.0425 12.0833 15.2083 12.0833C15.3741 12.0833 15.533 12.0174 15.6502 11.9002C15.7674 11.783 15.8333 11.6241 15.8333 11.4583V3.12496C15.8333 2.73819 15.6796 2.36725 15.4062 2.09376C15.1327 1.82027 14.7617 1.66663 14.375 1.66663H3.12496C2.73819 1.66663 2.36725 1.82027 2.09376 2.09376C1.82027 2.36725 1.66663 2.73819 1.66663 3.12496V16.875C1.66663 17.68 2.31996 18.3333 3.12496 18.3333H8.95829C9.12405 18.3333 9.28302 18.2674 9.40023 18.1502C9.51744 18.033 9.58329 17.8741 9.58329 17.7083C9.58329 17.5425 9.51744 17.3836 9.40023 17.2664C9.28302 17.1491 9.12405 17.0833 8.95829 17.0833H3.12496C3.06971 17.0833 3.01672 17.0613 2.97765 17.0223C2.93858 16.9832 2.91663 16.9302 2.91663 16.875V3.12496Z"
+                                    fill="black"/>
+                                <path
+                                    d="M5.20837 5.83337C5.04261 5.83337 4.88364 5.89922 4.76643 6.01643C4.64922 6.13364 4.58337 6.29261 4.58337 6.45837C4.58337 6.62413 4.64922 6.78311 4.76643 6.90032C4.88364 7.01753 5.04261 7.08337 5.20837 7.08337H12.2917C12.4575 7.08337 12.6164 7.01753 12.7336 6.90032C12.8509 6.78311 12.9167 6.62413 12.9167 6.45837C12.9167 6.29261 12.8509 6.13364 12.7336 6.01643C12.6164 5.89922 12.4575 5.83337 12.2917 5.83337H5.20837ZM4.58337 9.79171C4.58337 9.62595 4.64922 9.46698 4.76643 9.34977C4.88364 9.23256 5.04261 9.16671 5.20837 9.16671H8.95837C9.12413 9.16671 9.28311 9.23256 9.40032 9.34977C9.51753 9.46698 9.58337 9.62595 9.58337 9.79171C9.58337 9.95747 9.51753 10.1164 9.40032 10.2336C9.28311 10.3509 9.12413 10.4167 8.95837 10.4167H5.20837C5.04261 10.4167 4.88364 10.3509 4.76643 10.2336C4.64922 10.1164 4.58337 9.95747 4.58337 9.79171ZM18.15 13.5667C18.2114 13.5095 18.2607 13.4405 18.2949 13.3638C18.329 13.2872 18.3474 13.2044 18.3489 13.1205C18.3503 13.0366 18.3349 12.9532 18.3035 12.8754C18.272 12.7976 18.2253 12.7269 18.1659 12.6675C18.1066 12.6082 18.0359 12.5614 17.958 12.5299C17.8802 12.4985 17.7969 12.4831 17.7129 12.4845C17.629 12.486 17.5463 12.5044 17.4696 12.5386C17.3929 12.5727 17.3239 12.622 17.2667 12.6834L13.125 16.825L11.4834 15.1834C11.4262 15.122 11.3572 15.0727 11.2805 15.0386C11.2038 15.0044 11.1211 14.986 11.0371 14.9845C10.9532 14.9831 10.8699 14.9985 10.792 15.0299C10.7142 15.0614 10.6435 15.1082 10.5842 15.1675C10.5248 15.2269 10.478 15.2976 10.4466 15.3754C10.4152 15.4532 10.3997 15.5366 10.4012 15.6205C10.4027 15.7044 10.4211 15.7872 10.4552 15.8638C10.4894 15.9405 10.5386 16.0095 10.6 16.0667L12.6834 18.15C12.8006 18.2671 12.9594 18.3328 13.125 18.3328C13.2907 18.3328 13.4495 18.2671 13.5667 18.15L18.15 13.5667Z"
+                                    fill="black"/>
+                            </svg>
+
+                        </div>
+                        <div className=" ">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.4542 10.8333C17.0394 9.99211 17.3927 9.01159 17.4785 7.99045C17.5643 6.9693 17.3795 5.94358 16.9429 5.01651C16.5063 4.08945 15.8331 3.29377 14.9912 2.70955C14.1494 2.12534 13.1684 1.77321 12.1472 1.68861C11.1259 1.60402 10.1004 1.78994 9.17387 2.22766C8.24733 2.66538 7.45243 3.33946 6.86921 4.18205C6.28599 5.02463 5.93502 6.00598 5.85163 7.02732C5.76823 8.04866 5.95536 9.07395 6.39417 9.99998"
+                                    stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M11.6667 4.99996C10.7458 4.99996 10 5.55996 10 6.24996C10 6.93996 10.7458 7.49996 11.6667 7.49996C12.5875 7.49996 13.3333 8.05996 13.3333 8.74996C13.3333 9.43996 12.5875 9.99996 11.6667 9.99996M11.6667 4.99996C12.3917 4.99996 13.01 5.34746 13.2383 5.83329M11.6667 4.99996V4.16663M11.6667 9.99996C10.9417 9.99996 10.3233 9.65246 10.095 9.16663M11.6667 9.99996V10.8333M2.5 11.6666H4.49583C4.74083 11.6666 4.9825 11.7216 5.20167 11.8283L6.90333 12.6516C7.1225 12.7575 7.36417 12.8125 7.61 12.8125H8.47833C9.31833 12.8125 10 13.4716 10 14.285C10 14.3183 9.9775 14.3466 9.945 14.3558L7.8275 14.9416C7.44754 15.0466 7.04239 15.0099 6.6875 14.8383L4.86833 13.9583M10 13.75L13.8275 12.5741C14.1607 12.4719 14.5177 12.4775 14.8475 12.5902C15.1774 12.7029 15.4632 12.9169 15.6642 13.2016C15.9717 13.6266 15.8467 14.2366 15.3983 14.495L9.13583 18.1091C8.94001 18.2224 8.72317 18.2947 8.49853 18.3215C8.27389 18.3483 8.04614 18.329 7.82917 18.265L2.5 16.6833"
+                                    stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                        </div>
+                        <div className=" ">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.3249 12.9167L14.8082 11.8333C15.0582 10.9333 15.0749 9.95833 14.8082 8.98333L16.3249 7.91667L15.1166 5.83333L13.4249 6.6C12.7666 5.93333 11.9332 5.41667 10.9582 5.175L10.7916 3.33333H8.3749L8.20824 5.175C7.23324 5.41667 6.3999 5.93333 5.74157 6.6L4.0499 5.83333L2.84157 7.91667L4.35824 8.98333C4.09157 9.95833 4.10824 10.9333 4.35824 11.8333L2.84157 12.9167L4.0499 15L5.74157 14.225C6.3999 14.8833 7.23324 15.3833 8.20824 15.6417L8.3749 17.5H10.7916L10.9582 15.6417C11.9332 15.3833 12.7666 14.8833 13.4249 14.225L15.1166 15L16.3249 12.9167ZM11.2499 2.5C11.4749 2.5 11.6666 2.66667 11.6666 2.88333L11.8166 4.58333C12.4499 4.81667 13.0166 5.15833 13.5249 5.56667L15.0666 4.84167C15.2582 4.74167 15.4999 4.80833 15.6166 5L17.2832 7.91667C17.3999 8.09167 17.3332 8.33333 17.1499 8.45833L15.7582 9.43333C15.8666 10.1 15.8582 10.7583 15.7582 11.4L17.1499 12.375C17.3332 12.5 17.3999 12.7417 17.2832 12.9167L15.6166 15.8333C15.4999 16.0083 15.2582 16.075 15.0666 15.975L13.5249 15.2583C13.0166 15.6667 12.4499 16 11.8166 16.25L11.6666 17.9167C11.6666 18.1583 11.4749 18.3333 11.2499 18.3333H7.91657C7.80606 18.3333 7.70008 18.2894 7.62194 18.2113C7.5438 18.1332 7.4999 18.0272 7.4999 17.9167L7.3499 16.25C6.71657 16 6.1499 15.6667 5.64157 15.2583L4.0999 15.975C3.90824 16.075 3.66657 16.0083 3.5499 15.8333L1.88324 12.9167C1.76657 12.7417 1.83324 12.5 2.01657 12.375L3.40824 11.4C3.30824 10.7583 3.2999 10.1 3.40824 9.43333L2.01657 8.45833C1.83324 8.33333 1.76657 8.09167 1.88324 7.91667L3.5499 5C3.66657 4.80833 3.90824 4.74167 4.0999 4.84167L5.64157 5.56667C6.1499 5.15833 6.71657 4.81667 7.3499 4.58333L7.4999 2.88333C7.4999 2.66667 7.69157 2.5 7.91657 2.5H11.2499ZM9.58324 7.5C10.3568 7.5 11.0986 7.80729 11.6456 8.35427C12.1926 8.90125 12.4999 9.64312 12.4999 10.4167C12.4999 11.1902 12.1926 11.9321 11.6456 12.4791C11.0986 13.026 10.3568 13.3333 9.58324 13.3333C8.80969 13.3333 8.06782 13.026 7.52084 12.4791C6.97386 11.9321 6.66657 11.1902 6.66657 10.4167C6.66657 9.64312 6.97386 8.90125 7.52084 8.35427C8.06782 7.80729 8.80969 7.5 9.58324 7.5ZM9.58324 8.33333C9.0307 8.33333 8.5008 8.55283 8.1101 8.94353C7.7194 9.33423 7.4999 9.86413 7.4999 10.4167C7.4999 10.9692 7.7194 11.4991 8.1101 11.8898C8.5008 12.2805 9.0307 12.5 9.58324 12.5C10.1358 12.5 10.6657 12.2805 11.0564 11.8898C11.4471 11.4991 11.6666 10.9692 11.6666 10.4167C11.6666 9.86413 11.4471 9.33423 11.0564 8.94353C10.6657 8.55283 10.1358 8.33333 9.58324 8.33333Z"
+                                    fill="black"/>
+                            </svg>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div className="d-flex flex-wrap justify-content-between w-100">
+
+                    <div className="dashboard-card">
+                        <div className="dashboard-card-header">
+                            <span className="title">Trading Journal</span>
+                            <span className="badge-green">BEG. Balance</span>
+                        </div>
+                        <div className="dashboard-card-body">
+                            <p className="amount">$310000.00</p>
+                        </div>
+                    </div>
+                    <div className="dashboard-card">
+                        <div className="dashboard-card-header">
+                            <span className="title">Trading Journal</span>
+                            <span className="badge-green">Net Profit & Dividend</span>
+                        </div>
+                        <div className="dashboard-card-body">
+                            <p className="amount">$310000.00</p>
+                        </div>
+                    </div>
+                    <div className="dashboard-card">
+                        <div className="dashboard-card-header">
+                            <span className="title">Trading Journal</span>
+                            <span className="badge-red">Withdrawals</span>
+                        </div>
+                        <div className="dashboard-card-body">
+                            <p className="amount">$310000.00</p>
+                        </div>
+                    </div>
+                    <div className="dashboard-card">
+                        <div className="dashboard-card-header">
+                            <span className="title">Trading Journal</span>
+                            <span className="badge-white">End Balance</span>
+                        </div>
+                        <div className="dashboard-card-body">
+                            <p className="amount">$310000.00</p>
+                        </div>
+                    </div>
+                    <div className="dashboard-card">
+                        <div className="dashboard-card-header">
+                            <span className="title">Trading Journal</span>
+                            <span className="badge-white">Cash Balance</span>
+                        </div>
+                        <div className="dashboard-card-body">
+                            <p className="amount">$310000.00</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <div>
                 <div className="ua_top_item">
                     <ul>
                         {DashboardData.map((item, index: number) => {
+                            const isActive = activeLabel === item.label;
+
                             return (
                                 <li key={index}>
-                                    <i className={item.icon}></i>
-                                    <span> <a className="nav-link text_gray font_weight_400 " aria-current="page"
-                                              href={item.label}>{item.label}</a></span>
+                                    <a
+                                        href={item.label}
+                                        className={`text_gray font_weight_300 font_poppins line_height_20 heading_24 ${
+                                            isActive ? "active-tab" : ""
+                                        }`}
+                                        onClick={() => setActiveLabel(item.label)}
+                                    >
+                                        {item.label}
+                                    </a>
                                 </li>
                             );
                         })}
@@ -110,29 +243,27 @@ export const TradeLog = (props: Props) => {
                 </div>
             </div>
             <div className="">
-                <div className="d-flex align-items-center ms-4 p-3">
-                    <i className="fa-solid fa-address-card heading-24 "></i>
-                    <p className="ps-2">Trade Log</p>
-                </div>
 
-                <div className="row col-12 m-auto mt-2">
+
+                <div className="row col-12  main-trade-log-cards m-auto mt-5 ">
                     {/*CardOne*/}
 
-                    <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div className="portfolio-card-container box-12 position-relative">
+                    <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                        <div className=" box-12 ms-0  position-relative">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10">
                                         <tr>
-                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}}>Account
+                                            <th className="font_Epilogue heading-16 font_weight_400 line_height_32"
+                                                colSpan={3}>Account
                                                 Name
                                             </th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>
+                                            <th className="font_Epilogue heading-16 font_weight_400 line_height_32">Manisha</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr className="background_grey_color">
+                                        <tr className="background_grey_color ">
                                             <td>Beg. Capital</td>
                                             <td>$</td>
                                             <td>5,214,700</td>
@@ -185,13 +316,14 @@ export const TradeLog = (props: Props) => {
 
                     {/*card2*/}
                     <div className="col-xl-4 col-lg-6 col-md-8 col-sm-12">
-                        <div className="portfolio-card-container   position-relative    box-12">
+                        <div className="   position-relative ms-0    box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10">
                                         <tr>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Top Five Stock
+                                            <th className="font_Epilogue heading-16 font_weight_400 line_height_32"
+                                                style={{fontSize: '15px'}}>Top Five Stock
                                                 Position By Allocation
                                             </th>
 
@@ -199,11 +331,21 @@ export const TradeLog = (props: Props) => {
                                         </thead>
                                         <thead>
                                         <tr>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Weight%</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Stock Code</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Ave.Price</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Total Shares</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Amount</th>
+                                            <th className="font_Epilogue  font_weight_500"
+                                                style={{fontSize: '15px'}}>Weight%
+                                            </th>
+                                            <th className="font_Epilogue font_weight_500 "
+                                                style={{fontSize: '15px'}}>Stock Code
+                                            </th>
+                                            <th className="font_Epilogue font_weight_500"
+                                                style={{fontSize: '15px'}}>Ave.Price
+                                            </th>
+                                            <th className="font_Epilogue font_weight_500"
+                                                style={{fontSize: '15px'}}>Total Shares
+                                            </th>
+                                            <th className="font_Epilogue font_weight_500"
+                                                style={{fontSize: '15px'}}>Amount
+                                            </th>
 
                                         </tr>
 
@@ -245,26 +387,35 @@ export const TradeLog = (props: Props) => {
                     {/*card3*/}
 
                     <div className="col-xl-2 col-lg-6 col-md-5 col-sm-12">
-                        <div className="portfolio-card-container   position-relative    box-12">
+                        <div className="   position-relative  ms-0  box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
                                         <thead className="position-absolute top-10">
                                         <tr>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>SL & TP
+                                            <th className="font_Epilogue heading-16 font_weight_400 line_height_32"
+                                                style={{fontSize: '15px'}}>SL & TP
                                                 Calculator
                                             </th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}><i
-                                                className="fa-solid fa-gear heading-24 "></i></th>
+                                            <th>
+                                                <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M16.3249 12.9167L14.8082 11.8333C15.0582 10.9333 15.0749 9.95833 14.8082 8.98333L16.3249 7.91667L15.1166 5.83333L13.4249 6.6C12.7666 5.93333 11.9332 5.41667 10.9582 5.175L10.7916 3.33333H8.3749L8.20824 5.175C7.23324 5.41667 6.3999 5.93333 5.74157 6.6L4.0499 5.83333L2.84157 7.91667L4.35824 8.98333C4.09157 9.95833 4.10824 10.9333 4.35824 11.8333L2.84157 12.9167L4.0499 15L5.74157 14.225C6.3999 14.8833 7.23324 15.3833 8.20824 15.6417L8.3749 17.5H10.7916L10.9582 15.6417C11.9332 15.3833 12.7666 14.8833 13.4249 14.225L15.1166 15L16.3249 12.9167ZM11.2499 2.5C11.4749 2.5 11.6666 2.66667 11.6666 2.88333L11.8166 4.58333C12.4499 4.81667 13.0166 5.15833 13.5249 5.56667L15.0666 4.84167C15.2582 4.74167 15.4999 4.80833 15.6166 5L17.2832 7.91667C17.3999 8.09167 17.3332 8.33333 17.1499 8.45833L15.7582 9.43333C15.8666 10.1 15.8582 10.7583 15.7582 11.4L17.1499 12.375C17.3332 12.5 17.3999 12.7417 17.2832 12.9167L15.6166 15.8333C15.4999 16.0083 15.2582 16.075 15.0666 15.975L13.5249 15.2583C13.0166 15.6667 12.4499 16 11.8166 16.25L11.6666 17.9167C11.6666 18.1583 11.4749 18.3333 11.2499 18.3333H7.91657C7.80606 18.3333 7.70008 18.2894 7.62194 18.2113C7.5438 18.1332 7.4999 18.0272 7.4999 17.9167L7.3499 16.25C6.71657 16 6.1499 15.6667 5.64157 15.2583L4.0999 15.975C3.90824 16.075 3.66657 16.0083 3.5499 15.8333L1.88324 12.9167C1.76657 12.7417 1.83324 12.5 2.01657 12.375L3.40824 11.4C3.30824 10.7583 3.2999 10.1 3.40824 9.43333L2.01657 8.45833C1.83324 8.33333 1.76657 8.09167 1.88324 7.91667L3.5499 5C3.66657 4.80833 3.90824 4.74167 4.0999 4.84167L5.64157 5.56667C6.1499 5.15833 6.71657 4.81667 7.3499 4.58333L7.4999 2.88333C7.4999 2.66667 7.69157 2.5 7.91657 2.5H11.2499ZM9.58324 7.5C10.3568 7.5 11.0986 7.80729 11.6456 8.35427C12.1926 8.90125 12.4999 9.64312 12.4999 10.4167C12.4999 11.1902 12.1926 11.9321 11.6456 12.4791C11.0986 13.026 10.3568 13.3333 9.58324 13.3333C8.80969 13.3333 8.06782 13.026 7.52084 12.4791C6.97386 11.9321 6.66657 11.1902 6.66657 10.4167C6.66657 9.64312 6.97386 8.90125 7.52084 8.35427C8.06782 7.80729 8.80969 7.5 9.58324 7.5ZM9.58324 8.33333C9.0307 8.33333 8.5008 8.55283 8.1101 8.94353C7.7194 9.33423 7.4999 9.86413 7.4999 10.4167C7.4999 10.9692 7.7194 11.4991 8.1101 11.8898C8.5008 12.2805 9.0307 12.5 9.58324 12.5C10.1358 12.5 10.6657 12.2805 11.0564 11.8898C11.4471 11.4991 11.6666 10.9692 11.6666 10.4167C11.6666 9.86413 11.4471 9.33423 11.0564 8.94353C10.6657 8.55283 10.1358 8.33333 9.58324 8.33333Z"
+                                                        fill="black"/>
+                                                </svg>
+                                            </th>
 
                                         </tr>
                                         </thead>
                                         <thead>
                                         <tr>
-                                            <th className="font_Epilogue text-center" style={{fontSize: '15px'}}>Stop
+                                            <th className="font_Epilogue text-center font_weight_500"
+                                                style={{fontSize: '15px'}}>Stop
                                                 Loss
                                             </th>
-                                            <th className="font_Epilogue text-center " style={{fontSize: '15px'}}>Target
+                                            <th className="font_Epilogue text-center font_weight_500 "
+                                                style={{fontSize: '15px'}}>Target
                                                 Price
                                             </th>
 
@@ -303,35 +454,37 @@ export const TradeLog = (props: Props) => {
                     </div>
                     {/*Card4*/}
                     <div className="col-xl-3  col-lg-6 col-md-5 col-sm-12">
-                        <div className="portfolio-card-container position-relative box-12 overflow-x-auto">
+                        <div className=" position-relative ms-0 box-12 overflow-x-auto">
                             <div className="dashboard-overall-performance-card">
-                                <div className="amounts d-flex flex-row align-items-center">
-                                    <div id="overAllPerformanceChart" className="">
+                                <div className="font_Epilogue heading-16 font_weight_400 line_height_32">
+                                   Portfolio
+                                </div>
+                                <div className="amounts d-flex  align-items-center">
+                                    <div id="overAllPerformanceChart" className="d-flex align-items-center">
                                         <HighchartsReact highcharts={Highcharts} options={tradeLogChart}/>
+                                        <div className="">
+                                            <button className="circle-btn bg-light m-0 "><i
+                                                className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
+                                            </button>
+                                            <button className="circle-btn bg-light mt-3 m-0"><i
+                                                className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
+                                            </button>
+                                        </div>
+                                    </div>
 
-                                    </div>
-                                    <div className=" ">
-                                        <button className="circle-btn bg-light "><i
-                                            className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
-                                        </button>
-                                        <button className="circle-btn bg-light mt-3"><i
-                                            className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
-                                        </button>
-                                    </div>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div className="amounts mt-4  d-flex flex-row">
+                        <TradeDataGrid onRowsChange={handleTradeRowsChange}/>
+                    </div>
                 </div>
 
-                <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
-                    <TradeDataGrid onRowsChange={handleTradeRowsChange}/>
-                </div>
 
-                </div>
             </div>
-            );
-            };
+        </div>
+    );
+};
 

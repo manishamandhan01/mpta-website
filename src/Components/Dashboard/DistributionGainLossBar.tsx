@@ -56,6 +56,7 @@ export const DistributionGainLossBar = (props: Props) => {
             },
 
         },
+
         legend: {
             enabled: true
         },
@@ -97,16 +98,20 @@ export const DistributionGainLossBar = (props: Props) => {
     };
 
     return (
-        <div className="col-xl-6 col-md-6 col-sm-12">
-            <div className="card-container box-12">
-                <div><h1 className="linear-gradient-headings">Distribution Of Gains
+        <div className="col-xl-10 col-lg-6 col-md-6 col-sm-12">
+            <div className=" ">
+                <div className="main_heading_card"><h1 className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Distribution Of Gains
                     And Losses</h1></div>
+                <div className="main_heading_card">
+                    <hr/>
+
+                </div>
 
 
                 <div className="dashboard-overall-performance-card">
 
 
-                <div className="dashboard-card">
+                <div className="dashboard-card-gain-loss">
 
                         <HighchartsReact
                             highcharts={Highcharts}

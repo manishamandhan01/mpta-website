@@ -90,10 +90,15 @@ export const OverAllPerformanceCard = (props: Props) => {
     };
 
     return (
-        <div className="col-xl-3 col-md-6 col-sm-12">
-            <div className="card-container box-12">
+        <div className="col-xl-4 col-md-6 col-sm-12 ms-5 mb-5">
+            <div className=" box-12">
                 <div className="dashboard-overall-performance-card">
-                    <h1 className="linear-gradient-headings">Overall Performance</h1>
+                    <div className="main_heading_card"><h1
+                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">OverAll Performance</h1></div>
+                    <div className="main_heading_card">
+                        <hr/>
+
+                    </div>
                     <div className="amounts mt-4">
                         <div className="d-flex justify-content-between text-center mt-1">
                             <div className="lh-lg">
@@ -134,8 +139,8 @@ export const OverAllPerformanceCard = (props: Props) => {
                             }}
                         ></div>
                     </div>
-                    <div id="overAllPerformanceChart" className="mt-1">
-                        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+                    <div id="overAllPerformanceChart" className="">
+                        <HighchartsReact highcharts={Highcharts} options={chartOptions}/>
                     </div>
                 </div>
             </div>

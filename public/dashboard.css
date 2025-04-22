@@ -8,7 +8,14 @@
 .dashboard-header {
     display: flex;
     align-items: center;
+    /*margin-left: 260px;*/
+    margin-top: 34px;
 
+}
+.vertical-line {
+    width: 3px;
+    height: 27px; /* Adjust as needed */
+    background-color: #0C7FDA; /* Or your preferred color */
 }
 
 .dashboard-image {
@@ -24,7 +31,6 @@
 .dashboard-details-main{
     display: flex;
     flex-direction: row;
-    column-gap: 40px;
 }
 
 /*.dashboard-details {*/
@@ -45,11 +51,90 @@
     margin: 0;
 }
 .dashboard-side-icons {
+    margin-top: 34px;
+    /* margin-right: 150px; */
     display: flex;
-    gap: 30px;
+    gap: 14px;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
 }
+.dashboard-card {
+    /*border: 1px solid #ccc;*/
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    width: 100%;
+    max-width: 340px; /* Adjust if needed */
+    margin-top: 20px;
+    /*margin-left: 260px;*/
+    box-shadow: 2px 2px 5px rgba(204, 204, 204, 0.6);
+}
+.dashboard-card-gain-loss{
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 1400px; /* Adjust if needed */
+    margin-top: 20px;
+    box-shadow: 0px 0px  12px rgba(204, 204, 204, 0.6);
+    margin-left: 80px;
+}
+
+
+.dashboard-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #60b8f2; /* Light blue */
+    padding: 10px 16px;
+}
+
+.title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+}
+
+.badge-green {
+    background-color: #90f1c2; /* Green pill */
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: black;
+}
+.badge-red {
+    background-color: #F96677; /* Green pill */
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: white;
+}
+.badge-white{
+    background-color: #ffffff; /* Green pill */
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: black;
+}
+
+.dashboard-card-body {
+    padding: 20px 16px;
+    text-align: center;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: 500;
+    color: #555;
+    font-family: 'Epilogue', sans-serif;
+}
+
 /*dashboard-top_item*/
 
 
@@ -66,16 +151,35 @@
 }
 
 .ua_top_item ul {
+    margin-top: 32px;
+    margin-left: -10px;
     display: flex;
     justify-content: flex-start;  /* Distribute items evenly */
     list-style-type: none;
-    padding-left: 195px;
     padding-bottom: 20px;
     padding-top: 20px;
     flex-wrap: wrap;  /* Allow wrapping for small screens */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Bottom shadow */
-background-color: #ffffff;
+    background-color: #ffffff;
 }
+.active-tab {
+    color: #60b8f2 !important;
+    font-weight: 500;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 6px; /* creates the gap between text and underline */
+}
+
+.active-tab::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px; /* underline thickness */
+    width: 100%;
+    background-color: #60b8f2; /* same as the text color or any highlight color */
+    border-radius: 2px; /* optional rounded edge */
+}
+
 
 .ua_top_item li {
     display: flex;
@@ -106,19 +210,21 @@ background-color: #ffffff;
 
 /*dashboard-container*/
 .dashboard-container{
-margin-left: 65px;
+margin-left: 55px;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
-    text-transform: uppercase;
-    font-family: 'monospace';
-    background: -webkit-linear-gradient(#0d82fe, #ecf1f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: 'epilogue', sans-serif;
+    color: rgba(11, 13, 14, 0.8);
 }
 /*dashboard-container*/
 
 /*card-OverAllPerformanceCard*/
+.main_heading_card{
+    margin-left: 80px;
+    margin-right: 50px;
+    color: rgba(0, 0, 0, 0.8);
+}
 .card-container {
     display: flex;
     flex-direction: column;
@@ -129,27 +235,16 @@ margin-left: 65px;
     border-radius: 20px;
 }
 
-.dashboard-overall-performance-card,
-.dashboard-gain-loss-highchart,
-.dashboard-overall-trade-statistics-card {
-    /*background-color: #ffffff;*/
-    /*padding: 20px;*/
-    /*border-radius: 8px;*/
-    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
-}
 
-.dashboard-overall-performance-card {
-    /*width: 100%;  !* Ensure it takes up 30% of the available width *!*/
-    /*height: 440px;*/
-}
+
+
+
 .card-container-gain-loss-highchart{
     width: 500px;
     margin-top: 40px;
         margin-left: -295px;
 }
-.dashboard-overall-trade-statistics-card{
-    /*margin-left: -40px;*/
-}
+
 
 .dashboard-gain-loss-highchart{
     width: 800px;
@@ -264,14 +359,16 @@ margin-left: 65px;
     background-color: #0000ff;  /* Change this to your desired background color */
 }
 .box-12 {
-    /*background-color: #F8F9FA;*/
+    border-radius: 5px;
      padding: 10px;
-    /* border: 1px solid #ddd; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: 0px 0px  12px rgba(204, 204, 204, 0.6);
     height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: 80px;
 }
 /*dashboard-overall-trade-statistics*/
 /*trade-statistics*/
@@ -326,3 +423,11 @@ table,th,td,tr{
     padding: 10px 0px !important;
 }
 /*.portfolio-card-container*/
+
+.main-trade-log-cards {
+    padding: 0px 39px;
+}
+
+.right-10{
+    right: 10px;
+}

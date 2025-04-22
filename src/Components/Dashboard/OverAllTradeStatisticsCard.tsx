@@ -183,20 +183,26 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
 
 
     return (
-        <div className="col-xl-3 col-md-6 col-sm-12">
-            <div className="card-container box-12">
+        <div className="col-xl-4 col-md-6 col-sm-12 ms-5 mb-5">
+            <div className=" box-12">
 
-                <div className="dashboard-overall-trade-statistics-card">
-                    <h1 className="linear-gradient-headings">Overall Trade Statistics</h1>
+                <div className="">
+                    <div className="main_heading_card"><h1
+                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">OverAll
+                       Trade Statistics</h1></div>
+                    <div className="main_heading_card">
+                        <hr/>
+
+                    </div>
 
                     <div className="row mt-4">
                         {/* First pie chart (Win Rate) */}
-                        <div className="col-6">
+                        <div className=" ms-5 col-3">
                             <HighchartsReact highcharts={Highcharts} options={winRateChartOptions}/>
                         </div>
 
                         {/* Second pie chart (Profit Rate) */}
-                        <div className="col-6 profit_Rate ">
+                        <div className="col-3 ms-5 profit_Rate ">
                             <HighchartsReact highcharts={Highcharts} options={profitRateChartOptions}/>
                         </div>
                     </div>

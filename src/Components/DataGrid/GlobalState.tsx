@@ -1,6 +1,7 @@
 // store.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import {useState} from "react";
 
 export type TradeRow = {
     id: number;
@@ -40,6 +41,13 @@ export type DividendRow = {
     dateReceived: string;
     amountReceived: number;
 }
+export type BackendResult = {
+    id: number;
+    symbol: string;
+    dividendType: string;
+    dateReceived: string;
+    amountReceived: number;
+}
 
 interface GlobalState {
     tradeRows: TradeRow[];
@@ -48,6 +56,9 @@ interface GlobalState {
     setBankTransferRows: (bankTransferRows: BankTransferRow[]) => void;
     dividendRows: DividendRow[];
     setDividendRows: (dividendRows: DividendRow[]) => void;
+    backendResult: BackendResult[];
+    setBackendResult: (backendResult: BackendResult[]) => void;
+
 }
 
 export const useGlobalStore = create<GlobalState>()(
@@ -59,6 +70,8 @@ export const useGlobalStore = create<GlobalState>()(
             setBankTransferRows: (bankTransferRows) => set({ bankTransferRows }),
             dividendRows: [],
             setDividendRows: (dividendRows) => set({ dividendRows }),
+            backendResult: [],
+            setBackendResult: (backendResult) => set({ backendResult }),
         }),
         {
             name: 'trade_rows_data', // 🔑 key used in localStorage
@@ -74,6 +87,7 @@ export type CombinedRows = {
 }
 
 export const fetchTradeResults = async (tradeRows: TradeRow[], combinedRows?: CombinedRows) => {
+    const [backendResult, setBackendResult]= useState<BackendResult[]>([]);
     const response = await fetch(
         'http://localhost:8000/dashboard/overall_performance/get_results?format=json',
         {
@@ -86,6 +100,8 @@ export const fetchTradeResults = async (tradeRows: TradeRow[], combinedRows?: Co
     );
 
     if (!response.ok) throw new Error('Failed to fetch performance data');
+    setBackendResult(response.json());
 
-    return response.json();
+
+
 };
