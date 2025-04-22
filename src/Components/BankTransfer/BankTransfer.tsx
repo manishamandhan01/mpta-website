@@ -29,6 +29,7 @@ type Props = {};
 // ];
 export const BankTransfer = (props: Props) => {
     const {tradeRows, setTradeRows} = useGlobalStore();
+    const[activeLabel, setActiveLabel] = React.useState<string | null>("Bank Transfer");
 
     const {bankTransferRows, setBankTransferRows} = useGlobalStore();
     const [bankTransferCummulatives, setBankTransferCummulatives] = useState([]);
@@ -57,11 +58,19 @@ export const BankTransfer = (props: Props) => {
                 <div className="ua_top_item">
                     <ul>
                         {DashboardData.map((item, index: number) => {
+                            const isActive = activeLabel === item.label;
+
                             return (
                                 <li key={index}>
-                                    <i className={item.icon}></i>
-                                    <span> <a className="nav-link text_gray font_weight_400 " aria-current="page"
-                                              href={item.label}>{item.label}</a></span>
+                                    <a
+                                        href={item.label}
+                                        className={`text_gray font_weight_300 font_poppins line_height_20 heading_24 ${
+                                            isActive ? "active-tab" : ""
+                                        }`}
+                                        onClick={() => setActiveLabel(item.label)}
+                                    >
+                                        {item.label}
+                                    </a>
                                 </li>
                             );
                         })}
@@ -69,17 +78,13 @@ export const BankTransfer = (props: Props) => {
                 </div>
             </div>
             <div className="">
-                <div className="d-flex align-items-center ms-4 p-3">
-                    <div className="bank-icon ">
-                        <img className="heading-24" src="/public/bank.png"/></div>
-                    <p className="ps-2">Bank Transfers</p>
-                </div>
 
-                <div className="row col-12 m-auto mt-2">
+
+                <div className="row col-12 main-trade-log-cards m-auto mt-5 ">
                     {/*CardOne*/}
 
                     <div className="col-xl-4 col-md-6 col-sm-12">
-                        <div className="portfolio-card-container box-12 position-relative">
+                        <div className=" box-12 ms-0 position-relative">
                             <div className="dashboard-overall-performance-card">
                                 <p>OVERALL PROFIT/LOSS</p>
                                 <div className="amounts mt-3    ">
@@ -148,7 +153,7 @@ export const BankTransfer = (props: Props) => {
 
                     {/*card2*/}
                     <div className="col-xl-8 col-md-7 col-sm-12">
-                        <div className="portfolio-card-container   position-relative    box-12">
+                        <div className="   position-relative   ms-0 box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="d-flex justify-content-between text-center mw-50 m-auto ">
                                     <div><p>PREVIOUS CUMULATIVE</p><p>NOV-19</p></div>
@@ -171,7 +176,7 @@ export const BankTransfer = (props: Props) => {
                                         {bankTransferCummulatives?.length > 0 ? (
                                             bankTransferCummulatives.map((stock, index) => (
                                                 <tr className="background_grey_color" key={index}>
-                                                    <td>{stock['deposit']?? 'N/A'}</td>
+                                                    <td>{stock['deposit'] ?? 'N/A'}</td>
 
                                                 </tr>
                                             ))
@@ -197,40 +202,42 @@ export const BankTransfer = (props: Props) => {
                         </div>
                     </div>
 
+                    <div className="amounts mt-4  d-flex flex-row">
+                        <BankTransferDataGrid/>
+
+                        {/*<TableContainer component={Paper}>*/}
+                        {/*    <Table>*/}
+                        {/*        <TableHead >*/}
+                        {/*            <TableRow  style={{ backgroundColor: "#e0e0e0" }}>*/}
+                        {/*                <TableCell className={"text-center p-2"} ><b>S.No.</b></TableCell>*/}
+                        {/*                <TableCell className={"text-center p-2"} ><b>DATE</b></TableCell>*/}
+                        {/*                <TableCell className={"text-center"} ><b>ACTION</b></TableCell>*/}
+                        {/*                <TableCell className={"text-center"} ><b>GROSS AMOUNT</b></TableCell>*/}
+                        {/*                <TableCell className={"text-center"} ><b>FEES</b></TableCell>*/}
+                        {/*                <TableCell className={"text-center"} ><b>NET AMOUNT</b></TableCell>*/}
+                        {/*                <TableCell className={"text-center"} ><b>NOTES</b></TableCell>*/}
+                        {/*            </TableRow>*/}
+                        {/*        </TableHead>*/}
+                        {/*        <TableBody>*/}
+                        {/*            {transactions.map((row, index) => (*/}
+                        {/*                <TableRow key={index}>*/}
+                        {/*                    <TableCell className={" tableBorderStyle text-center p-2 "} style={{width:"0.1%"}}>{index + 1}</TableCell>*/}
+                        {/*                    <TableCell  className={" tableBorderStyle text-center p-2 "} style={{width:"10%"}} >{row.date}</TableCell>*/}
+                        {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}}  >{row.action}</TableCell>*/}
+                        {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}} >{row.grossAmount}</TableCell>*/}
+                        {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"5%"}}  >{row.fees}</TableCell>*/}
+                        {/*                    <TableCell className={"background_grey_color text-center tableBorderStyle"} style={{width:"10%"}} >{row.netAmount}</TableCell>*/}
+                        {/*                    <TableCell className={"text-center tableBorderStyle"}style={{width:"25%"}} >{row.notes || ""}</TableCell>*/}
+                        {/*                </TableRow>*/}
+                        {/*            ))}*/}
+                        {/*        </TableBody>*/}
+                        {/*    </Table>*/}
+                        {/*</TableContainer>*/}
+                    </div>
+
 
                 </div>
-                <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
-                    <BankTransferDataGrid />
 
-                    {/*<TableContainer component={Paper}>*/}
-                    {/*    <Table>*/}
-                    {/*        <TableHead >*/}
-                    {/*            <TableRow  style={{ backgroundColor: "#e0e0e0" }}>*/}
-                    {/*                <TableCell className={"text-center p-2"} ><b>S.No.</b></TableCell>*/}
-                    {/*                <TableCell className={"text-center p-2"} ><b>DATE</b></TableCell>*/}
-                    {/*                <TableCell className={"text-center"} ><b>ACTION</b></TableCell>*/}
-                    {/*                <TableCell className={"text-center"} ><b>GROSS AMOUNT</b></TableCell>*/}
-                    {/*                <TableCell className={"text-center"} ><b>FEES</b></TableCell>*/}
-                    {/*                <TableCell className={"text-center"} ><b>NET AMOUNT</b></TableCell>*/}
-                    {/*                <TableCell className={"text-center"} ><b>NOTES</b></TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*        </TableHead>*/}
-                    {/*        <TableBody>*/}
-                    {/*            {transactions.map((row, index) => (*/}
-                    {/*                <TableRow key={index}>*/}
-                    {/*                    <TableCell className={" tableBorderStyle text-center p-2 "} style={{width:"0.1%"}}>{index + 1}</TableCell>*/}
-                    {/*                    <TableCell  className={" tableBorderStyle text-center p-2 "} style={{width:"10%"}} >{row.date}</TableCell>*/}
-                    {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}}  >{row.action}</TableCell>*/}
-                    {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"10%"}} >{row.grossAmount}</TableCell>*/}
-                    {/*                    <TableCell className={"text-center tableBorderStyle"} style={{width:"5%"}}  >{row.fees}</TableCell>*/}
-                    {/*                    <TableCell className={"background_grey_color text-center tableBorderStyle"} style={{width:"10%"}} >{row.netAmount}</TableCell>*/}
-                    {/*                    <TableCell className={"text-center tableBorderStyle"}style={{width:"25%"}} >{row.notes || ""}</TableCell>*/}
-                    {/*                </TableRow>*/}
-                    {/*            ))}*/}
-                    {/*        </TableBody>*/}
-                    {/*    </Table>*/}
-                    {/*</TableContainer>*/}
-                </div>
 
             </div>
         </div>
