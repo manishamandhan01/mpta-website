@@ -1,5 +1,5 @@
 
-export const MiddleSectionB = () => {
+export const HomePage = () => {
 
 
 

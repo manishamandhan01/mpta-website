@@ -24,6 +24,14 @@
     padding: 0 80px;
     margin: 0 auto;
 }
+.about-us-container{
+    width: 100%;
+    max-width: 1440px;
+    padding-left: 200px;
+    padding-top: 100px;
+    margin: 0 auto;
+}
+
 
 input, textarea, select {
     width: 100%;
@@ -266,7 +274,7 @@ a {
 
 .middle_card {
     width: 100%;
-    max-width: 366px;
+    max-width: 500px;
 
 }
 
@@ -288,10 +296,23 @@ a {
 .middle_card_top_text {
     padding-top: 82px;
     padding-bottom: 31px;
+
+
 }
 
 .middle_card_top_text_content {
     margin-bottom: 12px;
+}
+.about-us-middle-arrow-section{
+    display: flex;
+    justify-content: center;
+
+}
+.aboutUsPage-vison-mission-section{
+    margin-top: 200px;
+}
+.text_color_black{
+    color: black !important;
 }
 
 /*#footer section*/

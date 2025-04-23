@@ -3,7 +3,7 @@
 import { RouteObject, useRoutes } from 'react-router-dom';
 import {Layout} from "./Components/Layout/Layout.tsx";
 import './App.css'
-import {MiddleSectionB} from "@Components/Layout/MiddleSection(Bootstrap).tsx";
+import {HomePage} from "@Components/Layout/HomePage.tsx";
 import {CalculatorsB} from "@Components/Calculators/Calculator(bootstrap).tsx";
 import 'react-tooltip/dist/react-tooltip.css'
 import {CandleChart} from "@Components/Charts/CandleChart.tsx";
@@ -18,6 +18,7 @@ import ExcelToTable from "@Components/ExcelToTable.tsx";
 import {TradeLog} from "@Components/TradeLog/TradeLog.tsx";
 import {Dividends} from "@Components/Dividends/Dividends.tsx";
 import TradeResultsUpdater from "@Components/DataGrid/TradeResultUpdater.tsx";
+import {AboutUsPage} from "@Components/Layout/AboutUsPage.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -28,7 +29,13 @@ function App() {
                 {
                     index: true,
                     element: (
-                        <MiddleSectionB/>
+                        <HomePage/>
+                    ),
+                },
+                {
+                    path:"aboutuspage",
+                    element: (
+                        <AboutUsPage/>
                     ),
                 },
                 {

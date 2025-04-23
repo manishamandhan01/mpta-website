@@ -1,8 +1,9 @@
 // import React from "react";
 import {Outlet, useLocation} from "react-router-dom";
 import {HeaderB} from "@Components/Layout/Header(Bootstrap).tsx";
-import {MiddleSectionB} from "@Components/Layout/MiddleSection(Bootstrap).tsx";
+import {HomePage} from "@Components/Layout/HomePage.tsx";
 import {FooterB} from "@Components/Layout/Footer(Bootstrap).tsx";
+import {AboutUsPage} from "@Components/Layout/AboutUsPage.tsx";
 
 export const Layout = () => {
     const open = false;
@@ -16,7 +17,7 @@ export const Layout = () => {
             {!isChartPage && <HeaderB/>}
 
             {open ? (
-                <MiddleSectionB/>
+                <HomePage/>
             ) : (
                 <Outlet/>
             )}

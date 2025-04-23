@@ -20,7 +20,7 @@ export const HeaderB = () => {
                             <a className="nav-link text_gray font_weight_400 " aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text_gray font_weight_400" href="#">About Us</a>
+                            <a className="nav-link text_gray font_weight_400" href="/aboutuspage">About Us</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text_gray font_weight_400" href="/dashboard">Demo</a>
