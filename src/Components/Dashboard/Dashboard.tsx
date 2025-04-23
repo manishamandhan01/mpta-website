@@ -177,7 +177,7 @@ export const Dashboard = (props: Props) => {
                 </div>
 
             </div>
-            <div className="row col-12 m-auto mt-2 ms-5">
+            <div className="row col-10 m-auto mt-2 ms-5">
 
                 <DistributionGainLossBar/>
 

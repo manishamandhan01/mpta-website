@@ -11,6 +11,7 @@ type Props = {
     
 };
 export const Portfolio = (props: Props) => {
+    const[activeLabel, setActiveLabel] = React.useState<string | null>("Portfolio");
     return (
         <div className="pb-5" >
             {/*heading*/}
@@ -18,11 +19,19 @@ export const Portfolio = (props: Props) => {
                 <div className="ua_top_item">
                     <ul>
                         {DashboardData.map((item, index: number) => {
+                            const isActive = activeLabel === item.label;
+
                             return (
                                 <li key={index}>
-                                    <i className={item.icon}></i>
-                                    <span> <a className="nav-link text_gray font_weight_400 " aria-current="page"
-                                              href={item.label}>{item.label}</a></span>
+                                    <a
+                                        href={item.label}
+                                        className={`text_gray font_weight_300 font_poppins line_height_20 heading_24 ${
+                                            isActive ? "active-tab" : ""
+                                        }`}
+                                        onClick={() => setActiveLabel(item.label)}
+                                    >
+                                        {item.label}
+                                    </a>
                                 </li>
                             );
                         })}
@@ -30,20 +39,17 @@ export const Portfolio = (props: Props) => {
                 </div>
             </div>
             <div className="">
-                <div className="d-flex align-items-center ms-4 p-3">
-                    <i className="fa-solid fa-address-card heading-24 "></i>
-                    <p className="ps-2">Portfolio</p>
-                </div>
 
-                <div className="row col-12 m-auto mt-2">
+
+                <div className="row col-12  main-trade-log-cards m-auto mt-5 ">
                     {/*CardOne*/}
 
                     <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div className="portfolio-card-container box-12 position-relative">
+                        <div className=" box-12 ms-0 position-relative">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10" >
+                                        <thead className="position-absolute top-10">
                                         <tr>
                                             <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}} >Account Name</th>
                                             <th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>
@@ -86,7 +92,7 @@ export const Portfolio = (props: Props) => {
 
                     {/*card2*/}
                     <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
-                        <div className="portfolio-card-container   position-relative    box-12">
+                        <div className="   position-relative   ms-0  box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-5">
                                     <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
@@ -132,7 +138,7 @@ export const Portfolio = (props: Props) => {
                     {/*card3*/}
 
                     <div className="col-xl-2 col-lg-6 col-md-5 col-sm-12">
-                        <div className="portfolio-card-container position-relative box-12">
+                        <div className=" position-relative ms-0 box-12">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts mt-2">
                                     <p className="heading-20 font_Epilogue font_weight_400 mb-4">OPEN POSITION DATA</p>
@@ -149,7 +155,7 @@ export const Portfolio = (props: Props) => {
                     </div>
                     {/*Card4*/}
                     <div className="col-xl-4  col-lg-6 col-md-6 col-sm-12">
-                        <div className="portfolio-card-container position-relative box-12 overflow-x-auto">
+                        <div className=" position-relative box-12 ms-0 overflow-x-auto">
                             <div className="dashboard-overall-performance-card">
                                 <div className="amounts  mt-5 ">
                                     <table className="table mt-2  " style={{borderCollapse: 'collapse'}}>
