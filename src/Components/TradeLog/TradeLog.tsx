@@ -8,7 +8,7 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
 import {useEffect, useState} from "react";
-import {fetchTradeResults, TradeRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useTradeResults, TradeRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {
 
@@ -16,6 +16,7 @@ type Props = {
 export const TradeLog = (props: Props) => {
 
     const {tradeRows, setTradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
 
 
     const [topStockPositionsByAllocation, setTopStockPositionsByAllocation] = useState([]);
@@ -23,7 +24,7 @@ export const TradeLog = (props: Props) => {
 
     // Fetching data
     const overAllPerformanceData = () => {
-        fetchTradeResults(tradeRows)
+        fetchTradeResults()
             .then(json => {
                 setTopStockPositionsByAllocation(json['top_5_stock_positions_by_allocation']);
             })

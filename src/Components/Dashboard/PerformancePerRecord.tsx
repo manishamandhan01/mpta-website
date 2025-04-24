@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from "react";
 import {PerformancePeriod, QuarterlyPnl} from "@Components/Utils/Constants.tsx";
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 
 
@@ -14,6 +14,7 @@ type Props = {};
 
 export const PerformancePerRecord = (props: Props) => {
     const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [quarterlyPnl, setQuarterlyPnl] = React.useState<QuarterlyPnl>({});
     const [thisMonthPnl, setThisMonthPnl] = React.useState(0);
     const [yearToDatePnl, setYearToDatePnl] = React.useState(-68);
@@ -21,7 +22,7 @@ export const PerformancePerRecord = (props: Props) => {
 
     // Fetch data from the backend and update the state
     const fetchPerformancePerRecord = () => {
-        fetchTradeResults(tradeRows)
+        fetchTradeResults()
             .then((json: ApiResponse) => {
                 const performance_per_period = json.performance_per_period;
                 setQuarterlyPnl(performance_per_period.quarterly_pnl);

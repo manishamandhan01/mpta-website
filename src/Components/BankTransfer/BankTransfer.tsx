@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
 import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 import {useEffect, useState} from "react";
 
 type Props = {};
@@ -32,16 +32,17 @@ export const BankTransfer = (props: Props) => {
     const[activeLabel, setActiveLabel] = React.useState<string | null>("Bank Transfer");
 
     const {bankTransferRows, setBankTransferRows} = useGlobalStore();
-    const [bankTransferCummulatives, setBankTransferCummulatives] = useState([]);
+    const { fetchTradeResults } = useTradeResults();
+    const [bankTransferCumulatives, setBankTransferCumulatives] = useState([]);
     const [realizedProfit, setTotalGainPer] = React.useState<number>(7892);
     const [realizedLoss, setTotalLossPer] = React.useState<number>(794);
     const total = realizedProfit + realizedLoss;
     const profitPercentage = total ? (realizedProfit / total) * 100 : 0; // percentage of realized profit
     const lossPercentage = total ? (realizedLoss / total) * 100 : 0; //
     const overAllPerformanceData = () => {
-        fetchTradeResults(tradeRows)
+        fetchTradeResults()
             .then(json => {
-                setBankTransferCummulatives(json['bank_transfer_cummulatives']);
+                setBankTransferCumulatives(json['bank_transfer_cumulatives']);
             })
             .catch(err => console.log(err));
     };
@@ -126,12 +127,6 @@ export const BankTransfer = (props: Props) => {
                                             <td>90716</td>
                                             <td>1.26%</td>
                                         </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Realized Profit</td>
-                                            <td>$</td>
-                                            <td>90716</td>
-                                            <td>29.26%</td>
-                                        </tr>
 
                                         </tbody>
                                     </table>
@@ -173,8 +168,8 @@ export const BankTransfer = (props: Props) => {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {bankTransferCummulatives?.length > 0 ? (
-                                            bankTransferCummulatives.map((stock, index) => (
+                                        {bankTransferCumulatives?.length > 0 ? (
+                                            bankTransferCumulatives.map((stock, index) => (
                                                 <tr className="background_grey_color" key={index}>
                                                     <td>{stock['deposit'] ?? 'N/A'}</td>
 

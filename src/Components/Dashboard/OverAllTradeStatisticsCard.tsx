@@ -3,12 +3,13 @@ import { useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HighchartsMore from 'highcharts/highcharts-more';
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx"; // Importing highcharts-more
+import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx"; // Importing highcharts-more
 
 type Props = {};
 
 export const OverAllTradeStatisticsCard = (props: Props) => {
     const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [winRatePercent, setWinRatePercent] = React.useState(0);
     const [profitRatePercent, setProfitRatePercent] = React.useState(0);
     const [winTrades, setWinTrades] = React.useState(0);
@@ -24,7 +25,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
 
     // Fetching data
     const overAllPerformanceData = () => {
-        fetchTradeResults(tradeRows)
+        fetchTradeResults()
             .then(json => {
                 const overall_trade_statistics = json['overall_trade_statistics'];
                 const trade_statistics = json['trade_statistics'];

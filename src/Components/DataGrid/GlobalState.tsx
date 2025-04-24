@@ -86,22 +86,34 @@ export type CombinedRows = {
     dividendRows: DividendRow[];
 }
 
-export const fetchTradeResults = async (tradeRows: TradeRow[], combinedRows?: CombinedRows) => {
-    const [backendResult, setBackendResult]= useState<BackendResult[]>([]);
-    const response = await fetch(
-        'http://localhost:8000/dashboard/overall_performance/get_results?format=json',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(tradeRows),
-        }
-    );
+export const useTradeResults = () => {
+    const { tradeRows, bankTransferRows, dividendRows } = useGlobalStore();
+    const [backendResult, setBackendResult] = useState<BackendResult[]>([]);
 
-    if (!response.ok) throw new Error('Failed to fetch performance data');
-    setBackendResult(response.json());
+    const fetchTradeResults = async () => {
+        const combinedData = {
+            trade_rows: tradeRows,
+            bank_transfer_rows: bankTransferRows,
+            dividend_rows: dividendRows,
+        };
 
+        const response = await fetch(
+            'http://localhost:8000/dashboard/overall_performance/get_results?format=json',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(combinedData),
+            }
+        );
 
+        if (!response.ok) throw new Error('Failed to fetch performance data');
+        const data = await response.json();
+        setBackendResult(data);
+        return data;
+    };
 
+    return { backendResult, fetchTradeResults };
 };
+

@@ -3,18 +3,19 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useEffect } from "react";
 import { OverAllPerformanceModel } from "@Components/Models/OverAllPerformanceModel.tsx";
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 export const DistributionGainLossBar = (props: Props) => {
     const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [cardData, setCardData] = React.useState<OverAllPerformanceModel | null>(null);
     const [gainAndLoss, setGainAndLoss] = React.useState<any>(null); // Store gain/loss distribution data
 
     const DistributionGainLossBar = () => {
         // Make the API call on mount
-        fetchTradeResults(tradeRows)
+        fetchTradeResults()
             .then(json => {
                 const gain_loss_distribution = json['gain_loss_distribution'];
                 setGainAndLoss(gain_loss_distribution); // Set the gain/loss distribution data

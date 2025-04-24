@@ -3,12 +3,13 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 export const RequiredWinRate = (props: Props) => {
     const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [cardData, setCardData] = React.useState<any | null>(null);
     const [totalProfit, setTotalProfit] = React.useState(0);
     const [totalLoss, setTotalLoss] = React.useState(0);
@@ -23,7 +24,7 @@ export const RequiredWinRate = (props: Props) => {
     // Define the function to fetch the overall performance data
     const overAllPerformanceData = () => {
         // Make the API call on mount
-        fetchTradeResults(tradeRows)
+        fetchTradeResults()
             .then((json) => {
                 const overallPerformance = json['overall_performance'];
                 setTotalProfit(overallPerformance['total_gain']);

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 const TradeResultsUpdater = () => {
     const tradeRows = useGlobalStore((state) => state.tradeRows);
     const bankTransferRows = useGlobalStore((state) => state.bankTransferRows);
     const dividendRows = useGlobalStore((state) => state.dividendRows);
+    const { fetchTradeResults } = useTradeResults();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,7 +17,7 @@ const TradeResultsUpdater = () => {
                     dividendRows: dividendRows,
                 };
 
-                const result = await fetchTradeResults(tradeRows, combinedData);
+                const result = await fetchTradeResults();
                 console.log('Fetched performance data:', result);
                 // Optionally update state with the result here
             } catch (error) {

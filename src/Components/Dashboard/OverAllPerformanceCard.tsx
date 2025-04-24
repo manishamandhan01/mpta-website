@@ -3,12 +3,13 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import {fetchTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 export const OverAllPerformanceCard = (props: Props) => {
     const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [totalProfit, setTotalProfit] = React.useState(0);
     const [totalLoss, setTotalLoss] = React.useState(0);
     const [totalGainPer, setTotalGainPer] = React.useState(0);
@@ -18,7 +19,7 @@ export const OverAllPerformanceCard = (props: Props) => {
     const [profitLossData, setProfitLossData] = React.useState([]);
 
     useEffect(() => {
-        fetchTradeResults(tradeRows).then((json) => {
+        fetchTradeResults().then((json) => {
                 const overallPerformance = json['overall_performance'];
 
                 setTotalProfit(overallPerformance['total_gain']);
