@@ -167,7 +167,7 @@ export const Dashboard = (props: Props) => {
                 </div>
             </div>
 
-
+            {/*OverAllSummary*/}
             <div className="dashboard-container">
                 <div className="dashboard-header col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
                     <div className="vertical-line me-2"></div>
@@ -190,32 +190,59 @@ export const Dashboard = (props: Props) => {
                 <OverAllTradeStatisticsCard/>
 
             </div>
-            {/*<div className="dashboard-container mt-3">*/}
-            {/*    Analytics*/}
 
-            {/*</div>*/}
-            {/*<div className="row col-12 m-auto mt-2">*/}
+            {/*Anlytics*/}
+            <div className="dashboard-container">
+                <div className="dashboard-header col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                    <div className="vertical-line me-2"></div>
 
-            {/*    <DrawnAndLosingStreak/>*/}
-            {/*    <TradeStatistics/>*/}
 
-            {/*    <RequiredWinRate/>*/}
+                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24">Analytics</h1>
+                </div>
 
-            {/*</div>*/}
-            {/*<div className="dashboard-container mt-3">*/}
-            {/*    Performance summary*/}
+            </div>
+            <div className="row col-10 m-auto mt-2 ms-5">
 
-            {/*</div>*/}
-            {/*<div className="row col-12 m-auto mt-3">*/}
-            {/*    <PerformancePerRecord/>*/}
-            {/*    <PerformanceCurve/>*/}
-            {/*    <WeeklyPerformanceCurve/>*/}
+                <TradeStatistics/>
 
-            {/*</div>*/}
 
-            {/*<div>*/}
-            {/*    <DasboardAccountSummary/>*/}
-            {/*</div>*/}
+
+            </div>
+            <div className="row col-12 m-auto mt-5 ">
+
+                <DrawnAndLosingStreak/>
+                <RequiredWinRate/>
+
+            </div>
+
+
+            {/*Performance Curve*/}
+            <div className="dashboard-container">
+                <div className="dashboard-header col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                    <div className="vertical-line me-2"></div>
+
+
+                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24"> Performance summary</h1>
+                </div>
+
+            </div>
+            <div className="row col-10 m-auto mt-2 ms-5">
+
+                <PerformanceCurve/>
+
+
+            </div>
+            <div className="row col-12 m-auto mt-5 mb-5 ">
+
+                <PerformancePerRecord/>
+                <WeeklyPerformanceCurve/>
+
+
+            </div>
+
+
+
+
 
         </div>
 

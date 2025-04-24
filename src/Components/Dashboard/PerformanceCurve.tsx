@@ -55,15 +55,21 @@ export const PerformanceCurve = (props: Props) => {
     }
 
     return (
-        <div className="col-xl-6 col-md-6 col-sm-12">
-            <div className="card-container box-12">
-                <div><h1 className="linear-gradient-headings">Performance Curve</h1></div>
+        <div className="col-xl-10 col-lg-6 col-md-6 col-sm-12">
+            <div className=" ">
+                <div className="main_heading_card"><h1
+                    className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Performance Curve</h1>
+                </div>
+                <div className="main_heading_card">
+                    <hr/>
+
+                </div>
                 <div className="dashboard-overall-performance-card">
-                    <div className="dashboard-card">
+                    <div className="dashboard-card-gain-loss">
                         <HighchartsReact highcharts={Highcharts} options={performanceCurveGraph}/>
                     </div>
                 </div>
             </div>
-            </div>
-            );
-            };
+        </div>
+    );
+};

@@ -95,7 +95,7 @@ export const OverAllPerformanceCard = (props: Props) => {
             <div className=" box-12">
                 <div className="dashboard-overall-performance-card">
                     <div className="main_heading_card"><h1
-                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">OverAll Performance</h1></div>
+                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Performance Per Record</h1></div>
                     <div className="main_heading_card">
                         <hr/>
 
