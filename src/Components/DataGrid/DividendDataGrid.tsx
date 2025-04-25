@@ -25,7 +25,7 @@ const DividendDataGrid: React.FC = () => {
                 symbol: values[0] || '',
                 dividendType: values[1] || '',
                 dateReceived: values[2] || '',
-                amountReceived: parseFloat(values[3]) || 0
+                amountReceived: parseFloat(values[3].replace(/,/g, "").replace(/Php/g, "")) || 0
             };
         });
         const updatedRows = [...newRows];

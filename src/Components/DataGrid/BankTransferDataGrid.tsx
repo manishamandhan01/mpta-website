@@ -26,9 +26,9 @@ const TradeDataGrid: React.FC = () => {
                 id: Date.now() + index,
                 date: values[0] || '',
                 action: values[1] || '',
-                grossAmount: parseFloat(values[2]) || 0,
-                fees: parseFloat(values[3]) || 0,
-                netAmount: parseFloat(values[4]) || 0,
+                grossAmount: parseFloat(values[2].replace(/,/g, "").replace(/Php/g, "")) || 0,
+                fees: parseFloat(values[3].replace(/,/g, "").replace(/Php/g, "")) || 0,
+                netAmount: parseFloat(values[4].replace(/,/g, "").replace(/Php/g, "")) || 0,
                 notes: values[5] || ''
             };
         });
