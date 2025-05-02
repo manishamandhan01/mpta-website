@@ -56,185 +56,187 @@ export const TradeStatistics = (props: Props) => {
 
 
     return (
-        <div className="col-xl-10 col-lg-6 col-md-6 col-sm-12">
+        <div className=" ">
             <div className="">
-                <div className="dashboard-overall-performance-card">
+                <div className="">
 
-                    <div className="main_heading_card"><h1
-                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Trade Statistics</h1>
-                    </div>
-                    <div className="main_heading_card">
-                        <hr/>
 
-                    </div>
-                    <div className="dashboard-overall-performance-card">
-                        <div className="dashboard-card-gain-loss">
-                            <div className="amounts">
+                        <div className="main_heading_card_inside"><h1
+                            className="font_poppins heading-20 text-left line_height_32 font_weight_400 mt-1 ">Trade
+                            Statistics</h1></div>
+                        <div className="main_heading_card_inside">
+                            <hr/>
 
-                                <table className="table mt-5 mb-4  " style={{borderCollapse: 'collapse'}}>
-                                    <thead>
-                                    <tr>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Metrics</th>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}>All Trades Stats</th>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Last 50 Trades</th>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Remarks</th>
-                                        <th className="font_Epilogue" style={{fontSize: '15px'}}>Change %</th>
+                        </div>
+                        <div className="">
+                            <div className="">
+                                <div className="">
 
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr className="background_grey_color ">
-                                        <td>Win rate %:</td>
-                                        <td></td>
-                                        <td className={winRatePercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{winRatePercentage}</td>
-                                        <td></td>
-                                        <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades}</td>
-                                        <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > winRatePercentage ? "Improved" : "Declined"}<i
-                                            className={lastFiftyTrades > winRatePercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                        </td>
-                                        <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Largest Profit</td>
-                                        <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
-                                        <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestProfit}</td>
-                                        <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestProfit ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > largestProfit ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                            </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                    <table className="table mt-4   " style={{borderCollapse: 'collapse'}}>
+                                        <thead>
+                                        <tr>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Metrics</th>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>All Trades Stats
+                                            </th>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Last 50 Trades</th>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Remarks</th>
+                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Change %</th>
 
-                                    </tr>
-                                    <tr className="background_grey_color">
-                                        <td>Largest Loss</td>
-                                        <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
-                                        <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLoss}</td>
-                                        <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLoss ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > largestLoss ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr className="background_grey_color ">
+                                            <td>Win rate %:</td>
+                                            <td></td>
+                                            <td className={winRatePercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{winRatePercentage}</td>
+                                            <td></td>
+                                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades}</td>
+                                            <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > winRatePercentage ? "Improved" : "Declined"}<i
+                                                className={lastFiftyTrades > winRatePercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Largest Win %</td>
-                                        <td></td>
-                                        <td className={largestWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestWinPercentage}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestWinPercentage ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > largestWinPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                            <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Largest Profit</td>
+                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestProfit}</td>
+                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestProfit ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > largestProfit ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr className="background_grey_color">
-                                        <td>Largest Loss %</td>
-                                        <td></td>
-                                        <td className={largestLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLossPercentage}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > largestLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLossPercentage ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > largestLossPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                            </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > largestLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ave. Win %</td>
-                                        <td></td>
-                                        <td className={averageWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageWinPercentage}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > averageWinPercentage ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > averageWinPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                            </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                            <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
 
-                                    </tr>
-                                    <tr className="background_grey_color">
-                                        <td>Ave. Loss %</td>
-                                        <td></td>
-                                        <td className={averageLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageLossPercentage}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > averageLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > averageLossPercentage ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > averageLossPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                        </tr>
+                                        <tr className="background_grey_color">
+                                            <td>Largest Loss</td>
+                                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLoss}</td>
+                                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLoss ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > largestLoss ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > averageLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Reward To Risk Ratio</td>
-                                        <td></td>
-                                        <td className={rewardToRiskRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{rewardToRiskRatio}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > rewardToRiskRatio ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > rewardToRiskRatio ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                            <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Largest Win %</td>
+                                            <td></td>
+                                            <td className={largestWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestWinPercentage}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestWinPercentage ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > largestWinPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr className="background_grey_color">
-                                        <td>Profit Loss (Edge) Ratio</td>
-                                        <td></td>
-                                        <td className={profitLossRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitLossRatio}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > profitLossRatio ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > profitLossRatio ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > profitLossRatio ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                            <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr className="background_grey_color">
+                                            <td>Largest Loss %</td>
+                                            <td></td>
+                                            <td className={largestLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLossPercentage}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > largestLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLossPercentage ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > largestLossPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > profitLossRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Profit factor</td>
-                                        <td></td>
-                                        <td className={profitFactor > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitFactor}</td>
-                                        <td></td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > profitFactor ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > profitFactor ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                            <td className={lastFiftyTrades > largestLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ave. Win %</td>
+                                            <td></td>
+                                            <td className={averageWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageWinPercentage}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > averageWinPercentage ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > averageWinPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    <tr className="background_grey_color">
-                                        <td>Expectancy Per Trade</td>
-                                        <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
-                                        <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{expectancyPerTrade}</td>
-                                        <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
-                                        <td>{lastFiftyTrades}</td>
-                                        <td>
-                                            <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > expectancyPerTrade ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > expectancyPerTrade ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                            <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+
+                                        </tr>
+                                        <tr className="background_grey_color">
+                                            <td>Ave. Loss %</td>
+                                            <td></td>
+                                            <td className={averageLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageLossPercentage}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > averageLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > averageLossPercentage ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > averageLossPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
                                             </td>
-                                        </td>
-                                        <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            <td className={lastFiftyTrades > averageLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reward To Risk Ratio</td>
+                                            <td></td>
+                                            <td className={rewardToRiskRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{rewardToRiskRatio}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > rewardToRiskRatio ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > rewardToRiskRatio ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
+                                            </td>
+                                            <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr className="background_grey_color">
+                                            <td>Profit Loss (Edge) Ratio</td>
+                                            <td></td>
+                                            <td className={profitLossRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitLossRatio}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > profitLossRatio ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > profitLossRatio ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > profitLossRatio ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
+                                            </td>
+                                            <td className={lastFiftyTrades > profitLossRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profit factor</td>
+                                            <td></td>
+                                            <td className={profitFactor > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitFactor}</td>
+                                            <td></td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > profitFactor ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > profitFactor ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
+                                            </td>
+                                            <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        <tr className="background_grey_color">
+                                            <td>Expectancy Per Trade</td>
+                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{expectancyPerTrade}</td>
+                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td>{lastFiftyTrades}</td>
+                                            <td>
+                                                <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > expectancyPerTrade ? "Improved" : "Declined"}<i
+                                                    className={lastFiftyTrades > expectancyPerTrade ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                                </td>
+                                            </td>
+                                            <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                        </div>
-                    </div>
                 </div>
-                );
-                };
+            </div>
+            );
+            };

@@ -5,12 +5,13 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import {EntryExitTableWithChart} from "@Components/TradeReview/EntryExitTableWithChart.tsx";
 import {EmotionTableWithChart} from "@Components/TradeReview/EmotionTableWithChart.tsx";
+import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
 
 type Props = {};
 
 export const TradeReview = (props: Props) => {
     const [years, setYears] = useState<number[]>([]);
-
+    const[activeLabel, setActiveLabel] = React.useState<string | null>("Trade Review");
     useEffect(() => {
         const currentYear = new Date().getFullYear();
         const startYear = 1980; // Starting year for the dropdown
@@ -82,23 +83,26 @@ export const TradeReview = (props: Props) => {
 
     return (
         <div className="pb-5">
-            {/* heading */}
+            <div className="dashboard-top_item pe-5 ps-5 row ">
+                <DashboardHeader/>
+            </div>
             <div>
                 <div className="ua_top_item">
                     <ul>
                         {DashboardData.map((item, index: number) => {
+                            const isActive = activeLabel === item.label;
+
                             return (
                                 <li key={index}>
-                                    <i className={item.icon}></i>
-                                    <span>
-                    <a
-                        className="nav-link text_gray font_weight_400"
-                        aria-current="page"
-                        href={item.label}
-                    >
-                      {item.label}
-                    </a>
-                  </span>
+                                    <a
+                                        href={item.label}
+                                        className={`text_gray font_weight_300 font_poppins line_height_20 heading_24 ${
+                                            isActive ? "active-tab" : ""
+                                        }`}
+                                        onClick={() => setActiveLabel(item.label)}
+                                    >
+                                        {item.label}
+                                    </a>
                                 </li>
                             );
                         })}

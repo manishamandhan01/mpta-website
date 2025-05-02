@@ -15,6 +15,7 @@ import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
 import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
 import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 import {useEffect, useState} from "react";
+import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
 
 type Props = {};
 
@@ -39,10 +40,13 @@ export const BankTransfer = (props: Props) => {
     const total = realizedProfit + realizedLoss;
     const profitPercentage = total ? (realizedProfit / total) * 100 : 0; // percentage of realized profit
     const lossPercentage = total ? (realizedLoss / total) * 100 : 0; //
+
+
+
     const overAllPerformanceData = () => {
         fetchTradeResults()
             .then(json => {
-                setBankTransferCumulatives(json['bank_transfer_cumulatives']);
+                setBankTransferCumulatives(json?.bank_transfer_cumulatives || []);
             })
             .catch(err => console.log(err));
     };
@@ -54,7 +58,7 @@ export const BankTransfer = (props: Props) => {
 
     return (
         <div className="pb-5">
-            {/*heading*/}
+            <DashboardHeader/>
             <div>
                 <div className="ua_top_item">
                     <ul>

@@ -8,23 +8,35 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
 import DividendDataGrid from "@Components/DataGrid/DividendDataGrid.tsx";
+import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
 
 type Props = {
     
 };
 export const Dividends = (props: Props) => {
+    const[activeLabel, setActiveLabel] = React.useState<string | null>("Dividends");
     return (
-        <div className="pb-5" >
-            {/*heading*/}
+        <div  >
+            <div className="dashboard-top_item pe-5 ps-5 row ">
+                <DashboardHeader/>
+            </div>
             <div>
                 <div className="ua_top_item">
                     <ul>
                         {DashboardData.map((item, index: number) => {
+                            const isActive = activeLabel === item.label;
+
                             return (
                                 <li key={index}>
-                                    <i className={item.icon}></i>
-                                    <span> <a className="nav-link text_gray font_weight_400 " aria-current="page"
-                                              href={item.label}>{item.label}</a></span>
+                                    <a
+                                        href={item.label}
+                                        className={`text_gray font_weight_300 font_poppins line_height_20 heading_24 ${
+                                            isActive ? "active-tab" : ""
+                                        }`}
+                                        onClick={() => setActiveLabel(item.label)}
+                                    >
+                                        {item.label}
+                                    </a>
                                 </li>
                             );
                         })}

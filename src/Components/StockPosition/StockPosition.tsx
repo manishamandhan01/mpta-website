@@ -2,10 +2,12 @@ import * as React from 'react';
 import { DashboardData } from "@Components/Dashboard/DashboardData.tsx";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
 
 type Props = {};
 
 export const StockPosition = (props: Props) => {
+    const[activeLabel, setActiveLabel] = React.useState<string | null>("Stock Position");
    const StockPositionData=[
        {
            "name": "CAN",
@@ -182,20 +184,27 @@ export const StockPosition = (props: Props) => {
     };
 
     return (
-        <div className="pb-5">
-            {/*heading*/}
+        <div >
+            <div className="dashboard-top_item pe-5 ps-5 row ">
+                <DashboardHeader/>
+            </div>
             <div>
                 <div className="ua_top_item">
                     <ul>
                         {DashboardData.map((item, index: number) => {
+                            const isActive = activeLabel === item.label;
+
                             return (
                                 <li key={index}>
-                                    <i className={item.icon}></i>
-                                    <span>
-                    <a className="nav-link text_gray font_weight_400 " aria-current="page" href={item.label}>
-                      {item.label}
-                    </a>
-                  </span>
+                                    <a
+                                        href={item.label}
+                                        className={`text_gray font_weight_300 font_poppins line_height_20 heading_24 ${
+                                            isActive ? "active-tab" : ""
+                                        }`}
+                                        onClick={() => setActiveLabel(item.label)}
+                                    >
+                                        {item.label}
+                                    </a>
                                 </li>
                             );
                         })}
@@ -216,7 +225,7 @@ export const StockPosition = (props: Props) => {
                         <div className="portfolio-card-container box-12 position-relative">
                             <div id="overAllPerformanceChart" className="mt-1">
                                 {/* Rendering the Highcharts pie chart here */}
-                                <HighchartsReact highcharts={Highcharts} options={statisticChart} />
+                                <HighchartsReact highcharts={Highcharts} options={statisticChart}/>
                             </div>
                         </div>
                     </div>
@@ -227,7 +236,7 @@ export const StockPosition = (props: Props) => {
                             <div className="dashboard-overall-performance-card">
                                 <div className="d-flex justify-content-between text-center  m-auto ">
                                     <div className="d-flex flex-row ">
-                                        <p className="heading-20 " >Sort </p>
+                                        <p className="heading-20 ">Sort </p>
                                         <p className="heading-20 ms-2">Symbol </p>
 
                                         <select className="ms-3">
@@ -241,42 +250,54 @@ export const StockPosition = (props: Props) => {
 
                                 <div className="amounts mt-4  mr-82 d-flex flex-row  ">
                                     <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead >
+                                        <thead>
                                         <tr>
-                                            <th className="  heading-20 font_Epilogue font_weight_400 mb-4 text-center  ">Stock Code</th>
+                                            <th className="  heading-20 font_Epilogue font_weight_400 mb-4 text-center  ">Stock
+                                                Code
+                                            </th>
                                             <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Profit</th>
                                             <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Trade(Win%)</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Win Rate %</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average Days</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average Allocation</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average Win%</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average Loss%</th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Win
+                                                Rate %
+                                            </th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average
+                                                Days
+                                            </th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average
+                                                Allocation
+                                            </th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average
+                                                Win%
+                                            </th>
+                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average
+                                                Loss%
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
-                                            {StockPositionData.map((item, index: number) => {
-                                                return (
-                                                    <tr className="table-row-padding text-center">
-                                                        <td>{item.name}</td>
-                                                        <td>{item.profit}</td>
-                                                        <td>{item.tradeWin}</td>
-                                                        <td>{item.winRate}</td>
-                                                        <td>{item.averagedays}</td>
-                                                        <td>{item.averageAllocation}</td>
-                                                        <td>{item.averageWin}</td>
-                                                        <td>{item.averageLoss}</td>
-                                                    </tr>
+                                        {StockPositionData.map((item, index: number) => {
+                                            return (
+                                                <tr className="table-row-padding text-center">
+                                                    <td>{item.name}</td>
+                                                    <td>{item.profit}</td>
+                                                    <td>{item.tradeWin}</td>
+                                                    <td>{item.winRate}</td>
+                                                    <td>{item.averagedays}</td>
+                                                    <td>{item.averageAllocation}</td>
+                                                    <td>{item.averageWin}</td>
+                                                    <td>{item.averageLoss}</td>
+                                                </tr>
 
-                                                )
+                                            )
 
-                                            })}
+                                        })}
 
 
                                         </tbody>
                                     </table>
                                     <div className=" ms-5 me-5">
-                                    <button className="circle-btn bg-light mt-5">
+                                        <button className="circle-btn bg-light mt-5">
                                             <i className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
                                         </button>
                                         <button className="circle-btn bg-light  mt-5">

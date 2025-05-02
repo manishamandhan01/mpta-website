@@ -184,32 +184,32 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
 
 
     return (
-        <div className="col-xl-4 col-md-6 col-sm-12 ms-5 mb-5">
-            <div className=" box-12">
+        <div className="">
+            <div className=" dashboard-overall-performance-card">
 
                 <div className="">
-                    <div className="main_heading_card"><h1
-                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">OverAll
+                    <div className="main_heading_card_inside"><h1
+                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-2 ">OverAll
                        Trade Statistics</h1></div>
-                    <div className="main_heading_card">
+                    <div className="main_heading_card_inside">
                         <hr/>
 
                     </div>
 
-                    <div className="row mt-4">
+                    <div className="row col-12 mt-5 m-auto ">
                         {/* First pie chart (Win Rate) */}
-                        <div className=" ms-5 col-3">
+                        <div className=" col-xl-6  col-lg-5 col-md-5 col-sm-6 p-0">
                             <HighchartsReact highcharts={Highcharts} options={winRateChartOptions}/>
                         </div>
 
                         {/* Second pie chart (Profit Rate) */}
-                        <div className="col-3 ms-5 profit_Rate ">
+                        <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5  profit_Rate p-0 ">
                             <HighchartsReact highcharts={Highcharts} options={profitRateChartOptions}/>
                         </div>
                     </div>
 
                     <div className="d-flex justify-content-between text-center mt-5">
-                        <div className="lh-lg">
+                        <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400 mt-2 p-1">
                             <div><p className="text-success font-bold">{winTrades}</p></div>
                             <div><p>Win Trades</p></div>
                             <div><p className="text-success font-bold">{averageWinPercent}%</p></div>
@@ -217,7 +217,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                             <div><p>Profit Factor</p></div>
                         </div>
 
-                        <div className="lh-lg">
+                        <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400 mt-2 p-1 ">
                             <div><p className="text-danger font-bold">{lossTrades}</p></div>
                             <div><p>Loss Trades</p></div>
                             <div><p className="text-danger font-bold">{averageLossPercent}%</p></div>
@@ -225,7 +225,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                             <div><p>{profitFactor}</p></div>
                         </div>
 
-                        <div className="lh-lg">
+                        <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400 mt-2 p-1 ">
                             <div><p className="text-success font-bold">{averageProfit}</p></div>
                             <div><p>Avg Profit</p></div>
                             <div><p className="text-success font-bold">{winLossRatio}</p></div>
@@ -233,7 +233,7 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                             <div><p>Expectancy</p></div>
                         </div>
 
-                        <div className="lh-lg">
+                        <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400 mt-2 p-1">
                             <div><p className="text-danger font-bold">{averageLoss}</p></div>
                             <div><p>Avg Loss</p></div>
                             <div><p className="text-success font-bold">{profitLossRatio}</p></div>

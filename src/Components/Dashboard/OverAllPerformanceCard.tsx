@@ -91,37 +91,37 @@ export const OverAllPerformanceCard = (props: Props) => {
     };
 
     return (
-        <div className="col-xl-4 col-md-6 col-sm-12 ms-5 mb-5">
-            <div className=" box-12">
+        <div className="   ">
+            <div className=" ">
                 <div className="dashboard-overall-performance-card">
-                    <div className="main_heading_card"><h1
-                        className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Performance Per Record</h1></div>
-                    <div className="main_heading_card">
+                    <div className="main_heading_card_inside"><h1
+                        className="font_poppins heading-20 line_height_32 text-left font_weight_400 mt-2 ">Overall Performance</h1></div>
+                    <div className="main_heading_card_inside">
                         <hr/>
 
                     </div>
                     <div className="amounts mt-4">
                         <div className="d-flex justify-content-between text-center mt-1">
-                            <div className="lh-lg">
+                            <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400">
                                 <p>Total Gain</p>
                                 <p>Total Loss</p>
                                 <p>Profit/Loss</p>
                             </div>
-                            <div className="lh-lg">
+                            <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400">
                                 <p className="total_gain_row">${totalProfit}</p>
                                 <p className="total_loss_row">${totalLoss}</p>
                                 <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
                                     ${totalProfitLoss}
                                 </p>
                             </div>
-                            <div className="lh-lg">
+                            <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400">
                                 <p className="total_gain_row"><i className="fa-solid fa-caret-up"></i></p>
                                 <p className="total_loss_row"><i className="fa-solid fa-caret-down"></i></p>
                                 <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
                                     <i className={totalProfitLoss >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
                                 </p>
                             </div>
-                            <div className="lh-lg">
+                            <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400">
                                 <p className="total_gain_row">{totalGainPer}%</p>
                                 <p className="total_loss_row">{totalLossPer}%</p>
                                 <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
@@ -130,7 +130,7 @@ export const OverAllPerformanceCard = (props: Props) => {
                             </div>
                         </div>
                         <div
-                            className="profit-loss-bar"
+                            className="profit-loss-bar mt-1"
                             style={{
                                 background: `linear-gradient(to right, green ${totalGainPer}%, red ${totalLossPer}%)`,
                                 width: '100%',
@@ -140,7 +140,7 @@ export const OverAllPerformanceCard = (props: Props) => {
                             }}
                         ></div>
                     </div>
-                    <div id="overAllPerformanceChart" className="">
+                    <div id="overAllPerformanceChart" className="mt-1">
                         <HighchartsReact highcharts={Highcharts} options={chartOptions}/>
                     </div>
                 </div>
@@ -148,3 +148,4 @@ export const OverAllPerformanceCard = (props: Props) => {
         </div>
     );
 };
+

@@ -74,7 +74,7 @@ export const DistributionGainLossBar = (props: Props) => {
                 const percentageValue = parseFloat(percentageRange.replace('%', '')); // Convert the percentage string to a number
 
                 // Color the bar red if percentage is below 10%, green if it's 10% or more
-                const color = percentageValue < 0 ? '#dc3545' : '#28a745';
+                const color = percentageValue < 0 ? '#fa5567' : '#b3edc0';
 
                 return {
                     name: label,
@@ -99,25 +99,29 @@ export const DistributionGainLossBar = (props: Props) => {
     };
 
     return (
-        <div className="col-xl-10 col-lg-6 col-md-6 col-sm-12">
+        <div className=" ">
             <div className=" ">
-                <div className="main_heading_card"><h1 className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Distribution Of Gains
-                    And Losses</h1></div>
-                <div className="main_heading_card">
-                    <hr/>
-
-                </div>
 
 
-                <div className="dashboard-overall-performance-card">
+
+                <div className="">
 
 
-                <div className="dashboard-card-gain-loss">
+                    <div className="" >
+                        <div className="main_heading_card_inside"><h1
+                            className="font_poppins heading-20 text-left line_height_32 font_weight_400 mt-1 ">Distribution Of
+                            Gains
+                            And Losses</h1></div>
+                        <div className="main_heading_card_inside">
+                            <hr/>
+
+                        </div>
 
                         <HighchartsReact
                             highcharts={Highcharts}
                             options={chartOptions}
                         />
+
                     </div>
                 </div>
             </div>

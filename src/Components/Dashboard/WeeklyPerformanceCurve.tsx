@@ -12,11 +12,11 @@ type Props = {};
 
 export const WeeklyPerformanceCurve = (props: Props) => {
     const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [quarterlyPnl, setQuarterlyPnl] = React.useState<QuarterlyPnl>({});
     const [thisMonthPnl, setThisMonthPnl] = React.useState(0);
     const [yearToDatePnl, setYearToDatePnl] = React.useState(-68);
     const [previousYearToDate, setPreviousYearToDate] = React.useState(0);
-    const { fetchTradeResults } = useTradeResults();
 
     // Fetch data from the backend and update the state
     const fetchPerformancePerRecord = () => {
@@ -39,19 +39,94 @@ export const WeeklyPerformanceCurve = (props: Props) => {
 
 
     return (
-        <div className="col-xl-4 col-md-6 col-sm-12 ms-5 mb-5 ">
-            <div className=" box-12">
-                <div className="main_heading_card"><h1
-                    className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">Weekly Performance Curve</h1>
-                </div>
-                <div className="main_heading_card">
-                    <hr/>
+        <div className="">
+            <div className=" ">
 
-                </div>
-                <div className="dashboard-overall-performance-card">
+
+                <div className="dashboard-overall-performance-card ">
+                    <div className="main_heading_card_inside"><h1
+                        className="font_poppins heading-20 line_height_32 text-left font_weight_400 mt-2 ">Performance Per Period</h1></div>
+                    <div className="main_heading_card_inside">
+                        <hr/>
+
+                    </div>
 
                     <div className="amounts">
 
+                        <table className="table mt-5" style={{borderCollapse: 'collapse'}}>
+                            <thead>
+                            <tr>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr className="background_grey_color">
+                                <td>This Month</td>
+                                <td className={(thisMonthPnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(thisMonthPnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(thisMonthPnl)}</td>
+                                <td className={(thisMonthPnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(thisMonthPnl) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(thisMonthPnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+                            <tr>
+                                <td>1st Quater</td>
+                                <td className={(quarterlyPnl['2018 Q1']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(quarterlyPnl['2018 Q1']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(quarterlyPnl['2018 Q1'] + quarterlyPnl['2018 Q3'] + quarterlyPnl['2019 Q3'])}</td>
+                                <td className={(quarterlyPnl['2018 Q1']) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(quarterlyPnl['2018 Q1'] + quarterlyPnl['2018 Q3'] + quarterlyPnl['2019 Q3']) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(quarterlyPnl['2018 Q1']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+                            <tr className="background_grey_color">
+                                <td>2nd Quater</td>
+                                <td className={(quarterlyPnl['2018 Q2']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(quarterlyPnl['2018 Q2']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(quarterlyPnl['2018 Q2'])}</td>
+                                <td className={(quarterlyPnl['2018 Q2']) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(quarterlyPnl['2018 Q2']) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(quarterlyPnl['2018 Q2']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+                            <tr>
+                                <td>3rd Quater</td>
+                                <td className={(quarterlyPnl['2017 Q3']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(quarterlyPnl['2017 Q3']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(quarterlyPnl['2017 Q3'])}</td>
+                                <td className={(quarterlyPnl['2017 Q3']) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(quarterlyPnl['2017 Q3']) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(quarterlyPnl['2017 Q3']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+                            <tr className="background_grey_color">
+                                <td>4th Quater</td>
+                                <td className={(quarterlyPnl['2017 Q4']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(quarterlyPnl['2017 Q4']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(quarterlyPnl['2017 Q4'])}</td>
+                                <td className={(quarterlyPnl['2017 Q4']) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(quarterlyPnl['2017 Q4']) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(quarterlyPnl['2017 Q4']) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+                            <tr>
+                                <td>Year To Date</td>
+                                <td className={(yearToDatePnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(yearToDatePnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(yearToDatePnl)}</td>
+                                <td className={(yearToDatePnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(yearToDatePnl) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(yearToDatePnl) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+                            <tr className="background_grey_color">
+                                <td>Previous YTD</td>
+                                <td className={(previousYearToDate) >= 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                <td className={(previousYearToDate) >= 0 ? 'total_gain_row' : 'total_loss_row'}>{(previousYearToDate)}</td>
+                                <td className={(previousYearToDate) >= 0 ? 'total_gain_row' : 'total_loss_row'}><i
+                                    className={(previousYearToDate) >= 0 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
+                                </td>
+                                <td className={(previousYearToDate) >= 0 ? 'total_gain_row' : 'total_loss_row'}>%</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>

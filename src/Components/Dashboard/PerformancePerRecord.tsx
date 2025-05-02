@@ -41,21 +41,21 @@ export const PerformancePerRecord = (props: Props) => {
 
 
     return (
-        <div className="col-xl-4 col-md-6 col-sm-12 ms-5 mb-5">
-            <div className=" box-12">
+        <div className="">
+            <div className=" ">
 
-                <div className="main_heading_card"><h1
-                    className="font_poppins heading-20 line_height_32 font_weight_400 mt-5 ">OverAll Performance</h1>
-                </div>
-                <div className="main_heading_card">
-                    <hr/>
 
-                </div>
-                <div className="dashboard-overall-performance-card">
+                <div className="dashboard-overall-performance-card ">
+                    <div className="main_heading_card_inside"><h1
+                        className="font_poppins heading-20 line_height_32 text-left font_weight_400 mt-2 ">Performance Per Period</h1></div>
+                    <div className="main_heading_card_inside">
+                        <hr/>
+
+                    </div>
 
                     <div className="amounts">
 
-                        <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
+                        <table className="table mt-5" style={{borderCollapse: 'collapse'}}>
                             <thead>
                             <tr>
 
