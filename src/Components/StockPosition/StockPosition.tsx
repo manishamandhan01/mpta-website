@@ -185,7 +185,7 @@ export const StockPosition = (props: Props) => {
 
     return (
         <div >
-            <div className="dashboard-top_item pe-5 ps-5 row ">
+            <div className="pb-5">
                 <DashboardHeader/>
             </div>
             <div>

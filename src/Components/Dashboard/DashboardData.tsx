@@ -51,8 +51,8 @@ export const DashboardData = [
     //     icon:"fa-solid fa-trophy",
     //     label:"Dividends",
     // },
-    // {
-    //     icon:"fa-solid fa-upload",
-    //     label:"Settings",
-    // }
+    {
+        icon:"fa-solid fa-upload",
+        label:"Settings",
+    }
 ]

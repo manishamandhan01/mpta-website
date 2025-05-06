@@ -97,7 +97,7 @@ export const TradeLog = (props: Props) => {
     };
     return (
         <div className="pb-5">
-            <div className="dashboard-top_item pe-5 ps-5 row ">
+            <div className=" ">
                 <DashboardHeader/>
 
             </div>

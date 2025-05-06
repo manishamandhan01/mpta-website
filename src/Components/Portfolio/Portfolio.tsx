@@ -15,7 +15,7 @@ export const Portfolio = (props: Props) => {
     const[activeLabel, setActiveLabel] = React.useState<string | null>("Portfolio");
     return (
         <div>
-            <div className="dashboard-top_item pe-5 ps-5 row ">
+            <div className="pb-5">
                 <DashboardHeader/>
             </div>
                 <div>

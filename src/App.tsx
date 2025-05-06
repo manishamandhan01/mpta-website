@@ -19,6 +19,7 @@ import {TradeLog} from "@Components/TradeLog/TradeLog.tsx";
 import {Dividends} from "@Components/Dividends/Dividends.tsx";
 import TradeResultsUpdater from "@Components/DataGrid/TradeResultUpdater.tsx";
 import {AboutUsPage} from "@Components/Layout/AboutUsPage.tsx";
+import {Settings} from "@Components/Settings/Settings.tsx";
 
 function App() {
     const route : RouteObject[]=[
@@ -107,6 +108,12 @@ function App() {
                     path:"trade log",
                     element: (
                         <TradeLog/>
+                    ),
+                },
+                {
+                    path:"settings",
+                    element: (
+                        <Settings/>
                     ),
                 },
 
