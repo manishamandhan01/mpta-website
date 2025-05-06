@@ -3,11 +3,16 @@ import { DashboardData } from "@Components/Dashboard/DashboardData.tsx";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
+import DividendDataGrid from "@Components/DataGrid/DividendDataGrid.tsx";
+import StockPositionDataGrid from "@Components/DataGrid/StockPositionDataGrid.tsx";
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
+
+import {useEffect, useState} from "react";
 
 type Props = {};
 
 export const StockPosition = (props: Props) => {
-    const[activeLabel, setActiveLabel] = React.useState<string | null>("Stock Position");
+   const[activeLabel, setActiveLabel] = React.useState<string | null>("Stock Position");
    const StockPositionData=[
        {
            "name": "CAN",
@@ -70,6 +75,38 @@ export const StockPosition = (props: Props) => {
            "averageLoss": "22%"
        }
    ]
+   const { fetchTradeResults } = useTradeResults();
+   const {tradeRows, setTradeRows} = useGlobalStore();
+
+   const [topSymbols, setTopSymbols] = useState([]);
+
+    // const topSymbols = [
+    //     { id: 1, symbol: 'PXP', cumulative: 'Php 50,452', trades: 16, winRate: '56.25%', profitFactor: '4.12', expectancy: 'Php 3,153' },
+    //     { id: 2, symbol: 'NOW', cumulative: 'Php 34,531', trades: 3, winRate: '33.33%', profitFactor: '4.71', expectancy: 'Php 11,510' },
+    //     // ...
+    // ];
+
+    const [worstSymbols, setWorstSymbols] = useState([]);
+
+    // const worstSymbols = [
+    //     { id: 1, symbol: 'NIKL', cumulative: 'Php -16,329', trades: 6, winRate: '0.00%', profitFactor: 'NA', expectancy: 'NA' },
+    //     { id: 2, symbol: 'PRMX', cumulative: 'Php -6,959', trades: 3, winRate: '0.00%', profitFactor: 'NA', expectancy: 'NA' },
+    //     // ...
+    // ];
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setTopSymbols(json['top_symbols']);
+                setWorstSymbols(json['worst_symbols']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
 
 
     const statisticChart = {
@@ -308,6 +345,9 @@ export const StockPosition = (props: Props) => {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
+                    <StockPositionDataGrid topSymbols={topSymbols} worstSymbols={worstSymbols} />
                 </div>
             </div>
         </div>
