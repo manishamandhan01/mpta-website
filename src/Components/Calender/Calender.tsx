@@ -1,6 +1,9 @@
 // @flow
 import * as React from 'react';
 import {DashboardData} from "@Components/Dashboard/DashboardData.tsx";
+import TradeCalendar from "@Components/Calender/TradeCalendar.tsx";
+import {useState, useEffect} from "react";
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 
 type Props = {};
@@ -11,6 +14,22 @@ export const Calendar = (props: Props) => {
     const currentDay = currentDate.getDate(); // Current day of the month
     const currentMonth = currentDate.getMonth(); // Current month (0-indexed)
     const currentYearGlobal = currentDate.getFullYear(); // Current year
+    const {tradeRows, setTradeRows} = useGlobalStore();
+    const [calendarTradeRows, setCalendarTradeRows] = useState([]);
+    const { fetchTradeResults } = useTradeResults();
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setCalendarTradeRows(json['calendar_trades']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
 
 
     const monthNames = [
@@ -72,16 +91,19 @@ export const Calendar = (props: Props) => {
             <div className="calender-heading">
                 Calendar
             </div>
-            <div className="yearly-calendar-container">
-                <div className="year-header">
-                    <button onClick={() => setCurrentYear(currentYear - 1)}>Prev Year</button>
-                    <h2>{currentYear}</h2>
-                    <button onClick={() => setCurrentYear(currentYear + 1)}>Next Year</button>
+            {/*<div className="yearly-calendar-container">*/}
+                {/*<div className="year-header">*/}
+                {/*    <button onClick={() => setCurrentYear(currentYear - 1)}>Prev Year</button>*/}
+                {/*    <h2>{currentYear}</h2>*/}
+                {/*    <button onClick={() => setCurrentYear(currentYear + 1)}>Next Year</button>*/}
+                {/*</div>*/}
+                {/*<div className="scrollable-calendar">*/}
+                {/*    {monthNames.map((_, index) => renderMonth(index))}*/}
+                {/*</div>*/}
+                <div className="min-h-screen bg-gray-100">
+                    <TradeCalendar trades={calendarTradeRows}/>
                 </div>
-                <div className="scrollable-calendar">
-                    {monthNames.map((_, index) => renderMonth(index))}
-                </div>
-            </div>
+            {/*</div>*/}
         </div>
     );
 };
