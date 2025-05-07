@@ -8,6 +8,7 @@ import StockPositionDataGrid from "@Components/DataGrid/StockPositionDataGrid.ts
 import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 import {useEffect, useState} from "react";
+import SummaryPieChart from "@Components/StockPosition/SummaryPieChart.tsx";
 
 type Props = {};
 
@@ -262,7 +263,8 @@ export const StockPosition = (props: Props) => {
                         <div className="portfolio-card-container box-12 position-relative">
                             <div id="overAllPerformanceChart" className="mt-1">
                                 {/* Rendering the Highcharts pie chart here */}
-                                <HighchartsReact highcharts={Highcharts} options={statisticChart}/>
+                                {/*<HighchartsReact highcharts={Highcharts} options={statisticChart}/>*/}
+                                <SummaryPieChart profitableCount={topSymbols.length} nonProfitableCount={worstSymbols.length} />
                             </div>
                         </div>
                     </div>
