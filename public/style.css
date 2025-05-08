@@ -1016,3 +1016,62 @@ a {
     border-radius: 2px;
     border: 1px solid #ccc;
 }
+.calendar-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 20px;
+}
+
+.month-container {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+
+.calendar-day, .empty-day {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.highlight-today {
+    background-color: #3182ce;
+    color: white;
+    font-weight: bold;
+}
+.calendar-day {
+    padding: 0.5rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pevNextButtonCalendar{
+    display: flex;
+    flex-direction: row;
+    margin-left: 850px;
+}
+
+.empty-day {
+    height: 40px;
+}
+.calendar-day {
+    padding: 6px;
+    border-radius: 4px;
+}
+.highlight-today {
+    background-color: #cbd5e1; /* Tailwind slate-300 */
+}
+

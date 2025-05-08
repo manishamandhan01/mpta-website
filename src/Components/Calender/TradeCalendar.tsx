@@ -73,13 +73,13 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
 
         return (
             <div key={monthIndex} className="p-2 w-full sm:w-1/2 lg:w-1/3 box-border">
-                <div className="border rounded p-2 h-full bg-white">
-                    <h3 className="text-center font-bold mb-2 text-sm">{month.format('MMMM')}</h3>
+                <div className=" rounded p-2 h-full bg-white">
+                    <h3 className=" font-bold mb-2 text-sm">{month.format('MMMM')}</h3>
                     <table className="w-full table-fixed border-collapse text-xs border border-gray-300">
                         <thead>
                         <tr>
                             {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d) => (
-                                <th key={d} className="border bg-gray-100 text-[10px] py-1">{d}</th>
+                                <th key={d} className="border bg-gray-100 text-[10px] text-center">{d}</th>
                             ))}
                         </tr>
                         </thead>
