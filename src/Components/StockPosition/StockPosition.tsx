@@ -250,17 +250,12 @@ export const StockPosition = (props: Props) => {
                 </div>
             </div>
             <div className="">
-                <div className="d-flex align-items-center ms-4 p-3">
-                    <div className="bank-icon">
-                        <i className="fa-solid fa-chart-column heading-24"></i>
-                    </div>
-                    <p className="ps-2">Statistics</p>
-                </div>
+
 
                 <div className="row col-12 m-auto mt-2">
                     {/* CardOne */}
                     <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12">
-                        <div className="portfolio-card-container box-12 position-relative">
+                        <div className="portfolio-card-container dashboard-overall-performance-card ms-5 position-relative">
                             <div id="overAllPerformanceChart" className="mt-1">
                                 {/* Rendering the Highcharts pie chart here */}
                                 {/*<HighchartsReact highcharts={Highcharts} options={statisticChart}/>*/}
@@ -271,8 +266,8 @@ export const StockPosition = (props: Props) => {
 
                     {/* card2 */}
                     <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12 ">
-                        <div className="portfolio-card-container position-relative box-12  overflow-x-auto">
-                            <div className="dashboard-overall-performance-card">
+                        <div className="portfolio-card-container position-relative me-5  overflow-x-auto">
+                            <div className="dashboard-overall-performance-card ">
                                 <div className="d-flex justify-content-between text-center  m-auto ">
                                     <div className="d-flex flex-row ">
                                         <p className="heading-20 ">Sort </p>

@@ -72,7 +72,7 @@ export const Calendar = (props: Props) => {
         }
 
         return (
-            <div key={monthIndex} className="month-container p-2">
+            <div key={monthIndex} className="dashboard-overall-performance-card p-2">
                 <h3 className="month-name font-bold mb-2">{monthNames[monthIndex]}</h3>
                 <div className="calendar-grid grid grid-cols-7 gap-1 text-sm">
                     {weekdayHeaders}
