@@ -16,11 +16,12 @@ type Props = {
 };
 export const TradeLog = (props: Props) => {
 
-    const {tradeRows, setTradeRows} = useGlobalStore();
+    const {tradeRows} = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
 
 
     const [topStockPositionsByAllocation, setTopStockPositionsByAllocation] = useState([]);
+    const [capitalCalculations, setCapitalCalculations] = useState([]);
     const[activeLabel, setActiveLabel] = React.useState<string | null>("Trade Log");
 
     // Fetching data
@@ -28,6 +29,7 @@ export const TradeLog = (props: Props) => {
         fetchTradeResults()
             .then(json => {
                 setTopStockPositionsByAllocation(json['top_5_stock_positions_by_allocation']);
+                setCapitalCalculations(json['capital_calculations']);
             })
             .catch(err => console.log(err));
     };
@@ -141,53 +143,23 @@ export const TradeLog = (props: Props) => {
                                                 colSpan={3}>Account
                                                 Name
                                             </th>
-                                            <th className="font_Epilogue heading-16 font_weight_400 line_height_32">Manisha</th>
+                                            <th className="font_Epilogue heading-16 font_weight_400 line_height_32">Sam</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr className="background_grey_color ">
-                                            <td>Beg. Capital</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Add deposit</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Div. Received</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Net Profit/Loss</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Withdrawals</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>End Capital</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Cash Balance</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>52%</td>
-                                        </tr>
+                                        {capitalCalculations.map((row, index) => (
+                                            <tr
+                                                key={index}
+                                                className={index % 2 === 0 ? "background_grey_color" : ""}
+                                            >
+                                                <td>{row["label"]}</td>
+                                                <td>{row["currency"]}</td>
+                                                <td>{row["amount"]}</td>
+                                                <td>{row["percentage"]}</td>
+                                            </tr>
+                                        ))}
                                         </tbody>
+
                                     </table>
 
 
