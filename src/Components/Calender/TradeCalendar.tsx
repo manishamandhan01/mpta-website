@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import dayjs from 'dayjs';
 
 interface Trade {
-    date: string; // format: YYYY-MM-DD
+    date: string;
     profit: number;
     trades: number;
     symbol: string;
@@ -24,7 +24,7 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
     const renderMonth = (monthIndex: number) => {
         const month = dayjs().year(currentYear).month(monthIndex);
         const startOfMonth = month.startOf('month');
-        const startDay = startOfMonth.day(); // Sunday = 0
+        const startDay = startOfMonth.day();
         const daysInMonth = startOfMonth.daysInMonth();
 
         const weeks: JSX.Element[][] = [];
@@ -72,45 +72,47 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
         }
 
         return (
-            <div key={monthIndex} className="p-2 w-full sm:w-1/2 lg:w-1/3 box-border">
-                <div className=" rounded p-2 h-full bg-white">
-                    <h3 className=" font-bold mb-2 text-sm">{month.format('MMMM')}</h3>
-                    <table className="w-full table-fixed border-collapse text-xs border border-gray-300">
-                        <thead>
-                        <tr>
-                            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d) => (
-                                <th key={d} className="border bg-gray-100 text-[10px] text-center">{d}</th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {weeks.map((week, i) => (
-                            <tr key={i}>{week}</tr>
+            <div key={monthIndex} className="bg-white rounded p-2 shadow">
+                <h3 className="font-bold mb-2 text-sm text-center">{month.format('MMMM')}</h3>
+                <table className="w-full table-fixed border-collapse text-xs border border-gray-300">
+                    <thead>
+                    <tr>
+                        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d) => (
+                            <th key={d} className="border bg-gray-100 text-[10px] text-center">{d}</th>
                         ))}
-                        </tbody>
-                    </table>
-                </div>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {weeks.map((week, i) => (
+                        <tr key={i}>{week}</tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
-
         );
     };
 
     return (
         <div className="w-full max-w-7xl mx-auto p-4">
             <div className="flex justify-between items-center mb-6">
-                <button onClick={() => setCurrentYear((y) => y - 1)}
-                        className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                <button
+                    onClick={() => setCurrentYear((y) => y - 1)}
+                    className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                >
                     &lt; Prev Year
                 </button>
                 <h2 className="text-2xl font-bold">{currentYear}</h2>
-                <button onClick={() => setCurrentYear((y) => y + 1)}
-                        className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                <button
+                    onClick={() => setCurrentYear((y) => y + 1)}
+                    className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                >
                     Next Year &gt;
                 </button>
             </div>
 
-            <div className="flex flex-wrap">
-                {Array.from({length: 12}).map((_, monthIndex) => renderMonth(monthIndex))}
+            {/* ✅ This is the layout that makes 3 months per row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Array.from({ length: 12 }).map((_, monthIndex) => renderMonth(monthIndex))}
             </div>
         </div>
     );

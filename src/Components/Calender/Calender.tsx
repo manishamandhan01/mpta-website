@@ -109,28 +109,7 @@ export const Calendar = (props: Props) => {
                     </ul>
                 </div>
             </div>
-            <div className="  items-center justify-between px-4 py-2  pevNextButtonCalendar">
-                <button
-                    onClick={() => setCurrentYear(currentYear - 1)}
-                    className=""
-                >
-                    ←
-                </button>
-                <h2 className="heading-20 font_poppins font_weight_400 text_light_gray mt-4 ">{currentYear}</h2>
-                <button
-                    onClick={() => setCurrentYear(currentYear + 1)}
-                    className=""
-                >
-                    →
-                </button>
-            </div>
-
-
-            <div className="min-h-screen bg-gray-100">
-                <div className="calendar-grid-wrapper">
-                    {Array.from({length: 12}).map((_, index) => renderMonth(index))}
-                </div>
-            </div>
+            <TradeCalendar trades={calendarTradeRows} />
             {/*</div>*/}
         </div>
     );

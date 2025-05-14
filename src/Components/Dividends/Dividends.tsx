@@ -9,12 +9,36 @@ import Highcharts from "highcharts";
 import BankTransferDataGrid from "@Components/DataGrid/BankTransferDataGrid.tsx";
 import DividendDataGrid from "@Components/DataGrid/DividendDataGrid.tsx";
 import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
+import CapitalCalculationsCard from "@Components/Widgets/CapitalCalculationCard.tsx";
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
+import {useEffect, useState} from "react";
+import DividendCumulativesCard from "@Components/Widgets/DividendCumulativesCard.tsx";
 
 type Props = {
     
 };
 export const Dividends = (props: Props) => {
     const[activeLabel, setActiveLabel] = React.useState<string | null>("Dividends");
+    const {tradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
+
+
+    const [capitalCalculations, setCapitalCalculations] = useState([]);
+    const [dividendCumulatives, setDividendCumulatives] = useState([]);
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setCapitalCalculations(json['capital_calculations']);
+                setDividendCumulatives(json['dividend_cumulatives']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
     return (
         <div  >
             <div className="pb-5">
@@ -52,106 +76,13 @@ export const Dividends = (props: Props) => {
                 <div className="row col-12 m-auto mt-2">
                     {/*CardOne*/}
 
-                    <div className="col-xl-4 col-lg-6 col-md-7 col-sm-12">
-                        <div className="portfolio-card-container box-12 position-relative">
-                            <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-5">
-                                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10">
-                                        <tr>
-                                            <th className="font_Epilogue" colSpan={3} style={{fontSize: '15px'}}>Account
-                                                Name
-                                            </th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Manisha</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr className="background_grey_color">
-                                            <td>Big Capital</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Add Deposit</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Div. Received</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Net Profit/Loss</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Withdrawal</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>End Capital</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Cash Balance</td>
-                                            <td>$</td>
-                                            <td>5,214,700</td>
-                                            <td>100%</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <CapitalCalculationsCard
+                        capitalCalculations={capitalCalculations}
+                        accountName="Sam"
+                    />
 
                     {/*card2*/}
-                    <div className="col-xl-4 col-lg-6 col-md-7 col-sm-12">
-                        <div className="portfolio-card-container   position-relative    box-12">
-                            <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-5">
-                                    <table className="table mt-2 " style={{borderCollapse: 'collapse'}}>
-                                        <thead className="position-absolute top-10">
-                                        <tr>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Symbol</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Count</th>
-                                            <th className="font_Epilogue " style={{fontSize: '15px'}}>Total Amount</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr className="background_grey_color">
-                                            <td>Total</td>
-                                            <td>1</td>
-                                            <td>$</td>
-                                            <td>232,735</td>
-                                        </tr>
-                                        <tr className="">
-                                            <td>X</td>
-                                            <td>1</td>
-                                            <td>$</td>
-                                            <td>232,735</td>
-                                        </tr>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <DividendCumulativesCard data={dividendCumulatives} />
 
                     {/*Card4*/}
                     <div className="col-xl-4  col-lg-6 col-md-7 col-sm-12">

@@ -1,6 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
+
+type DashboardHeaderCardData = {
+    label: string;
+    value: number;
+};
 
 const DashboardHeader = () => {
+    const {tradeRows, setTradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
+    const [cards, setCardsData] = useState<DashboardHeaderCardData[]>([]);
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setCardsData(json['dashboard_header_data']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
     return (
         <div className="dashboard-top_item pe-5 ps-5 row ">
             <div className="dashboard-top_item">
@@ -8,7 +30,7 @@ const DashboardHeader = () => {
                     <div className="vertical-line me-2"></div>
 
 
-                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24">Manisha Mandhan</h1>
+                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24">Sam</h1>
                 </div>
                 <div className="dashboard-side-icons  col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
 
@@ -78,50 +100,17 @@ const DashboardHeader = () => {
 
             <div className="d-flex flex-wrap justify-content-between w-100">
 
-                <div className="dashboard-card">
-                    <div className="dashboard-card-header">
-                        <span className="title">Trading Journal</span>
-                        <span className="badge-green">BEG. Balance</span>
-                    </div>
-                    <div className="dashboard-card-body">
-                        <p className="amount">$310000.00</p>
-                    </div>
-                </div>
-                <div className="dashboard-card">
-                    <div className="dashboard-card-header">
-                        <span className="title">Trading Journal</span>
-                        <span className="badge-green">Net Profit & Dividend</span>
-                    </div>
-                    <div className="dashboard-card-body">
-                        <p className="amount">$310000.00</p>
-                    </div>
-                </div>
-                <div className="dashboard-card">
-                    <div className="dashboard-card-header">
-                        <span className="title">Trading Journal</span>
-                        <span className="badge-red">Withdrawals</span>
-                    </div>
-                    <div className="dashboard-card-body">
-                        <p className="amount">$310000.00</p>
-                    </div>
-                </div>
-                <div className="dashboard-card">
-                    <div className="dashboard-card-header">
-                        <span className="title">Trading Journal</span>
-                        <span className="badge-white">End Balance</span>
-                    </div>
-                    <div className="dashboard-card-body">
-                        <p className="amount">$310000.00</p>
-                    </div>
-                </div>
-                <div className="dashboard-card">
-                    <div className="dashboard-card-header">
-                        <span className="title">Trading Journal</span>
-                        <span className="badge-white">Cash Balance</span>
-                    </div>
-                    <div className="dashboard-card-body">
-                        <p className="amount">$310000.00</p>
-                    </div>
+                <div className="dashboard-cards-container">
+                    {cards.map((card, index) => (
+                        <div key={index} className="dashboard-card">
+                            <div className="dashboard-card-header">
+                                <span className="badge-green">{card.label}</span>
+                            </div>
+                            <div className="dashboard-card-body">
+                                <p className="amount">{card.value.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 
