@@ -97,14 +97,14 @@ export const Dividends = (props: Props) => {
                                         <p>Date| Stock Code|Buy|Price Leave Blank|Shares Received</p>
                                         <p>Stock Shares and average price will be adjusted accordingly.</p>
                                     </div>
-                                    <div className=" ms-5 me-5 mt-5">
-                                        <button className="circle-btn bg-light m-0"><i
-                                            className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
-                                        </button>
-                                        <button className="circle-btn bg-light m-0 mt-3"><i
-                                            className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
-                                        </button>
-                                    </div>
+                                    {/*<div className=" ms-5 me-5 mt-5">*/}
+                                    {/*    <button className="circle-btn bg-light m-0"><i*/}
+                                    {/*        className="fa-solid fa-arrow-up icon-black icon-large-20"></i>*/}
+                                    {/*    </button>*/}
+                                    {/*    <button className="circle-btn bg-light m-0 mt-3"><i*/}
+                                    {/*        className="fa-solid fa-arrow-down icon-black icon-large-20"></i>*/}
+                                    {/*    </button>*/}
+                                    {/*</div>*/}
                                 </div>
 
                             </div>

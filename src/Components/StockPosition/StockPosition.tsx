@@ -9,6 +9,7 @@ import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.
 
 import {useEffect, useState} from "react";
 import SummaryPieChart from "@Components/StockPosition/SummaryPieChart.tsx";
+import StockPerformanceTableCard from "@Components/Widgets/StockPerformanceTableCard.tsx";
 
 type Props = {};
 
@@ -79,7 +80,19 @@ export const StockPosition = (props: Props) => {
    const { fetchTradeResults } = useTradeResults();
    const {tradeRows, setTradeRows} = useGlobalStore();
 
+   const [sortOption, setSortOption] = useState<'Most Trades' | 'Top Trades' | 'Worst Trades'>('Most Trades');
+
+
    const [topSymbols, setTopSymbols] = useState([]);
+   const [mostSymbols, setMostSymbols] = useState([]);
+
+    // Determine which data to show
+    const getCurrentData = () => {
+        if (sortOption === 'Top Trades') return topSymbols.slice(0,5);
+        if (sortOption === 'Most Trades') return topSymbols.slice(0,5);
+        if (sortOption === 'Worst Trades') return worstSymbols.slice(0,5);
+        return mostSymbols;
+    };
 
     // const topSymbols = [
     //     { id: 1, symbol: 'PXP', cumulative: 'Php 50,452', trades: 16, winRate: '56.25%', profitFactor: '4.12', expectancy: 'Php 3,153' },
@@ -100,6 +113,7 @@ export const StockPosition = (props: Props) => {
         fetchTradeResults()
             .then(json => {
                 setTopSymbols(json['top_symbols']);
+                setMostSymbols(json['top_symbols']);
                 setWorstSymbols(json['worst_symbols']);
             })
             .catch(err => console.log(err));
@@ -265,83 +279,11 @@ export const StockPosition = (props: Props) => {
                     </div>
 
                     {/* card2 */}
-                    <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12 ">
-                        <div className="portfolio-card-container position-relative me-5  overflow-x-auto">
-                            <div className="dashboard-overall-performance-card ">
-                                <div className="d-flex justify-content-between text-center  m-auto ">
-                                    <div className="d-flex flex-row ">
-                                        <p className="heading-20 ">Sort </p>
-                                        <p className="heading-20 ms-2">Symbol </p>
-
-                                        <select className="ms-3">
-                                            <option>Most Trades</option>
-                                            <option>Top Trades</option>
-                                            <option>Worst Trades</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                                <div className="amounts mt-4  mr-82 d-flex flex-row  ">
-                                    <table className="table mt-2" style={{borderCollapse: 'collapse'}}>
-                                        <thead>
-                                        <tr>
-                                            <th className="  heading-20 font_Epilogue font_weight_400 mb-4 text-center  ">Stock
-                                                Code
-                                            </th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Profit</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Trade(Win%)</th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Win
-                                                Rate %
-                                            </th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average
-                                                Days
-                                            </th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center ">Average
-                                                Allocation
-                                            </th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average
-                                                Win%
-                                            </th>
-                                            <th className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Average
-                                                Loss%
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        {StockPositionData.map((item, index: number) => {
-                                            return (
-                                                <tr className="table-row-padding text-center">
-                                                    <td>{item.name}</td>
-                                                    <td>{item.profit}</td>
-                                                    <td>{item.tradeWin}</td>
-                                                    <td>{item.winRate}</td>
-                                                    <td>{item.averagedays}</td>
-                                                    <td>{item.averageAllocation}</td>
-                                                    <td>{item.averageWin}</td>
-                                                    <td>{item.averageLoss}</td>
-                                                </tr>
-
-                                            )
-
-                                        })}
-
-
-                                        </tbody>
-                                    </table>
-                                    <div className=" ms-5 me-5">
-                                        <button className="circle-btn bg-light mt-5">
-                                            <i className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
-                                        </button>
-                                        <button className="circle-btn bg-light  mt-5">
-                                            <i className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <StockPerformanceTableCard
+                        stockData={getCurrentData()}
+                        sortOption={sortOption}
+                        setSortOption={setSortOption}
+                    />
                 </div>
                 <div className="amounts mt-4 ms-3 me-3 d-flex flex-row">
                     <StockPositionDataGrid topSymbols={topSymbols} worstSymbols={worstSymbols} />
