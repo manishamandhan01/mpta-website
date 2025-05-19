@@ -32,7 +32,7 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
 
         for (let i = 0; i < startDay; i++) {
             currentWeek.push(
-                <td key={`empty-${monthIndex}-${i}`} className="border w-[14.28%] h-[80px] p-1 align-top" />
+                <td key={`empty-${monthIndex}-${i}`} className="border  calender-cells p-1 align-top"   />
             );
         }
 
@@ -43,14 +43,17 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
 
             const cellContent = trade ? (
                 <div
-                    className="flex flex-col justify-between h-full w-full rounded p-1 overflow-hidden"
+                    className=" text-center justify-between h-full w-full rounded p-1 overflow-hidden"
                     style={{
                         backgroundColor: trade.profit > 0 ? '#bbf7d0' : '#fecaca',
                     }}
                 >
-                    <div className="text-[10px] font-semibold truncate">{trade.symbol}</div>
-                    <div className="text-[12px] font-bold truncate">{trade.profit.toLocaleString()}</div>
-                    <div className="text-[10px] italic truncate">{trade.trades} Trade(s)</div>
+                    <div className="d-flex justify-content-center align-items-center">
+                        <p className="heading-12 font-semibold truncate">{trade.symbol}</p>
+                        <p className="heading-12 font-bold truncate">{trade.profit.toLocaleString()}</p>
+                    </div>
+
+                    <p className="heading-10 italic truncate">{trade.trades} Trade(s)</p>
                 </div>
             ) : (
                 <div className="text-[12px] font-semibold">{day}</div>
@@ -59,7 +62,7 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
             currentWeek.push(
                 <td
                     key={dateStr}
-                    className="border w-[14.28%] h-[80px] p-1 align-top"
+                    className="border  p-1 align-top calender-cells"
                 >
                     {cellContent}
                 </td>
@@ -72,14 +75,15 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
         }
 
         return (
-            <div key={monthIndex} className="bg-white rounded p-2 shadow">
-                <h3 className="font-bold mb-2 text-sm text-center">{month.format('MMMM')}</h3>
+            <div key={monthIndex} className="bg-white rounded  card mt-5  ">
+                <h3 className="font_poppins font_weight_400 heading-14 text_primary_300 mt-2 mb-2  text-center">{month.format('MMMM')}</h3>
                 <table className="w-full table-fixed border-collapse text-xs border border-gray-300">
                     <thead>
                     <tr>
                         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d) => (
                             <th key={d} className="border bg-gray-100 text-[10px] text-center">{d}</th>
                         ))}
+
                     </tr>
                     </thead>
                     <tbody>
@@ -94,28 +98,37 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
 
     return (
         <div className="w-full max-w-7xl mx-auto p-4">
-            <div className="flex justify-between items-center mb-6">
+            <div className="d-flex justify-content-center align-items-center mb-1 gap-2">
                 <button
                     onClick={() => setCurrentYear((y) => y - 1)}
-                    className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
                 >
                     &lt; Prev Year
                 </button>
-                <h2 className="text-2xl font-bold">{currentYear}</h2>
+                <h2 className="font_poppins heading_16 font_weight_400 text_light_gray">{currentYear}</h2>
                 <button
                     onClick={() => setCurrentYear((y) => y + 1)}
-                    className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
                 >
                     Next Year &gt;
                 </button>
             </div>
 
-            {/* ✅ This is the layout that makes 3 months per row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Array.from({ length: 12 }).map((_, monthIndex) => renderMonth(monthIndex))}
-            </div>
+
+
+
+    {/* ✅ This is the layout that makes 3 months per row */
+    }
+    <div>
+
+
+        <div className="calendar-grid row mt-0 mb-5">
+            {Array.from({length: 12}).map((_, monthIndex) => renderMonth(monthIndex))}
         </div>
-    );
+    </div>
+</div>
+)
+    ;
 };
 
 export default TradeCalendar;
