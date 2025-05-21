@@ -43,17 +43,19 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
 
             const cellContent = trade ? (
                 <div
-                    className=" text-center justify-between h-full w-full rounded p-1 overflow-hidden"
+                    className=" justify-between h-full w-full rounded p-1 overflow-hidden"
                     style={{
                         backgroundColor: trade.profit > 0 ? '#bbf7d0' : '#fecaca',
                     }}
                 >
-                    <div className="d-flex justify-content-center align-items-center">
+                    <div className="text-[12px] font-semibold">{day}</div>
+                    <div className="d-flex  ">
+
                         <p className="heading-12 font-semibold truncate">{trade.symbol}</p>
-                        <p className="heading-12 font-bold truncate">{trade.profit.toLocaleString()}</p>
+                        <p className="heading-12 font-bold truncate ms-5">{trade.profit.toLocaleString()}</p>
                     </div>
 
-                    <p className="heading-10 italic truncate">{trade.trades} Trade(s)</p>
+                    <p className="heading-12 italic truncate font-bold ">{trade.trades} Trade(s)</p>
                 </div>
             ) : (
                 <div className="text-[12px] font-semibold">{day}</div>
