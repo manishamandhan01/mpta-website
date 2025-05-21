@@ -3,8 +3,8 @@ import React from "react";
 export interface CapitalCalculation {
     label: string;
     currency: string;
-    amount: string;
-    percentage: string;
+    amount: number;
+    percentage: number;
 }
 
 interface Props {
