@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {DashboardData} from "@Components/Dashboard/DashboardData.tsx";
 import TradeCalendar from "@Components/Calender/TradeCalendar.tsx";
-import {useState, useEffect} from "react";
 import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
 
@@ -19,12 +19,14 @@ export const Calendar = (props: Props) => {
     const [calendarTradeRows, setCalendarTradeRows] = useState([]);
     const { fetchTradeResults } = useTradeResults();
     const[activeLabel, setActiveLabel] = React.useState<string | null>("calendar");
+    const [lastTradedYear, setLastTradedYear] = React.useState<number | null>(null);
 
     // Fetching data
     const overAllPerformanceData = () => {
         fetchTradeResults()
             .then(json => {
                 setCalendarTradeRows(json['calendar_trades']);
+                setLastTradedYear(json['last_traded_year']);
             })
             .catch(err => console.log(err));
     };
@@ -32,56 +34,6 @@ export const Calendar = (props: Props) => {
     useEffect(() => {
         overAllPerformanceData();
     }, [tradeRows]);
-
-
-    const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-
-    const renderMonth = (monthIndex) => {
-        const daysInMonth = new Date(currentYear, monthIndex + 1, 0).getDate();
-        const firstDayOfMonth = new Date(currentYear, monthIndex, 1).getDay();
-        const days = [];
-
-        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-        // Weekday headers
-        const weekdayHeaders = weekdays.map((day, index) => (
-            <div key={`weekday-${index}`} className="calendar-weekday font-semibold text-center text-gray-600">
-                {day}
-            </div>
-        ));
-
-        // Empty days for the first week
-        for (let i = 0; i < firstDayOfMonth; i++) {
-            days.push(<div key={`empty-${i}`} className="empty-day" />);
-        }
-
-        // Fill in the actual days
-        for (let i = 1; i <= daysInMonth; i++) {
-            const isToday = currentYear === currentYearGlobal && monthIndex === currentMonth && i === currentDay;
-            days.push(
-                <div
-                    key={i}
-                    className={`calendar-day text-center ${isToday ? 'highlight-today bg-blue-200 rounded' : ''}`}
-                >
-                    {i}
-                </div>
-            );
-        }
-
-        return (
-            <div key={monthIndex} className="dashboard-overall-performance-card p-2">
-                <h3 className="month-name font-bold mb-2">{monthNames[monthIndex]}</h3>
-                <div className="calendar-grid grid grid-cols-7 gap-1 text-sm">
-                    {weekdayHeaders}
-                    {days}
-                </div>
-            </div>
-        );
-    };
-
 
     return (
         <div className="pb-5">
@@ -109,8 +61,7 @@ export const Calendar = (props: Props) => {
                     </ul>
                 </div>
             </div>
-            <TradeCalendar trades={calendarTradeRows} />
-            {/*</div>*/}
+            <TradeCalendar trades={calendarTradeRows} lastTradedYear={lastTradedYear} />
         </div>
     );
 };

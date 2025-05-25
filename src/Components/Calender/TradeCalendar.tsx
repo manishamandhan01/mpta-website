@@ -10,10 +10,11 @@ interface Trade {
 
 interface TradeCalendarProps {
     trades: Trade[];
+    lastTradedYear: number | null;
 }
 
-const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades }) => {
-    const [currentYear, setCurrentYear] = useState(dayjs().year());
+const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades, lastTradedYear }) => {
+    const [currentYear, setCurrentYear] = useState(() => lastTradedYear ?? dayjs().year());
 
     const tradeMap = trades.reduce((acc, trade) => {
         const key = dayjs(trade.date).format('YYYY-MM-DD');

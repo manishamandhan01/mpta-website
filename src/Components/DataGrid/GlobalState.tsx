@@ -3,6 +3,37 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import {useState} from "react";
 
+type SetupSetting = {
+    setup: string;
+    definition: string;
+};
+
+type NoteDefault = {
+    reason: string;
+};
+
+type EvaluationSetting = {
+    entryExit: string;
+    score1: number;
+    emotion: string;
+    score2: number;
+};
+
+export type TradingSetting = {
+    name: string;
+    interval: string;
+    yAxisGap: string;
+    noOfTrades: number;
+    currencySymbol: string;
+    retainFormula: number;
+    rowsToAdd: number;
+    winLossCount: number;
+    reportDate: string;
+    setupSettings: SetupSetting[];
+    noteDefaults: NoteDefault[];
+    evaluationSettings: EvaluationSetting[];
+};
+
 export type TradeRow = {
     id: number;
     date: string;
@@ -58,6 +89,8 @@ interface GlobalState {
     setDividendRows: (dividendRows: DividendRow[]) => void;
     backendResult: BackendResult[];
     setBackendResult: (backendResult: BackendResult[]) => void;
+    tradingSetting: TradingSetting;
+    setTradingSetting: (tradingSetting: TradingSetting) => void;
 
 }
 
@@ -72,6 +105,41 @@ export const useGlobalStore = create<GlobalState>()(
             setDividendRows: (dividendRows) => set({ dividendRows }),
             backendResult: [],
             setBackendResult: (backendResult) => set({ backendResult }),
+            tradingSetting: {
+                name: "Sam",
+                interval: "2%",
+                yAxisGap: "0%",
+                noOfTrades: 100,
+                currencySymbol: "Php",
+                retainFormula: 20,
+                rowsToAdd: 100,
+                winLossCount: 50,
+                reportDate: "Last Trade Data",
+                setupSettings: [
+                    { setup: "Momentum", definition: "" },
+                    { setup: "Bounce", definition: "" },
+                    { setup: "Trend Follow", definition: "" },
+                    { setup: "Swing Trade", definition: "" },
+                    { setup: "Bottom fishing", definition: "" }
+                ],
+                noteDefaults: [
+                    { reason: "Time-stop" },
+                    { reason: "Breakout entry Hit" },
+                    { reason: "BO+Volume+RSI" },
+                    { reason: "Tranche Buy" },
+                    { reason: "Lock in Profit" }
+                ],
+                evaluationSettings: [
+                    { entryExit: "TOO EARLY", score1: -1, emotion: "FEAR", score2: -1 },
+                    { entryExit: "TOO LATE", score1: -1, emotion: "HOPE", score2: -1 },
+                    { entryExit: "NOT IN PLAN", score1: -1, emotion: "GREED", score2: -1 },
+                    { entryExit: "AS PLANNED", score1: 1, emotion: "BORED", score2: 1 },
+                    { entryExit: "BROKE RULES", score1: -1, emotion: "IMPULSE", score2: -1 },
+                    { entryExit: "NEWS", score1: -1, emotion: "FOMO", score2: -1 },
+                    { entryExit: "FUNDA", score1: 1, emotion: "CONFIDENT", score2: 1 }
+                ]
+            },
+            setTradingSetting: (tradingSetting) => set({ tradingSetting }),
         }),
         {
             name: 'trade_rows_data', // 🔑 key used in localStorage
@@ -84,10 +152,11 @@ export type CombinedRows = {
     tradeRows: TradeRow[];
     bankTransferRows: BankTransferRow[];
     dividendRows: DividendRow[];
+    tradingSetting: TradingSetting;
 }
 
 export const useTradeResults = () => {
-    const { tradeRows, bankTransferRows, dividendRows } = useGlobalStore();
+    const { tradeRows, bankTransferRows, dividendRows, tradingSetting} = useGlobalStore();
     const [backendResult, setBackendResult] = useState<BackendResult[]>([]);
 
     const fetchTradeResults = async () => {
@@ -95,6 +164,7 @@ export const useTradeResults = () => {
             trade_rows: tradeRows,
             bank_transfer_rows: bankTransferRows,
             dividend_rows: dividendRows,
+            trading_setting: tradingSetting,
         };
 
         const response = await fetch(

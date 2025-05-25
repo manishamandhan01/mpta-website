@@ -1,83 +1,54 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 export default function SettingsPanel() {
-    const [formData, setFormData] = useState({
-        name: "Sam",
-        interval: "2%",
-        yAxisGap: "0%",
-        noOfTrades: 100,
-        currencySymbol: "Php",
-        retainFormula: 20,
-        rowsToAdd: 100,
-        winLossCount: 50,
-        reportDate: "Last Trade Data",
-        setupSettings: [
-            { setup: "Momentum", definition: "" },
-            { setup: "Bounce", definition: "" },
-            { setup: "Trend Follow", definition: "" },
-            { setup: "Swing Trade", definition: "" },
-            { setup: "Bottom fishing", definition: "" }
-        ],
-        noteDefaults: [
-            { reason: "Time-stop" },
-            { reason: "Breakout entry Hit" },
-            { reason: "BO+Volume+RSI" },
-            { reason: "Tranche Buy" },
-            { reason: "Lock in Profit" }
-        ],
-        evaluationSettings: [
-            { entryExit: "TOO EARLY", score1: -1, emotion: "FEAR", score2: -1 },
-            { entryExit: "TOO LATE", score1: -1, emotion: "HOPE", score2: -1 },
-            { entryExit: "NOT IN PLAN", score1: -1, emotion: "GREED", score2: -1 },
-            { entryExit: "AS PLANNED", score1: 1, emotion: "BORED", score2: 1 },
-            { entryExit: "BROKE RULES", score1: -1, emotion: "IMPULSE", score2: -1 },
-            { entryExit: "NEWS", score1: -1, emotion: "FOMO", score2: -1 },
-            { entryExit: "FUNDA", score1: 1, emotion: "CONFIDENT", score2: 1 }
-        ]
-    });
+    const {tradingSetting, setTradingSetting} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
+
 
     const handleSetupChange = (index, key, value) => {
-        const updated = [...formData.setupSettings];
+        const updated = [...tradingSetting.setupSettings];
         updated[index][key] = value;
-        setFormData({ ...formData, setupSettings: updated });
+        setTradingSetting({ ...tradingSetting, setupSettings: updated });
     };
 
     const handleNoteChange = (index, value) => {
-        const updated = [...formData.noteDefaults];
+        const updated = [...tradingSetting.noteDefaults];
         updated[index].reason = value;
-        setFormData({ ...formData, noteDefaults: updated });
+        setTradingSetting({ ...tradingSetting, noteDefaults: updated });
     };
 
     const handleEvaluationChange = (index, key, value) => {
-        const updated = [...formData.evaluationSettings];
+        const updated = [...tradingSetting.evaluationSettings];
         updated[index][key] = key.includes("score") ? parseInt(value) : value;
-        setFormData({ ...formData, evaluationSettings: updated });
+        setTradingSetting({ ...tradingSetting, evaluationSettings: updated });
     };
 
     const addSetupRow = () => {
-        setFormData({
-            ...formData,
-            setupSettings: [...formData.setupSettings, { setup: "", definition: "" }]
+        setTradingSetting({
+            ...tradingSetting,
+            setupSettings: [...tradingSetting.setupSettings, { setup: "", definition: "" }]
         });
     };
 
     const addNoteRow = () => {
-        setFormData({
-            ...formData,
-            noteDefaults: [...formData.noteDefaults, { reason: "" }]
+        setTradingSetting({
+            ...tradingSetting,
+            noteDefaults: [...tradingSetting.noteDefaults, { reason: "" }]
         });
     };
 
     const addEvaluationRow = () => {
-        setFormData({
-            ...formData,
-            evaluationSettings: [...formData.evaluationSettings, { entryExit: "", score1: 0, emotion: "", score2: 0 }]
+        setTradingSetting({
+            ...tradingSetting,
+            evaluationSettings: [...tradingSetting.evaluationSettings, { entryExit: "", score1: 0, emotion: "", score2: 0 }]
         });
     };
 
     const handleSubmit = () => {
-        console.log("Data submitted:", formData);
+        console.log("Data submitted:", tradingSetting);
+        fetchTradeResults();
     };
 
     return (
@@ -90,14 +61,14 @@ export default function SettingsPanel() {
                         <div className="text-lg font-bold mb-2">Distribution Chart Settings</div>
                         <div className="grid gap-2">
                             <label>Interval %</label>
-                            <input className="border p-1" value={formData.interval}
-                                   onChange={e => setFormData({...formData, interval: e.target.value})}/>
+                            <input className="border p-1" value={tradingSetting.interval}
+                                   onChange={e => setTradingSetting({...tradingSetting, interval: e.target.value})}/>
                             <label>Y Axis Gap</label>
-                            <input className="border p-1" value={formData.yAxisGap}
-                                   onChange={e => setFormData({...formData, yAxisGap: e.target.value})}/>
+                            <input className="border p-1" value={tradingSetting.yAxisGap}
+                                   onChange={e => setTradingSetting({...tradingSetting, yAxisGap: e.target.value})}/>
                             <label>No. of Trades</label>
-                            <input className="border p-1" type="number" value={formData.noOfTrades}
-                                   onChange={e => setFormData({...formData, noOfTrades: parseInt(e.target.value)})}/>
+                            <input className="border p-1" type="number" value={tradingSetting.noOfTrades}
+                                   onChange={e => setTradingSetting({...tradingSetting, noOfTrades: parseInt(e.target.value)})}/>
                         </div>
                     </div>
 
@@ -105,20 +76,20 @@ export default function SettingsPanel() {
                     <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card   position-relative ">
                         <div className="text-lg font-bold mb-2">Currency Settings</div>
                         <label>Currency Symbol</label>
-                        <input className="border p-1" value={formData.currencySymbol}
-                               onChange={e => setFormData({...formData, currencySymbol: e.target.value})}/>
-                        <div className="mt-2">Preview: {formData.currencySymbol}</div>
+                        <input className="border p-1" value={tradingSetting.currencySymbol}
+                               onChange={e => setTradingSetting({...tradingSetting, currencySymbol: e.target.value})}/>
+                        <div className="mt-2">Preview: {tradingSetting.currencySymbol}</div>
                     </div>
 
                     {/* Log Settings */}
                     <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
                         <div className="text-lg font-bold mb-2">Log Settings</div>
                         <label>Retain Formula</label>
-                        <input className="border p-1" type="number" value={formData.retainFormula}
-                               onChange={e => setFormData({...formData, retainFormula: parseInt(e.target.value)})}/>
+                        <input className="border p-1" type="number" value={tradingSetting.retainFormula}
+                               onChange={e => setTradingSetting({...tradingSetting, retainFormula: parseInt(e.target.value)})}/>
                         <label>Rows to Add</label>
-                        <input className="border p-1" type="number" value={formData.rowsToAdd}
-                               onChange={e => setFormData({...formData, rowsToAdd: parseInt(e.target.value)})}/>
+                        <input className="border p-1" type="number" value={tradingSetting.rowsToAdd}
+                               onChange={e => setTradingSetting({...tradingSetting, rowsToAdd: parseInt(e.target.value)})}/>
                     </div>
 
                     {/* Stats Settings */}
@@ -127,8 +98,8 @@ export default function SettingsPanel() {
                         <label>W/L Count</label>
                         <input className="border p-1" value="Per Tranche" disabled/>
                         <label>Last No. of Trades</label>
-                        <input className="border p-1" type="number" value={formData.winLossCount}
-                               onChange={e => setFormData({...formData, winLossCount: parseInt(e.target.value)})}/>
+                        <input className="border p-1" type="number" value={tradingSetting.winLossCount}
+                               onChange={e => setTradingSetting({...tradingSetting, winLossCount: parseInt(e.target.value)})}/>
                     </div>
                 </div>
                 <div className="row col-12 gap-10px  main-trade-log-cards m-auto mt-4  ">
@@ -137,8 +108,8 @@ export default function SettingsPanel() {
                     <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
                         <div className="text-lg font-bold mb-2">Report Date Settings</div>
                         <label>Report Date</label>
-                        <input className="border p-1" value={formData.reportDate}
-                               onChange={e => setFormData({...formData, reportDate: e.target.value})}/>
+                        <input className="border p-1" value={tradingSetting.reportDate}
+                               onChange={e => setTradingSetting({...tradingSetting, reportDate: e.target.value})}/>
 
 
                     </div>
@@ -219,7 +190,7 @@ export default function SettingsPanel() {
                             </tr>
                             </thead>
                             <tbody>
-                            {formData.setupSettings.map((row, index) => (
+                            {tradingSetting.setupSettings.map((row, index) => (
                                 <tr key={index} className="even:bg-white odd:bg-gray-50">
                                     <td className="border px-2 py-1">
                                         <input
@@ -256,7 +227,7 @@ export default function SettingsPanel() {
                 <div>Reason for Buying/Selling</div>
             </div>
             <div className="grid gap-2 mt-1">
-                {formData.noteDefaults.map((item, index) => (
+                {tradingSetting.noteDefaults.map((item, index) => (
                     <input key={index} className="border p-1" value={item.reason}
                            onChange={e => handleNoteChange(index, e.target.value)}
                            placeholder="Reason for Buying/Selling"/>
@@ -288,7 +259,7 @@ export default function SettingsPanel() {
                             </tr>
                             </thead>
                             <tbody>
-                            {formData.evaluationSettings.map((row, index) => (
+                            {tradingSetting.evaluationSettings.map((row, index) => (
                                 <tr key={index} className="even:bg-white odd:bg-gray-50">
                                     <td className="border px-2 py-1">
                                         <input
