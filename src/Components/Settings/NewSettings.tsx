@@ -6,6 +6,21 @@ export default function SettingsPanel() {
     const {tradingSetting, setTradingSetting} = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
 
+    const [name, setName] = useState('');
+    const [image, setImage] = useState<File | null>(null);
+    const [previewUrl, setPreviewUrl] = useState<string>('');
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file && file.size <= 20 * 1024) {
+            setImage(file);
+            setPreviewUrl(URL.createObjectURL(file));
+        } else {
+            alert('Please select a file under 20kb.');
+        }
+    };
+
+
 
     const handleSetupChange = (index, key, value) => {
         const updated = [...tradingSetting.setupSettings];
@@ -48,6 +63,13 @@ export default function SettingsPanel() {
 
     const handleSubmit = () => {
         console.log("Data submitted:", tradingSetting);
+        const formData = new FormData();
+        formData.append('name', name);
+        if (image) formData.append('photo', image);
+
+        // 👇 Send formData to backend if needed
+        console.log('Submitting FormData:', { name, image });
+
         fetchTradeResults();
     };
 
@@ -56,118 +78,182 @@ export default function SettingsPanel() {
 
             <div className="">
                 <div className="row col-12 gap-4px  main-trade-log-cards m-auto mt-5  ">
-                    {/* Distribution Chart Settings */}
-                    <div className=" col-xl-4 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
-                        <div className="text-lg font-bold mb-2">Distribution Chart Settings</div>
-                        <div className="grid gap-2">
-                            <label>Interval %</label>
-                            <input className="border p-1" value={tradingSetting.interval}
-                                   onChange={e => setTradingSetting({...tradingSetting, interval: e.target.value})}/>
-                            <label>Y Axis Gap</label>
-                            <input className="border p-1" value={tradingSetting.yAxisGap}
-                                   onChange={e => setTradingSetting({...tradingSetting, yAxisGap: e.target.value})}/>
-                            <label>No. of Trades</label>
-                            <input className="border p-1" type="number" value={tradingSetting.noOfTrades}
-                                   onChange={e => setTradingSetting({...tradingSetting, noOfTrades: parseInt(e.target.value)})}/>
-                        </div>
-                    </div>
-
-                    {/* Currency Settings */}
-                    <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card   position-relative ">
-                        <div className="text-lg font-bold mb-2">Currency Settings</div>
-                        <label>Currency Symbol</label>
-                        <input className="border p-1" value={tradingSetting.currencySymbol}
-                               onChange={e => setTradingSetting({...tradingSetting, currencySymbol: e.target.value})}/>
-                        <div className="mt-2">Preview: {tradingSetting.currencySymbol}</div>
-                    </div>
-
-                    {/* Log Settings */}
-                    <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
-                        <div className="text-lg font-bold mb-2">Log Settings</div>
-                        <label>Retain Formula</label>
-                        <input className="border p-1" type="number" value={tradingSetting.retainFormula}
-                               onChange={e => setTradingSetting({...tradingSetting, retainFormula: parseInt(e.target.value)})}/>
-                        <label>Rows to Add</label>
-                        <input className="border p-1" type="number" value={tradingSetting.rowsToAdd}
-                               onChange={e => setTradingSetting({...tradingSetting, rowsToAdd: parseInt(e.target.value)})}/>
-                    </div>
-
-                    {/* Stats Settings */}
+                    {/*profile settings*/}
                     <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
-                        <div className="text-lg font-bold mb-2">Stats Settings</div>
-                        <label>W/L Count</label>
-                        <input className="border p-1" value="Per Tranche" disabled/>
-                        <label>Last No. of Trades</label>
-                        <input className="border p-1" type="number" value={tradingSetting.winLossCount}
-                               onChange={e => setTradingSetting({...tradingSetting, winLossCount: parseInt(e.target.value)})}/>
+                        <div className="fw-bold mb-2">PROFILE SETTINGS</div>
+
+                        <div className="mb-2 small text-muted">Licensed to:</div>
+                        <div className="mb-2 d-flex align-items-center">
+
+
+                            <div className="d-flex justify-content-center mb-2">
+                                <img
+                                    src={previewUrl || '/placeholder.png'}
+                                    alt="Profile"
+                                    style={{width: 100, height: 100, objectFit: 'cover', borderRadius: '5px'}}
+                                />
+                            </div>
+                            <input
+                                type="text"
+                                className="form-control text-center mb-2"
+                                placeholder="Enter Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+
+                        </div>
+
+
+                        <div className="mb-2 text-center">
+                            <label className="btn btn-outline-secondary btn-sm">
+                                INSERT PHOTO
+                                <input
+                                    type="file"
+                                    accept=".jpg, .jpeg, .png, .gif"
+                                    style={{display: 'none'}}
+                                    onChange={handleImageChange}
+                                />
+                            </label>
+                        </div>
+                        <div className="small text-muted text-center">
+                            Insert 100x100 pixels, max 20kb<br/>
+                            Format: .jpg / .gif / .png
+                        </div>
                     </div>
-                </div>
-                <div className="row col-12 gap-10px  main-trade-log-cards m-auto mt-4  ">
+                        {/* Distribution Chart Settings */}
+                        <div className=" col-xl-4 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
+                            <div className="text-lg font-bold mb-2">Distribution Chart Settings</div>
+                            <div className="grid gap-2">
+                                <label>Interval %</label>
+                                <input className="border p-1" value={tradingSetting.interval}
+                                       onChange={e => setTradingSetting({
+                                           ...tradingSetting,
+                                           interval: e.target.value
+                                       })}/>
+                                <label>Y Axis Gap</label>
+                                <input className="border p-1" value={tradingSetting.yAxisGap}
+                                       onChange={e => setTradingSetting({
+                                           ...tradingSetting,
+                                           yAxisGap: e.target.value
+                                       })}/>
+                                <label>No. of Trades</label>
+                                <input className="border p-1" type="number" value={tradingSetting.noOfTrades}
+                                       onChange={e => setTradingSetting({
+                                           ...tradingSetting,
+                                           noOfTrades: parseInt(e.target.value)
+                                       })}/>
+                            </div>
+                        </div>
 
-                    {/* Report Date Settings */}
-                    <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
-                        <div className="text-lg font-bold mb-2">Report Date Settings</div>
-                        <label>Report Date</label>
-                        <input className="border p-1" value={tradingSetting.reportDate}
-                               onChange={e => setTradingSetting({...tradingSetting, reportDate: e.target.value})}/>
+                        {/* Currency Settings */}
+                        <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card   position-relative ">
+                            <div className="text-lg font-bold mb-2">Currency Settings</div>
+                            <label>Currency Symbol</label>
+                            <input className="border p-1" value={tradingSetting.currencySymbol}
+                                   onChange={e => setTradingSetting({
+                                       ...tradingSetting,
+                                       currencySymbol: e.target.value
+                                   })}/>
+                            <div className="mt-2">Preview: {tradingSetting.currencySymbol}</div>
+                        </div>
+
+                        {/* Log Settings */}
+                        <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
+                            <div className="text-lg font-bold mb-2">Log Settings</div>
+                            <label>Retain Formula</label>
+                            <input className="border p-1" type="number" value={tradingSetting.retainFormula}
+                                   onChange={e => setTradingSetting({
+                                       ...tradingSetting,
+                                       retainFormula: parseInt(e.target.value)
+                                   })}/>
+                            <label>Rows to Add</label>
+                            <input className="border p-1" type="number" value={tradingSetting.rowsToAdd}
+                                   onChange={e => setTradingSetting({
+                                       ...tradingSetting,
+                                       rowsToAdd: parseInt(e.target.value)
+                                   })}/>
+                        </div>
 
 
                     </div>
-                    <div
-                        className="col-xl-7 col-lg-6 col-md-6 col-sm-12 card  position-relative p-4 rounded-2xl  ">
+                    <div className="row col-12 gap-4px  main-trade-log-cards m-auto mt-4  ">
+                        {/*Stats Settings */}
+                        <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
+                            <div className="text-lg font-bold mb-2">Stats Settings</div>
+                            <label>W/L Count</label>
+                            <input className="border p-1" value="Per Tranche" disabled/>
+                            <label>Last No. of Trades</label>
+                            <input className="border p-1" type="number" value={tradingSetting.winLossCount}
+                                   onChange={e => setTradingSetting({
+                                       ...tradingSetting,
+                                       winLossCount: parseInt(e.target.value)
+                                   })}/>
+                        </div>
+
+                        {/* Report Date Settings */}
+                        <div className="col-xl-2 col-lg-6 col-md-6 col-sm-12 card  position-relative ">
+                            <div className="text-lg font-bold mb-2">Report Date Settings</div>
+                            <label>Report Date</label>
+                            <input className="border p-1" value={tradingSetting.reportDate}
+                                   onChange={e => setTradingSetting({...tradingSetting, reportDate: e.target.value})}/>
 
 
-                        <div className="overflow-x-auto">
-                            <table className="table-auto w-full border-collapse border text-sm">
-                                <thead>
-                                <tr className="bg-gray-100 text-left">
-                                    <th className="border px-3 py-2">Fees</th>
-                                    <th className="border px-3 py-2">From</th>
-                                    <th className="border px-3 py-2">Multiply By</th>
-                                    <th className="border px-3 py-2">Minimum</th>
-                                    <th className="border px-3 py-2">From</th>
-                                    <th className="border px-3 py-2">Maximum</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {[
-                                    {fees: "Commission", multiplyBy: "0.00000"},
-                                    {fees: "VAT", multiplyBy: "0.00"},
-                                    {fees: "Tax", multiplyBy: "0.00"},
-                                    {fees: "Sales Tax", multiplyBy: "0.00000", },
-                                ].map((row, index) => (
-                                    <tr key={index} className="even:bg-white odd:bg-gray-50">
-                                        <td className="border px-4 py-1 font-medium">
-                                            <span >{row.fees}</span>
-                                        </td>
-                                        <td className="border px-4 py-1">Amount</td>
-                                        <td className="border px-4 py-1">
-                                            <input
-                                                type="number"
-                                                className="w-full mt-2 border rounded"
-                                                value={row.multiplyBy}
-                                                placeholder="Enter value in decimals"
-                                                readOnly
-                                            />
-                                        </td>
-                                        <td className="border px-4 py-1">0.0</td>
-                                        <td className="border px-4 py-1">Amount</td>
-                                        <td className="border px-4 py-1"></td>
+                        </div>
+                        <div
+                            className="col-xl-6 col-lg-6 col-md-6 col-sm-12 card  position-relative p-4 rounded-2xl  ">
+
+
+                            <div className="overflow-x-auto">
+                                <table className="table-auto w-full border-collapse border text-sm">
+                                    <thead>
+                                    <tr className="bg-gray-100 text-left">
+                                        <th className="border px-3 py-2">Fees</th>
+                                        <th className="border px-3 py-2">From</th>
+                                        <th className="border px-3 py-2">Multiply By</th>
+                                        <th className="border px-3 py-2">Minimum</th>
+                                        <th className="border px-3 py-2">From</th>
+                                        <th className="border px-3 py-2">Maximum</th>
                                     </tr>
-                                ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {[
+                                        {fees: "Commission", multiplyBy: "0.00000"},
+                                        {fees: "VAT", multiplyBy: "0.00"},
+                                        {fees: "Tax", multiplyBy: "0.00"},
+                                        {fees: "Sales Tax", multiplyBy: "0.00000",},
+                                    ].map((row, index) => (
+                                        <tr key={index} className="even:bg-white odd:bg-gray-50">
+                                            <td className="border px-4 py-1 font-medium">
+                                                <span>{row.fees}</span>
+                                            </td>
+                                            <td className="border px-4 py-1">Amount</td>
+                                            <td className="border px-4 py-1">
+                                                <input
+                                                    type="number"
+                                                    className="w-full mt-2 border rounded"
+                                                    value={row.multiplyBy}
+                                                    placeholder="Enter value in decimals"
+                                                    readOnly
+                                                />
+                                            </td>
+                                            <td className="border px-4 py-1">0.0</td>
+                                            <td className="border px-4 py-1">Amount</td>
+                                            <td className="border px-4 py-1"></td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
 
                     </div>
 
+
                 </div>
 
 
-            </div>
-
-
-            <div className="row col-12  main-trade-log-cards m-auto gap-4px mt-4 tex ">
+                <div className="row col-12  main-trade-log-cards m-auto gap-4px mt-4 tex ">
                 {/* Setup Settings */}
                 <div
                     className="col-xl-4 col-lg-6 col-md-6 col-sm-12 card  position-relative p-4 rounded-2xl ">
