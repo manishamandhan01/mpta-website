@@ -44,6 +44,7 @@ export type PerformancePeriod = {
     year_to_date_pnl: number;
     previous_year_to_date_pnl: number;
     this_month_pnl: number;
+    last_traded_date: string;
 };
 
 
