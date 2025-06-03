@@ -16,14 +16,14 @@ const columns: GridColDef<TradeRow>[] = [
     { field: 'price', headerName: 'PRICE', width: 100, editable: true, type: 'number' },
     { field: 'volume', headerName: 'VOLUME', width: 100, editable: true, type: 'number' },
     { field: 'over_write_fees', headerName: 'O.WRITE FEES', width: 120, editable: true, type: 'number' },
-    { field: 'fees', headerName: 'FEES', width: 100, editable: true, type: 'number' },
-    { field: 'netAmount', headerName: 'NET AMOUNT (Php)', width: 150, editable: true, type: 'number' },
-    { field: 'avePrice', headerName: 'AVE. PRICE', width: 120, editable: true, type: 'number' },
-    { field: 'profit', headerName: 'PROFIT (Php)', width: 120, editable: true, type: 'number' },
-    { field: 'percentProfit', headerName: '% PROFIT', width: 100, editable: true },
-    { field: 'days', headerName: 'DAYS', width: 80, editable: true, type: 'number' },
-    { field: 'rmul', headerName: 'R-MUL.', width: 90, editable: true },
-    { field: 'equity', headerName: 'EQUITY (Php)', width: 130, editable: true, type: 'number' },
+    { field: 'fees', headerName: 'FEES', width: 100, editable: false, type: 'number'},
+    { field: 'netAmount', headerName: 'NET AMOUNT (Php)', width: 150, editable: false, type: 'number' },
+    { field: 'avePrice', headerName: 'AVE. PRICE', width: 120, editable: false, type: 'number' },
+    { field: 'profit', headerName: 'PROFIT (Php)', width: 120, editable: false, type: 'number' },
+    { field: 'percentProfit', headerName: '% PROFIT', width: 100, editable: false },
+    { field: 'days', headerName: 'DAYS', width: 80, editable: false, type: 'number' },
+    { field: 'rmul', headerName: 'R-MUL.', width: 90, editable: false },
+    { field: 'equity', headerName: 'EQUITY (Php)', width: 130, editable: false, type: 'number' },
     { field: 'setup', headerName: 'SETUP', width: 120, editable: true },
     { field: 'reason', headerName: 'REASON FOR BUYING / SELLING', width: 250, editable: true },
     { field: 'notes', headerName: 'ADDITIONAL NOTES', width: 250, editable: true }
@@ -107,8 +107,12 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
                     initialState={{
                         pagination: { paginationModel: { pageSize: 5 } }
                     }}
-                    checkboxSelection
+                    // checkboxSelection
                     disableRowSelectionOnClick
+                    getCellClassName={(params) => {
+                        if(!params.isEditable) return 'non-editable-cell';
+                        else return '';
+                    }}
                 />
             </Box>
         </Box>

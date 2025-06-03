@@ -1078,3 +1078,8 @@ a {
 .gap-4px{
     gap: 4px;
 }
+
+.non-editable-cell {
+    background-color: #f0f0f0;
+    color: #555;
+}
