@@ -47,9 +47,9 @@ const StockPerformanceTableCard: React.FC<Props> = ({ stockData, sortOption, set
                                 <th className="text-center">Trade(Win%)</th>
                                 <th className="text-center">Win Rate %</th>
                                 <th className="text-center">Average Days</th>
-                                <th className="text-center">Average Allocation</th>
-                                <th className="text-center">Average Win%</th>
-                                <th className="text-center">Average Loss%</th>
+                                {/*<th className="text-center">Average Allocation</th>*/}
+                                {/*<th className="text-center">Average Win%</th>*/}
+                                {/*<th className="text-center">Average Loss%</th>*/}
                             </tr>
                             </thead>
                             <tbody>
@@ -60,9 +60,9 @@ const StockPerformanceTableCard: React.FC<Props> = ({ stockData, sortOption, set
                                     <td>{item.trades}</td>
                                     <td>{item.winRate}</td>
                                     <td>{item.average_days}</td>
-                                    <td>{item.average_allocation_percentage}</td>
-                                    <td>{item.average_win_percentage}</td>
-                                    <td>{item.average_loss_percentage}</td>
+                                    {/*<td>{item.average_allocation_percentage}</td>*/}
+                                    {/*<td>{item.average_win_percentage}</td>*/}
+                                    {/*<td>{item.average_loss_percentage}</td>*/}
                                 </tr>
                             ))}
                             </tbody>
