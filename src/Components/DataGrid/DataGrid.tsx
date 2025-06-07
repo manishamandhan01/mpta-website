@@ -30,7 +30,7 @@ const columns: GridColDef<TradeRow>[] = [
 ];
 
 const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
-    const {tradeRows, setTradeRows} = useGlobalStore();
+    const {tradeRows, setTradeRows, finalTradeRows, setFinalTradeRows} = useGlobalStore();
     const [showPasteBox, setShowPasteBox] = useState(false);
     const [pasteText, setPasteText] = useState('');
 
@@ -61,6 +61,7 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
         });
         const updatedRows = [...newRows];
         setTradeRows(updatedRows);
+        setFinalTradeRows(updatedRows);
         setPasteText('');
         setShowPasteBox(false);
         onRowsChange?.(updatedRows);
@@ -100,7 +101,7 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
 
             <Box sx={{ height: 600, width: '100%' }}>
                 <DataGrid
-                    rows={tradeRows}
+                    rows={finalTradeRows}
                     columns={columns}
                     processRowUpdate={handleRowUpdate}
                     pageSizeOptions={[5, 10, 20]}

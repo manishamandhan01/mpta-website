@@ -83,6 +83,8 @@ export type BackendResult = {
 interface GlobalState {
     tradeRows: TradeRow[];
     setTradeRows: (tradeRows: TradeRow[]) => void;
+    finalTradeRows: TradeRow[];
+    setFinalTradeRows: (tradeRows: TradeRow[]) => void;
     bankTransferRows: BankTransferRow[];
     setBankTransferRows: (bankTransferRows: BankTransferRow[]) => void;
     dividendRows: DividendRow[];
@@ -99,6 +101,8 @@ export const useGlobalStore = create<GlobalState>()(
         (set) => ({
             tradeRows: [],
             setTradeRows: (tradeRows) => set({ tradeRows }),
+            finalTradeRows: [],
+            setFinalTradeRows: (finalTradeRows) => set({ finalTradeRows }),
             bankTransferRows: [],
             setBankTransferRows: (bankTransferRows) => set({ bankTransferRows }),
             dividendRows: [],

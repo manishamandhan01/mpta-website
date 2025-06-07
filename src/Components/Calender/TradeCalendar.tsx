@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import dayjs from 'dayjs';
 
 interface Trade {
@@ -14,7 +14,11 @@ interface TradeCalendarProps {
 }
 
 const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades, lastTradedYear }) => {
-    const [currentYear, setCurrentYear] = useState(() => lastTradedYear ?? dayjs().year());
+    const [currentYear, setCurrentYear] = useState(dayjs().year());
+
+    useEffect(() => {
+        setCurrentYear(lastTradedYear || currentYear);
+    }, [lastTradedYear]);
 
     const tradeMap = trades.reduce((acc, trade) => {
         const key = dayjs(trade.date).format('YYYY-MM-DD');

@@ -18,7 +18,7 @@ type Props = {
 };
 export const TradeLog = (props: Props) => {
 
-    const {tradeRows} = useGlobalStore();
+    const {tradeRows, setFinalTradeRows} = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
 
 
@@ -32,6 +32,7 @@ export const TradeLog = (props: Props) => {
             .then(json => {
                 setTopStockPositionsByAllocation(json['top_5_stock_positions_by_allocation']);
                 setCapitalCalculations(json['capital_calculations']);
+                setFinalTradeRows(json['trade_log_result_data']);
             })
             .catch(err => console.log(err));
     };

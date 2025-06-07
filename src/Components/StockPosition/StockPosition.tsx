@@ -80,7 +80,7 @@ export const StockPosition = (props: Props) => {
    const { fetchTradeResults } = useTradeResults();
    const {tradeRows, setTradeRows} = useGlobalStore();
 
-   const [sortOption, setSortOption] = useState<'Most Trades' | 'Top Trades' | 'Worst Trades'>('Most Trades');
+   const [sortOption, setSortOption] = useState<'Top Trades' | 'Worst Trades'>('Top Trades');
 
 
    const [topSymbols, setTopSymbols] = useState([]);

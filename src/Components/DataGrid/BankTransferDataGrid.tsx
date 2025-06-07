@@ -8,8 +8,8 @@ const columns: GridColDef<BankTransferRow>[] = [
     { field: 'date', headerName: 'DATE', width: 120, editable: true },
     { field: 'action', headerName: 'ACTION', width: 100, editable: true },
     { field: 'grossAmount', headerName: 'Gross Amount', width: 200, editable: true, type: 'number' },
-    { field: 'fess', headerName: 'Fees', width: 100, editable: true, type: 'number' },
-    { field: 'netAmount', headerName: 'NET AMOUNT (Php)', width: 200, editable: true, type: 'number' },
+    { field: 'fess', headerName: 'Fees', width: 100, editable: true, type: 'number'},
+    { field: 'netAmount', headerName: 'NET AMOUNT (Php)', width: 200, editable: false, type: 'number' },
     { field: 'notes', headerName: 'ADDITIONAL NOTES', width: 250, editable: true }
 ];
 
@@ -22,13 +22,21 @@ const TradeDataGrid: React.FC = () => {
         const lines = pasteText.trim().split(/\r?\n/);
         const newRows: BankTransferRow[] = lines.map((line, index) => {
             const values = line.split('\t');
+            const grossAmount = parseFloat(values[2].replace(/,/g, "").replace(/Php/g, "")) || 0;
+            let fees = 0;
+            if (typeof values[3] === 'string') {
+                fees = parseFloat(values[3].replace(/,/g, "").replace(/Php/g, "")) || 0;
+            } else if (typeof values[3] === 'number') {
+                fees = values[3];
+            }
+            const netAmount = grossAmount - fees;
             return {
                 id: Date.now() + index,
                 date: values[0] || '',
                 action: values[1] || '',
-                grossAmount: parseFloat(values[2].replace(/,/g, "").replace(/Php/g, "")) || 0,
-                fees: parseFloat(values[3].replace(/,/g, "").replace(/Php/g, "")) || 0,
-                netAmount: parseFloat(values[4].replace(/,/g, "").replace(/Php/g, "")) || 0,
+                grossAmount: grossAmount,
+                fees: fees,
+                netAmount: netAmount,
                 notes: values[5] || ''
             };
         });
@@ -80,6 +88,10 @@ const TradeDataGrid: React.FC = () => {
                     }}
                     checkboxSelection
                     disableRowSelectionOnClick
+                    getCellClassName={(params) => {
+                        if(!params.isEditable) return 'non-editable-cell';
+                        else return '';
+                    }}
                 />
             </Box>
         </Box>
