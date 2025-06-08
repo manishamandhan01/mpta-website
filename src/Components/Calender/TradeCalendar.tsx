@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 interface Trade {
     date: string;
     profit: number;
     trades: number;
-    symbol: string;
+    // symbol: string;
 }
 
 interface TradeCalendarProps {
@@ -21,7 +23,7 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades, lastTradedYear })
     }, [lastTradedYear]);
 
     const tradeMap = trades.reduce((acc, trade) => {
-        const key = dayjs(trade.date).format('YYYY-MM-DD');
+        const key = dayjs(trade.date, 'DD/MM/YY').format('YYYY-MM-DD');
         acc[key] = trade;
         return acc;
     }, {} as Record<string, Trade>);
@@ -56,7 +58,7 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades, lastTradedYear })
                     <div className="text-[12px] font-semibold">{day}</div>
                     <div className="d-flex  ">
 
-                        <p className="heading-12 font-semibold truncate">{trade.symbol}</p>
+                        {/*<p className="heading-12 font-semibold truncate">{trade.symbol}</p>*/}
                         <p className="heading-12 font-bold truncate ms-5">{trade.profit.toLocaleString()}</p>
                     </div>
 
