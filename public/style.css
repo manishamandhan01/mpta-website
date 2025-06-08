@@ -1083,3 +1083,12 @@ a {
     background-color: #f0f0f0;
     color: #555;
 }
+
+.non-editable-green-text-cell {
+    background-color: #f0f0f0;
+    color: green;
+}
+.non-editable-red-text-cell {
+    background-color: #f0f0f0;
+    color: red;
+}

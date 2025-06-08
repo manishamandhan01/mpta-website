@@ -21,8 +21,8 @@ const columns: GridColDef<TradeRow>[] = [
     { field: 'avePrice', headerName: 'AVE. PRICE', width: 120, editable: false, type: 'number' },
     { field: 'profit', headerName: 'PROFIT (Php)', width: 120, editable: false, type: 'number' },
     { field: 'percentProfit', headerName: '% PROFIT', width: 100, editable: false },
-    { field: 'days', headerName: 'DAYS', width: 80, editable: false, type: 'number' },
-    { field: 'rmul', headerName: 'R-MUL.', width: 90, editable: false },
+    // { field: 'days', headerName: 'DAYS', width: 80, editable: false, type: 'number' },
+    { field: 'rmul', headerName: 'R-MUL.', width: 90, editable: false},
     { field: 'equity', headerName: 'EQUITY (Php)', width: 130, editable: false, type: 'number' },
     { field: 'setup', headerName: 'SETUP', width: 120, editable: true },
     { field: 'reason', headerName: 'REASON FOR BUYING / SELLING', width: 250, editable: true },
@@ -111,8 +111,14 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
                     // checkboxSelection
                     disableRowSelectionOnClick
                     getCellClassName={(params) => {
-                        if(!params.isEditable) return 'non-editable-cell';
-                        else return '';
+                        if (!params.isEditable && ['profit', 'percentProfit', 'rmul'].includes(params.field)) {
+                            const value = typeof params.value === 'number' ? params.value : parseFloat(params.value?.toString() || '0');
+                            return value >= 0 ? 'non-editable-green-text-cell' : 'non-editable-red-text-cell';
+                        } else if (!params.isEditable) {
+                            return 'non-editable-cell';
+                        } else {
+                            return '';
+                        }
                     }}
                 />
             </Box>

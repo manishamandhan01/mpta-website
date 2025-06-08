@@ -74,7 +74,6 @@ const DividendDataGrid: React.FC = () => {
                     initialState={{
                         pagination: { paginationModel: { pageSize: 5 } }
                     }}
-                    checkboxSelection
                     disableRowSelectionOnClick
                 />
             </Box>

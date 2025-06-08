@@ -5,6 +5,10 @@ import {BankTransferRow, useGlobalStore} from "@Components/DataGrid/GlobalState.
 
 
 const columns: GridColDef<BankTransferRow>[] = [
+    // { field: 'serialNo', headerName: 'S.No.', width: 120, editable: false,  flex: 0,
+    //     renderCell: (params) =>
+    //         params.api.getRowIndexRelativeToVisibleRows(params.row.id) + 1
+    // },
     { field: 'date', headerName: 'DATE', width: 120, editable: true },
     { field: 'action', headerName: 'ACTION', width: 100, editable: true },
     { field: 'grossAmount', headerName: 'Gross Amount', width: 200, editable: true, type: 'number' },
@@ -86,7 +90,6 @@ const TradeDataGrid: React.FC = () => {
                     initialState={{
                         pagination: { paginationModel: { pageSize: 5 } }
                     }}
-                    checkboxSelection
                     disableRowSelectionOnClick
                     getCellClassName={(params) => {
                         if(!params.isEditable) return 'non-editable-cell';

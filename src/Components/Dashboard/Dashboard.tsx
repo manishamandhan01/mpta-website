@@ -211,15 +211,15 @@ export const Dashboard = (props: Props) => {
                 </div>
                 <div className="row col-12 m-auto mt-2 equal-height">
 
-                    <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
-                        <DrawnAndLosingStreak/>
-                    </div>
+                    {/*<div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">*/}
+                    {/*    <DrawnAndLosingStreak/>*/}
+                    {/*</div>*/}
                     <div className="col-xl-6 col-lg-6 col-md-7 col-sm-12 dashboard-overall-performance-card">
                         <TradeStatistics/>
                     </div>
-                    <div className="col-xl-3  col-lg-6 col-md-7 col-sm-12">
-                        <RequiredWinRate/>
-                    </div>
+                    {/*<div className="col-xl-3  col-lg-6 col-md-7 col-sm-12">*/}
+                    {/*    <RequiredWinRate/>*/}
+                    {/*</div>*/}
 
                 </div>
 
@@ -238,12 +238,12 @@ export const Dashboard = (props: Props) => {
                     <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
                         <PerformancePerRecord/>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-7 col-sm-12 dashboard-overall-performance-card">
-                        <PerformanceCurve/>
-                    </div>
-                    <div className="col-xl-3  col-lg-6 col-md-7 col-sm-12">
-                        <WeeklyPerformanceCurve/>
-                    </div>
+                    {/*<div className="col-xl-6 col-lg-6 col-md-7 col-sm-12 dashboard-overall-performance-card">*/}
+                    {/*    <PerformanceCurve/>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-xl-3  col-lg-6 col-md-7 col-sm-12">*/}
+                    {/*    <WeeklyPerformanceCurve/>*/}
+                    {/*</div>*/}
 
                 </div>
 
