@@ -63,12 +63,12 @@ export default function SettingsPanel() {
 
     const handleSubmit = () => {
         console.log("Data submitted:", tradingSetting);
-        const formData = new FormData();
-        formData.append('name', name);
-        if (image) formData.append('photo', image);
+        // const formData = new FormData();
+        // formData.append('name', name);
+        // if (image) formData.append('photo', image);
 
         // 👇 Send formData to backend if needed
-        console.log('Submitting FormData:', { name, image });
+        // console.log('Submitting FormData:', { name, image });
 
         fetchTradeResults();
     };
@@ -97,8 +97,11 @@ export default function SettingsPanel() {
                                 type="text"
                                 className="form-control text-center mb-2"
                                 placeholder="Enter Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={tradingSetting.name}
+                                onChange={e => setTradingSetting({
+                                    ...tradingSetting,
+                                    name: e.target.value
+                                })}
                             />
 
                         </div>

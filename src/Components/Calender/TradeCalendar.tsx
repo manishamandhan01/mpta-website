@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import {useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 dayjs.extend(customParseFormat);
 
 interface Trade {
@@ -17,6 +18,7 @@ interface TradeCalendarProps {
 
 const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades, lastTradedYear }) => {
     const [currentYear, setCurrentYear] = useState(dayjs().year());
+    const {tradingSetting} = useGlobalStore();
 
     useEffect(() => {
         setCurrentYear(lastTradedYear || currentYear);
@@ -58,7 +60,7 @@ const TradeCalendar: React.FC<TradeCalendarProps> = ({ trades, lastTradedYear })
                     <div className="text-[12px] font-semibold">{day}</div>
                     <div className="d-flex  ">
 
-                        {/*<p className="heading-12 font-semibold truncate">{trade.symbol}</p>*/}
+                        <p className="heading-12 font-semibold truncate">{tradingSetting.currencySymbol}</p>
                         <p className="heading-12 font-bold truncate ms-5">{trade.profit.toLocaleString()}</p>
                     </div>
 

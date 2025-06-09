@@ -7,7 +7,7 @@ type DashboardHeaderCardData = {
 };
 
 const DashboardHeader = () => {
-    const {tradeRows, setTradeRows} = useGlobalStore();
+    const {tradeRows, tradingSetting} = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
     const [cards, setCardsData] = useState<DashboardHeaderCardData[]>([]);
 
@@ -22,7 +22,7 @@ const DashboardHeader = () => {
 
     useEffect(() => {
         overAllPerformanceData();
-    }, [tradeRows]);
+    }, [tradeRows, tradingSetting]);
     return (
         <div className="dashboard-top_item pe-5 ps-5 row ">
             <div className="dashboard-top_item">
@@ -30,7 +30,7 @@ const DashboardHeader = () => {
                     <div className="vertical-line me-2"></div>
 
 
-                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24">Sam</h1>
+                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24">{tradingSetting.name}</h1>
                 </div>
                 <div className="dashboard-side-icons  col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
 
