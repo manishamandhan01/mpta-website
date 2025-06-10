@@ -3,16 +3,16 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import {useState} from "react";
 
-type SetupSetting = {
+export type SetupSetting = {
     setup: string;
     definition: string;
 };
 
-type NoteDefault = {
+export type NoteDefault = {
     reason: string;
 };
 
-type EvaluationSetting = {
+export type EvaluationSetting = {
     entryExit: string;
     score1: number;
     emotion: string;

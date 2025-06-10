@@ -1,36 +1,59 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import {TradeRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
-
-
+import {NoteDefault, SetupSetting, TradeRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type TradeDataGridProps = {
     onRowsChange?: (rows: TradeRow[]) => void;
 };
 
-const columns: GridColDef<TradeRow>[] = [
-    { field: 'date', headerName: 'DATE', width: 120, editable: true },
-    { field: 'ticker', headerName: 'STOCK CODE', width: 120, editable: true },
-    { field: 'action', headerName: 'ACTION', width: 100, editable: true },
-    { field: 'price', headerName: 'PRICE', width: 100, editable: true, type: 'number' },
-    { field: 'volume', headerName: 'VOLUME', width: 100, editable: true, type: 'number' },
-    { field: 'over_write_fees', headerName: 'O.WRITE FEES', width: 120, editable: true, type: 'number' },
-    { field: 'fees', headerName: 'FEES', width: 100, editable: false, type: 'number'},
-    { field: 'netAmount', headerName: 'NET AMOUNT (Php)', width: 150, editable: false, type: 'number' },
-    { field: 'avePrice', headerName: 'AVE. PRICE', width: 120, editable: false, type: 'number' },
-    { field: 'profit', headerName: 'PROFIT (Php)', width: 120, editable: false, type: 'number' },
-    { field: 'percentProfit', headerName: '% PROFIT', width: 100, editable: false },
-    // { field: 'days', headerName: 'DAYS', width: 80, editable: false, type: 'number' },
-    { field: 'rmul', headerName: 'R-MUL.', width: 90, editable: false},
-    { field: 'equity', headerName: 'EQUITY (Php)', width: 130, editable: false, type: 'number' },
-    { field: 'setup', headerName: 'SETUP', width: 120, editable: true },
-    { field: 'reason', headerName: 'REASON FOR BUYING / SELLING', width: 250, editable: true },
-    { field: 'notes', headerName: 'ADDITIONAL NOTES', width: 250, editable: true }
-];
-
 const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
-    const {tradeRows, setTradeRows, finalTradeRows, setFinalTradeRows} = useGlobalStore();
+    const {tradeRows, setTradeRows, finalTradeRows, setFinalTradeRows, tradingSetting} = useGlobalStore();
+
+    const columns: GridColDef<TradeRow>[] = [
+        { field: 'date', headerName: 'DATE', width: 120, editable: true },
+        { field: 'ticker', headerName: 'STOCK CODE', width: 120, editable: true },
+        { field: 'action', headerName: 'ACTION', width: 100, editable: true },
+        { field: 'price', headerName: 'PRICE', width: 100, editable: true, type: 'number' },
+        { field: 'volume', headerName: 'VOLUME', width: 100, editable: true, type: 'number' },
+        { field: 'over_write_fees', headerName: 'O.WRITE FEES', width: 120, editable: true, type: 'number' },
+        { field: 'fees', headerName: 'FEES', width: 100, editable: false, type: 'number'},
+        { field: 'netAmount', headerName: 'NET AMOUNT (Php)', width: 150, editable: false, type: 'number' },
+        { field: 'avePrice', headerName: 'AVE. PRICE', width: 120, editable: false, type: 'number' },
+        { field: 'profit', headerName: 'PROFIT (Php)', width: 120, editable: false, type: 'number' },
+        { field: 'percentProfit', headerName: '% PROFIT', width: 100, editable: false },
+        // { field: 'days', headerName: 'DAYS', width: 80, editable: false, type: 'number' },
+        { field: 'rmul', headerName: 'R-MUL.', width: 90, editable: false},
+        { field: 'equity', headerName: 'EQUITY (Php)', width: 130, editable: false, type: 'number' },
+        {
+            field: 'setup',
+            headerName: 'SETUP',
+            width: 120,
+            editable: true,
+            renderEditCell: (params) => {
+                const { value, api, id, field } = params;
+
+                const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+                    api.setEditCellValue({ id, field, value: event.target.value }, event);
+                };
+
+                return (
+                    <select value={value || ''} onChange={handleChange} style={{ width: '100%' }}>
+                        <option value="">-- Select --</option>
+                        {tradingSetting.setupSettings.map((option: SetupSetting) => (
+                            <option key={option.setup} value={option.setup}>
+                                {option.setup}
+                            </option>
+                        ))}
+                    </select>
+                );
+            }
+        },
+        { field: 'reason', headerName: 'REASON FOR BUYING / SELLING', width: 250, editable: true, type: 'singleSelect',
+        valueOptions: tradingSetting.noteDefaults.map((option: NoteDefault) => option.reason)},
+        { field: 'notes', headerName: 'ADDITIONAL NOTES', width: 250, editable: true }
+    ];
+
     const [showPasteBox, setShowPasteBox] = useState(false);
     const [pasteText, setPasteText] = useState('');
 

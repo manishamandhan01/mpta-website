@@ -210,32 +210,32 @@ export const TradeLog = (props: Props) => {
                     </div>
                     {/*card3*/}
 
-                    <SLTPCalculatorCard positions={topStockPositionsByAllocation} />
+                    {/*<SLTPCalculatorCard positions={topStockPositionsByAllocation} />*/}
                     {/*Card4*/}
-                    <div className="col-xl-3  col-lg-6 col-md-5 col-sm-12">
-                        <div className=" position-relative ms-0 box-12 overflow-x-auto">
-                            <div className="dashboard-overall-performance-card">
-                                <div className="font_Epilogue heading-16 font_weight_400 line_height_32">
-                                   Portfolio
-                                </div>
-                                <div className="amounts d-flex  align-items-center">
-                                    <div id="overAllPerformanceChart" className="d-flex align-items-center">
-                                        <HighchartsReact highcharts={Highcharts} options={tradeLogChart}/>
-                                        <div className="">
-                                            <button className="circle-btn bg-light m-0 "><i
-                                                className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
-                                            </button>
-                                            <button className="circle-btn bg-light mt-3 m-0"><i
-                                                className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                    {/*<div className="col-xl-3  col-lg-6 col-md-5 col-sm-12">*/}
+                    {/*    <div className=" position-relative ms-0 box-12 overflow-x-auto">*/}
+                    {/*        <div className="dashboard-overall-performance-card">*/}
+                    {/*            <div className="font_Epilogue heading-16 font_weight_400 line_height_32">*/}
+                    {/*               Portfolio*/}
+                    {/*            </div>*/}
+                    {/*            <div className="amounts d-flex  align-items-center">*/}
+                    {/*                <div id="overAllPerformanceChart" className="d-flex align-items-center">*/}
+                    {/*                    <HighchartsReact highcharts={Highcharts} options={tradeLogChart}/>*/}
+                    {/*                    <div className="">*/}
+                    {/*                        <button className="circle-btn bg-light m-0 "><i*/}
+                    {/*                            className="fa-solid fa-arrow-up icon-black icon-large-20"></i>*/}
+                    {/*                        </button>*/}
+                    {/*                        <button className="circle-btn bg-light mt-3 m-0"><i*/}
+                    {/*                            className="fa-solid fa-arrow-down icon-black icon-large-20"></i>*/}
+                    {/*                        </button>*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
 
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="amounts mt-4  d-flex flex-row">
                         <TradeDataGrid onRowsChange={handleTradeRowsChange}/>
                     </div>

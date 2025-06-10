@@ -6,7 +6,8 @@ import {DividendRow, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx"
 
 const columns: GridColDef<DividendRow>[] = [
     { field: 'symbol', headerName: 'SYMBOL', width: 120, editable: true },
-    { field: 'dividendType', headerName: 'Dividend Type', width: 100, editable: true },
+    { field: 'dividendType', headerName: 'Dividend Type', width: 100, editable: true, type: 'singleSelect',
+    valueOptions: ['Cash', 'Stock']},
     { field: 'dateReceived', headerName: 'Date Received', width: 200, editable: true},
     { field: 'amountReceived', headerName: 'Amount Received', width: 100, editable: true, type: 'number' }
 ];

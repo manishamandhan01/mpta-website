@@ -8,7 +8,7 @@ import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.
 type Props = {};
 
 export const OverAllPerformanceCard = (props: Props) => {
-    const {tradeRows} = useGlobalStore();
+    const {tradeRows, tradingSetting} = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
     const [totalProfit, setTotalProfit] = React.useState(0);
     const [totalLoss, setTotalLoss] = React.useState(0);
@@ -108,10 +108,10 @@ export const OverAllPerformanceCard = (props: Props) => {
                                 <p>Profit/Loss</p>
                             </div>
                             <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400">
-                                <p className="total_gain_row">${totalProfit}</p>
-                                <p className="total_loss_row">${totalLoss}</p>
+                                <p className="total_gain_row">{tradingSetting.currencySymbol} {totalProfit}</p>
+                                <p className="total_loss_row">{tradingSetting.currencySymbol} {totalLoss}</p>
                                 <p className={totalProfitLoss >= 0 ? 'total_gain_row' : 'total_loss_row'}>
-                                    ${totalProfitLoss}
+                                    {tradingSetting.currencySymbol} {totalProfitLoss}
                                 </p>
                             </div>
                             <div className="lh-lg heading-16 font_poppins line_height_20 font_weight_400">

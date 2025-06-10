@@ -10,7 +10,7 @@ import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.
 type Props = {};
 
 export const TradeStatistics = (props: Props) => {
-    const {tradeRows} = useGlobalStore();
+    const {tradeRows, tradingSetting} = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
     const [winRatePercentage, setWinRatePercentage] = React.useState(0);
     const [largestProfit, setLargestProfit] = React.useState(0);
@@ -100,9 +100,9 @@ export const TradeStatistics = (props: Props) => {
                                         </tr>
                                         <tr>
                                             <td>Largest Profit</td>
-                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
                                             <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestProfit}</td>
-                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
                                             <td>{lastFiftyTrades}</td>
                                             <td>
                                                 <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestProfit ? "Improved" : "Declined"}<i
@@ -114,9 +114,9 @@ export const TradeStatistics = (props: Props) => {
                                         </tr>
                                         <tr className="background_grey_color">
                                             <td>Largest Loss</td>
-                                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
                                             <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLoss}</td>
-                                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
                                             <td>{lastFiftyTrades}</td>
                                             <td>
                                                 <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLoss ? "Improved" : "Declined"}<i
@@ -219,9 +219,9 @@ export const TradeStatistics = (props: Props) => {
                                         </tr>
                                         <tr className="background_grey_color">
                                             <td>Expectancy Per Trade</td>
-                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
                                             <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{expectancyPerTrade}</td>
-                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>$</td>
+                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
                                             <td>{lastFiftyTrades}</td>
                                             <td>
                                                 <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > expectancyPerTrade ? "Improved" : "Declined"}<i
