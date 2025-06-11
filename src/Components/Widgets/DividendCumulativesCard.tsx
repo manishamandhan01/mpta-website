@@ -1,4 +1,5 @@
 import React from "react";
+import {useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 export interface DividendCumulative {
     symbol: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const DividendCumulativesCard: React.FC<Props> = ({ data }) => {
+    const {tradingSetting} = useGlobalStore();
     return (
         <div className="col-xl-4 col-lg-6 col-md-7 col-sm-12">
             <div className="portfolio-card-container position-relative box-12">
@@ -32,7 +34,7 @@ const DividendCumulativesCard: React.FC<Props> = ({ data }) => {
                                 >
                                     <td>{entry.symbol}</td>
                                     <td>{entry.count}</td>
-                                    <td>$</td>
+                                    <td>{tradingSetting.currencySymbol}</td>
                                     <td>{entry.amount.toLocaleString()}</td>
                                 </tr>
                             ))}

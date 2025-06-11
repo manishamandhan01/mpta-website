@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type TradeStat = {
     id: number;
@@ -17,7 +18,7 @@ type Props = {
     worstSymbols: TradeStat[];
 };
 
-const createColumns = (isTop: boolean): GridColDef[] => [
+const createColumns = (isTop: boolean, currencySymbol: string): GridColDef[] => [
     {
         field: 'symbol',
         headerName: 'Symbol',
@@ -32,6 +33,7 @@ const createColumns = (isTop: boolean): GridColDef[] => [
         headerAlign: 'center',
         align: 'right',
         cellClassName: isTop ? 'greenText' : 'redText',
+        valueGetter: (value) => `${currencySymbol} ${value}`,
     },
     {
         field: 'trades',
@@ -65,6 +67,8 @@ const createColumns = (isTop: boolean): GridColDef[] => [
 ];
 
 const StockPositionDataGrid: React.FC<Props> = ({ topSymbols, worstSymbols }) => {
+    const { tradingSetting } = useGlobalStore();
+
     return (
         <Box sx={{ display: 'flex', gap: 4, p: 2 }}>
             {/* Top Symbols Grid */}
@@ -74,7 +78,7 @@ const StockPositionDataGrid: React.FC<Props> = ({ topSymbols, worstSymbols }) =>
                 </Typography>
                 <DataGrid
                     rows={topSymbols}
-                    columns={createColumns(true)}
+                    columns={createColumns(true, tradingSetting.currencySymbol)}
                     autoHeight
                     pageSizeOptions={[5]}
                     disableRowSelectionOnClick
@@ -97,7 +101,7 @@ const StockPositionDataGrid: React.FC<Props> = ({ topSymbols, worstSymbols }) =>
                 </Typography>
                 <DataGrid
                     rows={worstSymbols}
-                    columns={createColumns(false)}
+                    columns={createColumns(false, tradingSetting.currencySymbol)}
                     autoHeight
                     pageSizeOptions={[5]}
                     disableRowSelectionOnClick

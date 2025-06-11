@@ -1,4 +1,5 @@
 import React from 'react';
+import {useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type ProfitLossData = {
     label: string;
@@ -17,6 +18,7 @@ const OverallProfitLossCard: React.FC<OverallProfitLossCardProps> = ({
                                                                          profitPercentage,
                                                                          lossPercentage,
                                                                      }) => {
+    const {tradingSetting} = useGlobalStore();
     const getAmountClass = (amount: number) => {
         return amount < 0 ? 'text-danger' : 'text-success';
     };
@@ -48,7 +50,7 @@ const OverallProfitLossCard: React.FC<OverallProfitLossCardProps> = ({
                             {data.map((row, index) => (
                                 <tr key={index} className={index % 2 === 0 ? 'background_grey_color' : ''}>
                                     <td>{row.label}</td>
-                                    <td>$</td>
+                                    <td>{tradingSetting.currencySymbol}</td>
                                     <td className={getAmountClass(row.amount)}>{row.amount.toLocaleString()}</td>
                                     <td className={getPercentageClass(row.percentage)}>{row.percentage.toFixed(2)}%</td>
                                 </tr>

@@ -1,4 +1,5 @@
 import React from "react";
+import {useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
 
 type BankTransferData = {
     title: string;
@@ -31,6 +32,7 @@ const getColorClass = (value: number | null): string => {
 };
 
 const BankTransferSummaryCard: React.FC<Props> = ({ bank_transfer_cumulatives }) => {
+    const {tradingSetting} = useGlobalStore();
     if (!bank_transfer_cumulatives) {
         return (
             <div className="p-3 bg-light text-center text-muted rounded">
@@ -88,7 +90,7 @@ const BankTransferSummaryCard: React.FC<Props> = ({ bank_transfer_cumulatives })
                                                     isEquity ? "fw-bold" : getColorClass(val)
                                                 }`}
                                             >
-                                                Php {formatCurrency(val)}
+                                                {tradingSetting.currencySymbol} {formatCurrency(val)}
                                             </td>
                                         );
                                     })}

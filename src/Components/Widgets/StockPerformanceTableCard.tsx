@@ -1,3 +1,5 @@
+import {useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
+
 type StockData = {
     symbol: string;
     cumulative: number | string;
@@ -18,6 +20,7 @@ type Props = {
 };
 
 const StockPerformanceTableCard: React.FC<Props> = ({ stockData, sortOption, setSortOption }) => {
+    const {tradingSetting} = useGlobalStore();
     return (
         <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12">
             <div className="portfolio-card-container position-relative me-5 overflow-x-auto">
@@ -56,7 +59,7 @@ const StockPerformanceTableCard: React.FC<Props> = ({ stockData, sortOption, set
                             {stockData.map((item, index) => (
                                 <tr key={index} className="text-center">
                                     <td>{item.symbol}</td>
-                                    <td>{item.cumulative}</td>
+                                    <td>{tradingSetting.currencySymbol} {item.cumulative}</td>
                                     <td>{item.trades}</td>
                                     <td>{item.winRate}</td>
                                     <td>{item.average_days}</td>

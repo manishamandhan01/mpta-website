@@ -137,7 +137,6 @@ export const TradeLog = (props: Props) => {
 
                     <CapitalCalculationsCard
                         capitalCalculations={capitalCalculations}
-                        accountName="Sam"
                     />
 
                     {/*card2*/}

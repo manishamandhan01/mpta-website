@@ -186,10 +186,10 @@ export default function SettingsPanel() {
                             <label>W/L Count</label>
                             <input className="border p-1" value="Per Tranche" disabled/>
                             <label>Last No. of Trades</label>
-                            <input className="border p-1" type="number" value={tradingSetting.winLossCount}
+                            <input className="border p-1" type="number" value={tradingSetting.noOfTrades}
                                    onChange={e => setTradingSetting({
                                        ...tradingSetting,
-                                       winLossCount: parseInt(e.target.value)
+                                       noOfTrades: parseInt(e.target.value)
                                    })}/>
                         </div>
 
@@ -199,6 +199,9 @@ export default function SettingsPanel() {
                             <label>Report Date</label>
                             <input className="border p-1" value={tradingSetting.reportDate}
                                    onChange={e => setTradingSetting({...tradingSetting, reportDate: e.target.value})}/>
+                            <label>Date Format</label>
+                            <input className="border p-1" value={tradingSetting.dateFormat}
+                                   onChange={e => setTradingSetting({...tradingSetting, dateFormat: e.target.value})}/>
 
 
                         </div>
@@ -207,7 +210,7 @@ export default function SettingsPanel() {
 
 
                             <div className="overflow-x-auto">
-                                <table className="table-auto w-full border-collapse border text-sm">
+                            <table className="table-auto w-full border-collapse border text-sm">
                                     <thead>
                                     <tr className="bg-gray-100 text-left">
                                         <th className="border px-3 py-2">Fees</th>

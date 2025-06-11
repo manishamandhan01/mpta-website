@@ -24,6 +24,7 @@ export type TradingSetting = {
     interval: string;
     yAxisGap: string;
     noOfTrades: number;
+    dateFormat: string;
     currencySymbol: string;
     retainFormula: number;
     rowsToAdd: number;
