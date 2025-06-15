@@ -6,10 +6,15 @@ import Highcharts from "highcharts";
 import {EntryExitTableWithChart} from "@Components/TradeReview/EntryExitTableWithChart.tsx";
 import {EmotionTableWithChart} from "@Components/TradeReview/EmotionTableWithChart.tsx";
 import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
+import TradeDataGrid from "@Components/DataGrid/DataGrid.tsx";
+import TradeReviewDataGrid from "@Components/DataGrid/TradeReviewDataGrid.tsx";
+import {TradeRow, useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 export const TradeReview = (props: Props) => {
+    const {tradeRows, setFinalTradeRows} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
     const [years, setYears] = useState<number[]>([]);
     const[activeLabel, setActiveLabel] = React.useState<string | null>("Trade Review");
     useEffect(() => {
@@ -23,6 +28,24 @@ export const TradeReview = (props: Props) => {
 
         setYears(generatedYears);
     }, []);
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setFinalTradeRows(json['trade_log_result_data']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
+
+    const handleTradeRowsChange = (rows: TradeRow[]) => {
+        console.log("Updated trade rows from TradeDataGrid", rows);
+        // setTradeRows(rows);
+    };
 
     // Data retrieved from https://en.wikipedia.org/wiki/Winter_Olympic_Games
     const barChart = {
@@ -118,56 +141,56 @@ export const TradeReview = (props: Props) => {
 
                 <div className="row col-12 m-auto mt-2">
                     {/* Card One */}
-                    <div className="col-xl-1 col-md-5 col-sm-12">
-                        <div className="portfolio-card-container position-relative box-12 p-0">
-                            <div className="dashboard-overall-performance-card">
-                                <div className="amounts mt-2 gap-3">
-                                    <p className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Data
-                                        Filter</p>
-                                    <button
-                                        className="btn text-white bg-primary-300 rounded-pill p-lg-1 pe-2 ps-2 heading_14 m-auto"
-                                        type="submit"
-                                    >
-                                        This Month
-                                    </button>
-                                    <p className="heading-12 text-center mt-2">Select a Month & Year</p>
-                                    <div className="d-flex align-items-center stock_id_table p-1">
-                                        <label htmlFor="months" className="heading-12">Month</label>
-                                        <select name="months" id="months" className="mb-0 mw-50  m-auto">
-                                            <option value="january">January</option>
-                                            <option value="february">February</option>
-                                            <option value="march">March</option>
-                                            <option value="april">April</option>
-                                            <option value="may">May</option>
-                                            <option value="june">June</option>
-                                            <option value="july">July</option>
-                                            <option value="august">August</option>
-                                            <option value="september">September</option>
-                                            <option value="october">October</option>
-                                            <option value="november">November</option>
-                                            <option value="december">December</option>
-                                        </select>
-                                    </div>
-                                    <div className="d-flex align-items-center p-1 stock_id_table">
-                                        <label htmlFor="cars" className="heading-12">Year</label>
-                                        <select name="cars" id="cars" className="mb-0 ms-2 mw-50 m-auto">
-                                            {years.map((year) => (
-                                                <option key={year} value={year}>
-                                                    {year}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <button
-                                        className="btn text-white bg-primary-300 rounded-pill p-lg-1 pe-2 ps-2 heading_14 m-auto mt-3 mb-1"
-                                        type="submit"
-                                    >
-                                        Apply <i className="fa-solid fa-check"></i>
-                                    </button>
+                    ` <div className="col-xl-1 col-md-5 col-sm-12">
+                    <div className="portfolio-card-container position-relative box-12 p-0">
+                        <div className="dashboard-overall-performance-card">
+                            <div className="amounts mt-2 gap-3">
+                                <p className="heading-20 font_Epilogue font_weight_400 mb-4 text-center">Data
+                                    Filter</p>
+                                <button
+                                    className="btn text-white bg-primary-300 rounded-pill p-lg-1 pe-2 ps-2 heading_14 m-auto"
+                                    type="submit"
+                                >
+                                    This Month
+                                </button>
+                                <p className="heading-12 text-center mt-2">Select a Month & Year</p>
+                                <div className="d-flex align-items-center stock_id_table p-1">
+                                    <label htmlFor="months" className="heading-12">Month</label>
+                                    <select name="months" id="months" className="mb-0 mw-50  m-auto">
+                                        <option value="january">January</option>
+                                        <option value="february">February</option>
+                                        <option value="march">March</option>
+                                        <option value="april">April</option>
+                                        <option value="may">May</option>
+                                        <option value="june">June</option>
+                                        <option value="july">July</option>
+                                        <option value="august">August</option>
+                                        <option value="september">September</option>
+                                        <option value="october">October</option>
+                                        <option value="november">November</option>
+                                        <option value="december">December</option>
+                                    </select>
                                 </div>
+                                <div className="d-flex align-items-center p-1 stock_id_table">
+                                    <label htmlFor="cars" className="heading-12">Year</label>
+                                    <select name="cars" id="cars" className="mb-0 ms-2 mw-50 m-auto">
+                                        {years.map((year) => (
+                                            <option key={year} value={year}>
+                                                {year}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <button
+                                    className="btn text-white bg-primary-300 rounded-pill p-lg-1 pe-2 ps-2 heading_14 m-auto mt-3 mb-1"
+                                    type="submit"
+                                >
+                                    Apply <i className="fa-solid fa-check"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
 
                     {/* Card Two */}
                     <div className="col-xl-3 col-md-6 col-sm-12">
@@ -317,6 +340,10 @@ export const TradeReview = (props: Props) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="amounts mt-4  d-flex flex-row">
+                        <TradeReviewDataGrid onRowsChange={handleTradeRowsChange}/>
                     </div>
 
                 </div>

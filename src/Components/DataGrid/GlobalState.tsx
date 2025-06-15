@@ -53,6 +53,34 @@ export type TradeRow = {
     equity: number;
     setup: string;
     reason: string;
+    error_cause: string;
+    entry_exit: string;
+    emotion: string;
+    trend: string;
+    notes: string;
+};
+
+export type TradeReviewRow = {
+    id: number;
+    date: string;
+    ticker: string;
+    action: string;
+    price: number;
+    volume: number;
+    over_write_fees: number;
+    fees: number;
+    netAmount: number;
+    avePrice: number;
+    profit: number;
+    percentProfit: string;
+    days: number;
+    rmul: string;
+    equity: number;
+    setup: string;
+    reason: string;
+    error_cause: string;
+    entry_exit: string;
+    emotion: string;
     notes: string;
 };
 
@@ -86,6 +114,8 @@ interface GlobalState {
     setTradeRows: (tradeRows: TradeRow[]) => void;
     finalTradeRows: TradeRow[];
     setFinalTradeRows: (tradeRows: TradeRow[]) => void;
+    tradeReviewRows: TradeReviewRow[];
+    setTradeReviewRows: (tradeRows: TradeReviewRow[]) => void;
     bankTransferRows: BankTransferRow[];
     setBankTransferRows: (bankTransferRows: BankTransferRow[]) => void;
     dividendRows: DividendRow[];
@@ -104,6 +134,8 @@ export const useGlobalStore = create<GlobalState>()(
             setTradeRows: (tradeRows) => set({ tradeRows }),
             finalTradeRows: [],
             setFinalTradeRows: (finalTradeRows) => set({ finalTradeRows }),
+            tradeReviewRows: [],
+            setTradeReviewRows: (tradeReviewRows) => set({ tradeReviewRows }),
             bankTransferRows: [],
             setBankTransferRows: (bankTransferRows) => set({ bankTransferRows }),
             dividendRows: [],
@@ -119,6 +151,7 @@ export const useGlobalStore = create<GlobalState>()(
                 retainFormula: 20,
                 rowsToAdd: 100,
                 winLossCount: 50,
+                dateFormat: 'dd/mm/yy',
                 reportDate: "Last Trade Data",
                 setupSettings: [
                     { setup: "Momentum", definition: "" },

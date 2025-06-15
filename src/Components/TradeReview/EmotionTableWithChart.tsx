@@ -1,24 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 interface TableRowData {
     label: string;
-    value: number;
-    dollarValue: number;
+    score: number;
+    profit: number;
 }
 
-export const EmotionTableWithChart: React.FC<Props> = (props: Props) => {
-    const tableData: TableRowData[] = [
-        {label: "Fear", value: -2, dollarValue: 243735},
-        {label: "Greed", value: -2, dollarValue: 83235},
-        {label: "Fomo", value: -2, dollarValue: 32735},
-        {label: "Bored", value: -8, dollarValue: 25735},
-        {label: "Hope", value: 6, dollarValue: 272135},
-        {label: "Confident", value: 19, dollarValue: 458935},
-    ];
+export const EmotionTableWithChart: React.FC<Props> = () => {
+    const {tradeRows, tradingSetting} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
+    const [tableData, setTableData] = useState<TableRowData[]>([]);
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setTableData(json['emotion_data']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
 
     // Prepare chart data dynamically based on tableData
     const chartOptions = {
@@ -60,7 +69,7 @@ export const EmotionTableWithChart: React.FC<Props> = (props: Props) => {
         },
         series: [
             {
-                data: tableData.map(row => row.dollarValue), // Use dollarValue for bar height
+                data: tableData.map(row => row.profit), // Use dollarValue for bar height
                 color: '#', // Set color for the bars
             },
         ],
@@ -83,19 +92,21 @@ export const EmotionTableWithChart: React.FC<Props> = (props: Props) => {
                     {tableData.map((row, index) => (
                         <tr key={index} className="table-row-padding" >
                             <td>{row.label}</td>
-                            <td>{row.value}</td>
-                            <td>{`$${row.dollarValue.toLocaleString()}`}</td>
+                            <td style={{ color: row.score >= 0 ? 'green' : 'red' }}>{row.score}</td>
+                            <td style={{ color: row.profit >= 0 ? 'green' : 'red' }}>
+                                {tradingSetting.currencySymbol} {`${row.profit.toLocaleString()}`}
+                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
 
             </div>
-            <div className="col-5 ">
-                {/* Render the Highcharts bar chart */}
-                <HighchartsReact highcharts={Highcharts} options={chartOptions}/>
+            {/*<div className="col-5 ">*/}
+            {/*    /!* Render the Highcharts bar chart *!/*/}
+            {/*    <HighchartsReact highcharts={Highcharts} options={chartOptions}/>*/}
 
-            </div>
+            {/*</div>*/}
         </div>
     );
 };

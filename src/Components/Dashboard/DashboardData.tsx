@@ -26,10 +26,10 @@ export const DashboardData = [
         icon:"fa-solid fa-hand-holding-dollar",
         label:"Dividends",
     },
-    // {
-    //     icon:"fa-brands fa-searchengin",
-    //     label:"Trade Review",
-    // },
+    {
+        icon:"fa-brands fa-searchengin",
+        label:"Trade Review",
+    },
 
     {
         icon:"fa-solid fa-trophy",

@@ -79,7 +79,11 @@ const TradeDataGrid: React.FC<TradeDataGridProps> = ({ onRowsChange }) => {
                 equity: parseFloat(values[13]?.replace(/,/g, "")) || 0,
                 setup: values[14] || '',
                 reason: values[15] || '',
-                notes: values[16] || ''
+                notes: values[16] || '',
+                error_cause: '',
+                entry_exit: '',
+                emotion: '',
+                trend: ''
             };
         });
         const updatedRows = [...newRows];

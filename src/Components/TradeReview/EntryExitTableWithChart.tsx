@@ -1,22 +1,33 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import {useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
 interface TableRowData {
     label: string;
-    value: number;
-    dollarValue: number;
+    score: number;
+    profit: number;
 }
 
-export const EntryExitTableWithChart: React.FC<Props> = (props: Props) => {
-    const tableData: TableRowData[] = [
-        {label: "Broke rules", value: -2, dollarValue: 23735},
-        {label: "Too Early", value: -2, dollarValue: 23235},
-        {label: "Not In Plan", value: -2, dollarValue: 32735},
-        {label: "As Planned", value: 29, dollarValue: 2735},
-    ];
+export const EntryExitTableWithChart: React.FC<Props> = () => {
+    const {tradeRows, tradingSetting} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
+    const [tableData, setTableData] = useState<TableRowData[]>([]);
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setTableData(json['entry_exit_data']);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
 
     // Prepare chart data dynamically based on tableData
     const chartOptions = {
@@ -56,7 +67,7 @@ export const EntryExitTableWithChart: React.FC<Props> = (props: Props) => {
         },
         series: [
             {
-                data: tableData.map(row => row.dollarValue), // Use dollarValue for bar height
+                data: tableData.map(row => row.profit), // Use dollarValue for bar height
                 color: '#', // Set color for the bars
             },
         ],
@@ -82,17 +93,18 @@ export const EntryExitTableWithChart: React.FC<Props> = (props: Props) => {
                     {tableData.map((row, index) => (
                         <tr className="table-row-padding" key={index}>
                             <td>{row.label}</td>
-                            <td>{row.value}</td>
-
-                            <td>${`${row.dollarValue.toLocaleString()}`}</td>
+                            <td style={{color: row.score >= 0 ? 'green' : 'red'}}>{row.score}</td>
+                            <td style={{color: row.profit >= 0 ? 'green' : 'red'}}>
+                                {tradingSetting.currencySymbol} {`${row.profit.toLocaleString()}`}
+                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
             </div>
-            <div className="col-5 "  >
-                <HighchartsReact highcharts={Highcharts} options={chartOptions}/>
-            </div>
+            {/*<div className="col-5 "  >*/}
+            {/*    <HighchartsReact highcharts={Highcharts} options={chartOptions}/>*/}
+            {/*</div>*/}
 
             {/* Render the Highcharts bar chart */}
 
