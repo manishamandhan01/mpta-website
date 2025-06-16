@@ -5,9 +5,10 @@ import {EvaluationSetting, TradeRow, useGlobalStore} from "@Components/DataGrid/
 
 type TradeReviewDataGridProps = {
     onRowsChange?: (rows: TradeRow[]) => void;
+    filteredTradeRows: TradeRow[];
 };
 
-const TradeReviewDataGrid: React.FC<TradeReviewDataGridProps> = ({ onRowsChange }) => {
+const TradeReviewDataGrid: React.FC<TradeReviewDataGridProps> = ({ onRowsChange, filteredTradeRows }) => {
     const {tradeRows, setTradeRows, finalTradeRows, tradingSetting} = useGlobalStore();
 
     const columns: GridColDef<TradeRow>[] = [
@@ -94,7 +95,7 @@ const TradeReviewDataGrid: React.FC<TradeReviewDataGridProps> = ({ onRowsChange 
         <Box sx={{ width: '100%' }}>
             <Box sx={{ height: 600, width: '100%' }}>
                 <DataGrid
-                    rows={finalTradeRows}
+                    rows={filteredTradeRows}
                     columns={columns}
                     processRowUpdate={handleRowUpdate}
                     pageSizeOptions={[5, 10, 20]}
