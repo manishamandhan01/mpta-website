@@ -52,7 +52,7 @@ export const TradeReview = (props: Props) => {
     const [selectedExecutions, setSelectedExecutions] = useState<string[]>([]);
     const uniqueExecutions = Array.from(new Set(tradingSetting.evaluationSettings.map(row => row.entryExit))).filter(Boolean);
     const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
-    const uniqueEmotions = Array.from(new Set(tradingSetting.evaluationSettings.map(row => row.entryExit))).filter(Boolean);
+    const uniqueEmotions = Array.from(new Set(tradingSetting.evaluationSettings.map(row => row.emotion))).filter(Boolean);
 
     // Fetching data
     const overAllPerformanceData = () => {
@@ -320,7 +320,8 @@ export const TradeReview = (props: Props) => {
                                                 onClick={() => {
 
                                                     if (selectedStockIds) {
-                                                        const filtered = tradeRows.filter(row => {
+                                                        const currentTradeRows = filterApplied ? filteredTradeRows : tradeRows;
+                                                        const filtered = currentTradeRows.filter(row => {
                                                             return (
                                                                 selectedStockIds.includes(row.ticker)
                                                             );
@@ -342,7 +343,7 @@ export const TradeReview = (props: Props) => {
                                                 disableCloseOnSelect
                                                 getOptionLabel={(option) => option}
                                                 value={selectedSetups}
-                                                onChange={(event, newValue) => setSelectedStockIds(newValue)}
+                                                onChange={(event, newValue) => setSelectedSetups(newValue)}
                                                 renderOption={(props, option, { selected }) => (
                                                     <li {...props}>
                                                         <Checkbox
@@ -373,9 +374,10 @@ export const TradeReview = (props: Props) => {
                                                 onClick={() => {
 
                                                     if (selectedSetups) {
-                                                        const filtered = tradeRows.filter(row => {
+                                                        const currentTradeRows = filterApplied ? filteredTradeRows : tradeRows;
+                                                        const filtered = currentTradeRows.filter(row => {
                                                             return (
-                                                                selectedSetups.includes(row.ticker)
+                                                                selectedSetups.includes(row.setup)
                                                             );
                                                         });
                                                         setFilterApplied(true);
@@ -394,7 +396,7 @@ export const TradeReview = (props: Props) => {
                                                 disableCloseOnSelect
                                                 getOptionLabel={(option) => option}
                                                 value={selectedExecutions}
-                                                onChange={(event, newValue) => setSelectedStockIds(newValue)}
+                                                onChange={(event, newValue) => setSelectedExecutions(newValue)}
                                                 renderOption={(props, option, { selected }) => (
                                                     <li {...props}>
                                                         <Checkbox
@@ -425,9 +427,10 @@ export const TradeReview = (props: Props) => {
                                                 onClick={() => {
 
                                                     if (selectedExecutions) {
-                                                        const filtered = tradeRows.filter(row => {
+                                                        const currentTradeRows = filterApplied ? filteredTradeRows : tradeRows;
+                                                        const filtered = currentTradeRows.filter(row => {
                                                             return (
-                                                                selectedExecutions.includes(row.ticker)
+                                                                selectedExecutions.includes(row.entry_exit)
                                                             );
                                                         });
                                                         setFilterApplied(true);
@@ -446,7 +449,7 @@ export const TradeReview = (props: Props) => {
                                                 disableCloseOnSelect
                                                 getOptionLabel={(option) => option}
                                                 value={selectedEmotions}
-                                                onChange={(event, newValue) => setSelectedStockIds(newValue)}
+                                                onChange={(event, newValue) => setSelectedEmotions(newValue)}
                                                 renderOption={(props, option, { selected }) => (
                                                     <li {...props}>
                                                         <Checkbox
@@ -477,9 +480,10 @@ export const TradeReview = (props: Props) => {
                                                 onClick={() => {
 
                                                     if (selectedEmotions) {
-                                                        const filtered = tradeRows.filter(row => {
+                                                        const currentTradeRows = filterApplied ? filteredTradeRows : tradeRows;
+                                                        const filtered = currentTradeRows.filter(row => {
                                                             return (
-                                                                selectedEmotions.includes(row.ticker)
+                                                                selectedEmotions.includes(row.emotion)
                                                             );
                                                         });
                                                         setFilterApplied(true);

@@ -35,10 +35,10 @@ export const DashboardData = [
         icon:"fa-solid fa-trophy",
         label:"Calender",
     },
-    // {
-    //     icon:"fa-solid fa-arrow-trend-up",
-    //     label:"Monthly Report",
-    // },
+    {
+        icon:"fa-solid fa-arrow-trend-up",
+        label:"Monthly Report",
+    },
     // {
     //     icon:"fa-solid fa-upload",
     //     label:"Portfolio",
