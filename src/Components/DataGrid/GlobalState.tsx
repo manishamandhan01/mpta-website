@@ -35,6 +35,25 @@ export type TradingSetting = {
     evaluationSettings: EvaluationSetting[];
 };
 
+export type MonthlyTradeRow = {
+    id: number;
+    month: string;
+    beg_balance: number;
+    bank_transfer: number;
+    total_profit: number;
+    total_loss: number;
+    dividend: number;
+    end_balance: number;
+    net_profit: number;
+    profit_percent: number;
+    r_multiplier_sum: number;
+    no_of_trades: number;
+    win_rate_percent: number;
+    average_win_percent: number;
+    average_loss_percent: number;
+    profit_factor: number;
+};
+
 export type TradeRow = {
     id: number;
     date: string;

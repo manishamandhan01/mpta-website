@@ -4,6 +4,12 @@ import {DashboardData} from "@Components/Dashboard/DashboardData.tsx";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
+import {MonthlyTradeRow, TradeRow, useGlobalStore, useTradeResults} from "@Components/DataGrid/GlobalState.tsx";
+import {useState, useEffect} from "react";
+import TradeReviewDataGrid from "@Components/DataGrid/TradeReviewDataGrid.tsx";
+import MonthlyReportDataGrid from "@Components/DataGrid/MonthlyReportDataGrid.tsx";
+import MonthlyEquityCurveChart from "@Components/Charts/MonthlyEquityCurveChart.tsx";
+import MonthlyEquityCurveChartWithSummary from "@Components/Charts/MonthlyEquityCurveChartWithSummary.tsx";
 
 type Props = {
     
@@ -13,8 +19,34 @@ export const MonthlyReport = (props: Props) => {
     const [realizedProfit, setTotalGainPer] = React.useState<number>(7892);
     const [realizedLoss, setTotalLossPer] = React.useState<number>(794);
     const total = realizedProfit + realizedLoss;
+
+    const {tradeRows, setFinalTradeRows, tradingSetting} = useGlobalStore();
+    const { fetchTradeResults } = useTradeResults();
+    const [filteredTradeRows, setFilteredTradeRows] = useState<MonthlyTradeRow[]>([]);
+    const [filterApplied, setFilterApplied] = useState<boolean>(false);
+
     const profitPercentage = total ? (realizedProfit / total) * 100 : 0; // percentage of realized profit
     const lossPercentage = total ? (realizedLoss / total) * 100 : 0; //
+
+    // Fetching data
+    const overAllPerformanceData = () => {
+        fetchTradeResults()
+            .then(json => {
+                setFilteredTradeRows(json['monthly_report_data']);
+                // setFilteredTradeRows(filteredTradeRows.slice(0, 15));
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        overAllPerformanceData();
+    }, [tradeRows]);
+
+    const handleTradeRowsChange = (rows: TradeRow[]) => {
+        console.log("Updated trade rows from TradeDataGrid", rows);
+        // setTradeRows(rows);
+    };
+
    const monthlyChartOne= {
        chart: {
            width: 1200 ,
@@ -180,11 +212,16 @@ export const MonthlyReport = (props: Props) => {
                     <div className="col-xl-6 col-lg-12 col-md-6 col-sm-12">
                         <div className="portfolio-card-container box-12 position-relative">
                             <div className="dashboard-overall-performance-card">
-                                <p>MONTHLY EQUITY CURVE</p>
+                                {/*<p>MONTHLY EQUITY CURVE</p>*/}
                                 <div className="amounts mt-3    ">
 
                                     <div>
-                                        <HighchartsReact highcharts={Highcharts} options={monthlyChartOne}/>
+                                        {/*<HighchartsReact highcharts={Highcharts} options={monthlyChartOne}/>*/}
+                                        <MonthlyEquityCurveChart
+                                            equityData={filteredTradeRows.map(row => row.end_balance)}
+                                            volumeData={filteredTradeRows.map(row => row.bank_transfer)}
+                                            categories={filteredTradeRows.map(row => row.month)}
+                                        />
                                     </div>
 
                                 </div>
@@ -199,25 +236,25 @@ export const MonthlyReport = (props: Props) => {
                                 <div className="amounts mt-3 d-flex flex-row    ">
 
                                     <div>
-                                        <HighchartsReact highcharts={Highcharts} options={monthlyChartTwo}/>
-                                    </div>
-                                    <div className="ms-5 text-center">
-                                        <p>Jan-19 to Dec-19</p>
-                                        <p>Vs Jan-19 to Dec-19</p>
-                                        <button>Profit</button>
-                                        <div className=" ms-5 me-5 d-flex flex-row align-items-center ">
-                                            <button className="circle-btn bg-light "><i
-                                                className="fa-solid fa-arrow-up icon-black icon-large-20"></i>
-                                            </button>
-                                            <button className="circle-btn bg-light "><i
-                                                className="fa-solid fa-arrow-down icon-black icon-large-20"></i>
-                                            </button>
-                                        </div>
+                                        {/*<HighchartsReact highcharts={Highcharts} options={monthlyChartTwo}/>*/}
+                                        <MonthlyEquityCurveChartWithSummary
+                                            thisPeriod={[10500, 15000, 12300, 16000, 8700, 9500, 13400, 14200, 11500, 10200, 9900, 12058]}
+                                            previousPeriod={[15000, 17500, 14300, 17000, 11000, 10500, 14400, 16000, 12500, 13000, 12500, 13500]}
+                                            thisPeriodLabel="Jan-19 to Dec-19"
+                                            previousPeriodLabel="Jan-18 to Dec-18"
+                                            currencySymbol="Php"
+                                        />
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="amounts mt-4  d-flex flex-row">
+                        <MonthlyReportDataGrid
+                            filteredTradeRows={filteredTradeRows}
+                        />
                     </div>
 
 
