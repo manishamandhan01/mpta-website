@@ -46,9 +46,9 @@ const MonthlyReportDataGrid: React.FC<MonthlyReportDataGridProps> = ({ filteredT
                     columns={columns}
                     getRowId={row => row.month}
                     // processRowUpdate={handleRowUpdate}
-                    pageSizeOptions={[5, 10, 20]}
+                    pageSizeOptions={[5, 10, 20, 50, 100]}
                     initialState={{
-                        pagination: { paginationModel: { pageSize: 5 } }
+                        pagination: { paginationModel: { pageSize: 50 } }
                     }}
                     // checkboxSelection
                     disableRowSelectionOnClick

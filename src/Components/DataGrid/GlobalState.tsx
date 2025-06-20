@@ -117,14 +117,14 @@ export type DividendRow = {
     id: number;
     symbol: string;
     dividendType: string;
-    dateReceived: string;
+    date: string;
     amountReceived: number;
 }
 export type BackendResult = {
     id: number;
     symbol: string;
     dividendType: string;
-    dateReceived: string;
+    date: string;
     amountReceived: number;
 }
 
