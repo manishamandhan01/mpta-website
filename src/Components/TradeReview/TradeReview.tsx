@@ -242,7 +242,8 @@ export const TradeReview = (props: Props) => {
                                     type="submit"
                                     onClick={() => {
                                         if (selectedMonth && selectedYear) {
-                                            const filtered = tradeRows.filter(row => {
+                                            const finalRows = filteredTradeRows.length > 0 ? filteredTradeRows : tradeRows;
+                                            const filtered = finalRows.filter(row => {
                                                 const tradeDate = dayjs(row.date, tradingSetting.dateFormat.toUpperCase()).toDate();
                                                 return (
                                                     tradeDate.getMonth() + 1 === selectedMonth &&

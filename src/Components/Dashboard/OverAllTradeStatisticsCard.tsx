@@ -39,8 +39,8 @@ export const OverAllTradeStatisticsCard = (props: Props) => {
                 setAverageLossPercent(overall_trade_statistics['average_loss_percentage']);
                 setWinLossRatio(overall_trade_statistics['win_to_loss_ratio']);
                 setProfitLossRatio(overall_trade_statistics['profit_to_loss_ratio']);
-                setProfitFactor(trade_statistics['profit_factor']);
-                setExpectancyPerTrade(trade_statistics['expectancy_per_trade']);
+                setProfitFactor(overall_trade_statistics['profit_factor']);
+                setExpectancyPerTrade(overall_trade_statistics['expectancy_per_trade']);
             })
             .catch(err => console.log(err));
     };

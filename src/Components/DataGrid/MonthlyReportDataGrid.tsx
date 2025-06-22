@@ -53,7 +53,7 @@ const MonthlyReportDataGrid: React.FC<MonthlyReportDataGridProps> = ({ filteredT
                     // checkboxSelection
                     disableRowSelectionOnClick
                     getCellClassName={(params) => {
-                        if (!params.isEditable && ['profit', 'percentProfit', 'rmul'].includes(params.field)) {
+                        if (!params.isEditable && ['total_profit', 'total_loss', 'net_profit', 'profit_percent', 'r_multiplier_sum', 'average_loss_percent'].includes(params.field)) {
                             const value = typeof params.value === 'number' ? params.value : parseFloat(params.value?.toString() || '0');
                             return value >= 0 ? 'non-editable-green-text-cell' : 'non-editable-red-text-cell';
                         } else if (!params.isEditable) {
