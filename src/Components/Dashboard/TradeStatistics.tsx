@@ -1,242 +1,151 @@
 import * as React from 'react';
 import { useEffect } from "react";
-import {PerformancePeriod, QuarterlyPnl} from "@Components/Utils/Constants.tsx";
-import {useTradeResults, useGlobalStore} from "@Components/DataGrid/GlobalState.tsx";
-
-
-
-
+import { useTradeResults, useGlobalStore } from "@Components/DataGrid/GlobalState.tsx";
 
 type Props = {};
 
+// Utility to determine remarks and class
+const getChangeStatus = (recent: number, allTime: number) => {
+    const improved = recent > allTime;
+    return {
+        text: improved ? 'Improved' : 'Declined',
+        icon: improved ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down',
+        className: improved ? 'total_gain_row' : 'total_loss_row'
+    };
+};
+
 export const TradeStatistics = (props: Props) => {
-    const {tradeRows, tradingSetting} = useGlobalStore();
+    const { tradingSetting } = useGlobalStore();
     const { fetchTradeResults } = useTradeResults();
-    const [winRatePercentage, setWinRatePercentage] = React.useState(0);
-    const [largestProfit, setLargestProfit] = React.useState(0);
-    const [largestLoss, setLargestLoss] = React.useState(0);
-    const [largestWinPercentage, setLargestWinPercentage] = React.useState(0);
-    const [largestLossPercentage, setLargestLossPercentage] = React.useState(0);
-    const [averageWinPercentage, setAverageWinPercentage] = React.useState(0);
-    const [averageLossPercentage, setAverageLossPercentage] = React.useState(0);
-    const [rewardToRiskRatio, setRewardToRiskRatio] = React.useState(0);
-    const [profitLossRatio, setProfitLossRatio] = React.useState(0);
-    const [profitFactor, setProfitFactor] = React.useState(0);
-    const [expectancyPerTrade, setExpectancyPerTrade] = React.useState(0);
-    const [lastFiftyTrades, setLastFiftyTrades] = React.useState(50.45);
+
+    const [stats, setStats] = React.useState({
+        winRatePercentage: 0,
+        largestProfit: 0,
+        largestLoss: 0,
+        largestWinPercentage: 0,
+        largestLossPercentage: 0,
+        averageWinPercentage: 0,
+        averageLossPercentage: 0,
+        rewardToRiskRatio: 0,
+        profitLossRatio: 0,
+        profitFactor: 0,
+        expectancyPerTrade: 0,
+    });
+    // For demonstration, using same value for last 50 trades for all metrics
+    const [lastFiftyStats, setLastFiftyStats] = React.useState({
+        winRatePercentage: 50.45,
+        largestProfit: 50.45,
+        largestLoss: 50.45,
+        largestWinPercentage: 50.45,
+        largestLossPercentage: 50.45,
+        averageWinPercentage: 50.45,
+        averageLossPercentage: 50.45,
+        rewardToRiskRatio: 50.45,
+        profitLossRatio: 50.45,
+        profitFactor: 50.45,
+        expectancyPerTrade: 50.45,
+    });
     const [changePercentage, setChangePercentage] = React.useState("17%");
 
-
-    // Fetch data from the backend and update the state
-    const fetchTradeStatistics = () => {
+    useEffect(() => {
         fetchTradeResults()
             .then((json) => {
-                const trade_statistics = json['trade_statistics'];
-                setWinRatePercentage(trade_statistics.win_rate_percentage);
-                setLargestProfit(trade_statistics.largest_profit);
-                setLargestLoss(trade_statistics.largest_loss);
-                setLargestWinPercentage(trade_statistics.largest_win_percentage);
-                setLargestLossPercentage(trade_statistics.largest_loss_percentage);
-                setAverageWinPercentage(trade_statistics.average_win_percentage);
-                setAverageLossPercentage(trade_statistics.average_loss_percentage);
-                setRewardToRiskRatio(trade_statistics.reward_to_risk_ratio);
-                setProfitLossRatio(trade_statistics.profit_loss_ratio);
-                setProfitFactor(trade_statistics.profit_factor);
-                setExpectancyPerTrade(trade_statistics.expectancy_per_trade);
-
+                const s = json['trade_statistics'];
+                setStats({
+                    winRatePercentage: s.win_rate_percentage,
+                    largestProfit: s.largest_profit,
+                    largestLoss: s.largest_loss,
+                    largestWinPercentage: s.largest_win_percentage,
+                    largestLossPercentage: s.largest_loss_percentage,
+                    averageWinPercentage: s.average_win_percentage,
+                    averageLossPercentage: s.average_loss_percentage,
+                    rewardToRiskRatio: s.reward_to_risk_ratio,
+                    profitLossRatio: s.profit_loss_ratio,
+                    profitFactor: s.profit_factor,
+                    expectancyPerTrade: s.expectancy_per_trade,
+                });
+                // TODO: Replace with actual last 50 trades stats if available
+                // setLastFiftyStats({...});
             })
             .catch((err) => console.log(err));
-    };
-
-    useEffect(() => {
-        fetchTradeStatistics();
     }, []);
 
-    // Function to round numbers to 2 decimal places
+    // Row rendering function
+    const renderStatRow = (
+        label: string,
+        key: keyof typeof stats,
+        isCurrency: boolean = false,
+        rowClassName: string = ''
+    ) => {
+        const value = stats[key];
+        const recent = lastFiftyStats[key];
+        const status = getChangeStatus(recent, value);
+        return (
+            <tr className={rowClassName}>
+                <td>{label}</td>
+                <td className={value > 0 ? 'total_gain_row' : 'total_loss_row'}>
+                    {isCurrency ? tradingSetting.currencySymbol : ''}
+                </td>
+                <td className={value > 0 ? 'total_gain_row' : 'total_loss_row'}>{value}</td>
+                {/*<td className={recent > 0 && isCurrency ? (recent > 0 ? 'total_gain_row' : 'total_loss_row') : ''}>
+                    {isCurrency ? tradingSetting.currencySymbol : ''}
+                </td>
+                <td className={recent > 0 ? 'total_gain_row' : 'total_loss_row'}>{recent}</td>
+                <td className={status.className}>
+                    {status.text}
+                    <i className={status.icon}></i>
+                </td>
+                <td className={status.className}>{changePercentage}</td>*/}
+            </tr>
+        );
+    };
 
+    // Metrics config array for mapping
+    const metrics = [
+        { label: "Win rate %:", key: "winRatePercentage", isCurrency: false },
+        { label: "Largest Profit", key: "largestProfit", isCurrency: true },
+        { label: "Largest Loss", key: "largestLoss", isCurrency: true },
+        { label: "Largest Win %", key: "largestWinPercentage", isCurrency: false },
+        { label: "Largest Loss %", key: "largestLossPercentage", isCurrency: false },
+        { label: "Ave. Win %", key: "averageWinPercentage", isCurrency: false },
+        { label: "Ave. Loss %", key: "averageLossPercentage", isCurrency: false },
+        { label: "Reward To Risk Ratio", key: "rewardToRiskRatio", isCurrency: false },
+        { label: "Profit Loss (Edge) Ratio", key: "profitLossRatio", isCurrency: false },
+        { label: "Profit factor", key: "profitFactor", isCurrency: false },
+        { label: "Expectancy Per Trade", key: "expectancyPerTrade", isCurrency: true },
+    ];
 
     return (
-        <div className=" ">
-            <div className="">
-                <div className="">
-
-
-                        <div className="main_heading_card_inside"><h1
-                            className="font_poppins heading-20 text-left line_height_32 font_weight_400 mt-1 ">Trade
-                            Statistics</h1></div>
-                        <div className="main_heading_card_inside">
-                            <hr/>
-
-                        </div>
-                        <div className="">
-                            <div className="">
-                                <div className="">
-
-                                    <table className="table mt-4   " style={{borderCollapse: 'collapse'}}>
-                                        <thead>
-                                        <tr>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Metrics</th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>All Trades Stats
-                                            </th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}></th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Last 50 Trades</th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Remarks</th>
-                                            <th className="font_Epilogue" style={{fontSize: '15px'}}>Change %</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr className="background_grey_color ">
-                                            <td>Win rate %:</td>
-                                            <td></td>
-                                            <td className={winRatePercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{winRatePercentage}</td>
-                                            <td></td>
-                                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades}</td>
-                                            <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > winRatePercentage ? "Improved" : "Declined"}<i
-                                                className={lastFiftyTrades > winRatePercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                            </td>
-                                            <td className={lastFiftyTrades > winRatePercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Largest Profit</td>
-                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
-                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestProfit}</td>
-                                            <td className={largestProfit > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestProfit ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > largestProfit ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > largestProfit ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Largest Loss</td>
-                                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
-                                            <td className={largestLoss > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLoss}</td>
-                                            <td className={lastFiftyTrades > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLoss ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > largestLoss ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > largestLoss ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Largest Win %</td>
-                                            <td></td>
-                                            <td className={largestWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestWinPercentage}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestWinPercentage ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > largestWinPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > largestWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Largest Loss %</td>
-                                            <td></td>
-                                            <td className={largestLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{largestLossPercentage}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > largestLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > largestLossPercentage ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > largestLossPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > largestLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ave. Win %</td>
-                                            <td></td>
-                                            <td className={averageWinPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageWinPercentage}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > averageWinPercentage ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > averageWinPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > averageWinPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Ave. Loss %</td>
-                                            <td></td>
-                                            <td className={averageLossPercentage > 0 ? 'total_gain_row' : 'total_loss_row'}>{averageLossPercentage}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > averageLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > averageLossPercentage ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > averageLossPercentage ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > averageLossPercentage ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Reward To Risk Ratio</td>
-                                            <td></td>
-                                            <td className={rewardToRiskRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{rewardToRiskRatio}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > rewardToRiskRatio ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > rewardToRiskRatio ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > rewardToRiskRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Profit Loss (Edge) Ratio</td>
-                                            <td></td>
-                                            <td className={profitLossRatio > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitLossRatio}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > profitLossRatio ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > profitLossRatio ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > profitLossRatio ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > profitLossRatio ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Profit factor</td>
-                                            <td></td>
-                                            <td className={profitFactor > 0 ? 'total_gain_row' : 'total_loss_row'}>{profitFactor}</td>
-                                            <td></td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > profitFactor ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > profitFactor ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > profitFactor ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        <tr className="background_grey_color">
-                                            <td>Expectancy Per Trade</td>
-                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
-                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{expectancyPerTrade}</td>
-                                            <td className={expectancyPerTrade > 0 ? 'total_gain_row' : 'total_loss_row'}>{tradingSetting.currencySymbol}</td>
-                                            <td>{lastFiftyTrades}</td>
-                                            <td>
-                                                <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{lastFiftyTrades > expectancyPerTrade ? "Improved" : "Declined"}<i
-                                                    className={lastFiftyTrades > expectancyPerTrade ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'}></i>
-                                                </td>
-                                            </td>
-                                            <td className={lastFiftyTrades > expectancyPerTrade ? 'total_gain_row' : 'total_loss_row'}>{changePercentage}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div>
+            <div className="main_heading_card_inside">
+                <h1 className="font_poppins heading-20 text-left line_height_32 font_weight_400 mt-1">
+                    Trade Statistics
+                </h1>
+                <hr />
             </div>
-            );
-            };
+            <table className="table mt-4" style={{ borderCollapse: 'collapse' }}>
+                <thead>
+                    <tr>
+                        <th className="font_Epilogue" style={{ fontSize: '15px' }}>Metrics</th>
+                        <th className="font_Epilogue" style={{ fontSize: '15px' }}></th>
+                        <th className="font_Epilogue" style={{ fontSize: '15px' }}>All Trades Stats</th>
+                        {/*<th className="font_Epilogue" style={{ fontSize: '15px' }}></th>
+                        <th className="font_Epilogue" style={{ fontSize: '15px' }}>Last 50 Trades</th>
+                        <th className="font_Epilogue" style={{ fontSize: '15px' }}>Remarks</th>
+                        <th className="font_Epilogue" style={{ fontSize: '15px' }}>Change %</th>*/}
+                    </tr>
+                </thead>
+                <tbody>
+                    {metrics.map((m, idx) =>
+                        renderStatRow(
+                            m.label,
+                            m.key as keyof typeof stats,
+                            m.isCurrency,
+                            idx % 2 === 0 ? 'background_grey_color' : ''
+                        )
+                    )}
+                </tbody>
+            </table>
+        </div>
+    );
+};

@@ -16,6 +16,7 @@ import { Collapse } from 'react-bootstrap';
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DashboardHeader from "@Components/Dashboard/DashboardHeader.tsx";
+import TradeEvaluationCard from "@Components/Dashboard/TradeEvaluationCard.tsx";
 
 
 
@@ -237,6 +238,29 @@ export const Dashboard = (props: Props) => {
                 <div className="row col-12 m-auto mt-2 equal-height">
                     <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
                         <PerformancePerRecord/>
+                    </div>
+                    {/*<div className="col-xl-6 col-lg-6 col-md-7 col-sm-12 dashboard-overall-performance-card">*/}
+                    {/*    <PerformanceCurve/>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-xl-3  col-lg-6 col-md-7 col-sm-12">*/}
+                    {/*    <WeeklyPerformanceCurve/>*/}
+                    {/*</div>*/}
+
+                </div>
+
+            </div>
+
+            {/*Evaluation*/}
+            <div className="dashboard-container mb-5">
+                <div className="dashboard-header col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                    <div className="vertical-line me-2"></div>
+
+
+                    <h1 className=" font_poppins font_weight_500 heading-20 line_height_24"> Evaluation </h1>
+                </div>
+                <div className="row col-12 m-auto mt-2 equal-height">
+                    <div className="col-xl-3 col-lg-6 col-md-7 col-sm-12">
+                        <TradeEvaluationCard/>
                     </div>
                     {/*<div className="col-xl-6 col-lg-6 col-md-7 col-sm-12 dashboard-overall-performance-card">*/}
                     {/*    <PerformanceCurve/>*/}
